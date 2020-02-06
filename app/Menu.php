@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 { 
     protected $table = 'menu';
-
+    
     public function topmenu()
     {
         return $this->belongSto(Menu::class, 'menu_id');

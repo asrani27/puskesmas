@@ -17,8 +17,9 @@ class Menu extends Migration
             $table->Increments('id');
             $table->string('nama');
             $table->integer('menu_id')->unsigned()->nullable();
-            $table->string('kategori');
-            $table->string('url');
+            $table->string('icon')->nullable();
+            $table->string('url')->nullable();
+            $table->char('is_aktif')->default('Y');
             $table->timestamps();
             $table->foreign('menu_id')->references('id')->on('menu')->onDelete('cascade')->onUpdate('cascade');
         });

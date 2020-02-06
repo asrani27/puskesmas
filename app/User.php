@@ -12,6 +12,11 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use Notifiable;
     protected $table = 'users';
+    
+    public function puskes()
+    {
+        return $this->belongsToMany(Mpuskesmas::class, 'puskes_user', 'users_id', 'puskes_id');
+    }
 
     /**
      * The attributes that are mass assignable.

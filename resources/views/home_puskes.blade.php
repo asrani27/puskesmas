@@ -15,105 +15,85 @@
 
             <i class="ace-icon fa fa-check green"></i>
 
-            SELAMAT DATANG DI
+            SELAMAT DATANG ADMIN PUSKES DI
             <strong class="green">
                 E-PUSKESMAS
                 <small>(v1.1)</small>
-            </strong>,
-
-            ANDA BERADA DI HALAMAN SUPERADMIN, SILAHKAN LAKUKAN PENGATURAN AWAL SEPERTI MENU DAN SETTING USER ADMIN PUSKESMAS
+            </strong>
         </div>
 
         <div class="row">
-            <div class="space-6"></div>
-            <div class="col-sm-3" id="default-buttons">
-                <a href="/sa/puskes" class="btn btn-app btn-success btn-sm">
-                    <i class="ace-icon fa fa-hospital-o bigger-200"></i>
-                    Puskes
-                </a>
-                <a href="/sa/user" class="btn btn-app btn-primary btn-sm">
-                    <i class="ace-icon fa fa-users bigger-200"></i>
-                    User
-                </a>
-                <a href="/sa/role" class="btn btn-app btn-warning btn-sm">
-                    <i class="ace-icon fa fa-refresh bigger-200"></i>
-                    Role
-                </a>
-                <a href="/sa/menu" class="btn btn-app btn-danger btn-sm">
-                    <i class="ace-icon fa fa-gear bigger-230"></i>
-                    Menu
-                </a>
-            </div>
-            <div class="col-sm-4 infobox-container">
+            <div class="space-7"></div>
+            <div class="col-sm-7 infobox-container">
                 <div class="infobox infobox-green">
                     <div class="infobox-icon">
-                        <i class="ace-icon fa fa-comments"></i>
+                        <i class="ace-icon fa fa-users"></i>
                     </div>
 
                     <div class="infobox-data">
-                        <span class="infobox-data-number">32</span>
-                        <div class="infobox-content">comments + 2 reviews</div>
+                        <span class="infobox-data-number">32 orang</span>
+                        <div class="infobox-content"><strong>Pasien Di Daftarkan</strong></div>
                     </div>
 
-                    <div class="stat stat-success">8%</div>
+                    {{-- <div class="stat stat-success"></div> --}}
                 </div>
 
                 <div class="infobox infobox-blue">
                     <div class="infobox-icon">
-                        <i class="ace-icon fa fa-twitter"></i>
+                        <i class="ace-icon fa fa-heart"></i>
                     </div>
 
                     <div class="infobox-data">
-                        <span class="infobox-data-number">11</span>
-                        <div class="infobox-content">new followers</div>
+                        <span class="infobox-data-number">11 orang</span>
+                        <div class="infobox-content"><strong>Pasien Dilayanni</strong></div>
                     </div>
 
-                    <div class="badge badge-success">
+                    {{-- <div class="badge badge-success">
                         +32%
                         <i class="ace-icon fa fa-arrow-up"></i>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="infobox infobox-pink">
                     <div class="infobox-icon">
-                        <i class="ace-icon fa fa-shopping-cart"></i>
+                        <i class="ace-icon fa fa-medkit"></i>
                     </div>
 
                     <div class="infobox-data">
-                        <span class="infobox-data-number">8</span>
-                        <div class="infobox-content">new orders</div>
+                        <span class="infobox-data-number">8 resep</span>
+                        <div class="infobox-content"><strong>Resep Obat</strong></div>
                     </div>
-                    <div class="stat stat-important">4%</div>
+                    {{-- <div class="stat stat-important">4%</div> --}}
                 </div>
 
                 <div class="infobox infobox-red">
                     <div class="infobox-icon">
-                        <i class="ace-icon fa fa-flask"></i>
+                        <i class="ace-icon fa fa-dollar"></i>
                     </div>
 
                     <div class="infobox-data">
-                        <span class="infobox-data-number">7</span>
-                        <div class="infobox-content">experiments</div>
+                        <span class="infobox-data-number">7 orang</span>
+                        <div class="infobox-content"><strong>Pasien Membayar</strong></div>
                     </div>
                 </div>
 
-                <div class="infobox infobox-orange2">
+                {{-- <div class="infobox infobox-orange2">
                     <div class="infobox-chart">
                         <span class="sparkline" data-values="196,128,202,177,154,94,100,170,224"></span>
                     </div>
 
                     <div class="infobox-data">
                         <span class="infobox-data-number">6,251</span>
-                        <div class="infobox-content">pageviews</div>
+                        <div class="infobox-content">Kunjungan Hari Ini</div>
                     </div>
 
                     <div class="badge badge-success">
                         7.2%
                         <i class="ace-icon fa fa-arrow-up"></i>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="infobox infobox-blue2">
+                {{-- <div class="infobox infobox-blue2">
                     <div class="infobox-progress">
                         <div class="easy-pie-chart percentage" data-percent="42" data-size="46">
                             <span class="percent">42</span>%
@@ -128,11 +108,11 @@
                             58GB remaining
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="space-6"></div>
 
-                <div class="infobox infobox-green infobox-small infobox-dark">
+                {{-- <div class="infobox infobox-green infobox-small infobox-dark">
                     <div class="infobox-progress">
                         <div class="easy-pie-chart percentage" data-percent="61" data-size="39">
                             <span class="percent">61</span>%
@@ -143,20 +123,21 @@
                         <div class="infobox-content">Task</div>
                         <div class="infobox-content">Completion</div>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="infobox infobox-blue infobox-small infobox-dark">
+                {{-- <div class="infobox infobox-blue infobox-dark">
                     <div class="infobox-chart">
                         <span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
                     </div>
 
                     <div class="infobox-data">
-                        <div class="infobox-content">Earnings</div>
-                        <div class="infobox-content">$32,000</div>
+                        <span></span>
+                        <div class="infobox-content">Kunjungan Hari ini</div>
+                        <div class="infobox-content">219</div>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="infobox infobox-grey infobox-small infobox-dark">
+                {{-- <div class="infobox infobox-grey infobox-small infobox-dark">
                     <div class="infobox-icon">
                         <i class="ace-icon fa fa-download"></i>
                     </div>
@@ -165,7 +146,7 @@
                         <div class="infobox-content">Downloads</div>
                         <div class="infobox-content">1,205</div>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="vspace-12-sm"></div>

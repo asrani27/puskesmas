@@ -18,10 +18,10 @@ class MasterPuskesmas extends Migration
             $table->string('nama');
             $table->text('alamat');
             $table->string('telp');
-            $table->integer('users_id')->unsigned()->nullable();
+            $table->string('kecamatan');
+            $table->string('kelurahan');
             $table->timestamps();
 
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

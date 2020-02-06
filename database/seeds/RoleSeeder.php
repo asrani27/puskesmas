@@ -12,15 +12,16 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        //Membuat role admin 
         $adminRole = new Role();
         $adminRole->name = "superadmin";
         $adminRole->display_name = "SuperAdmin";
+        $adminRole->description = "Merupakan Role yang memiliki hak akses penuh terhadap aplikasi, untuk Dinas Kesehatan";
         $adminRole->save();
         
         $puskesRole = new Role();
         $puskesRole->name = "adminpuskes";
         $puskesRole->display_name = "adminpuskes";
+        $puskesRole->description = "Role untuk admin puskesmas, yang memiliki hak akses tertentu";
         $puskesRole->save();
     }
 }

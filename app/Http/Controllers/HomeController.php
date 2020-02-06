@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
+use App\Mpuskesmas;
+use DB;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(Auth::user() == null){
+            return redirect('/');
+        }else{
+            if(Auth::user()->hasRole('superadmin')){
+                return view('home');   
+            }else{
+                return view('home_puskes');
+            }    
+        }
     }
 }

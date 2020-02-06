@@ -12,11 +12,15 @@
 				<script type="text/javascript">
 					try{ace.settings.loadState('sidebar')}catch(e){}
 				</script>
-			@if(Auth::user()->hasRole('superadmin'))
-			
-			@else
-				@include('layouts.menu')
-			@endif
+				@if(Auth::user() == null)
+				
+				@else	
+					@if(Auth::user()->hasRole('superadmin'))
+					
+					@else
+						@include('layouts.menu_puskes')
+					@endif
+				@endif
 			</div>
 
 			<div class="main-content">
