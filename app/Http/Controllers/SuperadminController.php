@@ -8,6 +8,8 @@ use App\Role;
 use App\User;
 use App\Menu;
 use App\Mpuskesmas;
+use App\Mkecamatan;
+use App\Mkelurahan;
 use Auth;
 
 class SuperadminController extends Controller
@@ -271,4 +273,53 @@ class SuperadminController extends Controller
         return view('superadmin.profile');
     }
 
+    public function gantiPass(Request $req)
+    {
+        $u = User::find(Auth::user()->id);
+        $u->password = bcrypt($req->password);
+        $u->save();
+        Alert::success('Password Berhasil Di Perbaharui','Pesan');
+        return back();
+    }
+    
+    public function gantiFoto(Request $req)
+    {
+        if($req->hasfile('file'))
+            {
+                $filename = $req->file->getClientOriginalName();
+                $filename = rand(1,9999).$filename;
+                $req->file->storeAs('/public/profile/',$filename);
+                $u = User::find(Auth::user()->id);
+                $u->foto = $filename;
+                $u->save();
+                Alert::success('Foto Berhasil Di Update', 'Pesan');
+            }else{
+                Alert::info('Tidak Ada Perubahan', 'Pesan');
+            }
+        return back();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Function Kecamatan [CRUD]
+    |--------------------------------------------------------------------------
+    */
+
+    public function kecamatan()
+    {
+        $data = Mkecamatan::all();
+        return view('superadmin.kecamatan.kecamatan',compact('data'));
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Function Kelurahan [CRUD]
+    |--------------------------------------------------------------------------
+    */
+    
+    public function kelurahan()
+    {
+        $data = Mkelurahan::all();
+        return view('superadmin.kelurahan.kelurahan',compact('data'));
+    }
 }

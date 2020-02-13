@@ -28,6 +28,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth', 'role:superadmin|adminpuskes']], function () {
     Route::get('/profile', 'SuperadminController@profile');
+    Route::post('/profile/password', 'SuperadminController@gantiPass');
+    Route::post('/profile/foto', 'SuperadminController@gantiFoto');
 });
 Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     //Route Role
@@ -59,4 +61,14 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::post('/sa/menu/add', 'SuperadminController@simpanMenu');
     Route::post('/sa/submenu/add', 'SuperadminController@simpanSubmenu');
     Route::get('/sa/menu/delete/{id}', 'SuperadminController@deleteMenu');
+    
+    Route::get('/sa/kecamatan', 'SuperadminController@kecamatan');
+    Route::get('/sa/kelurahan', 'SuperadminController@kelurahan');
+});
+
+
+Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
+    Route::get('/pendaftaran/pasien', 'PendaftaranController@pasien');
+    Route::get('/pendaftaran/pasien/add', 'PendaftaranController@addPasien');
+    Route::post('/pendaftaran/pasien/add', 'PendaftaranController@storePasien');
 });

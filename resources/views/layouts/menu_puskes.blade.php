@@ -1,7 +1,7 @@
 <ul class="nav nav-list">
     @foreach ($menu as $item)
-    <li class="{{ (request()->is($item->url)) ? 'active' : '' }} hover">
-        <a href="{{$item->url}}" class="{{count($item->submenu) == 0 ? '' : 'dropdown-toggle'}}">
+    <li class="{{ (request()->is($item->url.'*')) ? 'active' : '' }} hover">
+        <a href="/{{$item->url}}" class="{{count($item->submenu) == 0 ? '' : 'dropdown-toggle'}}">
             <i class="menu-icon fa {{$item->icon}}"></i>
             <span class="menu-text"> {{$item->nama}} </span>
             @if(count($item->submenu) == 0)
@@ -17,7 +17,7 @@
         <ul class="submenu">
             @foreach ($item->submenu as $sub)
             <li class="hover">
-                <a href="{{$sub->url}}" class="{{count($sub->submenu) == 0 ? '' : 'dropdown-toggle'}}">
+                <a href="/{{$sub->url}}" class="{{count($sub->submenu) == 0 ? '' : 'dropdown-toggle'}}">
                     <i class="menu-icon fa fa-caret-right"></i>
                     
                     {{$sub->nama}}
@@ -35,7 +35,7 @@
                 <ul class="submenu">
                     @foreach ($sub->submenu as $sub2)
                     <li class="hover">
-                        <a href="{{$sub2->url}}">
+                        <a href="/{{$sub2->url}}">
                             <i class="menu-icon fa fa-leaf green"></i>
                             {{$sub2->nama}}
                         </a>

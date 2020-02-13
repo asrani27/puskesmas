@@ -43,7 +43,12 @@
                 </li>
                 <li class="light-blue dropdown-modal user-min">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+
+                        @if(Auth::user()->foto == null)
                         <img class="nav-user-photo" src="/assets/assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                        @else
+                        <img class="nav-user-photo" src="/storage/profile/{{Auth::user()->foto}}" alt="Photo"/>
+                        @endif
                         <span class="user-info">
                             <small>Selamat Datang,</small>
                             {{Auth::user()->name}}
@@ -79,37 +84,30 @@
 				
 			@else	
 			    @if(Auth::user()->hasRole('superadmin'))		
-                {{-- <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
                     <li>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Pengaturan
+                            Data master
                             <i class="ace-icon fa fa-angle-down bigger-110"></i>
                         </a>
     
                         <ul class="dropdown-menu dropdown-light-blue dropdown-caret">
                             <li>
-                                <a href="#">
-                                    <i class="ace-icon fa fa-eye bigger-110 blue"></i>
-                                    Menu & Sub Menu
+                                <a href="/sa/kecamatan">
+                                    <i class="ace-icon fa fa-folder bigger-110 blue"></i>
+                                    Kecamatan
                                 </a>
                             </li>
     
                             <li>
-                                <a href="#">
-                                    <i class="ace-icon fa fa-user bigger-110 blue"></i>
-                                    Pengguna
-                                </a>
-                            </li>
-    
-                            <li>
-                                <a href="#">
-                                    <i class="ace-icon fa fa-cog bigger-110 blue"></i>
-                                    Settings
+                                <a href="/sa/kelurahan">
+                                    <i class="ace-icon fa fa-folder bigger-110 blue"></i>
+                                    Kelurahan
                                 </a>
                             </li>
                         </ul>
                     </li>
-                </ul> --}}
+                </ul>
                 @else
                 
                 @endif
