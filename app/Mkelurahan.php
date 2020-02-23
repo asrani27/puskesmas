@@ -12,4 +12,9 @@ class Mkelurahan extends Model
     {
         return $this->belongsTo(Mkecamatan::class, 'kecamatan_id');
     }
+
+    public function pasien()
+    {
+        return $this->hasMany(Mpasien::class, 'kelurahan_id');
+    }
 }

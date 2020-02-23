@@ -1,0 +1,171 @@
+@extends('layouts.admin.default')
+
+@push('addcss')
+<link rel="stylesheet" href="/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+@endpush
+
+@section('content-header')
+<div class="content-header">
+    <div class="row">
+    </div>
+</div>
+@endsection
+
+@section('content')
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Data Pendaftaran</h3>
+                
+            <div class="text-right">
+                <a href="/pendaftaran/pasien/add" class="btn btn-info btn-xs float-right shadow"><i class="fas fa-docs"></i> XLS</a> &nbsp;
+              <a href="/pendaftaran/pasien/add" class="btn btn-info btn-xs float-right shadow"><i class="fas fa-print"></i> Print</a> &nbsp;
+              <a href="/pendaftaran/pasien/add" class="btn btn-primary btn-xs float-right shadow"><i class="fas fa-plus"></i> Tambah</a> &nbsp;
+            </div>
+            </div>
+            
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <div class="d-flex">
+                    <div class="p-2" style="padding-bottom: 5px;">
+                      <div class="input-group input-group-sm" style="width: 200px;">
+                        <select class="form-control form-control-sm">
+                            <option>- Asuransi -</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="p-2" style="padding-bottom: 5px;">
+                      <div class="input-group input-group-sm" style="width: 200px;">
+                        <select class="form-control form-control-sm">
+                            <option>- Asal Pendaftaran -</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="p-2" style="padding-bottom: 5px;">
+                        <div class="input-group input-group-sm" style="width: 200px;">
+                          <select class="form-control form-control-sm">
+                              <option>- Semua Ruangan -</option>
+                          </select>
+                        </div>
+                    </div>
+                    
+                    <div class="p-2" style="padding-bottom: 5px;">
+                        <div class="input-group input-group-sm" style="width: 200px;">
+                          <select class="form-control form-control-sm">
+                              <option>- Semua Pemeriksaan -</option>
+                          </select>
+                        </div>
+                    </div>
+                    
+                    <div class="p-2" style="padding-bottom: 5px;">
+                        <div class="input-group input-group-sm" style="width: 200px;">
+                          <select class="form-control form-control-sm">
+                              <option>- Semua Pelayanan -</option>
+                          </select>
+                        </div>
+                    </div>
+                    
+                    <div class="p-2" style="padding-bottom: 5px;">
+                        <div class="input-group input-group-sm" style="width: 200px;">
+                          <input type="text" name="search" class="form-control" placeholder="Pencarian">
+                          <div class="input-group-append">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="p-2" style="padding-bottom: 5px;">
+                          <a href="/pendaftaran/pasien" class="btn btn-sm btn-info"><i class="fas fa-sync-alt"></i> Reset</a>
+                    </div>
+                </div>
+              <table id="example" class="table table-bordered table-sm table-responsive">
+                <thead>
+                <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
+                  <th>#</th>
+                  <th>Tanggal</th>
+                  <th>ID Pasien</th>
+                  <th>No. Dok RM</th>
+                  <th>NIK</th>
+                  <th>Nama</th>
+                  <th>Penyakit Khusus</th>
+                  <th>Tempat & Tgl Lahir</th>
+                  <th>Umur</th>
+                  <th>Kelurahan</th>
+                  <th>Asuransi</th>
+                  <th>Kunjungan</th>
+                  <th>Status Pelayanan</th>
+                  <th>Status PRB</th>
+                  <th>Status Prolanis</th>
+                  <th>Cetak</th>
+                </thead><small>
+                <tbody>
+                  @foreach ($data as $key => $item)
+                  <tr class="bg-gradient-successs">
+                      <td></td>
+                    <td><small>{{$item->tanggal}}</small></td>
+                    <td><small>{{$item->pasien_id}}</small></td>
+                    <td><small>{{$item->pasien == null ? '-': $item->pasien->no_dok_rm}}</small></td>
+                    <td><small>{{$item->pasien == null ? '-': $item->pasien->nik}}</small></td>
+                    <td><small>{{$item->pasien->nama}}</small></td>
+                    <td><small>-</small></td>
+                    <td><small>{{$item->pasien == null ? '': $item->pasien->tempat_lahir}}, {{$item->pasien == null ? null : \Carbon\Carbon::parse($item->pasien->tgl_lahir)->format('d-M-Y')}}</small></td>
+                    <td><small>{{$item->umur_tahun}} Thn,{{$item->umur_bulan}} Bln, {{$item->umur_hari}} Hari</small></td>
+                    <td><small>{{$item->pasien->kelurahan == null ? '-' : $item->pasien->kelurahan->nama}}</small></td>
+                    <td><small>{{$item->asuransi == null ? '-' : $item->asuransi->nama}}</small></td>
+                    <td><small>{{$item->kunjungan}}</small></td>
+                    <td><small>-</small></td>
+                    <td><small>{{$item->status_prb}}</small></td>
+                    <td><small>{{$item->status_prolanis}}</small></td>
+                    <td>
+                        <a href="" class="btn btn-info btn-sm">Cetak</a>
+                    </td>
+                    {{-- <td><small>{{$item->no_asuransi}}</small></td>
+                    <td>
+                      <small>
+                      @if($item->jkel == 'L')
+                      Laki-Laki
+                      @else
+                      Perempuan
+                      @endif
+                      </small>
+                    </td>
+                    <td>
+                      <small>@if($item->kelurahan == null)
+                        @else
+                        {{$item->kelurahan->nama}}
+                        @endif
+                      </small>
+                    </td> --}}
+                  </tr>
+                  @endforeach
+                <tbody></small> 
+              </table>
+            </div>
+            <div class="card-footer">
+                {{ $data->onEachSide(1)->links() }}
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('addjs')
+<script src="/admin/plugins/datatables/jquery.dataTables.js"></script>
+<script src="/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script>
+  $(function () {
+    $("#example1").DataTable({
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
+  });
+</script>
+@endpush

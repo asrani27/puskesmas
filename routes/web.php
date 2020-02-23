@@ -69,6 +69,17 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 
 Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
     Route::get('/pendaftaran/pasien', 'PendaftaranController@pasien');
+    Route::post('/pendaftaran/pasien/search', 'PendaftaranController@search');
+    Route::get('/pendaftaran/pasien/getData', 'PendaftaranController@getDataPasien');
     Route::get('/pendaftaran/pasien/add', 'PendaftaranController@addPasien');
     Route::post('/pendaftaran/pasien/add', 'PendaftaranController@storePasien');
+    Route::get('/pendaftaran/pasien/syncrone', 'PendaftaranController@syncrone');
+    Route::get('/pendaftaran/pasien/delete/{id}', 'PendaftaranController@delete');
+    Route::get('/pendaftaran/pasien/edit/{id}', 'PendaftaranController@editPasien');
+    Route::get('/pendaftaran/pasien/view/{id}', 'PendaftaranController@viewPasien');
+    Route::get('/pendaftaran/pasien/create/{id}', 'PendaftaranController@create');
+
+    Route::get('/pendaftaran', 'PendaftaranController@pendaftaran');
+    Route::get('/rekam_medis', 'PendaftaranController@rekamMedis');
+    
 });

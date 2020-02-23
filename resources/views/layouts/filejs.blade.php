@@ -3,11 +3,9 @@
 			if('ontouchstart' in document.documentElement) document.write("<script src='/assets/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
 		<script src="/assets/assets/js/bootstrap.min.js"></script>
-		
-
 		<script src="/assets/assets/js/ace-elements.min.js"></script>
 		<script src="/assets/assets/js/ace.min.js"></script>
-		<script type="text/javascript">
+		{{-- <script type="text/javascript">
 			jQuery(function($) {
 			 var $sidebar = $('.sidebar').eq(0);
 			 if( !$sidebar.hasClass('h-sidebar') ) return;
@@ -87,6 +85,6 @@
 				$(document).triggerHandler('settings.ace.top_menu', ['sidebar_fixed' , $sidebar.hasClass('sidebar-fixed')]);
 			 });
 			});
-		</script>
+		</script> --}}
         @include('sweetalert::alert')
         @stack('addjs')

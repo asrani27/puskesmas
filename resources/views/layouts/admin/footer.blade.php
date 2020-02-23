@@ -6,7 +6,7 @@
   </aside>
   <footer class="main-footer">
     <div class="float-right d-none d-sm-inline">
-      Anything you want
+     E-Puskesmas v.1.1.0
     </div>
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2020 <a href="https://adminlte.io">Diskominfotik Banjarmasin</a>.</strong>
   </footer>

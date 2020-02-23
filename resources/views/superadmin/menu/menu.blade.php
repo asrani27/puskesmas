@@ -48,7 +48,7 @@ select {
                             </div>
                             <div class="dd2-content">{{$item->nama}}
                                 <div class="pull-right action-buttons">
-                                    <a href="#" role="button" class="green sub-menu" data-toggle="modal" data-id="{{$item->id}}" data-nama="{{$item->nama}}">
+                                    <a href="#" role="button" class="green sub-menu" id="sub-menu" data-toggle="modal" data-id="{{$item->id}}" data-nama="{{$item->nama}}">
                                         <i class="ace-icon fa fa-plus bigger-130"></i>
                                     </a>
                                     <a class="blue" href="#">
@@ -136,14 +136,14 @@ select {
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama Menu </label>
 
                             <div class="col-sm-9">
-                                <input type="text" id="form-field-1-1" name="nama" class="form-control" required/>
+                                <input type="text" name="nama" class="form-control" required/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Url </label>
 
                             <div class="col-sm-9">
-                                <input type="text" id="form-field-1-1" name="url" class="form-control"/>
+                                <input type="text" name="url" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -668,13 +668,13 @@ select {
 
 <script src="/assets/assets/js/jquery.nestable.min.js"></script>
 <script>
-        jQuery(function($){
-            $('.dd').nestable();
-            $('.dd-handle a').on('mousedown', function(e){
-                e.stopPropagation();
-            });
-            $('[data-rel="tooltip"]').tooltip();
-        });
+        // jQuery(function($){
+        //     $('.dd').nestable();
+        //     $('.dd-handle a').on('mousedown', function(e){
+        //         e.stopPropagation();
+        //     });
+        //     $('[data-rel="tooltip"]').tooltip();
+        // });
 $(document).ready(function() {
     $('.sub-menu').click(function(){
     var id = $(this).data('id');  

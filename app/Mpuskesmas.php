@@ -12,4 +12,9 @@ class Mpuskesmas extends Model
     {
         return $this->belongsToMany(User::class, 'puskes_user', 'puskes_id', 'users_id');
     }
+    
+    public function pasien()
+    {
+        return $this->belongsToMany(Mpasien::class, 'pasien_puskes', 'puskes_id', 'pasien_id');
+    }
 }

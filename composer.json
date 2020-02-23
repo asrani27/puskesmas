@@ -14,7 +14,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.1",
         "realrashid/sweet-alert": "^3.1",
-        "santigarcor/laratrust": "5.2.*"
+        "santigarcor/laratrust": "5.2.*",
+        "yajra/laravel-datatables-oracle": "^9.8"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
@@ -40,6 +41,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+           "app/Helpers/Umur.php"
         ]
     },
     "autoload-dev": {

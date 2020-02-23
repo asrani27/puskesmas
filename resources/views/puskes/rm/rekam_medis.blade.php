@@ -16,10 +16,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Pasien</h3>
-              &nbsp;<a href="/pendaftaran/pasien/syncrone" class="btn btn-success btn-xs float shadow"><i class="fa fa-refresh" aria-hidden="true"></i> Syncrone</a>
-              <a href="/pendaftaran/pasien/add" class="btn btn-primary btn-xs float-right shadow"><i class="fas fa-plus"></i> Tambah Pasien</a> &nbsp;
-            </div>
+              <h3 class="card-title">Data Rekam Medis Pasien</h3>
+           </div>
             
             <!-- /.card-header -->
             <div class="card-body p-0 table-responsive">
@@ -51,28 +49,27 @@
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                   <th>#</th>
+                  <th>ID Pasien</th>
                   <th>No. RM Lama</th>
                   <th>No. Dok RM</th>
                   <th>Nama</th>
                   <th>NIK</th>
-                  <th>No Asuransi</th>
                   <th>Jenis Kelamin</th>
                   <th>Tempat & Tgl Lahir</th>
-                  <th>Kelurahan</th>
+                  <th>Alamat</th>
                 </thead><small>
                 <tbody>
                   @foreach ($data as $key => $item)
                   <tr>
                       <td>
                         <a href="/pendaftaran/pasien/view/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
-                        <a href="/pendaftaran/pasien/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Semua Data Tentang Pasien Ini?');"><i class="fa fa-trash"></i></a>
                       </td>
                     {{-- <td class="text-center"><small>{{ $key+ $data->firstItem() }}</small></td> --}}
+                    <td><small>{{$item->id}}</small></td>
                     <td><small>{{$item->no_rm_lama}}</small></td>
                     <td><small>{{$item->no_dok_rm}}</small></td>
                     <td><small>{{$item->nama}}</small></td>
                     <td><small>{{$item->nik}}</small></td>
-                    <td><small>{{$item->no_asuransi}}</small></td>
                     <td>
                       <small>
                       @if($item->jkel == 'L')
@@ -83,13 +80,8 @@
                       </small>
                     </td>
                     <td><small>{{$item->tempat_lahir}}, {{$item->tgl_lahir == null ? null : \Carbon\Carbon::parse($item->tgl_lahir)->format('d-M-Y')}}</small></td>
-                    <td>
-                      <small>@if($item->kelurahan == null)
-                        @else
-                        {{$item->kelurahan->nama}}
-                        @endif
-                      </small>
-                    </td>
+                  
+                    <td><small>{{$item->alamat}}</small></td>
                   </tr>
                   @endforeach
                 <tbody></small> 
