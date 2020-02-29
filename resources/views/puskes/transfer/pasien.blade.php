@@ -17,35 +17,11 @@
         <div class="card">
             <div class="card-header">
               <h3 class="card-title">Data Pasien</h3>
-              <a href="/pendaftaran/pasien/add" class="btn btn-primary btn-xs float-right shadow"><i class="fas fa-plus"></i> Tambah Pasien</a> &nbsp;
+              <a href="/sinkrondb" class="btn btn-danger btn-sm float-right shadow"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a> &nbsp;
             </div>
             
             <!-- /.card-header -->
             <div class="card-body p-0 table-responsive">
-                <div class="d-flex">
-                  <form method="post" action="/pendaftaran/pasien/search">
-                    @csrf
-                    <div class="p-2" style="padding-bottom: 5px;">
-                      <div class="input-group input-group-sm" style="width: 200px;">
-                        <input type="text" name="search" class="form-control" placeholder="Pencarian">
-                        <div class="input-group-append">
-                          <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                    <div class="p-2" style="padding-bottom: 5px;">
-                      <div class="input-group input-group-sm" style="width: 200px;">
-                        <input type="text" name="tanggal" class="form-control" placeholder="Tanggal Lahir">
-                        <div class="input-group-append">
-                          <button type="submit" class="btn bg-purple"><i class="fas fa-calendar"></i></button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="p-2" style="padding-bottom: 5px;">
-                          <a href="/pendaftaran/pasien" class="btn btn-sm btn-info"><i class="fas fa-sync-alt"></i> Reset</a>
-                    </div>
-                </div>
               <table id="example" class="table table-bordered table-sm">
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
@@ -62,11 +38,7 @@
                 <tbody>
                   @foreach ($data as $key => $item)
                   <tr>
-                      <td>
-                        <a href="/pendaftaran/pasien/view/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
-                        <a href="/pendaftaran/pasien/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Semua Data Tentang Pasien Ini?');"><i class="fa fa-trash"></i></a>
-                      </td>
-                    {{-- <td class="text-center"><small>{{ $key+ $data->firstItem() }}</small></td> --}}
+                    <td class="text-center"><small>{{ $key+ $data->firstItem() }}</small></td>
                     <td><small>{{$item->no_rm_lama}}</small></td>
                     <td><small>{{$item->no_dok_rm}}</small></td>
                     <td><small>{{$item->nama}}</small></td>

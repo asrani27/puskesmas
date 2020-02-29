@@ -66,7 +66,8 @@
                           </select>
                         </div>
                     </div>
-                    
+                    <form action="/pendaftaran/search" method="POST">
+                      @csrf
                     <div class="p-2" style="padding-bottom: 5px;">
                         <div class="input-group input-group-sm" style="width: 200px;">
                           <input type="text" name="search" class="form-control" placeholder="Pencarian">
@@ -75,9 +76,10 @@
                           </div>
                         </div>
                     </div>
+                    </form>
 
                     <div class="p-2" style="padding-bottom: 5px;">
-                          <a href="/pendaftaran/pasien" class="btn btn-sm btn-info"><i class="fas fa-sync-alt"></i> Reset</a>
+                          <a href="/pendaftaran" class="btn btn-sm btn-info"><i class="fas fa-sync-alt"></i> Reset</a>
                     </div>
                 </div>
               <table id="example" class="table table-bordered table-sm table-responsive">
@@ -85,7 +87,7 @@
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                   <th>#</th>
                   <th>Tanggal</th>
-                  <th>ID Pasien</th>
+                  <th>eRM</th>
                   <th>No. Dok RM</th>
                   <th>NIK</th>
                   <th>Nama</th>
@@ -99,10 +101,18 @@
                   <th>Status PRB</th>
                   <th>Status Prolanis</th>
                   <th>Cetak</th>
-                </thead><small>
+                </thead>
                 <tbody>
                   @foreach ($data as $key => $item)
-                  <tr class="bg-gradient-successs">
+                <tr style="
+                  @if($item->status_periksa == 0)
+                  background-color:#fff
+                  @elseif($item->status_periksa == 1)
+                  background-color:#f2dede
+                  @elseif($item->status_periksa == 2)
+                  background-color: #dff0d8
+                  @endif
+                ">
                       <td></td>
                     <td><small>{{$item->tanggal}}</small></td>
                     <td><small>{{$item->pasien_id}}</small></td>
@@ -115,9 +125,9 @@
                     <td><small>{{$item->pasien->kelurahan == null ? '-' : $item->pasien->kelurahan->nama}}</small></td>
                     <td><small>{{$item->asuransi == null ? '-' : $item->asuransi->nama}}</small></td>
                     <td><small>{{$item->kunjungan}}</small></td>
-                    <td><small>-</small></td>
-                    <td><small>{{$item->status_prb}}</small></td>
-                    <td><small>{{$item->status_prolanis}}</small></td>
+                    <td><small>{{$item->pelayanan->statuspulang == null ? 'Pendaftaran' : $item->pelayanan->statuspulang->nama}}</small></td>
+                    <td><small>{{$item->status_prb == 0 ? 'Tidak' : 'Ya'}}</small></td>
+                    <td><small>{{$item->status_prolanis == 0 ? 'Tidak' : 'Ya'}}</small></td>
                     <td>
                         <a href="" class="btn btn-info btn-sm">Cetak</a>
                     </td>
@@ -140,10 +150,22 @@
                     </td> --}}
                   </tr>
                   @endforeach
-                <tbody></small> 
+                <tbody>
               </table>
             </div>
+            <div class="row">
+              <div class="col-sm-4 text-center">
+                <button class="btn btn-default"></button> Belum Diperiksa<br>
+              </div>
+              <div class="col-sm-4 text-center">
+                <button class="btn btn-danger"></button> Sedang Diperiksa<br>
+              </div>
+              <div class="col-sm-4 text-center">
+                <button class="btn btn-success"></button> Selesai Diperiksa<br>
+              </div>
+            </div>
             <div class="card-footer">
+
                 {{ $data->onEachSide(1)->links() }}
             </div>
         </div>

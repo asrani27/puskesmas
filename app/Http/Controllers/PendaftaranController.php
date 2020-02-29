@@ -13,8 +13,6 @@ use Auth;
 use DataTables;
 use Carbon\Carbon;
 use DateTime;
-
-
 use DB;
 
 class PendaftaranController extends Controller
@@ -135,69 +133,6 @@ class PendaftaranController extends Controller
         ];
     }
 
-    public function syncrone()
-    {
-        $data = DB::connection('mysql2')->table('m_pasien')->get();
-        $puskes = Auth::user()->puskes->first();
-        $getData = $data->map(function($item, $key){
-            
-            $item->pendaftaran = DB::connection('mysql2')->table('t_pendaftaran')->where('pasien_id', $item->id)->get();
-            return $item;
-
-        });
-        //dd($getData);
-        $store = $getData->map(function($item, $key)use($puskes){
-            if($item->asuransi_id == '0000'){
-                $asuransi_id = 1;
-            }elseif($item->asuransi_id == '0001'){
-                $asuransi_id = 2;
-            }elseif($item->asuransi_id == '0002'){
-                $asuransi_id = 3;
-            }
-                $s = new Mpasien;
-                $s->no_rm_lama   = $item->no_rm_lama;
-                $s->no_dok_rm    = $item->no_dok_rm;
-                $s->no_asuransi  = $item->no_asuransi;
-                $s->asuransi_id  = $asuransi_id;
-                $s->nama         = $item->nama;
-                $s->nik          = $item->nik;
-                $s->jkel         = $item->jenis_kelamin;
-                $s->tempat_lahir = $item->tempat_lahir;
-                $s->tgl_lahir    = $item->tanggal_lahir;
-                $s->kelurahan_id = $item->kelurahan_id;
-                $s->alamat       = $item->alamat;
-                $s->save();
-                $s->puskes()->attach($puskes);
-
-                foreach($item->pendaftaran as $key => $value)
-                {
-                    $p = new Tpendaftaran;
-                    $p->tanggal          = $value->tanggal;
-                    $p->pasien_id         = $s->id;
-                    $p->umur_tahun        = $value->umur_tahun;
-                    $p->umur_bulan        = $value->umur_bulan;
-                    $p->umur_hari         = $value->umur_hari;
-                    $p->penanggung_jawab  = $value->penanggung_jawab_pasien;
-                    $p->hubungan          = $value->hubungan_dengan_pasien;
-                    $p->no_hp_penanggung  = $value->no_hp_penanggung;
-                    $p->kunjungan         = $value->kunjungan;
-                    $p->status            = $value->status;
-                    $p->asuransi_id       = $asuransi_id;
-                    $p->no_asuransi       = $value->no_asuransi;
-                    $p->status_prolanis   = $value->status_pstprol;
-                    $p->status_prb        = $value->status_pstprb;
-                    $p->rujukan_dari      = $value->rujukan_dari;
-                    $p->nama_perujuk      = $value->nama_perujuk;
-                    $p->status_periksa    = 2;
-                    $p->save();
-                }
-
-            return $item;
-        });
-        Alert::success('Syncrone Dari Database Lama Berhasil'.'pesan')->autoClose(50000);
-        return back();
-    }
-
     public function delete($id)
     {
         $del = Mpasien::find($id)->delete();
@@ -215,5 +150,49 @@ class PendaftaranController extends Controller
     {   
         $data = Mpasien::orderBy('created_at', 'desc')->paginate(10);
         return view('puskes.rm.rekam_medis',compact('data'));
+    }
+
+    public function pendaftaranSearch(Request $req)
+    {
+        $search = $req->search;
+        $data = Tpendaftaran::where('pasien_id', 'LIKE', '%' . $search . '%')
+        ->orWhere('no_asuransi','LIKE', '%'.$search.'%')
+        ->orwhereHas('pasien', function ($item) use ($search){
+            $item->where('nama', 'like', '%'.$search.'%');
+            $item->orWhere('nik', 'like', '%'.$search.'%');
+        })->paginate(10);
+        $data->appends($req->only('search'));
+        return view('puskes.daftar.pendaftaran',compact('data'));
+    }
+
+    public function daftarPelayanan(Request $req,$id)
+    {
+        $pasien = Mpasien::find($id);
+        $tahun = Tahun($pasien->tgl_lahir);
+        $bulan = Bulan($pasien->tgl_lahir);
+        $hari  = Hari($pasien->tgl_lahir);
+        
+        $t = new Tpendaftaran;
+        $t->tanggal          = $req->tanggal;
+        $t->pasien_id        = $req->pasien_id;
+        $t->umur_tahun       = $tahun; 
+        $t->umur_bulan       = $bulan;
+        $t->umur_hari        = $hari;
+        $t->penanggung_jawab = $req->penanggung_jawab;
+        $t->hubungan         = $req->hubungan;
+        $t->no_hp_penanggung = $req->no_hp_penanggung;
+        $t->kunjungan        = $req->kunjungan;
+        $t->status           = $req->status;
+        $t->asuransi_id      = $pasien->asuransi_id;
+        $t->no_asuransi      = $req->no_asuransi;
+        $t->tarif            = $req->tarif;
+        $t->rujukan_dari     = $req->rujukan_dari;
+        $t->nama_perujuk     = $req->nama_perujuk;
+        $t->puskesmas_id     = Auth::user()->puskes->first()->id;
+        $t->status_periksa   = 0;
+        $t->save();
+
+        toast('berhasil Di Daftarkan', 'success');
+        return redirect('/pendaftaran');
     }
 }

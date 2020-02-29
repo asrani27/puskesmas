@@ -68,8 +68,9 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 
 
 Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
+    Route::any('/pendaftaran/pasien/search', 'PendaftaranController@search');
+    Route::get('/pendaftaran/pasien/truncate', 'PendaftaranController@truncatePasien');
     Route::get('/pendaftaran/pasien', 'PendaftaranController@pasien');
-    Route::post('/pendaftaran/pasien/search', 'PendaftaranController@search');
     Route::get('/pendaftaran/pasien/getData', 'PendaftaranController@getDataPasien');
     Route::get('/pendaftaran/pasien/add', 'PendaftaranController@addPasien');
     Route::post('/pendaftaran/pasien/add', 'PendaftaranController@storePasien');
@@ -78,8 +79,18 @@ Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
     Route::get('/pendaftaran/pasien/edit/{id}', 'PendaftaranController@editPasien');
     Route::get('/pendaftaran/pasien/view/{id}', 'PendaftaranController@viewPasien');
     Route::get('/pendaftaran/pasien/create/{id}', 'PendaftaranController@create');
+    Route::post('/pendaftaran/pasien/create/{id}', 'PendaftaranController@daftarPelayanan');
 
     Route::get('/pendaftaran', 'PendaftaranController@pendaftaran');
+    Route::any('/pendaftaran/search', 'PendaftaranController@pendaftaranSearch');
     Route::get('/rekam_medis', 'PendaftaranController@rekamMedis');
+    
+    Route::get('/sinkrondb', 'TransferController@index');
+    Route::get('/sinkrondb/sinkron/{id}', 'TransferController@sinkron');
+    Route::get('/sinkrondb/lihat/{id}', 'TransferController@lihat');
+    Route::get('/sinkrondb/truncate/{id}', 'TransferController@truncate');
+
+    Route::get('/medis', 'PelayananController@medis');
+    
     
 });

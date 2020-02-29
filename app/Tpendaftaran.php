@@ -17,4 +17,14 @@ class Tpendaftaran extends Model
     {
         return $this->belongsTo(Masuransi::class, 'asuransi_id');
     }
+
+    public function pelayanan()
+    {
+        return $this->hasOne(Tpelayanan::class, 'pendaftaran_id');
+    }
+
+    public function puskesmas()
+    {
+        return $this->belongsTo(Mpuskesmas::class, 'puskesmas_id');
+    }
 }

@@ -17,4 +17,9 @@ class Mpuskesmas extends Model
     {
         return $this->belongsToMany(Mpasien::class, 'pasien_puskes', 'puskes_id', 'pasien_id');
     }
+
+    public function pendaftaran()
+    {
+        return $this->hasMany(Tpendaftaran::class, 'puskesmas_id');
+    }
 }

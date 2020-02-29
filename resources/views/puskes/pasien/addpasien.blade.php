@@ -75,9 +75,9 @@
                         </div>
                     </div>
                     <div class="input-group row">
-                        <label class="col-sm-3 col-form-label text-right"><small>Tanggal Lahir</small></label>
+                        <label class="col-sm-3 col-form-label text-right"><small>Tanggal Lahir <span class="text-danger"><strong>*</strong></span></small></label>
                         <div class="col-sm-9">
-                            <input type="text" id="datepicker" class="form-control form-control-sm"  name="tgl_lahir">
+                            <input type="text" id="datepicker" class="form-control form-control-sm"  name="tgl_lahir" required>
                         </div>
                     </div>
                     <div class="input-group row">
