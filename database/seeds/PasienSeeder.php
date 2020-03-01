@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 use App\Mpasien;
 use App\Mpuskesmas;
-use DB;
 use App\Tpendaftaran;
 use App\Tpelayanan;
 
