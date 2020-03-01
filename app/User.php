@@ -18,6 +18,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Mpuskesmas::class, 'puskes_user', 'users_id', 'puskes_id');
     }
 
+    public function menuakses()
+    {
+        return Menu::where('menuakses', [Auth::user()->menu]);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

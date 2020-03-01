@@ -7,7 +7,9 @@ use App\Mpasien;
 use App\Masuransi;
 use App\Mkelurahan;
 use App\Mpuskesmas;
+use App\Mruangan;
 use App\Tpendaftaran;
+use App\Tpelayanan;
 use Alert;
 use Auth;
 use DataTables;
@@ -119,8 +121,8 @@ class PendaftaranController extends Controller
     public function create($id)
     { 
         $data = Mpasien::find($id);
-
-        return view('puskes.pasien.pendaftaran',compact('data'));
+        $ruangan = Mruangan::orderBy('nama','asc')->get();
+        return view('puskes.pasien.pendaftaran',compact('data','ruangan'));
     }
 
     public function messages()
@@ -191,6 +193,13 @@ class PendaftaranController extends Controller
         $t->puskesmas_id     = Auth::user()->puskes->first()->id;
         $t->status_periksa   = 0;
         $t->save();
+
+        $p = new Tpelayanan;
+        $p->tanggal        = $req->tanggal;
+        $p->ruangan_id     = $req->ruangan_id;
+        $p->pendaftaran_id = $t->id;
+        $p->instalasi_id   = Mruangan::find($req->ruangan_id)->first()->instalasi->id;
+        $p->save();
 
         toast('berhasil Di Daftarkan', 'success');
         return redirect('/pendaftaran');

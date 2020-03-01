@@ -125,7 +125,7 @@
                     <td><small>{{$item->pasien->kelurahan == null ? '-' : $item->pasien->kelurahan->nama}}</small></td>
                     <td><small>{{$item->asuransi == null ? '-' : $item->asuransi->nama}}</small></td>
                     <td><small>{{$item->kunjungan}}</small></td>
-                    <td><small>{{$item->pelayanan->statuspulang == null ? 'Pendaftaran' : $item->pelayanan->statuspulang->nama}}</small></td>
+                    <td><small>{{$item->pelayanan->statuspulang_id == null ? 'Pendaftaran' : $item->pelayanan->statuspulang->nama}}</small></td>
                     <td><small>{{$item->status_prb == 0 ? 'Tidak' : 'Ya'}}</small></td>
                     <td><small>{{$item->status_prolanis == 0 ? 'Tidak' : 'Ya'}}</small></td>
                     <td>

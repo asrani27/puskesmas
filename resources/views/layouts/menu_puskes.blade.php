@@ -9,10 +9,8 @@
             <b class="arrow fa fa-angle-down"></b>
             @endif
         </a>
-
         <b class="arrow"></b>
         @if(count($item->submenu) == 0)
-
         @else
         <ul class="submenu">
             @foreach ($item->submenu as $sub)

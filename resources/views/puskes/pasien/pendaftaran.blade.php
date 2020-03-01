@@ -214,10 +214,11 @@
                         <tr>
                           <td>Pilih Poli <span class="text-danger"><strong>*</strong></span></td>
                           <td>
-                            <select class="form-control form-control-sm">
+                            <select class="form-control form-control-sm" name="ruangan_id">
                               <option>-Pilih-</option>
-                              <option>Umum</option>
-                              <option>Gigi</option>
+                              @foreach ($ruangan as $item)
+                                <option value="{{$item->id}}">{{$item->nama}}</option>
+                              @endforeach
                             </select>
                           </td>
                         </tr>
