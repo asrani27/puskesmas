@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Mpasien;
+use App\Mpuskesmas;
 use Auth;
 use DB;
 use App\Tpendaftaran;
@@ -17,7 +18,7 @@ class PasienSeeder extends Seeder
     public function run()
     {
         $data = DB::connection('mysql2')->table('m_pasien')->get();
-        $puskes = Auth::user()->puskes->first();
+        $puskes = Mpuskesmas::first();
         $getData = $data->map(function($item, $key){
             $item->pendaftaran = DB::connection('mysql2')->table('t_pendaftaran')->where('pasien_id', $item->id)->get()->map(function($item, $key){
                 $item->pelayanan = DB::connection('mysql2')->table('t_pelayanan')->where('pendaftaran_id', $item->id)->get();
