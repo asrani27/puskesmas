@@ -90,7 +90,20 @@
                   <th>Status Prolanis</th>
                   <th>Cetak</th>
                 </thead>
-                
+                <tbody>
+                  @foreach ($data as $item)
+                  <tr>
+                    <td>  
+                    <a href="/pelayanan/medis/proses/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  @endforeach
+                </tbody>
               </table>
             </div>
             <div class="row">
@@ -105,7 +118,7 @@
               </div>
             </div>
             <div class="card-footer">
-
+              {{ $data->onEachSide(1)->links() }}
             </div>
         </div>
     </div>
