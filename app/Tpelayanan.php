@@ -17,4 +17,9 @@ class Tpelayanan extends Model
     {
         return $this->belongsTo(Mstatuspulang::class, 'statuspulang_id');
     }
+
+    public function ruangan()
+    {
+        return $this->belongsTo(Mruangan::class, 'ruangan_id');
+    }
 }

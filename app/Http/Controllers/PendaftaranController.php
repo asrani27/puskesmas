@@ -51,6 +51,7 @@ class PendaftaranController extends Controller
                 ->orWhere('no_asuransi','LIKE', '%'.$req->search.'%')
                 ->orWhere('tempat_lahir','LIKE', '%'.$req->search.'%')
                 ->paginate(10);
+        $data->appends($req->only('search'));
         return view('puskes.pasien.pasien',compact('data'));
 
     }
@@ -167,6 +168,14 @@ class PendaftaranController extends Controller
         return view('puskes.daftar.pendaftaran',compact('data'));
     }
 
+    public function searchTglLahir(Request $req)
+    {
+        $tanggal = Carbon::parse($req->tanggal)->format('Y-m-d');
+        $data = Mpasien::where('tgl_lahir', $tanggal)->paginate(10);
+        
+        return view('puskes.pasien.pasien',compact('data'));
+    }
+
     public function daftarPelayanan(Request $req,$id)
     {
         $pasien = Mpasien::find($id);
@@ -203,5 +212,15 @@ class PendaftaranController extends Controller
 
         toast('berhasil Di Daftarkan', 'success');
         return redirect('/pendaftaran');
+    }
+
+    public function getKelurahan($id)
+    {
+        $data      = Mkelurahan::find($id);
+        $kecamatan = $data->kecamatan;
+        $kota      = $kecamatan->kota;
+        $provinsi  = $kota->provinsi;
+        return response()->json([$kecamatan, $kota, $provinsi]);
+        
     }
 }

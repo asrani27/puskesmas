@@ -136,6 +136,7 @@ class TransferController extends Controller
                         $l->statuspulang_id= $item->statuspulang_id == null ? null : (int)$item->statuspulang_id;
                         $l->tgl_mulai      = $item->tanggal_mulai;
                         $l->tgl_selesai    = $item->tanggal_selesai;
+                        $l->tanggal        = $item->tanggal;
                         $l->kamar_id       = $item->kamar_id;
                         $l->save();
                     }

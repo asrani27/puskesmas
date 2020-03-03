@@ -2,6 +2,7 @@
 
 @push('addcss')
 <link rel="stylesheet" href="/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="/admin/js/bootstrap-datepicker.min.css">
 @endpush
 
 @section('content-header')
@@ -21,12 +22,13 @@
             </div>
             
             <!-- /.card-header -->
-            <div class="card-body p-0 table-responsive">
-                <div class="d-flex">
+              <div class="row" style="padding-top:10px;">
+                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
+                  <!-- text input -->
                   <form method="post" action="/pendaftaran/pasien/search">
                     @csrf
-                    <div class="p-2" style="padding-bottom: 5px;">
-                      <div class="input-group input-group-sm" style="width: 200px;">
+                    <div class="form-group">
+                      <div class="input-group input-group-sm">
                         <input type="text" name="search" class="form-control" placeholder="Pencarian">
                         <div class="input-group-append">
                           <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
@@ -34,19 +36,31 @@
                       </div>
                     </div>
                   </form>
-                    <div class="p-2" style="padding-bottom: 5px;">
-                      <div class="input-group input-group-sm" style="width: 200px;">
-                        <input type="text" name="tanggal" class="form-control" placeholder="Tanggal Lahir">
-                        <div class="input-group-append">
-                          <button type="submit" class="btn bg-purple"><i class="fas fa-calendar"></i></button>
-                        </div>
+                </div>
+                
+                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
+                  <form method="post" action="/pendaftaran/pasien/search/tgl_lahir">
+                    @csrf
+                  <div class="form-group">
+                    <div class="input-group input-group-sm">
+                      <input type="text" name="tanggal" id="datepicker" class="form-control" placeholder="Tanggal Lahir">
+                      <div class="input-group-append">
+                        <button type="submit" class="btn bg-purple"><i class="fas fa-calendar"></i></button>
                       </div>
                     </div>
-                    <div class="p-2" style="padding-bottom: 5px;">
-                          <a href="/pendaftaran/pasien" class="btn btn-sm btn-info"><i class="fas fa-sync-alt"></i> Reset</a>
-                    </div>
+                  </div>
+                  </form>
                 </div>
-              <table id="example" class="table table-bordered table-sm">
+                
+                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
+                  <div class="form-group">
+                    <a href="/pendaftaran/pasien" class="btn btn-sm btn-info"><i class="fas fa-sync-alt"></i> Reset</a>
+                  </div>
+                </div>
+              </div>
+              
+            <div class="card-body p-0 table-responsive">
+              <table id="example" class="table table-bordered table-sm ">
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                   <th>#</th>
@@ -118,5 +132,13 @@
       "autoWidth": false,
     });
   });
+</script>
+<script src="/admin/js/bootstrap-datepicker.min.js"></script>
+<script>
+$(function() {
+    $('#datepicker').datepicker({
+      autoclose: true
+    })
+});
 </script>
 @endpush

@@ -12,4 +12,9 @@ class PelayananController extends Controller
         $data = Tpelayanan::orderBy('created_at','desc')->paginate(10);
         return view('puskes.pelayanan.medis.medis',compact('data'));
     }
+
+    public function proses($id)
+    {
+        return view('puskes.pelayanan.medis.detail');
+    }
 }

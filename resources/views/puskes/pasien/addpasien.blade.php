@@ -134,26 +134,26 @@
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Provinsi</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" readonly>
+                            <input type="text"  id="provinsi" class="form-control form-control-sm" readonly>
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Kota</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" readonly>
+                            <input type="text"  id="kota" class="form-control form-control-sm" readonly>
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Kecamatan</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" readonly>
+                            <input type="text" id="kecamatan" class="form-control form-control-sm" readonly>
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Kelurahan</small></label>
                         <div class="col-sm-9">
-                            <select id="e2" class="form-control form-control-sm select2" name="kelurahan_id">
-                                <option value="">-Pilih-</option>
+                            <select id="e2" class="form-control form-control-sm select2 pilih-kelurahan" name="kelurahan_id">
+                                <option value="0">-Pilih-</option>
                                 @foreach ($kelurahan as $item)
                                     <option value="{{$item->id}}">{{$item->nama}}</option>
                                 @endforeach
@@ -230,7 +230,7 @@
                         <label class="col-sm-3 col-form-label text-right"><small>Status Keluarga</small></label>
                         <div class="col-sm-9">
                             <select class="form-control form-control-sm select2" id="e3" name="status_keluarga_id">
-                                <option value="">-Pilih-</option>
+                                <option value="0">-Pilih-</option>
                                 @foreach ($statuskeluarga as $item)
                                     <option value="{{$item->id}}">{{$item->nama}}</option>
                                 @endforeach
@@ -279,6 +279,30 @@
 <!-- Select2 -->
 <script src="/admin/plugins/select2/js/select2.full.min.js"></script>
 <script src="/admin/js/bootstrap-datepicker.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    $('.pilih-kelurahan').change(function () {
+        var selectedKelurahan = $(this).children("option:selected").val();
+        axios.get('/getkelurahan/'+selectedKelurahan)
+        .then(function (response) {
+            kecamatan = response.data[0].nama;
+            kota      = response.data[1].nama;
+            provinsi  = response.data[2].nama
+            $("#kecamatan").val(kecamatan);
+            $("#kota").val(kota);
+            $("#provinsi").val(provinsi);
+        })
+        .catch(function (error) {
+            $("#kecamatan").val("");
+            $("#kota").val("");
+            $("#provinsi").val("");
+            console.log(error);
+        })
+        .then(function () {
+            
+        });
+    });
+</script>
 <script>
 $(function() {
     $('.select2').select2()
@@ -291,7 +315,7 @@ $(function() {
 </script>
 <script type="text/javascript">  
     function changetextbox() {
-        console.log(document.getElementById("asuransi_id").value);  
+        //console.log(document.getElementById("asuransi_id").value);  
         if(document.getElementById("asuransi_id").value == 2)  
         {      
           document.getElementById("no_asuransi").disabled = '';  

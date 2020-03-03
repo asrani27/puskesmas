@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 
 
 Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
+    Route::get('/getkelurahan/{id}', 'PendaftaranController@getKelurahan');
     Route::any('/pendaftaran/pasien/search', 'PendaftaranController@search');
     Route::get('/pendaftaran/pasien/truncate', 'PendaftaranController@truncatePasien');
     Route::get('/pendaftaran/pasien', 'PendaftaranController@pasien');
@@ -83,6 +84,7 @@ Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
 
     Route::get('/pendaftaran', 'PendaftaranController@pendaftaran');
     Route::any('/pendaftaran/search', 'PendaftaranController@pendaftaranSearch');
+    Route::post('/pendaftaran/pasien/search/tgl_lahir', 'PendaftaranController@searchTglLahir');
     Route::get('/rekam_medis', 'PendaftaranController@rekamMedis');
     
     Route::get('/sinkrondb', 'TransferController@index');
@@ -90,7 +92,8 @@ Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
     Route::get('/sinkrondb/lihat/{id}', 'TransferController@lihat');
     Route::get('/sinkrondb/truncate/{id}', 'TransferController@truncate');
 
-    Route::get('/medis', 'PelayananController@medis');
+    Route::get('/pelayanan/medis', 'PelayananController@medis');
+    Route::get('/pelayanan/medis/proses/{id}', 'PelayananController@proses');
     
     
 });

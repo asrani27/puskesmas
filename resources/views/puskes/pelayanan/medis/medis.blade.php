@@ -74,33 +74,43 @@
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                   <th>#</th>
-                  <th>Tanggal</th>
-                  <th>ID Pasien</th>
-                  <th>No. Dok RM</th>
+                  <th>Tanggal Daftar</th>
+                  <th>Poli/Ruangan</th>
+                  <th>No. eRM</th>
                   <th>NIK</th>
                   <th>Nama</th>
-                  <th>Penyakit Khusus</th>
+                  <th>Jenis Kelamin</th>
                   <th>Tempat & Tgl Lahir</th>
                   <th>Umur</th>
-                  <th>Kelurahan</th>
                   <th>Asuransi</th>
-                  <th>Kunjungan</th>
-                  <th>Status Pelayanan</th>
                   <th>Status PRB</th>
                   <th>Status Prolanis</th>
-                  <th>Cetak</th>
                 </thead>
                 <tbody>
                   @foreach ($data as $item)
-                  <tr>
-                    <td>  
-                    <a href="/pelayanan/medis/proses/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+                  <tr style="
+                  @if($item->pendaftaran->status_periksa == 0)
+                  background-color:#fff
+                  @elseif($item->pendaftaran->status_periksa == 1)
+                  background-color:#f2dede
+                  @elseif($item->pendaftaran->status_periksa == 2)
+                  background-color: #dff0d8
+                  @endif
+                  ">
+                    <td class="text-center">  
+                      <a href="/pelayanan/medis/proses/{{$item->id}}" class="btn btn-xs btn-success"><i class="fas fa-stethoscope"></i></a>
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><small>{{$item->tanggal}}</small></td>
+                    <td><small>{{$item->ruangan->nama}}</small></td>
+                    <td><small>{{$item->pendaftaran->pasien_id}}</small></td>
+                    <td><small>{{$item->pendaftaran->pasien->nik}}</small></td>
+                    <td><small>{{$item->pendaftaran->pasien->nama}}</small></td>
+                    <td><small>{{$item->pendaftaran->pasien->jkel == 'L' ? 'Laki-laki' : 'Perempuan'}}</small></td>
+                    <td><small>{{$item->pendaftaran->pasien->tempat_lahir}}, {{$item->pendaftaran->pasien->tgl_lahir}}</small></td>
+                    <td><small>{{$item->pendaftaran->umur_tahun}} tahun, {{$item->pendaftaran->umur_bulan}} bulan, {{$item->pendaftaran->umur_hari}} hari</small></td>
+                    <td><small>{{$item->pendaftaran->asuransi->nama}}</small></td>
+                    <td><small>{{$item->pendaftaran->status_prb == 0 ? 'Tidak' : 'ya'}}</small></td>
+                    <td><small>{{$item->pendaftaran->status_prolanis == 0 ? 'Tidak' : 'Ya'}}</small></td>
                   </tr>
                   @endforeach
                 </tbody>

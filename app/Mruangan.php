@@ -12,4 +12,9 @@ class Mruangan extends Model
     {
         return $this->belongsTo(Minstalasi::class, 'instalasi_id');
     }
+
+    public function pelayanan()
+    {
+        return $this->hasMany(Tpelayanan::class, 'ruangan_id');
+    }
 }

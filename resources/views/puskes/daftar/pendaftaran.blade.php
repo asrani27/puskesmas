@@ -19,7 +19,7 @@
               <h3 class="card-title">Data Pendaftaran</h3>
                 
             <div class="text-right">
-                <a href="/pendaftaran/pasien/add" class="btn btn-info btn-xs float-right shadow"><i class="fas fa-docs"></i> XLS</a> &nbsp;
+                <a href="/pendaftaran/pasien/add" class="btn btn-danger btn-xs float-right shadow"><i class="fas fa-docs"></i> Reset</a> &nbsp;
               <a href="/pendaftaran/pasien/add" class="btn btn-info btn-xs float-right shadow"><i class="fas fa-print"></i> Print</a> &nbsp;
               <a href="/pendaftaran/pasien/add" class="btn btn-primary btn-xs float-right shadow"><i class="fas fa-plus"></i> Tambah</a> &nbsp;
             </div>
@@ -27,61 +27,64 @@
             
             <!-- /.card-header -->
             <div class="card-body p-0">
-                <div class="d-flex">
-                    <div class="p-2" style="padding-bottom: 5px;">
-                      <div class="input-group input-group-sm" style="width: 200px;">
-                        <select class="form-control form-control-sm">
-                            <option>- Asuransi -</option>
-                        </select>
+              <div class="row" style="padding-top:10px;">
+                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <select class="form-control form-control-sm">
+                        <option>- Asuransi -</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <select class="form-control form-control-sm">
+                        <option>- Asal Pendaftaran -</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <select class="form-control form-control-sm">
+                        <option>- Semua Ruangan -</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <select class="form-control form-control-sm">
+                        <option>- Semua Pemeriksaan -</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <select class="form-control form-control-sm">
+                        <option>- Semua Pelayanan -</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <div class="input-group input-group-sm">
+                      <input type="text" name="search" class="form-control" placeholder="Pencarian">
+                      <div class="input-group-append">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
                       </div>
                     </div>
-                    <div class="p-2" style="padding-bottom: 5px;">
-                      <div class="input-group input-group-sm" style="width: 200px;">
-                        <select class="form-control form-control-sm">
-                            <option>- Asal Pendaftaran -</option>
-                        </select>
-                      </div>
-                    </div>
-                    
-                    <div class="p-2" style="padding-bottom: 5px;">
-                        <div class="input-group input-group-sm" style="width: 200px;">
-                          <select class="form-control form-control-sm">
-                              <option>- Semua Ruangan -</option>
-                          </select>
-                        </div>
-                    </div>
-                    
-                    <div class="p-2" style="padding-bottom: 5px;">
-                        <div class="input-group input-group-sm" style="width: 200px;">
-                          <select class="form-control form-control-sm">
-                              <option>- Semua Pemeriksaan -</option>
-                          </select>
-                        </div>
-                    </div>
-                    
-                    <div class="p-2" style="padding-bottom: 5px;">
-                        <div class="input-group input-group-sm" style="width: 200px;">
-                          <select class="form-control form-control-sm">
-                              <option>- Semua Pelayanan -</option>
-                          </select>
-                        </div>
-                    </div>
-                    <form action="/pendaftaran/search" method="POST">
-                      @csrf
-                    <div class="p-2" style="padding-bottom: 5px;">
-                        <div class="input-group input-group-sm" style="width: 200px;">
-                          <input type="text" name="search" class="form-control" placeholder="Pencarian">
-                          <div class="input-group-append">
-                            <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
-                          </div>
-                        </div>
-                    </div>
-                    </form>
-
+                  </div>
+                </div>
+              </div>
+                {{-- <div class="d-flex">
                     <div class="p-2" style="padding-bottom: 5px;">
                           <a href="/pendaftaran" class="btn btn-sm btn-info"><i class="fas fa-sync-alt"></i> Reset</a>
                     </div>
-                </div>
+                </div> --}}
               <table id="example" class="table table-bordered table-sm table-responsive">
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
