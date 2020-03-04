@@ -165,6 +165,7 @@ class PendaftaranController extends Controller
             $item->orWhere('nik', 'like', '%'.$search.'%');
         })->paginate(10);
         $data->appends($req->only('search'));
+        $req->flash();
         return view('puskes.daftar.pendaftaran',compact('data'));
     }
 

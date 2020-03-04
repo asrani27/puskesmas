@@ -27,4 +27,5 @@ class Tpendaftaran extends Model
     {
         return $this->belongsTo(Mpuskesmas::class, 'puskesmas_id');
     }
+    
 }

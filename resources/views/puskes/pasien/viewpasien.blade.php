@@ -162,14 +162,19 @@
                             <th style="width: 40px">Skrinning</th>
                           </tr>
                         </thead>
+                        @php
+                        $no = 1;
+                        @endphp
                         <tbody>
+                          @foreach ($data->pendaftaran->sortByDesc('tanggal') as $key => $item)
                           <tr>
-                            <td>1.</td>
-                            <td>2 Des 2019</td>
-                            <td>Rawat Jalan</td>
-                            <td>Umum</td>
+                            <td>{{$no++}}</td>
+                            <td>{{$item->tanggal}}</td>
+                            <td>{{$item->pelayanan->ruangan->instalasi->nama}}</td>
+                            <td>{{$item->pelayanan->ruangan->nama}}</td>
                             <td></td>
                           </tr>
+                          @endforeach
                         </tbody>
                       </table>
                       <br />
@@ -184,11 +189,6 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1.</td>
-                            <td>Siti</td>
-                            <td>Anak</td>
-                          </tr>
                         </tbody>
                       </table>
                     </div>
