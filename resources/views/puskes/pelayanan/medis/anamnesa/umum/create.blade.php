@@ -24,7 +24,7 @@
               </div>
             </div>
 
-            @include('puskes.pelayanan.medis.menu_medis')
+            @include('puskes.pelayanan.medis.menu_umum')
 
             <div class="row">
                 <div class="col-md-4" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
@@ -97,14 +97,13 @@
                         </div>
                       <div class="card-footer">
                           
-                        <button type="submit" class="btn btn-warning btn-sm float-right">Mulai</button>
                       </div>
                       <!-- /.card-body -->
                     </div>
                     
                     <div class="card card-success card-outline">
                       <div class="card-header">
-                        <h3 class="card-title">Riwayat Pasien</h3>
+                        <h3 class="card-title">Anamnesa</h3>
                       </div>
                       <div class="card-body">
                           
@@ -115,7 +114,7 @@
                 <div class="col-md-8" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                     <div class="card card-info card-outline">
                       <div class="card-header">
-                        <h3 class="card-title">Detail Pasien</h3>
+                        <h3 class="card-title">Periksa Fisik</h3>
                       </div>
                       <div class="card-body table-responsive p-0">
                         {{-- <table class="table table-sm" style="font-size:13px;">
