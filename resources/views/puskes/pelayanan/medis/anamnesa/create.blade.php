@@ -18,62 +18,83 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Detail Pelayanan Medis</h3>
+              <h3 class="card-title">Buat Baru Anamnesa</h3>
               <div class="card-tools">
-                <a href="/pelayanan/medis" class="btn bg-gradient-info btn-sm">Lihat Semua</a>
+                <a href="/pelayanan/medis/proses/{{$data->id}}" class="btn bg-gradient-danger btn-sm">Kembali</a>
               </div>
             </div>
-            @if($data->ruangan->id == 1)
-              {{-- Menu Untuk Poli Umum --}}
-              @include('puskes.pelayanan.medis.menu_umum')
-            @elseif($data->ruangan->id == 6)
-              {{-- Menu Untuk Poli GIGI --}}
-              @include('puskes.pelayanan.medis.menu_gigi')
-            @elseif($data->ruangan->id == 10)
-              {{-- Menu Untuk Poli ANAK --}}
-              @include('puskes.pelayanan.medis.menu_anak')
-            @elseif($data->ruangan->id == 8)
-              {{-- Menu Untuk Poli KIA --}}
-              @include('puskes.pelayanan.medis.menu_kia')
-            @endif
+
+            @include('puskes.pelayanan.medis.menu_medis')
+
             <div class="row">
                 <div class="col-md-4" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                     <!-- Form Element sizes -->
                     <div class="card card-success card-outline">
                       <div class="card-header">
-                        <h3 class="card-title">Pasien Pulang</h3>
+                        <h3 class="card-title">Data Pasien</h3>
                       </div>
-                      <div class="card-body">
-                        <div class="input-group row">
-                            <label class="col-sm-3 col-form-label text-right"><small>Status Pulang</small></label>
-                            <div class="col-sm-9">
-                                <select class="form-control form-control-sm" id="statuspulang_id" name="statuspulang_id" onchange="changetextbox();">
-                                <option>-Pilih-</option>
-                                <option>Berobat jalan</option>
-                                <option>Rujuk Internal</option>
-                                <option>Rujuk Lanjut</option>
-                                </select>
-                            </div>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-sm" style="font-size:13px;">
+                                <tbody>
+                                  <tr>
+                                    <td>ID Pelayanan</td>
+                                    <td>{{$data->id}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Tanggal</td>
+                                    <td>{{$data->tanggal}}</td>                            
+                                  </tr>
+                                  <tr>
+                                    <td>Poli/Ruangan</td>
+                                    <td>{{$data->ruangan->nama}}</td>     
+                                  </tr>
+                                  <tr>
+                                    <td>No. eRM</td>
+                                    <td>{{$data->pendaftaran->pasien->id}}</td>    
+                                  </tr>
+                                  <tr>
+                                    <td>No RM Lama</td>
+                                    <td>{{$data->pendaftaran->pasien->no_rm_lama}}</td>   
+                                  </tr>
+                                  <tr>
+                                    <td>No Dokumen RM</td>
+                                    <td>{{$data->pendaftaran->pasien->no_dok_rm}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>NIK</td>
+                                    <td>{{$data->pendaftaran->pasien->nik}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Nama KK</td>
+                                    <td>-</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Nama</td>
+                                    <td>{{$data->pendaftaran->pasien->nama}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Jenis Kelamin</td>
+                                    <td>{{$data->pendaftaran->pasien->jkel}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Tempat & Tanggal Lahir</td>
+                                    <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{\Carbon\Carbon::parse($data->pendaftaran->pasien->tgl_lahir)->format('d M Y')}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Alamat</td>
+                                    <td>{{$data->pendaftaran->pasien->alamat}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Umur</td>
+                                    <td>{{hitungUmur($data->pendaftaran->pasien->tgl_lahir)}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Asuransi</td>
+                                    <td>{{$data->pendaftaran->pasien->asuransi->nama}}</td>
+                                  </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="input-group row">
-                            <label class="col-sm-3 col-form-label text-right"><small>Tgl Mulai</small></label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control form-control-sm">
-                            </div>
-                        </div>
-                        <div class="input-group row">
-                            <label class="col-sm-3 col-form-label text-right"><small>Tgl Selesai</small></label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control form-control-sm">
-                            </div>
-                        </div>
-                        <div class="input-group row">
-                            <label class="col-sm-3 col-form-label text-right"><small>Tgl Rencana Kontrol</small></label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control form-control-sm">
-                            </div>
-                        </div>
-                      </div>
                       <div class="card-footer">
                           
                         <button type="submit" class="btn btn-warning btn-sm float-right">Mulai</button>
@@ -97,7 +118,7 @@
                         <h3 class="card-title">Detail Pasien</h3>
                       </div>
                       <div class="card-body table-responsive p-0">
-                        <table class="table table-sm" style="font-size:13px;">
+                        {{-- <table class="table table-sm" style="font-size:13px;">
                             <tbody>
                               <tr>
                                 <td>ID Pelayanan</td>
@@ -172,7 +193,7 @@
                                 <td>{{$data->pendaftaran->nama_perujuk}}</td>
                               </tr>
                             </tbody>
-                        </table>
+                        </table> --}}
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -358,10 +379,10 @@
                 </div>
               </div> --}}
             <div class="card-footer">
-                <div class="text-right">
+                {{-- <div class="text-right">
                     <a href="/pendaftaran/pasien/edit/" class="btn btn-sm btn-info shadow"><i class="fas fa-print"></i> Cetak Pengantar Rujukan</a>
                     <a href="/pendaftaran/pasien/delete/" class="btn btn-sm btn-info shadow"  onclick="return confirm('Yakin Menghapus Semua Data Tentang Pasien Ini?');"><i class="fas fa-trash"></i> Cetak</a>
-                </div>
+                </div> --}}
             </div>
             <!-- /.card-body -->
         </div>

@@ -25,6 +25,11 @@ class Tpelayanan extends Model
 
     public function anamnesa()
     {
-        return $this->hasOne(Tanamnesa::class, 'pelayanan_id');
+        return $this->hasMany(Tanamnesa::class, 'pelayanan_id');
+    }
+
+    public function periksafisik()
+    {
+        return $this->hasMany(Tperiksafisik::class, 'pelayanan_id');
     }
 }

@@ -6,14 +6,17 @@ use DB;
 use Auth;
 use Alert;
 use App\User;
+use App\Malergi;
 use App\Mpasien;
 use App\Mpegawai;
+use App\Mriwayat;
 use App\Mruangan;
 use App\Tanamnesa;
 use App\Xtransfer;
 use App\Tpelayanan;
 use App\Tpendaftaran;
 use App\Mjenispegawai;
+use App\Tperiksafisik;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -67,6 +70,9 @@ class TransferController extends Controller
             Tpendaftaran::truncate();
             Tpelayanan::truncate();
             Tanamnesa::truncate();
+            Tperiksafisik::truncate();
+            Malergi::truncate();
+            Mriwayat::truncate();
             DB::statement("SET foreign_key_checks=1");
             $u = Xtransfer::find($id);
             $u->status = 0;
@@ -109,14 +115,18 @@ class TransferController extends Controller
         $getData = $data->map(function($item, $key){
             $item->pendaftaran = DB::connection('mysql2')->table('t_pendaftaran')->where('pasien_id', $item->id)->get()->map(function($item, $key){
                 $item->pelayanan = DB::connection('mysql2')->table('t_pelayanan')->where('pendaftaran_id', $item->id)->get()->map(function($item, $key){
-                    $item->anamnesa = DB::connection('mysql2')->table('t_anamnesa')->where('pelayanan_id', $item->id)->get();
+                    $item->anamnesa = DB::connection('mysql2')->table('t_anamnesa')->where('pelayanan_id', $item->id)->get()->map(function($item, $key){
+                        $item->alergipasien = DB::connection('mysql2')->table('m_alergipasien')->where('anamnesa_id', $item->id)->get();
+                        $item->riwayatpasien = DB::connection('mysql2')->table('m_riwayatpasien')->where('anamnesa_id', $item->id)->get();
+                        return $item;
+                    });
+                    $item->periksafisik = DB::connection('mysql2')->table('t_periksafisik')->where('pelayanan_id', $item->id)->get();
                     return $item;
                 });
                 return $item;
             });
             return $item;
         });
-        //dd($getData->take(4));
         $store = $getData->map(function($item, $key)use($puskes){
             if($item->asuransi_id == '0000'){
                 $asuransi_id = 1;
@@ -175,6 +185,7 @@ class TransferController extends Controller
                         $l->tanggal        = $item->tanggal;
                         $l->kamar_id       = $item->kamar_id;
                         $l->save();
+                        
 
                         foreach($item->anamnesa as $key => $value)
                         {
@@ -199,6 +210,67 @@ class TransferController extends Controller
                             $a->observasi        = utf8_encode($value->observasi);
                             $a->biopsikososial   = utf8_encode($value->biopsikososial);
                             $a->save();
+
+                            foreach($value->alergipasien as $alergi)
+                            {
+                                $al = new Malergi;
+                                $al->anamnesa_id = $a->id;
+                                $al->jenis_alergi = $alergi->jenis_alergi;
+                                $al->value = $alergi->value;
+                                $al->save();
+                            }
+                            
+                            foreach($value->riwayatpasien as $riwayat)
+                            {
+                                $ri = new Mriwayat;
+                                $ri->anamnesa_id = $a->id;
+                                $ri->jenis_riwayat = $riwayat->jenis_riwayat;
+                                $ri->value = $riwayat->value;
+                                $ri->save();
+                            }
+                        }
+
+                        foreach($item->periksafisik as $key => $item)
+                        {
+                            $pp = new Tperiksafisik;
+                            $pp->tanggal      = $item->tanggal;
+                            $pp->pelayanan_id = $l->id;
+                            $pp->dokter_id    = $item->dokter_id;
+                            $pp->perawat_id   = $item->perawat_id;
+                            $pp->sistole      = $item->sistole;
+                            $pp->diastole     = $item->diastole;
+                            $pp->detak_nadi   = $item->detak_nadi;
+                            $pp->nafas         = $item->nafas;
+                            $pp->detak_jantung = $item->detak_jantung;
+                            $pp->suhu          = $item->suhu;
+                            $pp->kesadaran     = $item->kesadaran;
+                            $pp->triage        = $item->triage;
+                            $pp->berat         = $item->berat;
+                            $pp->tinggi        = $item->tinggi;
+                            $pp->lingkar_perut = $item->lingkar_perut;
+                            $pp->imt           = $item->imt;
+                            $pp->hasil_imt     = $item->hasil_imt;
+                            $pp->aktifitas_fisik = $item->aktifitas_fisik;
+                            $pp->kulit             = $item->kulit;
+                            $pp->kuku              = $item->kuku;
+                            $pp->kepala            = $item->kepala;
+                            $pp->wajah             = $item->wajah;
+                            $pp->mata              = $item->mata;
+                            $pp->telinga           = $item->telinga;
+                            $pp->hidung_sinus      = $item->hidung_sinus;
+                            $pp->mulut_bibir       = $item->mulut_bibir;
+                            $pp->leher             = $item->leher;
+                            $pp->dada_punggung     = $item->dada_punggung;
+                            $pp->kardiovaskuler    = $item->kardiovaskuler;
+                            $pp->dada_aksila       = $item->dada_aksila;
+                            $pp->abdomen_perut     = $item->abdomen_perut;
+                            $pp->ekstermitas_atas  = $item->ekstermitas_atas;
+                            $pp->ekstermitas_bawah = $item->ekstermitas_bawah;
+                            $pp->genitalia_wanita  = $item->genitalia_wanita;
+                            $pp->genitalia_pria    = $item->genitalia_pria;
+                            $pp->status_hamil      = $item->status_hamil;
+                            $pp->skala_nyeri       = $item->skala_nyeri;
+                            $pp->save();
                         }
                     }
                 }

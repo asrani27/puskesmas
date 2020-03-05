@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mruangan;
+use App\Tanamnesa;
 use Carbon\Carbon;
 use App\Tpelayanan;
 use Illuminate\Http\Request;
@@ -52,11 +53,13 @@ class PelayananController extends Controller
         return view('puskes.pelayanan.medis.medis',compact('data','ruangan'));
     }
 
-    public function anamnesa($id)
+    public function umumAnamnesa($id)
     {
         $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
         if($checkAnamnesa == null){
-            return view('create');
+            
+            $data = Tpelayanan::find($id);
+            return view('puskes.pelayanan.medis.anamnesa.create',compact('data'));
         }
         else{
             return view('ubah');

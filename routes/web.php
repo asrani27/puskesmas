@@ -94,9 +94,11 @@ Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
 
     Route::get('/pelayanan/medis', 'PelayananController@medis');
     Route::get('/pelayanan/medis/proses/{id}', 'PelayananController@proses');
-    Route::get('/pelayanan/medis/proses/{id}/anamnesa', 'PelayananController@anamnesa');
     Route::any('/pelayanan/medis/search', 'PelayananController@search');
     Route::any('/pelayanan/medis/search/tgl_lahir', 'PelayananController@searchTglLahir');
+
+    //POLI UMUM
+    Route::get('/pelayanan/medis/proses/{id}/umum/anamnesa', 'PelayananController@umumAnamnesa');
     
     
 });
