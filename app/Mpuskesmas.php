@@ -22,4 +22,9 @@ class Mpuskesmas extends Model
     {
         return $this->hasMany(Tpendaftaran::class, 'puskesmas_id');
     }
+
+    public function pegawai()
+    {
+        return $this->hasMany(Mpegawai::class, 'puskesmas_id');
+    }
 }

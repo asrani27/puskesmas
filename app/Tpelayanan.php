@@ -22,4 +22,9 @@ class Tpelayanan extends Model
     {
         return $this->belongsTo(Mruangan::class, 'ruangan_id');
     }
+
+    public function anamnesa()
+    {
+        return $this->hasOne(Tanamnesa::class, 'pelayanan_id');
+    }
 }

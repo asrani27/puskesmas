@@ -44,9 +44,9 @@
                     <form action="/pelayanan/medis/search/tgl_lahir" method="POST">
                       @csrf
                         <div class="input-group input-group-sm">
-                          <input type="text" name="search" id="datepicker" class="form-control" placeholder="Tanggal Lahir">
+                          <input type="text" name="tanggal" id="datepicker" class="form-control"  autocomplete="off" placeholder="Tanggal Lahir">
                           <div class="input-group-append">
-                            <button type="submit" class="btn btn-success"><i class="fas fa-calendar"></i></button>
+                            <button type="submit" class="btn bg-purple"><i class="fas fa-calendar"></i></button>
                           </div>
                         </div>
                     </form>

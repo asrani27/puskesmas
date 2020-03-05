@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Alert;
-use Auth;
-use App\User;
-use App\Xtransfer;
-use App\Mpasien;
-use App\Tpendaftaran;
-use App\Mruangan;
-use App\Tpelayanan;
 use DB;
+use Auth;
+use Alert;
+use App\User;
+use App\Mpasien;
+use App\Mpegawai;
+use App\Mruangan;
+use App\Tanamnesa;
+use App\Xtransfer;
+use App\Tpelayanan;
+use App\Tpendaftaran;
+use App\Mjenispegawai;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class TransferController extends Controller
 {
@@ -29,6 +33,8 @@ class TransferController extends Controller
         }elseif($id == 2){
             $data = Mruangan::paginate(10);
             return view('puskes.transfer.ruangan',compact('data'));
+        }elseif($id == 4){
+            
         }
     }
 
@@ -42,6 +48,14 @@ class TransferController extends Controller
             $this->ruangan($id);
             Alert::success('Syncrone Data Ruangan Berhasil')->autoClose(50000);
             return back();
+        }elseif($id == 4){
+            $this->jenisPegawai($id);
+            Alert::success('Syncrone Data Jenis Pegawai Berhasil')->autoClose(50000);
+            return back();
+        }elseif($id == 5){
+            $this->pegawai($id);
+            Alert::success('Syncrone Data Pegawai Berhasil')->autoClose(50000);
+            return back();
         }
     }
 
@@ -52,6 +66,7 @@ class TransferController extends Controller
             Mpasien::truncate();
             Tpendaftaran::truncate();
             Tpelayanan::truncate();
+            Tanamnesa::truncate();
             DB::statement("SET foreign_key_checks=1");
             $u = Xtransfer::find($id);
             $u->status = 0;
@@ -67,6 +82,24 @@ class TransferController extends Controller
             $u->save();
             Alert::info("Data Berhasil Di Kosongkan");
             return back();
+        }elseif($id == 4){
+            DB::statement("SET foreign_key_checks=0");
+            Mjenispegawai::truncate();
+            DB::statement("SET foreign_key_checks=1");
+            $u = Xtransfer::find($id);
+            $u->status = 0;
+            $u->save();
+            Alert::info("Data Berhasil Di Kosongkan");
+            return back();
+        }elseif($id == 5){
+            DB::statement("SET foreign_key_checks=0");
+            Mpegawai::truncate();
+            DB::statement("SET foreign_key_checks=1");
+            $u = Xtransfer::find($id);
+            $u->status = 0;
+            $u->save();
+            Alert::info("Data Berhasil Di Kosongkan");
+            return back();
         }
     }
     public function pasien_pendaftaran($id)
@@ -75,12 +108,15 @@ class TransferController extends Controller
         $puskes = Auth::user()->puskes->first();
         $getData = $data->map(function($item, $key){
             $item->pendaftaran = DB::connection('mysql2')->table('t_pendaftaran')->where('pasien_id', $item->id)->get()->map(function($item, $key){
-                $item->pelayanan = DB::connection('mysql2')->table('t_pelayanan')->where('pendaftaran_id', $item->id)->get();
+                $item->pelayanan = DB::connection('mysql2')->table('t_pelayanan')->where('pendaftaran_id', $item->id)->get()->map(function($item, $key){
+                    $item->anamnesa = DB::connection('mysql2')->table('t_anamnesa')->where('pelayanan_id', $item->id)->get();
+                    return $item;
+                });
                 return $item;
             });
             return $item;
         });
-        
+        //dd($getData->take(4));
         $store = $getData->map(function($item, $key)use($puskes){
             if($item->asuransi_id == '0000'){
                 $asuransi_id = 1;
@@ -139,6 +175,31 @@ class TransferController extends Controller
                         $l->tanggal        = $item->tanggal;
                         $l->kamar_id       = $item->kamar_id;
                         $l->save();
+
+                        foreach($item->anamnesa as $key => $value)
+                        {
+                            $a = new Tanamnesa;
+                            $a->tanggal          = utf8_encode($value->tanggal);
+                            $a->pelayanan_id     = $l->id;
+                            $a->dokter_id        = $value->dokter_id;
+                            $a->perawat_id       = $value->perawat_id;
+                            $a->keluhan_utama    = utf8_encode($value->keluhan_utama);
+                            $a->keluhan_tambahan = utf8_encode($value->keluhan_tambahan);
+                            $a->lama_sakit_tahun = utf8_encode($value->lama_sakit_tahun);
+                            $a->lama_sakit_bulan = utf8_encode($value->lama_sakit_bulan);
+                            $a->lama_sakit_hari  = utf8_encode($value->lama_sakit_hari);
+                            $a->merokok          = utf8_encode($value->merokok);
+                            $a->alkohol          = utf8_encode($value->konsumsi_alkohol);
+                            $a->sayur            = utf8_encode($value->kurang_sayur_buah);
+                            $a->terapi           = utf8_encode($value->terapi);
+                            $a->keterangan       = utf8_encode($value->keterangan);
+                            $a->edukasi          = utf8_encode($value->edukasi);
+                            $a->tindakan         = utf8_encode($value->rencana_tindakan);
+                            $a->askep            = utf8_encode($value->askep);
+                            $a->observasi        = utf8_encode($value->observasi);
+                            $a->biopsikososial   = utf8_encode($value->biopsikososial);
+                            $a->save();
+                        }
                     }
                 }
             return $item;
@@ -168,5 +229,50 @@ class TransferController extends Controller
         $u->status = 1;
         $u->save();
         return $s;
+    }
+
+    public function jenisPegawai($id)
+    {
+        $data = DB::connection('mysql2')->table('m_jenispegawai')->get();
+        foreach($data as $key => $value){
+            $s = new Mjenispegawai;
+            $s->id = $value->id;
+            $s->kelompok_pegawai = $value->kelompok_pegawai;
+            $s->nama = $value->nama;
+            $s->save();
+        }
+        $u = Xtransfer::find($id);
+        $u->status = 1;
+        $u->save();
+        return $s;
+    }
+
+    public function pegawai($id)
+    {
+        $data = DB::connection('mysql2')->table('m_pegawai')->get()->toArray();
+        $puskesmas_id = Auth::user()->puskes->first()->id;
+        foreach($data as $key => $value){
+            $s = new Mpegawai;
+            $s->id                  = $value->id;
+            $s->jenispegawai_id     = $value->jenispegawai_id;
+            $s->puskesmas_id        = $puskesmas_id;
+            $s->nip                 = $value->nip;
+            $s->nama                = utf8_encode($value->nama);
+            $s->jkel                = $value->jenis_kelamin;
+            $s->tgl_lahir           = $value->tanggal_lahir;
+            $s->tempat_lahir        = $value->tempat_lahir;
+            $s->pendidikan_terakhir = $value->pendidikan_terakhir;
+            $s->tahun_lulus         = $value->tahun_lulus;
+            $s->status_kepegawaian  = $value->status_kepegawaian;
+            $s->tmt_jabatan         = $value->tmt_jabatan;
+            $s->tempat_kerja        = $value->tempat_kerja;
+            $s->ket_tempat_kerja    = $value->ket_tempat_kerja;
+            $s->mulai_kerja         = $value->mulai_kerja;
+            $s->save();
+        }
+        $u = Xtransfer::find($id);
+        $u->status = 1;
+        $u->save();
+        return $u;
     }
 }

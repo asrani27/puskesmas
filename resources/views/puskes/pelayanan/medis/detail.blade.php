@@ -23,19 +23,9 @@
                 <a href="/medis" class="btn bg-gradient-info btn-sm">Lihat Semua</a>
               </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-8" style="padding-left:15px; padding-top:15px">
-                    <a href="/medis" class="btn bg-gradient-primary btn-sm">Anamnesa</a>
-                    <a href="/medis" class="btn bg-gradient-primary btn-sm">Diagnosa</a>
-                    <a href="/medis" class="btn bg-gradient-primary btn-sm">Resep</a>
-                    <a href="/medis" class="btn bg-gradient-primary btn-sm">Laboratorium</a>
-                    <a href="/medis" class="btn bg-gradient-primary btn-sm">Tindakan</a>
-                    <a href="/medis" class="btn bg-gradient-primary btn-sm">Keur</a>
-                    <a href="/medis" class="btn bg-gradient-primary btn-sm">Caten</a>
-                </div>
-            </div>
+
+            @include('puskes.pelayanan.medis.menu_medis')
+
             <div class="row">
                 <div class="col-md-4" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                     <!-- Form Element sizes -->
@@ -97,79 +87,79 @@
                         <h3 class="card-title">Detail Pasien</h3>
                       </div>
                       <div class="card-body table-responsive p-0">
-                        <table class="table table-sm">
+                        <table class="table table-sm" style="font-size:13px;">
                             <tbody>
                               <tr>
                                 <td>ID Pelayanan</td>
-                                <td>23421</td>
+                                <td>{{$data->id}}</td>
                                 <td>NIK</td>
-                                <td>432456764543432</td>
+                                <td>{{$data->pendaftaran->pasien->nik}}</td>
                               </tr>
                               <tr>
                                 <td>No Antrean</td>
-                                <td>0004</td>
+                                <td>-</td>
                                 <td>Nama Pasien</td>
-                                <td>Asrani</td>
+                                <td>{{$data->pendaftaran->pasien->nama}}</td>                              
                               </tr>
                               <tr>
                                 <td>Instalasi</td>
-                                <td>Rawat jalan</td>
+                                <td>{{$data->ruangan->instalasi->nama}}</td>    
                                 <td>Nama Ibu</td>
-                                <td></td>
+                                <td>{{$data->pendaftaran->pasien->nama_ibu}}</td>   
                               </tr>
                               <tr>
                                 <td>Poli/Ruangan</td>
-                                <td>Umum</td>
+                                <td>{{$data->ruangan->nama}}</td>   
                                 <td>No eRM</td>
-                                <td>0023</td>
+                                <td>{{$data->pendaftaran->pasien->id}}</td>   
                               </tr>
                               <tr>
                                 <td>Kamar/Bed</td>
                                 <td>-</td>
                                 <td>No RM Lama</td>
-                                <td>0021</td>
+                                <td>{{$data->pendaftaran->pasien->no_rm_lama}}</td>   
                               </tr>
                               <tr>
                                 <td>Tgl Pelayanan</td>
-                                <td>-</td>
+                                <td>{{$data->tanggal}}</td>   
                                 <td>No Dokumen RM</td>
-                                <td>0029</td>
+                                <td>{{$data->pendaftaran->pasien->no_dok_rm}}</td>   
                               </tr>
                               <tr>
                                 <td>Tgl Mulai</td>
                                 <td>-</td>
                                 <td>Jenis Kelamin</td>
-                                <td>0029</td>
+                                <td>{{$data->pendaftaran->pasien->jkel}}</td>   
                               </tr>
                               <tr>
                                 <td>Tgl Selesai</td>
                                 <td>-</td>
                                 <td>Tempat/Tgl Lahir</td>
-                                <td>0029</td>
+                                <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{$data->pendaftaran->pasien->tgl_lahir}}</td>   
                               </tr>
                               <tr>
                                 <td>ID Pendaftaran</td>
-                                <td>-</td>
+                                <td>{{$data->pendaftaran_id}}</td>
                                 <td>Umur</td>
-                                <td>0029</td>
+                                <td>{{hitungUmur($data->pendaftaran->pasien->tgl_lahir)}}</td>
                               </tr>
                               <tr>
                                 <td>Tgl Pendaftaran</td>
-                                <td>-</td>
+                                <td>{{$data->pendaftaran->tanggal}}</td>
                                 <td>Alamat</td>
-                                <td>0029</td>
+                                <td>{{$data->pendaftaran->pasien->alamat}}</td>
                               </tr>
                               <tr>
                                 <td>Asuransi</td>
-                                <td>-</td>
+                                <td>{{$data->pendaftaran->pasien->asuransi->nama}}</td>
                                 <td>Catatan</td>
-                                <td>0029</td>
+                                <td>-</td>
                               </tr>
                               <tr>
-                                <td>Perujuk</td>
-                                <td>-</td>
-                                <td>Catatan Perujuk</td>
-                                <td>0029</td>
+                                <td>Rujukan Dari</td>
+                                <td>{{$data->pendaftaran->rujukan_dari}}</td>
+                                <td>Nama Perujuk</td>
+                                <td>{{$data->pendaftaran->nama_perujuk}}</td>
                               </tr>
                             </tbody>
                         </table>
