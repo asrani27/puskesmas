@@ -93,12 +93,15 @@ Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
     Route::get('/sinkrondb/truncate/{id}', 'TransferController@truncate');
 
     Route::get('/pelayanan/medis', 'PelayananController@medis');
+    Route::post('/pelayanan/medis', 'PelayananController@medisPoli');
     Route::get('/pelayanan/medis/proses/{id}', 'PelayananController@proses');
     Route::any('/pelayanan/medis/search', 'PelayananController@search');
-    Route::any('/pelayanan/medis/search/tgl_lahir', 'PelayananController@searchTglLahir');
+    Route::any('/pelayanan/medis/tanggal', 'PelayananController@searchTanggal');
 
     //POLI UMUM
     Route::get('/pelayanan/medis/proses/{id}/umum/anamnesa', 'PelayananController@umumAnamnesa');
+    Route::get('/pelayanan/medis/proses/{id}/umum/diagnosa', 'PelayananController@umumDiagnosa');
+    Route::get('/pelayanan/medis/proses/{id}/umum/resep', 'PelayananController@umumResep');
     
     
 });

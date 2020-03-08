@@ -1,7 +1,8 @@
 @extends('layouts.admin.default')
 
 @push('addcss')
-
+<link rel="stylesheet" href="/admin/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 @endpush
 
 @section('content-header')
@@ -34,7 +35,7 @@
                         <h3 class="card-title">Data Pasien</h3>
                       </div>
                         <div class="card-body table-responsive p-0">
-                            <table class="table table-sm" style="font-size:13px;">
+                            <table class="table table-sm" style="font-size:15px;">
                                 <tbody>
                                   <tr>
                                     <td>ID Pelayanan</td>
@@ -103,7 +104,7 @@
                     
                     <div class="card card-success card-outline">
                       <div class="card-header">
-                        <h3 class="card-title">Anamnesa</h3>
+                        <h3 class="card-title">Riwayat</h3>
                       </div>
                       <div class="card-body">
                           
@@ -112,99 +113,391 @@
                     </div>
                 </div>
                 <div class="col-md-8" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
-                    <div class="card card-info card-outline">
+                    <div class="card card-success card-outline">
                       <div class="card-header">
-                        <h3 class="card-title">Periksa Fisik</h3>
+                        <h3 class="card-title">Anamnesa</h3>
                       </div>
-                      <div class="card-body table-responsive p-0">
-                        {{-- <table class="table table-sm" style="font-size:13px;">
-                            <tbody>
-                              <tr>
-                                <td>ID Pelayanan</td>
-                                <td>{{$data->id}}</td>
-                                <td>NIK</td>
-                                <td>{{$data->pendaftaran->pasien->nik}}</td>
-                              </tr>
-                              <tr>
-                                <td>No Antrean</td>
-                                <td>-</td>
-                                <td>Nama Pasien</td>
-                                <td>{{$data->pendaftaran->pasien->nama}}</td>                              
-                              </tr>
-                              <tr>
-                                <td>Instalasi</td>
-                                <td>{{$data->ruangan->instalasi->nama}}</td>    
-                                <td>Nama Ibu</td>
-                                <td>{{$data->pendaftaran->pasien->nama_ibu}}</td>   
-                              </tr>
-                              <tr>
-                                <td>Poli/Ruangan</td>
-                                <td>{{$data->ruangan->nama}}</td>   
-                                <td>No eRM</td>
-                                <td>{{$data->pendaftaran->pasien->id}}</td>   
-                              </tr>
-                              <tr>
-                                <td>Kamar/Bed</td>
-                                <td>-</td>
-                                <td>No RM Lama</td>
-                                <td>{{$data->pendaftaran->pasien->no_rm_lama}}</td>   
-                              </tr>
-                              <tr>
-                                <td>Tgl Pelayanan</td>
-                                <td>{{$data->tanggal}}</td>   
-                                <td>No Dokumen RM</td>
-                                <td>{{$data->pendaftaran->pasien->no_dok_rm}}</td>   
-                              </tr>
-                              <tr>
-                                <td>Tgl Mulai</td>
-                                <td>-</td>
-                                <td>Jenis Kelamin</td>
-                                <td>{{$data->pendaftaran->pasien->jkel}}</td>   
-                              </tr>
-                              <tr>
-                                <td>Tgl Selesai</td>
-                                <td>-</td>
-                                <td>Tempat/Tgl Lahir</td>
-                                <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{$data->pendaftaran->pasien->tgl_lahir}}</td>   
-                              </tr>
-                              <tr>
-                                <td>ID Pendaftaran</td>
-                                <td>{{$data->pendaftaran_id}}</td>
-                                <td>Umur</td>
-                                <td>{{hitungUmur($data->pendaftaran->pasien->tgl_lahir)}}</td>
-                              </tr>
-                              <tr>
-                                <td>Tgl Pendaftaran</td>
-                                <td>{{$data->pendaftaran->tanggal}}</td>
-                                <td>Alamat</td>
-                                <td>{{$data->pendaftaran->pasien->alamat}}</td>
-                              </tr>
-                              <tr>
-                                <td>Asuransi</td>
-                                <td>{{$data->pendaftaran->pasien->asuransi->nama}}</td>
-                                <td>Catatan</td>
-                                <td>-</td>
-                              </tr>
-                              <tr>
-                                <td>Rujukan Dari</td>
-                                <td>{{$data->pendaftaran->rujukan_dari}}</td>
-                                <td>Nama Perujuk</td>
-                                <td>{{$data->pendaftaran->nama_perujuk}}</td>
-                              </tr>
-                            </tbody>
-                        </table> --}}
+                      
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-body">
+                            <div class="input-group row">
+                                <label class="col-sm-4 col-form-label text-right"><small>Dokter / Tenaga Medis</small></label>
+                                <div class="col-sm-8">
+                                  <div class="form-group">
+                                    <select class="form-control select2" style="width: 100%;">
+                                      <option value=""></option>
+                                      <option>Alabama</option>
+                                      <option>Utuh</option>
+                                      <option>Galuh</option>
+                                      <option>Delaware</option>
+                                      <option>Tennessee</option>
+                                      <option>Texas</option>
+                                      <option>Washington</option>
+                                    </select>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="input-group row">
+                                <label class="col-sm-4 col-form-label text-right"><small>Keluhan Utama</small></label>
+                                <div class="col-sm-8">
+                                  <select class="form-control form-control-sm select2bs4" multiple="multiple" style="width: 100%;">
+                                    @foreach ($keluhan as $item)
+                                      <option value="{{$item->id}}">{{$item->value}}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="card-body">
+                          <div class="input-group row">
+                              <label class="col-sm-4 col-form-label text-right"><small>Perawat/Bidan/sdb</small></label>
+                              <div class="col-sm-8">
+                                  <select class="form-control form-control-sm" id="asuransi_id" name="asuransi_id" onchange="changetextbox();" >
+                                      
+                                  </select>
+                              </div>
+                          </div>
+                          
+                          <div class="input-group row">
+                              <label class="col-sm-4 col-form-label text-right"><small>Keluhan Tambahan</small></label>
+                              <div class="col-sm-8">
+                              <select class="form-control form-control-sm select2bs4" multiple="multiple" style="width: 100%;">
+                                  @foreach ($keluhan as $item)
+                                      <option value="{{$item->id}}">{{$item->value}}</option>
+                                  @endforeach
+                              </select>
+                              </div>
+                          </div>
+                          </div>
+                        </div>
                       </div>
                       <!-- /.card-body -->
                     </div>
                     
-                    <div class="card card-info card-outline">
+                    <div class="card card-success card-outline">
                       <div class="card-header">
-                        <h3 class="card-title">Penyakit Khusus Pasien</h3>
+                        <h3 class="card-title">Periksa Fisik</h3>
                       </div>
-                      <div class="card-body table-responsive p-0">
-                          
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-body">
+                            <div class="input-group row" style="padding-bottom:5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Kesadaran</small></label>
+                                <div class="col-sm-8">
+                                    <select class="form-control form-control" style="width: 100%;">
+                                      <option value="">-Pilih-</option>
+                                      <option>Alabama</option>
+                                      <option>Utuh</option>
+                                      <option>Galuh</option>
+                                      <option>Delaware</option>
+                                      <option>Tennessee</option>
+                                      <option>Texas</option>
+                                      <option>Washington</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-group row input-group"  style="padding-bottom:5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Sistole</small></label>
+                                  <input type="text" class="form-control" name="sistole" placeholder="0">
+                                  <div class="input-group-append">
+                                    <button type="button" class="btn btn-info">mm</button>
+                                  </div>
+                            </div>
+                            <div class="input-group row input-group" style="padding-bottom:5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Diastole</small></label>
+                                  <input type="text" class="form-control" name="sistole" placeholder="0">
+                                  <div class="input-group-append">
+                                    <button type="button" class="btn btn-info">Hg</button>
+                                  </div>
+                            </div>
+                            <div class="input-group row input-group" style="padding-bottom:5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Tinggi Badan</small></label>
+                                  <input type="text" class="form-control" name="sistole" placeholder="0">
+                                  <div class="input-group-append">
+                                    <button type="button" class="btn btn-info">cm</button>
+                                  </div>
+                            </div>
+                            <div class="input-group row input-group" style="padding-bottom:5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Berat Badan</small></label>
+                                  <input type="text" class="form-control" name="sistole" placeholder="0">
+                                  <div class="input-group-append">
+                                    <button type="button" class="btn btn-info">Kg</button>
+                                  </div>
+                            </div>
+                            <div class="input-group row input-group" style="padding-bottom:5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Lingkar Perut</small></label>
+                                  <input type="text" class="form-control" name="sistole" placeholder="0">
+                                  <div class="input-group-append">
+                                    <button type="button" class="btn btn-info">cm</button>
+                                  </div>
+                            </div>
+                            
+                            <div class="input-group row">
+                                <label class="col-sm-4 col-form-label text-right"><small>IMT</small></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control form-control-sm" name="email" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="input-group row">
+                                <label class="col-sm-4 col-form-label text-right"><small>Hasil IMT</small></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control form-control-sm" name="email" readonly>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="card-body">
+                            <div class="input-group row input-group" style="padding-bottom:5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Detak Nadi</small></label>
+                                  <input type="text" class="form-control" name="sistole" placeholder="0">
+                                  <div class="input-group-append">
+                                    <button type="button" class="btn btn-info">/Menit</button>
+                                  </div>
+                            </div>
+                            <div class="input-group row input-group" style="padding-bottom:5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Nafas</small></label>
+                                  <input type="text" class="form-control" name="sistole" placeholder="0">
+                                  <div class="input-group-append">
+                                    <button type="button" class="btn btn-info">/Menit</button>
+                                  </div>
+                            </div>
+                            <div class="input-group row input-group" style="padding-bottom:5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Suhu</small></label>
+                                  <input type="text" class="form-control" name="sistole" placeholder="0">
+                                  <div class="input-group-append">
+                                    <button type="button" class="btn btn-info">*C</button>
+                                  </div>
+                            </div>
+                            <div class="input-group row">
+                                <label class="col-sm-4 col-form-label text-right"><small>Aktivitas Fisik</small></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control form-control-sm" name="email">
+                                </div>
+                            </div>
+                            <div class="input-group row">
+                                <label class="col-sm-4 col-form-label text-right"><small>Detak Jantung</small></label>
+                                <div class="col-sm-8">
+                                    <input type="radio" name="detak_jantung"> REGULAR &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" name="detak_jantung"> IREGULAR
+                                </div>
+                            </div>
+                            <div class="input-group row">
+                                <label class="col-sm-4 col-form-label text-right"><small>Triage</small></label>
+                                <div class="col-sm-8">
+                                  <input type="radio" name="Triage"> Gawat Darurat &nbsp;&nbsp;&nbsp;&nbsp;
+                                  <input type="radio" name="Triage"> Darurat
+                                  <input type="radio" name="Triage"> Tidak Gawat Darurat
+                                  <input type="radio" name="Triage"> Meninggal
+                                </div>
+                            </div>
+                            <div class="input-group row">
+                                <label class="col-sm-4 col-form-label text-right"><small>Skala Nyeri</small></label>
+                                <div class="col-sm-8">
+                                  <input type="radio" name="Triage"> Tidak Nyeri &nbsp;&nbsp;&nbsp;&nbsp;
+                                  <input type="radio" name="Triage"> Sedang
+                                  <input type="radio" name="Triage"> Ringan
+                                  <input type="radio" name="Triage"> Berat
+                                </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
+
+                    <div class="row">
+                    <div class="col-md-6">
+                      <div class="card card-success card-outline">
+                        <div class="card-header">
+                          <h3 class="card-title">Riwayat Pasien</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>RPS</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>RPD</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>RPK</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <div class="card card-success card-outline">
+                        <div class="card-header">
+                          <h3 class="card-title">Alergi Pasien</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Obat</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Makanan</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Lainnya</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    
+                    
+                    <div class="card card-success card-outline">
+                      <div class="card-header">
+                        <h3 class="card-title">Lainnya</h3>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="card-body">
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Edukasi</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Terapi</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Rencana</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Deskripsi Askep</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Observasi</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Biopsikososial</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Ket</small></label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="2" name="email"></textarea>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="card-body">
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Tipe Askep</small></label>
+                                <div class="col-sm-8">
+                                    <input type="radio" name="tipe_askep"> TEXT &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" name="tipe_askep"> SOAP
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Merokop</small></label>
+                                <div class="col-sm-8">
+                                    <input type="radio" name="tipe_askep"> Tidak &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" name="tipe_askep"> Ya
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Konsumsi Alkohol</small></label>
+                                <div class="col-sm-8">
+                                    <input type="radio" name="tipe_askep"> Tidak &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" name="tipe_askep"> Ya
+                                </div>
+                            </div>
+                            <div class="input-group row" style="padding-bottom: 5px;">
+                                <label class="col-sm-4 col-form-label text-right"><small>Kurang Sayur / Buah</small></label>
+                                <div class="col-sm-8">
+                                    <input type="radio" name="tipe_askep"> Tidak &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" name="tipe_askep"> Ya
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="card card-success card-outline">
+                      <div class="card-header">
+                        <h3 class="card-title">Anatomi Tubuh</h3>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="card-body">
+                          <img src="https://kotabanjarmasin.epuskesmas.id/images/anatomi.svg" style="width:100%">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="card card-success card-outline">
+                      <div class="card-header">
+                        <h3 class="card-title">Keadaan Fisik</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <input type=checkbox> Pemeriksaan Kulit <br>
+                            <input type=checkbox> Pemeriksaan Kuku<br>
+                            <input type=checkbox> Pemeriksaan Kepala<br>
+                            <input type=checkbox> Pemeriksaan Wajah <br>
+                            <input type=checkbox> Pemeriksaan Mata <br>
+                            <input type=checkbox> Pemeriksaan Telinga<br>
+                            <input type=checkbox> Pemeriksaan Hidung Dan Sinus <br>
+                            <input type=checkbox> Pemeriksaan Mulut Dan Bibir<br>
+                          </div>
+                          <div class="col-md-6">
+                            <input type=checkbox> Pemeriksaan Leher <br>
+                            <input type=checkbox> Pemeriksaan Dada Dan Punggung<br>
+                            <input type=checkbox> Pemeriksaan Kepala<br>
+                            <input type=checkbox> Pemeriksaan Wajah <br>
+                            <input type=checkbox> Pemeriksaan Mata <br>
+                            <input type=checkbox> Pemeriksaan Telinga<br>
+                            <input type=checkbox> Pemeriksaan Hidung Dan Sinus <br>
+                            <input type=checkbox> Pemeriksaan Mulut Dan Bibir<br>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    
                 </div>
             </div>
               {{-- <div class="row">
@@ -393,5 +686,18 @@
 
 @push('addjs')
 
+<script src="/admin/plugins/select2/js/select2.full.min.js"></script>
+<script>  
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+  
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+    
+  });
+</script>
 
 @endpush
