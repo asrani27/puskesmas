@@ -75,6 +75,7 @@ class PelayananController extends Controller
     {
         $dokter_id = convertid($req->dokter_id);
         $perawat_id = convertid($req->perawat_id);
+        
         //ubah status periksa
         $pel = Tpelayanan::find($id)->pendaftaran;
         $pel->status_periksa = 1;

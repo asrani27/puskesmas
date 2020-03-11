@@ -16,6 +16,7 @@ use App\Tanamnesa;
 use App\Tdiagnosa;
 use App\Xtransfer;
 use App\Tpelayanan;
+use App\PasienPuskes;
 use App\Tpendaftaran;
 use App\Tresepdetail;
 use App\Mjenispegawai;
@@ -71,6 +72,7 @@ class TransferController extends Controller
             DB::statement("SET foreign_key_checks=0");
             Mpasien::truncate();
             Tpendaftaran::truncate();
+            PasienPuskes::truncate();
             Tpelayanan::truncate();
             Tanamnesa::truncate();
             Tperiksafisik::truncate();
