@@ -30,6 +30,6 @@ class Tpelayanan extends Model
 
     public function periksafisik()
     {
-        return $this->hasMany(Tperiksafisik::class, 'pelayanan_id');
+        return $this->hasOne(Tperiksafisik::class, 'pelayanan_id');
     }
 }

@@ -101,6 +101,7 @@ Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
     //POLI UMUM
     Route::get('/pelayanan/medis/proses/{id}/umum/anamnesa', 'PelayananController@umumAnamnesa');
     Route::post('/pelayanan/medis/proses/{id}/umum/anamnesa', 'PelayananController@storeAnamnesa')->name('anamnesa');
+    Route::post('/pelayanan/medis/proses/{id}/umum/anamnesa/{anamnesa_id}', 'PelayananController@updateAnamnesa')->name('updateAnamnesa');
     Route::get('/pelayanan/medis/proses/{id}/umum/diagnosa', 'PelayananController@umumDiagnosa');
     Route::get('/pelayanan/medis/proses/{id}/umum/resep', 'PelayananController@umumResep');
     

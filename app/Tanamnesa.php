@@ -22,4 +22,34 @@ class Tanamnesa extends Model
     {
         return $this->belongsTo(Mpegawai::class, 'perawat_id');
     }
+
+    public function rps()
+    {
+        return $this->hasMany(Mriwayat::class, 'anamnesa_id');
+    }
+    
+    public function rpd()
+    {
+        return $this->hasMany(Mriwayat::class, 'anamnesa_id');
+    }
+    
+    public function rpk()
+    {
+        return $this->hasMany(Mriwayat::class, 'anamnesa_id');
+    }
+
+    public function obat()
+    {
+        return $this->hasMany(Malergi::class, 'anamnesa_id');
+    }
+    
+    public function makanan()
+    {
+        return $this->hasMany(Malergi::class, 'anamnesa_id');
+    }
+    
+    public function umum()
+    {
+        return $this->hasMany(Malergi::class, 'anamnesa_id');
+    }
 }

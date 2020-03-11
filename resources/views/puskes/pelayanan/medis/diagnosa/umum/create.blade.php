@@ -128,14 +128,12 @@
                       <div class="card-header">
                         <h3 class="card-title">DIAGNOSA</h3>
                         <div class="card-tools">
-                          <a href="/pelayanan/medis/proses/{{$data->id}}" class="btn bg-gradient-primary btn-xs">Tambah Diagnosa</a>
                         </div>
                       </div>
                       <div class="card-body p-1 table-responsive">
                         <table id="example" class="table table-bordered table-sm">
                           <thead>
                           <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
-                            <th>#</th>
                             <th>Dokter /Tenaga Medis</th>
                             <th>Perawat / Bidan</th>
                             <th>ICD-X</th>
@@ -146,27 +144,50 @@
                           </thead>
                           <tbody>
                               <tr>
-                                  <td>1</td>
-                                  <td>Adi</td>
-                                  <td>Siti</td>
-                                  <td>RMZ1</td>
-                                  <td>ORIMER</td>
-                                  <td>BARU</td>
-                                  <td>-</td>
                                   <td>
-                                      <a href="#" class="btn btn-xs btn-info">Ubah</a>
-                                      <a href="#" class="btn btn-xs btn-danger">Hapus</a>
+                                    <select name="dokter_id" class="form-control form-control-sm select2">
+                                      @foreach ($dokter as $item)
+                                      <option value="{{$item->id}}">{{$item->nama}}</option>
+                                      @endforeach
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <select name="dokter_id" class="form-control form-control-sm select2">
+                                      @foreach ($perawat as $item)
+                                      <option value="{{$item->id}}">{{$item->nama}}</option>
+                                      @endforeach
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <select name="dokter_id" class="form-control select2">
+                                      @foreach ($diagnosa as $item)
+                                      <option value="{{$item->id}}">{{$item->id}}</option>
+                                      @endforeach
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <input type="text" class="form-control">
+                                  </td>
+                                  <td>
+                                    <select name="diagnosa_jenis" class="form-control select2">
+                                      <option value="PRIMER">PRIMER</option>
+                                      <option value="SEKUNDER">SEKUNDER</option>
+                                      <option value="KOMPLIKASI">KOMPLIKASI</option>
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <select name="diagnosa_kasus" class="form-control form-control-sm  select2">
+                                      <option value="BARU">BARU</option>
+                                      <option value="LAMA">LAMA</option>
+                                    </select>
+                                  </td>
+                                  <td>
+                                      <a href="#" class="btn btn-sm btn-success"><i class="fas fa-save"></i></a>
                                   </td>
                               </tr>
                           </tbody>
                         </table>
                       </div>
-                      
-                        <div class="card-footer">
-                            <div class="text-right">
-                                <a href="/pendaftaran/pasien/edit/" class="btn btn-sm btn-success shadow"><i class="fas fa-save"></i> SIMPAN</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -15,6 +15,7 @@ use App\Mruangan;
 use App\Tanamnesa;
 use App\Tdiagnosa;
 use App\Xtransfer;
+use Carbon\Carbon;
 use App\Tpelayanan;
 use App\PasienPuskes;
 use App\Tpendaftaran;
@@ -119,7 +120,22 @@ class TransferController extends Controller
     public function pasien_pendaftaran($id)
     {
         //0000000000019087
-        
+        // $data = DB::connection('mysql2')->table('t_diagnosa')->get()->map(function($item){
+        //     return $item;
+        // });
+        // foreach($data as $diagnosa)
+        // {
+        // $rr = new Tdiagnosa;
+        // $rr->tanggal        = Carbon::now();
+        // $rr->pelayanan_id   = 1;
+        // $rr->dokter_id      = $diagnosa->dokter_id;
+        // $rr->perawat_id     = $diagnosa->perawat_id;
+        // $rr->diagnosa_id    = $diagnosa->diagnosa_id;
+        // $rr->diagnosa_jenis = utf8_encode($diagnosa->diagnosa_jenis);
+        // $rr->diagnosa_kasus = utf8_encode($diagnosa->diagnosa_kasus);
+        // $rr->save();
+        // }
+        // dd($data->take(15));
         $data = DB::connection('mysql2')->table('m_pasien')->get();
         $puskes = Auth::user()->puskes->first();
         $getData = $data->map(function($item, $key){
@@ -318,9 +334,9 @@ class TransferController extends Controller
                             $rr = new Tdiagnosa;
                             $rr->tanggal        = $diagnosa->tanggal;
                             $rr->pelayanan_id   = $l->id;
-                            $rr->dokter_id      = utf8_encode($diagnosa->dokter_id);
-                            $rr->perawat_id     = utf8_encode($diagnosa->perawat_id);
-                            $rr->diagnosa_id    = utf8_encode($diagnosa->diagnosa_id);
+                            $rr->dokter_id      = $diagnosa->dokter_id;
+                            $rr->perawat_id     = $diagnosa->perawat_id;
+                            $rr->diagnosa_id    = $diagnosa->diagnosa_id;
                             $rr->diagnosa_jenis = utf8_encode($diagnosa->diagnosa_jenis);
                             $rr->diagnosa_kasus = utf8_encode($diagnosa->diagnosa_kasus);
                             $rr->save();
