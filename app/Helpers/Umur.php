@@ -34,3 +34,23 @@ function Hari($umur)
     $d = $today->diff($lahir)->d;
     return $d;
 }
+
+function convertid($param)
+{
+    if(strlen($param) == 1){
+        $hasil = '000000000000000'. $param;
+    }
+    elseif(strlen($param) == 2){
+        $hasil = '00000000000000'. $param;
+    }
+    elseif(strlen($param) == 3){
+        $hasil = '0000000000000'. $param;
+    }
+    elseif(strlen($param) == 4){
+        $hasil = '000000000000'. $param;
+    }
+    elseif(strlen($param) == 5){
+        $hasil = '00000000000'. $param;
+    }
+    return $hasil;
+}

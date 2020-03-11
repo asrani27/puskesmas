@@ -1,6 +1,7 @@
 @extends('layouts.admin.default')
 
 @push('addcss')
+<link rel="stylesheet" href="/admin/js/bootstrap-datepicker.min.css">
 
 @endpush
 
@@ -58,25 +59,31 @@
                         <div class="input-group row">
                             <label class="col-sm-3 col-form-label text-right"><small>Tgl Mulai</small></label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control form-control-sm">
+                                <input type="text" class="form-control form-control-sm"  value="{{$data->tanggal}}">
                             </div>
                         </div>
                         <div class="input-group row">
                             <label class="col-sm-3 col-form-label text-right"><small>Tgl Selesai</small></label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control form-control-sm">
+                            <input type="text" class="form-control form-control-sm" value="{{\Carbon\Carbon::now()}}">
                             </div>
                         </div>
                         <div class="input-group row">
                             <label class="col-sm-3 col-form-label text-right"><small>Tgl Rencana Kontrol</small></label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control form-control-sm">
+                                <input type="text" class="form-control form-control-sm" id="datepicker" name="rencana_kontrol">
                             </div>
                         </div>
                       </div>
                       <div class="card-footer">
                           
-                        <button type="submit" class="btn btn-warning btn-sm float-right">Mulai</button>
+                        <a href="" class="btn btn-primary btn-sm">Panggil</a>
+                        @if($data->pendaftaran->status_periksa == 0)
+                        <a href="" class="btn btn-success btn-sm">Mulai Periksa</a>
+                        @elseif($data->pendaftaran->status_periksa == 1)
+                        <a href="" class="btn btn-danger btn-sm">Selesai Periksa</a>
+                        @else
+                        @endif  
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -373,5 +380,15 @@
 
 @push('addjs')
 
-
+<script src="/admin/js/bootstrap-datepicker.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#datepicker').datepicker({
+      autoclose: true,
+      format: 'dd-mm-yyyy'
+    }).on('changeDate', function() {
+        $('#formTanggal').submit();
+    });
+});
+</script>
 @endpush

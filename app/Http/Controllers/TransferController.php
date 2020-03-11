@@ -6,15 +6,18 @@ use DB;
 use Auth;
 use Alert;
 use App\User;
+use App\Tresep;
 use App\Malergi;
 use App\Mpasien;
 use App\Mpegawai;
 use App\Mriwayat;
 use App\Mruangan;
 use App\Tanamnesa;
+use App\Tdiagnosa;
 use App\Xtransfer;
 use App\Tpelayanan;
 use App\Tpendaftaran;
+use App\Tresepdetail;
 use App\Mjenispegawai;
 use App\Tperiksafisik;
 use Illuminate\Support\Str;
@@ -73,6 +76,9 @@ class TransferController extends Controller
             Tperiksafisik::truncate();
             Malergi::truncate();
             Mriwayat::truncate();
+            Tresep::truncate();
+            Tdiagnosa::truncate();
+            Tresepdetail::truncate();
             DB::statement("SET foreign_key_checks=1");
             $u = Xtransfer::find($id);
             $u->status = 0;
@@ -110,6 +116,8 @@ class TransferController extends Controller
     }
     public function pasien_pendaftaran($id)
     {
+        //0000000000019087
+        
         $data = DB::connection('mysql2')->table('m_pasien')->get();
         $puskes = Auth::user()->puskes->first();
         $getData = $data->map(function($item, $key){
@@ -121,12 +129,18 @@ class TransferController extends Controller
                         return $item;
                     });
                     $item->periksafisik = DB::connection('mysql2')->table('t_periksafisik')->where('pelayanan_id', $item->id)->get();
+                    $item->diagnosa = DB::connection('mysql2')->table('t_diagnosa')->where('pelayanan_id', $item->id)->get();
+                    $item->resep = DB::connection('mysql2')->table('t_resep')->where('pelayanan_id', $item->id)->get()->map(function($item){
+                        $item->resep_detail = DB::connection('mysql2')->table('t_resep_detail')->where('resep_id', $item->id)->get();
+                        return $item;
+                    });
                     return $item;
                 });
                 return $item;
             });
             return $item;
         });
+        //dd($getData->take(15));
         $store = $getData->map(function($item, $key)use($puskes){
             if($item->asuransi_id == '0000'){
                 $asuransi_id = 1;
@@ -185,33 +199,32 @@ class TransferController extends Controller
                         $l->tanggal        = $item->tanggal;
                         $l->kamar_id       = $item->kamar_id;
                         $l->save();
-                        
 
-                        foreach($item->anamnesa as $key => $value)
+                        foreach($item->anamnesa as $key => $anamnesa)
                         {
                             $a = new Tanamnesa;
-                            $a->tanggal          = utf8_encode($value->tanggal);
+                            $a->tanggal          = utf8_encode($anamnesa->tanggal);
                             $a->pelayanan_id     = $l->id;
-                            $a->dokter_id        = $value->dokter_id;
-                            $a->perawat_id       = $value->perawat_id;
-                            $a->keluhan_utama    = utf8_encode($value->keluhan_utama);
-                            $a->keluhan_tambahan = utf8_encode($value->keluhan_tambahan);
-                            $a->lama_sakit_tahun = utf8_encode($value->lama_sakit_tahun);
-                            $a->lama_sakit_bulan = utf8_encode($value->lama_sakit_bulan);
-                            $a->lama_sakit_hari  = utf8_encode($value->lama_sakit_hari);
-                            $a->merokok          = utf8_encode($value->merokok);
-                            $a->alkohol          = utf8_encode($value->konsumsi_alkohol);
-                            $a->sayur            = utf8_encode($value->kurang_sayur_buah);
-                            $a->terapi           = utf8_encode($value->terapi);
-                            $a->keterangan       = utf8_encode($value->keterangan);
-                            $a->edukasi          = utf8_encode($value->edukasi);
-                            $a->tindakan         = utf8_encode($value->rencana_tindakan);
-                            $a->askep            = utf8_encode($value->askep);
-                            $a->observasi        = utf8_encode($value->observasi);
-                            $a->biopsikososial   = utf8_encode($value->biopsikososial);
+                            $a->dokter_id        = $anamnesa->dokter_id;
+                            $a->perawat_id       = $anamnesa->perawat_id;
+                            $a->keluhan_utama    = utf8_encode($anamnesa->keluhan_utama);
+                            $a->keluhan_tambahan = utf8_encode($anamnesa->keluhan_tambahan);
+                            $a->lama_sakit_tahun = utf8_encode($anamnesa->lama_sakit_tahun);
+                            $a->lama_sakit_bulan = utf8_encode($anamnesa->lama_sakit_bulan);
+                            $a->lama_sakit_hari  = utf8_encode($anamnesa->lama_sakit_hari);
+                            $a->merokok          = utf8_encode($anamnesa->merokok);
+                            $a->alkohol          = utf8_encode($anamnesa->konsumsi_alkohol);
+                            $a->sayur            = utf8_encode($anamnesa->kurang_sayur_buah);
+                            $a->terapi           = utf8_encode($anamnesa->terapi);
+                            $a->keterangan       = utf8_encode($anamnesa->keterangan);
+                            $a->edukasi          = utf8_encode($anamnesa->edukasi);
+                            $a->tindakan         = utf8_encode($anamnesa->rencana_tindakan);
+                            $a->askep            = utf8_encode($anamnesa->askep);
+                            $a->observasi        = utf8_encode($anamnesa->observasi);
+                            $a->biopsikososial   = utf8_encode($anamnesa->biopsikososial);
                             $a->save();
 
-                            foreach($value->alergipasien as $alergi)
+                            foreach($anamnesa->alergipasien as $alergi)
                             {
                                 $al = new Malergi;
                                 $al->anamnesa_id = $a->id;
@@ -220,7 +233,7 @@ class TransferController extends Controller
                                 $al->save();
                             }
                             
-                            foreach($value->riwayatpasien as $riwayat)
+                            foreach($anamnesa->riwayatpasien as $riwayat)
                             {
                                 $ri = new Mriwayat;
                                 $ri->anamnesa_id = $a->id;
@@ -230,47 +243,85 @@ class TransferController extends Controller
                             }
                         }
 
-                        foreach($item->periksafisik as $key => $item)
+                        foreach($item->periksafisik as $key => $fisik)
                         {
                             $pp = new Tperiksafisik;
-                            $pp->tanggal      = $item->tanggal;
+                            $pp->tanggal      = $fisik->tanggal;
                             $pp->pelayanan_id = $l->id;
-                            $pp->dokter_id    = $item->dokter_id;
-                            $pp->perawat_id   = $item->perawat_id;
-                            $pp->sistole      = $item->sistole;
-                            $pp->diastole     = $item->diastole;
-                            $pp->detak_nadi   = $item->detak_nadi;
-                            $pp->nafas         = $item->nafas;
-                            $pp->detak_jantung = $item->detak_jantung;
-                            $pp->suhu          = $item->suhu;
-                            $pp->kesadaran     = $item->kesadaran;
-                            $pp->triage        = $item->triage;
-                            $pp->berat         = $item->berat;
-                            $pp->tinggi        = $item->tinggi;
-                            $pp->lingkar_perut = $item->lingkar_perut;
-                            $pp->imt           = $item->imt;
-                            $pp->hasil_imt     = $item->hasil_imt;
-                            $pp->aktifitas_fisik = $item->aktifitas_fisik;
-                            $pp->kulit             = $item->kulit;
-                            $pp->kuku              = $item->kuku;
-                            $pp->kepala            = $item->kepala;
-                            $pp->wajah             = $item->wajah;
-                            $pp->mata              = $item->mata;
-                            $pp->telinga           = $item->telinga;
-                            $pp->hidung_sinus      = $item->hidung_sinus;
-                            $pp->mulut_bibir       = $item->mulut_bibir;
-                            $pp->leher             = $item->leher;
-                            $pp->dada_punggung     = $item->dada_punggung;
-                            $pp->kardiovaskuler    = $item->kardiovaskuler;
-                            $pp->dada_aksila       = $item->dada_aksila;
-                            $pp->abdomen_perut     = $item->abdomen_perut;
-                            $pp->ekstermitas_atas  = $item->ekstermitas_atas;
-                            $pp->ekstermitas_bawah = $item->ekstermitas_bawah;
-                            $pp->genitalia_wanita  = $item->genitalia_wanita;
-                            $pp->genitalia_pria    = $item->genitalia_pria;
-                            $pp->status_hamil      = $item->status_hamil;
-                            $pp->skala_nyeri       = $item->skala_nyeri;
+                            $pp->dokter_id    = $fisik->dokter_id;
+                            $pp->perawat_id   = $fisik->perawat_id;
+                            $pp->sistole      = $fisik->sistole;
+                            $pp->diastole     = $fisik->diastole;
+                            $pp->detak_nadi   = $fisik->detak_nadi;
+                            $pp->nafas         = $fisik->nafas;
+                            $pp->detak_jantung = $fisik->detak_jantung;
+                            $pp->suhu          = $fisik->suhu;
+                            $pp->kesadaran     = $fisik->kesadaran;
+                            $pp->triage        = $fisik->triage;
+                            $pp->berat         = $fisik->berat;
+                            $pp->tinggi        = $fisik->tinggi;
+                            $pp->lingkar_perut = $fisik->lingkar_perut;
+                            $pp->imt           = $fisik->imt;
+                            $pp->hasil_imt     = $fisik->hasil_imt;
+                            $pp->aktifitas_fisik = $fisik->aktifitas_fisik;
+                            $pp->kulit             = $fisik->kulit;
+                            $pp->kuku              = $fisik->kuku;
+                            $pp->kepala            = $fisik->kepala;
+                            $pp->wajah             = $fisik->wajah;
+                            $pp->mata              = $fisik->mata;
+                            $pp->telinga           = $fisik->telinga;
+                            $pp->hidung_sinus      = $fisik->hidung_sinus;
+                            $pp->mulut_bibir       = $fisik->mulut_bibir;
+                            $pp->leher             = $fisik->leher;
+                            $pp->dada_punggung     = $fisik->dada_punggung;
+                            $pp->kardiovaskuler    = $fisik->kardiovaskuler;
+                            $pp->dada_aksila       = $fisik->dada_aksila;
+                            $pp->abdomen_perut     = $fisik->abdomen_perut;
+                            $pp->ekstermitas_atas  = $fisik->ekstermitas_atas;
+                            $pp->ekstermitas_bawah = $fisik->ekstermitas_bawah;
+                            $pp->genitalia_wanita  = $fisik->genitalia_wanita;
+                            $pp->genitalia_pria    = $fisik->genitalia_pria;
+                            $pp->status_hamil      = $fisik->status_hamil;
+                            $pp->skala_nyeri       = $fisik->skala_nyeri;
                             $pp->save();
+                        }
+                        
+                        foreach($item->resep as $key => $rs)
+                        {
+                            $rr = new Tresep;
+                            $rr->tanggal      = $rs->tanggal;
+                            $rr->antrian      = $rs->antrean;
+                            $rr->pelayanan_id = $l->id;
+                            $rr->dokter_id    = $rs->dokter_id;
+                            $rr->perawat_id   = $rs->perawat_id;
+                            $rr->status_ambil = $rs->status_ambil;
+                            $rr->save();
+
+                            foreach($rs->resep_detail as $rd)
+                            {
+                                $rz = new Tresepdetail;
+                                $rz->resep_id = $rr->id;
+                                $rz->obat_id = $rd->obat_id;
+                                $rz->obat_jumlah = $rd->obat_jumlah;
+                                $rz->obat_signa = utf8_encode($rd->obat_signa);
+                                $rz->aturan_pakai = $rd->aturan_pakai;
+                                $rz->obat_racikan = $rd->obat_racikan;
+                                $rz->obat_jumlah_permintaan = $rd->obat_jumlah_permintaan;
+                                $rz->obat_keterangan = $rd->obat_keterangan;
+                                $rz->save();
+                            }   
+                        }
+                        foreach($item->diagnosa as $key => $diagnosa)
+                        {
+                            $rr = new Tdiagnosa;
+                            $rr->tanggal        = $diagnosa->tanggal;
+                            $rr->pelayanan_id   = $l->id;
+                            $rr->dokter_id      = utf8_encode($diagnosa->dokter_id);
+                            $rr->perawat_id     = utf8_encode($diagnosa->perawat_id);
+                            $rr->diagnosa_id    = utf8_encode($diagnosa->diagnosa_id);
+                            $rr->diagnosa_jenis = utf8_encode($diagnosa->diagnosa_jenis);
+                            $rr->diagnosa_kasus = utf8_encode($diagnosa->diagnosa_kasus);
+                            $rr->save();
                         }
                     }
                 }
