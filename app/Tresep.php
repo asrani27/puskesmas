@@ -12,4 +12,9 @@ class Tresep extends Model
     {
         return $this->hasMany(Tresepdetail::class, 'resep_id');
     }
+
+    public function pelayanan()
+    {
+        return $this->belongsTo(Tpelayanan::class, 'pelayanan_id');
+    }
 }

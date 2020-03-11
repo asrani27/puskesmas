@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Tresep;
 use App\Malergi;
 use App\Mlookup;
 use App\Mpegawai;
 use App\Mriwayat;
 use App\Mruangan;
 use App\Tanamnesa;
+use App\Tdiagnosa;
 use Carbon\Carbon;
 use App\Tpelayanan;
+use App\Tresepdetail;
+use App\Mstatuspulang;
 use App\Tperiksafisik;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,9 +32,32 @@ class PelayananController extends Controller
     public function proses($id)
     {
         $data = Tpelayanan::find($id);
-        return view('puskes.pelayanan.medis.detail',compact('data'));
+        $sp = Mstatuspulang::all();
+        return view('puskes.pelayanan.medis.detail',compact('data','sp'));
     }
 
+    public function mulaiPeriksa($id)
+    {
+        $u = Tpelayanan::find($id);
+        $data = $u->pendaftaran;
+        $data->status_periksa = 1;
+        $data->save();
+        return back();
+    }
+
+    public function selesaiPeriksa(Request $req, $id)
+    {
+        $u = Tpelayanan::find($id);
+        $u->tgl_mulai = $req->tgl_mulai;
+        $u->tgl_selesai = $req->tgl_selesai;
+        $u->statuspulang_id = $req->statuspulang_id;
+        $u->save();
+
+        $data = $u->pendaftaran;
+        $data->status_periksa = 2;
+        $data->save();
+        return redirect('/pelayanan/medis');
+    }
     public function search(Request $req)
     {
         $search = $req->search;
@@ -364,15 +391,89 @@ class PelayananController extends Controller
         });
         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        $diagnosa = DB::table('m_diagnosa')->select('id')->paginate(10);
+        $diagnosa = DB::table('m_diagnosa')->select('id','value')->paginate(100);
         
         return view('puskes.pelayanan.medis.diagnosa.umum.create',compact('data','dokter','perawat','diagnosa'));
+    }
+
+    public function storeDiagnosa(Request $req, $id)
+    {
+        $tanggal = Carbon::now();
+        $diagnosa = new Tdiagnosa;
+        $diagnosa->tanggal      = $tanggal;
+        $diagnosa->pelayanan_id = $id;
+        $diagnosa->dokter_id    = convertid($req->dokter_id);
+        $diagnosa->perawat_id   = convertid($req->perawat_id);
+        $diagnosa->diagnosa_id  = $req->diagnosa_id;
+        $diagnosa->diagnosa_kasus  = $req->diagnosa_kasus;
+        $diagnosa->diagnosa_jenis  = $req->diagnosa_jenis;
+        $diagnosa->save();
+        return back();
+    }
+
+    public function deleteDiagnosa($id, $id_diagnosa)
+    {
+        $del = Tdiagnosa::find($id_diagnosa)->delete();
+        return back();
     }
 
     public function umumResep($id)
     {
         $data = Tpelayanan::find($id);
-        return view('puskes.pelayanan.medis.resep.umum.create',compact('data'));
+        $tenagamedis = Mpegawai::all()->map(function($item, $key){
+            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+            $item->nama_tenaga_medis = $item->jenispegawai->nama;
+            return $item;
+        });
+        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+        $obat = DB::table('m_obat')->select('id','value')->get();
+        $signa = DB::table('m_signa')->select('value')->get();
+        return view('puskes.pelayanan.medis.resep.umum.create',compact('data','dokter','perawat', 'obat','signa'));
+    }
+
+    public function storeResep(Request $req, $id)
+    {
+        $checkResep = Tpelayanan::find($id)->resep;
+        if($checkResep == null){
+            $t               = new Tresep;
+            $t->no_resep     = $req->no_resep;
+            $t->tanggal      = Carbon::now();
+            $t->dokter_id    = convertid($req->dokter_id);
+            $t->perawat_id   = convertid($req->perawat_id);
+            $t->pelayanan_id = $id;
+            $t->status_ambil = 0;
+            $t->save();
+
+            $r = new Tresepdetail;
+            $r->resep_id               = $t->id;
+            $r->obat_id                = $req->obat_id;
+            $r->obat_jumlah            = $req->obat_jumlah;
+            $r->obat_signa             = $req->obat_signa;
+            $r->aturan_pakai           = $req->aturan_pakai;
+            $r->obat_racikan           = $req->racikan;
+            $r->obat_jumlah_permintaan = $req->obat_jumlah_permintaan;
+            $r->obat_keterangan        = $req->keterangan;
+            $r->save();
+        }else{
+            $r = new Tresepdetail;
+            $r->resep_id               = $checkResep->id;
+            $r->obat_id                = $req->obat_id;
+            $r->obat_jumlah            = $req->obat_jumlah;
+            $r->obat_signa             = $req->obat_signa;
+            $r->aturan_pakai           = $req->aturan_pakai;
+            $r->obat_racikan           = $req->racikan;
+            $r->obat_jumlah_permintaan = $req->obat_jumlah_permintaan;
+            $r->obat_keterangan        = $req->keterangan;
+            $r->save();
+        }
+        return back();
+    }
+
+    public function deleteResep($id, $id_resep)
+    {
+        $del = Tresepdetail::find($id_resep)->delete();
+        return back();
     }
 
     public function medisPoli(Request $req)

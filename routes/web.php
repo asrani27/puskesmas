@@ -95,6 +95,8 @@ Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
     Route::get('/pelayanan/medis', 'PelayananController@medis');
     Route::post('/pelayanan/medis', 'PelayananController@medisPoli');
     Route::get('/pelayanan/medis/proses/{id}', 'PelayananController@proses');
+    Route::get('/pelayanan/medis/proses/{id}/mulai', 'PelayananController@mulaiPeriksa');
+    Route::post('/pelayanan/medis/proses/{id}', 'PelayananController@selesaiPeriksa');
     Route::any('/pelayanan/medis/search', 'PelayananController@search');
     Route::any('/pelayanan/medis/tanggal', 'PelayananController@searchTanggal');
 
@@ -103,7 +105,11 @@ Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
     Route::post('/pelayanan/medis/proses/{id}/umum/anamnesa', 'PelayananController@storeAnamnesa')->name('anamnesa');
     Route::post('/pelayanan/medis/proses/{id}/umum/anamnesa/{anamnesa_id}', 'PelayananController@updateAnamnesa')->name('updateAnamnesa');
     Route::get('/pelayanan/medis/proses/{id}/umum/diagnosa', 'PelayananController@umumDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/umum/diagnosa', 'PelayananController@storeDiagnosa')->name('diagnosa');
+    Route::get('/pelayanan/medis/proses/{id}/umum/diagnosa/{id_diagnosa}', 'PelayananController@deleteDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/umum/resep', 'PelayananController@storeResep')->name('resep');
     Route::get('/pelayanan/medis/proses/{id}/umum/resep', 'PelayananController@umumResep');
+    Route::get('/pelayanan/medis/proses/{id}/umum/resep/{id_resep}', 'PelayananController@deleteResep');
     
     
 });

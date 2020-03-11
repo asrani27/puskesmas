@@ -12,4 +12,9 @@ class Tresepdetail extends Model
     {
         return $this->belongsTo(Tresepdetail::class, 'resep_id');
     }
+
+    public function obat()
+    {
+        return $this->belongsTo(Mobat::class, 'obat_id');
+    }
 }

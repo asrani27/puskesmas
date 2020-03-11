@@ -3,6 +3,25 @@
 @push('addcss')
 <link rel="stylesheet" href="/admin/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<style>
+.select2-selection__rendered {
+    line-height: 17px !important;
+    font-size:14px;
+}
+.select2-container .select2-selection--single {
+    height: 25px !important;
+    padding-bottom: 5px;
+}
+.select2-selection__arrow {
+    height: 25px !important;
+    padding-bottom: 5px;
+}
+
+.myFont{
+  font-size:13px;
+}
+</style>
+
 @endpush
 
 @section('content-header')
@@ -117,9 +136,34 @@
                       <div class="card-header">
                         <h3 class="card-title">Riwayat Penyakit</h3>
                       </div>
-                      
-                      <div class="row">
-                          
+                      <div class="card-body p-1 table-responsive">
+                        <table id="example" class="table table-bordered table-sm" width="100%">
+                          <thead>
+                          <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
+                            <th>Tanggal</th>
+                            <th>Dokter /Tenaga Medis</th>
+                            <th>Perawat / Bidan</th>
+                            <th>ICD-X / Diagnosa</th>
+                            <th>Jenis</th>
+                            <th>Kasus</th>
+                            <th></th>
+                          </thead>
+                          <tbody>
+                            @foreach ($data->diagnosa as $item)
+                              <tr style="font-size:14px;">
+                                <td>{{$item->tanggal}}</td>
+                                <td>{{$item->dokter->nama}}</td>
+                                <td>{{$item->perawat->nama}}</td>
+                                <td>{{$item->diagnosa_id}} / {{$item->mdiagnosa->value}}</td>
+                                <td>{{$item->diagnosa_jenis}}</td>
+                                <td>{{$item->diagnosa_kasus}}</td>
+                                <td>
+                                  <a href="/pelayanan/medis/proses/{{$data->id}}/umum/diagnosa/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Ingin Menghapus Riwayat Diagnosa?');"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -131,17 +175,18 @@
                         </div>
                       </div>
                       <div class="card-body p-1 table-responsive">
-                        <table id="example" class="table table-bordered table-sm">
+                        <table id="example" class="table table-bordered table-sm" width="100%">
                           <thead>
                           <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                             <th>Dokter /Tenaga Medis</th>
                             <th>Perawat / Bidan</th>
-                            <th>ICD-X</th>
-                            <th>Diagnosa</th>
+                            <th>ICD-X / Diagnosa</th>
                             <th>Jenis</th>
                             <th>Kasus</th>
                             <th>Aksi</th>
                           </thead>
+                          <form method="POST" action="{{route('diagnosa', ['id' => $data->id])}}">
+                            @csrf
                           <tbody>
                               <tr>
                                   <td>
@@ -152,21 +197,18 @@
                                     </select>
                                   </td>
                                   <td>
-                                    <select name="dokter_id" class="form-control form-control-sm select2">
+                                    <select name="perawat_id" class="form-control form-control-sm select2">
                                       @foreach ($perawat as $item)
                                       <option value="{{$item->id}}">{{$item->nama}}</option>
                                       @endforeach
                                     </select>
                                   </td>
                                   <td>
-                                    <select name="dokter_id" class="form-control select2">
+                                    <select name="diagnosa_id" class="form-control select2" style="width: 250px">
                                       @foreach ($diagnosa as $item)
-                                      <option value="{{$item->id}}">{{$item->id}}</option>
+                                      <option value="{{$item->id}}">{{$item->id}} / {{$item->value}}</option>
                                       @endforeach
                                     </select>
-                                  </td>
-                                  <td>
-                                    <input type="text" class="form-control">
                                   </td>
                                   <td>
                                     <select name="diagnosa_jenis" class="form-control select2">
@@ -176,16 +218,17 @@
                                     </select>
                                   </td>
                                   <td>
-                                    <select name="diagnosa_kasus" class="form-control form-control-sm  select2">
+                                    <select name="diagnosa_kasus" class="form-control form-control-sm select2">
                                       <option value="BARU">BARU</option>
                                       <option value="LAMA">LAMA</option>
                                     </select>
                                   </td>
                                   <td>
-                                      <a href="#" class="btn btn-sm btn-success"><i class="fas fa-save"></i></a>
+                                      <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-save"></i></button>
                                   </td>
                               </tr>
                           </tbody>
+                          </form>
                         </table>
                       </div>
                     </div>
@@ -211,7 +254,7 @@
 <script>  
   $(function () {
     //Initialize Select2 Elements
-    $('.select2').select2()
+    $('.select2').select2({ dropdownCssClass: "myFont" })
   
     //Initialize Select2 Elements
     $('.select2bs4').select2({

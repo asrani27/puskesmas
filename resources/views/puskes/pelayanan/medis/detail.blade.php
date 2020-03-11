@@ -44,28 +44,30 @@
                       <div class="card-header">
                         <h3 class="card-title">Pasien Pulang</h3>
                       </div>
+                      <form method="post" action="/pelayanan/medis/proses/{{$data->id}}">
+                        @csrf
                       <div class="card-body">
                         <div class="input-group row">
                             <label class="col-sm-3 col-form-label text-right"><small>Status Pulang</small></label>
                             <div class="col-sm-9">
                                 <select class="form-control form-control-sm" id="statuspulang_id" name="statuspulang_id" onchange="changetextbox();">
-                                <option>-Pilih-</option>
-                                <option>Berobat jalan</option>
-                                <option>Rujuk Internal</option>
-                                <option>Rujuk Lanjut</option>
+                                <option value="">-Pilih-</option>
+                                @foreach ($sp as $item)
+                                <option value="{{$item->id}}">{{$item->nama}}</option>
+                                @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="input-group row">
                             <label class="col-sm-3 col-form-label text-right"><small>Tgl Mulai</small></label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control form-control-sm"  value="{{$data->tanggal}}">
+                                <input type="text" class="form-control form-control-sm"  name="tgl_mulai" value="{{$data->tanggal}}">
                             </div>
                         </div>
                         <div class="input-group row">
                             <label class="col-sm-3 col-form-label text-right"><small>Tgl Selesai</small></label>
                             <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" value="{{\Carbon\Carbon::now()}}">
+                            <input type="text" class="form-control form-control-sm" name="tgl_selesai" value="{{\Carbon\Carbon::now()}}">
                             </div>
                         </div>
                         <div class="input-group row">
@@ -77,14 +79,17 @@
                       </div>
                       <div class="card-footer">
                           
-                        <a href="" class="btn btn-primary btn-sm">Panggil</a>
+                        <a href="#" class="btn btn-primary btn-sm">Panggil</a>
                         @if($data->pendaftaran->status_periksa == 0)
-                        <a href="" class="btn btn-success btn-sm">Mulai Periksa</a>
+                        <a href="/pelayanan/medis/proses/{{$data->id}}/mulai" class="btn btn-success btn-sm">Mulai Periksa</a>
                         @elseif($data->pendaftaran->status_periksa == 1)
-                        <a href="" class="btn btn-danger btn-sm">Selesai Periksa</a>
+                        <button type="submit" class="btn btn-danger btn-sm">Selesai Periksa</button>
+                        @elseif($data->pendaftaran->status_periksa == 2)
+                        <a href="/pelayanan/medis/proses/{{$data->id}}/mulai" class="btn btn-success btn-sm">Mulai Periksa</a>
                         @else
                         @endif  
                       </div>
+                      </form>
                       <!-- /.card-body -->
                     </div>
                     

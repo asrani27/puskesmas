@@ -32,4 +32,14 @@ class Tpelayanan extends Model
     {
         return $this->hasOne(Tperiksafisik::class, 'pelayanan_id');
     }
+
+    public function diagnosa()
+    {
+        return $this->hasMany(Tdiagnosa::class, 'pelayanan_id');
+    }
+
+    public function resep()
+    {
+        return $this->hasOne(Tresep::class, 'pelayanan_id');
+    }
 }
