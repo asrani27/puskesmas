@@ -58,8 +58,6 @@ class PelayananController extends Controller
     public function umumAnamnesa($id)
     {
         $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
-        if($checkAnamnesa == null){
-            
             $data = Tpelayanan::find($id);
             $keluhan = Mlookup::where('for','keluhan')->get();
             $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
@@ -71,10 +69,7 @@ class PelayananController extends Controller
             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
             return view('puskes.pelayanan.medis.anamnesa.umum.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
-        }
-        else{
-            return view('ubah');
-        }
+    
     }
     public function storeAnamnesa(Request $req, $id)
     {
