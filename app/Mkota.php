@@ -13,8 +13,8 @@ class Mkota extends Model
         return $this->hasMany(Mkecamatan::class, 'kota_id');
     }
 
-    public function provinsi()
+    public function propinsi()
     {
-        return $this->belongsTo(Mprovinsi::class, 'provinsi_id');
+        return $this->belongsTo(Mprovinsi::class, 'propinsi_id');
     }
 }

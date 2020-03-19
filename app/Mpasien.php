@@ -8,10 +8,11 @@ class Mpasien extends Model
 {
     protected $table = "m_pasien";
 
-    public function puskes()
-    {
-        return $this->belongsToMany(Mpuskesmas::class, 'pasien_puskes', 'pasien_id', 'puskes_id');
-    }
+    public $incrementing = false;
+    // public function puskes()
+    // {
+    //     return $this->belongsToMany(Mpuskesmas::class, 'pasien_puskes', 'pasien_id', 'puskes_id');
+    // }
 
     public function kelurahan()
     {

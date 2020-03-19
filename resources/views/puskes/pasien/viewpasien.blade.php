@@ -31,7 +31,7 @@
                         <tbody>
                           <tr>
                             <td>Puskesmas</td>
-                            <td>{{Auth::user()->puskes->first()->nama}}</td>
+                            <td>PEKAUMAN</td>
                           </tr>
                           <tr>
                             <td>Asuransi</td>
@@ -91,7 +91,7 @@
                         <tbody>
                           <tr>
                             <td>Provinsi</td>
-                            <td>{{$data->kelurahan == null ? '-' : $data->kelurahan->kecamatan->kota->provinsi->nama }}</td>
+                            <td>{{$data->kelurahan == null ? '-' : $data->kelurahan->kecamatan->kota->propinsi->nama }}</td>
                           </tr>
                           <tr>
                             <td>Kota</td>
@@ -100,7 +100,7 @@
                           <tr>
                             <td>Kecamatan</td>
                             <td>{{$data->kelurahan == null ? '-' : $data->kelurahan->kecamatan->nama }}</td>
-                          </tr>
+                          </tr> 
                           <tr>
                             <td>Kelurahan</td>
                             <td>{{$data->kelurahan == null ? '-' : $data->kelurahan->nama }}</td>
@@ -113,7 +113,7 @@
                             <td>RT/RW</td>
                             <td>{{$data->rt}}/{{$data->rw}}</td>
                           </tr>
-                          <tr>
+                          {{-- <tr>
                             <td>Pekerjaan</td>
                             <td>{{$data->pekerjaan == null ? '': $data->pekerjaan->nama}}</td>
                           </tr>
@@ -132,7 +132,7 @@
                           <tr>
                             <td>Status Keluarga</td>
                             <td>{{$data->statuskeluarga == null ? '': $data->statuskeluarga->nama}}</td>
-                          </tr>
+                          </tr> --}}
                           <tr>
                             <td>Warga Negara</td>
                             <td>{{$data->warganegara}}</td>
@@ -166,7 +166,7 @@
                         $no = 1;
                         @endphp
                         <tbody>
-                          @foreach ($data->pendaftaran->sortByDesc('tanggal') as $key => $item)
+                          {{-- @foreach ($data->pendaftaran->sortByDesc('tanggal') as $key => $item)
                           <tr>
                             <td>{{$no++}}</td>
                             <td>{{$item->tanggal}}</td>
@@ -174,7 +174,7 @@
                             <td>{{$item->pelayanan->ruangan->nama}}</td>
                             <td></td>
                           </tr>
-                          @endforeach
+                          @endforeach --}}
                         </tbody>
                       </table>
                       <br />

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Mruangan extends Model
 {
     protected $table = 'm_ruangan';
+    
+    public $incrementing = false;
 
     public function instalasi()
     {

@@ -13,10 +13,10 @@ class User extends Authenticatable
     use Notifiable;
     protected $table = 'users';
     
-    public function puskes()
-    {
-        return $this->belongsToMany(Mpuskesmas::class, 'puskes_user', 'users_id', 'puskes_id');
-    }
+    // public function puskes()
+    // {
+    //     return $this->belongsToMany(Mpuskesmas::class, 'puskes_user', 'users_id', 'puskes_id');
+    // }
 
     public function menuakses()
     {

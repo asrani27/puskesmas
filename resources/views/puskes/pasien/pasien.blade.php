@@ -64,6 +64,7 @@
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                   <th>#</th>
+                  <th>eRM</th>
                   <th>No. RM Lama</th>
                   <th>No. Dok RM</th>
                   <th>Nama</th>
@@ -81,6 +82,7 @@
                         <a href="/pendaftaran/pasien/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Semua Data Tentang Pasien Ini?');"><i class="fa fa-trash"></i></a>
                       </td>
                     {{-- <td class="text-center"><small>{{ $key+ $data->firstItem() }}</small></td> --}}
+                    <td><small>{{$item->id}}</small></td>
                     <td><small>{{$item->no_rm_lama}}</small></td>
                     <td><small>{{$item->no_dok_rm}}</small></td>
                     <td><small>{{$item->nama}}</small></td>

@@ -125,7 +125,8 @@ class PelayananController extends Controller
         $pel = Tpelayanan::find($id)->pendaftaran;
         $pel->status_periksa = 1;
         $pel->save();
-        
+        $pasien_id = $pel->pasien_id;
+
         //Simpan Anamnesa
         $anamnesa = new Tanamnesa;
         $anamnesa->tanggal          = $pel->tanggal;
@@ -138,12 +139,12 @@ class PelayananController extends Controller
         $anamnesa->lama_sakit_bulan = $req->lama_sakit_bulan;
         $anamnesa->lama_sakit_hari  = $req->lama_sakit_hari;
         $anamnesa->merokok          = $req->merokok;
-        $anamnesa->alkohol          = $req->alkohol;
-        $anamnesa->sayur            = $req->sayur;
+        $anamnesa->konsumsi_alkohol = $req->alkohol;
+        $anamnesa->kurang_sayur_buah= $req->sayur;
         $anamnesa->terapi           = $req->terapi;
         $anamnesa->keterangan       = $req->keterangan;
         $anamnesa->edukasi          = $req->edukasi;
-        $anamnesa->tindakan         = $req->tindakan;
+        $anamnesa->rencana_tindakan = $req->tindakan;
         $anamnesa->askep            = $req->askep;
         $anamnesa->observasi        = $req->observasi;
         $anamnesa->biopsikososial   = $req->biopsikososial;
@@ -175,6 +176,7 @@ class PelayananController extends Controller
         //Simpan Riwayat Penyakit
         if(!is_null($req->riwayat_penyakit_sekarang)){
             $rp = new Mriwayat;
+            $rp->pasien_id = $pasien_id;
             $rp->anamnesa_id = $anamnesa->id;
             $rp->jenis_riwayat = 'Riwayat Penyakit Sekarang';
             $rp->value = $req->riwayat_penyakit_sekarang;
@@ -183,6 +185,7 @@ class PelayananController extends Controller
 
         if(!is_null($req->riwayat_penyakit_dulu)){
             $rp = new Mriwayat;
+            $rp->pasien_id = $pasien_id;
             $rp->anamnesa_id = $anamnesa->id;
             $rp->jenis_riwayat = 'Riwayat Penyakit Dulu';
             $rp->value = $req->riwayat_penyakit_dulu;
@@ -191,6 +194,7 @@ class PelayananController extends Controller
         
         if(!is_null($req->riwayat_penyakit_keluarga)){
             $rp = new Mriwayat;
+            $rp->pasien_id = $pasien_id;
             $rp->anamnesa_id = $anamnesa->id;
             $rp->jenis_riwayat = 'Riwayat Penyakit Keluarga';
             $rp->value = $req->riwayat_penyakit_keluarga;
@@ -200,6 +204,7 @@ class PelayananController extends Controller
         //Simpan Alergi Pasien
         if(!is_null($req->obat)){
             $ap = new Malergi;
+            $ap->pasien_id = $pasien_id;
             $ap->anamnesa_id = $anamnesa->id;
             $ap->jenis_alergi = 'Obat';
             $ap->value = $req->obat;
@@ -208,6 +213,7 @@ class PelayananController extends Controller
         
         if(!is_null($req->makanan)){
             $ap = new Malergi;
+            $ap->pasien_id = $pasien_id;
             $ap->anamnesa_id = $anamnesa->id;
             $ap->jenis_alergi = 'Makanan';
             $ap->value = $req->makanan;
@@ -216,6 +222,7 @@ class PelayananController extends Controller
         
         if(!is_null($req->umum)){
             $ap = new Malergi;
+            $ap->pasien_id = $pasien_id;
             $ap->anamnesa_id = $anamnesa->id;
             $ap->jenis_alergi = 'Umum';
             $ap->value = $req->umum;

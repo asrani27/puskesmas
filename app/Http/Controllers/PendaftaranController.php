@@ -179,19 +179,20 @@ class PendaftaranController extends Controller
 
     public function daftarPelayanan(Request $req,$id)
     {
+
         $pasien = Mpasien::find($id);
-        $tahun = Tahun($pasien->tgl_lahir);
-        $bulan = Bulan($pasien->tgl_lahir);
-        $hari  = Hari($pasien->tgl_lahir);
-        
+        $tahun = Tahun($pasien->tanggal_lahir);
+        $bulan = Bulan($pasien->tanggal_lahir);
+        $hari  = Hari($pasien->tanggal_lahir);
+
         $t = new Tpendaftaran;
         $t->tanggal          = $req->tanggal;
         $t->pasien_id        = $req->pasien_id;
         $t->umur_tahun       = $tahun; 
         $t->umur_bulan       = $bulan;
         $t->umur_hari        = $hari;
-        $t->penanggung_jawab = $req->penanggung_jawab;
-        $t->hubungan         = $req->hubungan;
+        $t->penanggung_jawab_pasien = $req->penanggung_jawab;
+        $t->hubungan_dengan_pasien  = $req->hubungan;
         $t->no_hp_penanggung = $req->no_hp_penanggung;
         $t->kunjungan        = $req->kunjungan;
         $t->status           = $req->status;
@@ -200,16 +201,17 @@ class PendaftaranController extends Controller
         $t->tarif            = $req->tarif;
         $t->rujukan_dari     = $req->rujukan_dari;
         $t->nama_perujuk     = $req->nama_perujuk;
-        $t->puskesmas_id     = Auth::user()->puskes->first()->id;
-        $t->status_periksa   = 0;
+        $t->puskesmas_id     = Mpuskesmas::where('nama','PEKAUMAN')->first()->id;
         $t->save();
 
         $p = new Tpelayanan;
         $p->tanggal        = $req->tanggal;
-        $p->ruangan_id     = $req->ruangan_id;
         $p->pendaftaran_id = $t->id;
+        $p->is_promotifpreventif = 0;
         $p->instalasi_id   = Mruangan::find($req->ruangan_id)->first()->instalasi->id;
+        $p->ruangan_id     = $req->ruangan_id;
         $p->save();
+        //dd('sukses');
 
         toast('berhasil Di Daftarkan', 'success');
         return redirect('/pendaftaran');

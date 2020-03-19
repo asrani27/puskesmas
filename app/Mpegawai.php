@@ -8,6 +8,8 @@ class Mpegawai extends Model
 {
     protected $table = 'm_pegawai';
 
+    public $incrementing = false;
+    
     public function jenispegawai()
     {
         return $this->belongsTo(Mjenispegawai::class, 'jenispegawai_id');

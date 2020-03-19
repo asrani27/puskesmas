@@ -67,7 +67,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 });
 
 
-Route::group(['middleware' => ['auth', 'role:adminpuskes']], function () {
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/getkelurahan/{id}', 'PendaftaranController@getKelurahan');
     Route::any('/pendaftaran/pasien/search', 'PendaftaranController@search');
     Route::get('/pendaftaran/pasien/truncate', 'PendaftaranController@truncatePasien');

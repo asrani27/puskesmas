@@ -52,4 +52,26 @@ function convertid($param)
     elseif(strlen($param) == 5){
         return $hasil = '00000000000'. $param;
     }
+    elseif(strlen($param) == 6){
+        return $hasil = '0000000000'. $param;
+    }
+    elseif(strlen($param) == 7){
+        return $hasil = '000000000'. $param;
+    }
+}
+
+function convertruangan($param)
+{
+    if(strlen($param) == 1){
+        return $hasil = '000'. $param;
+    }
+    elseif(strlen($param) == 2){
+        return $hasil = '00'. $param;
+    }
+    elseif(strlen($param) == 3){
+        return $hasil = '0'. $param;
+    }
+    elseif(strlen($param) == 4){
+        return $hasil = $param;
+    }
 }

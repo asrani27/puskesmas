@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mprovinsi extends Model
 {
-    protected $table = 'm_provinsi';
+    protected $table = 'm_propinsi';
 
     public function kota()
     {
-        return $this->hasMany(Mkota::class, 'provinsi_id');
+        return $this->hasMany(Mkota::class, 'propinsi_id');
     }
 }
