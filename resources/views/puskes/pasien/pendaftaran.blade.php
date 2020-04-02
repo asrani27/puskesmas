@@ -47,14 +47,14 @@
                                 No. Dok. RM : {{$data->no_dok_rm}} <br />
                                 NIK : {{$data->nik}} <br />
                                 Nama : {{$data->nama}} <br />
-                                JK : {{$data->jkel == 'L'  ? 'Laki-Laki' : 'Perempuan'}} <br />
-                                Lahir : {{$data->tgl_lahir == null  ? null : \Carbon\Carbon::parse($data->tgl_lahir)->format('d-M-Y')}} <br />
+                                JK : {{$data->jenis_kelamin == 'L'  ? 'Laki-Laki' : 'Perempuan'}} <br />
+                                Lahir : {{$data->tanggal_lahir == null  ? null : \Carbon\Carbon::parse($data->tanggal_lahir)->format('d-M-Y')}} <br />
                                 Kelurahan : {{$data->kelurahan == null  ? '-' : $data->kelurahan->nama}} <br />
                             </td>
                           </tr>
                           <tr>
                             <td>Umur <span class="text-danger"><b>*</b></span></td>
-                            <td>{{hitungUmur($data->tgl_lahir)}}</td>
+                            <td>{{hitungUmur($data->tanggal_lahir)}}</td>
                           </tr>
                           <tr>
                             <td>No HP  <span class="text-danger"><b>*</b></span></td>

@@ -10,11 +10,10 @@ class Mpuskesmas extends Model
     
     public $incrementing = false;
 
-
-    // public function user()
-    // {
-    //     return $this->belongsToMany(User::class, 'puskes_user', 'puskes_id', 'users_id');
-    // }
+    public function user()
+    {
+        return $this->hasMany(User::class, 'puskesmas_id');
+    }
     
     // public function pasien()
     // {

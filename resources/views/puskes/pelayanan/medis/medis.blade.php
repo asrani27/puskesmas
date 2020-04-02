@@ -115,8 +115,8 @@
                     <td><small>{{$item->pendaftaran->pasien_id}}</small></td>
                     <td><small>{{$item->pendaftaran->pasien->nik}}</small></td>
                     <td><small>{{$item->pendaftaran->pasien->nama}}</small></td>
-                    <td><small>{{$item->pendaftaran->pasien->jkel == 'L' ? 'Laki-laki' : 'Perempuan'}}</small></td>
-                    <td><small>{{$item->pendaftaran->pasien->tempat_lahir}}, {{$item->pendaftaran->pasien->tgl_lahir}}</small></td>
+                    <td><small>{{$item->pendaftaran->pasien->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan'}}</small></td>
+                    <td><small>{{$item->pendaftaran->pasien->tempat_lahir}}, {{$item->pendaftaran->pasien->tanggal_lahir}}</small></td>
                     <td><small>{{$item->pendaftaran->umur_tahun}} tahun, {{$item->pendaftaran->umur_bulan}} bulan, {{$item->pendaftaran->umur_hari}} hari</small></td>
                     <td><small>{{$item->pendaftaran->asuransi->nama}}</small></td>
                     <td><small>{{$item->pendaftaran->status_prb == 0 ? 'Tidak' : 'ya'}}</small></td>

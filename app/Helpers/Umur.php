@@ -11,6 +11,17 @@ function hitungUmur($umur)
     return $umur;
 }
 
+function umurBulan($umur)
+{
+    $lahir = new DateTime($umur);
+    $today = new DateTime('today');
+    $y = $today->diff($lahir)->y;
+    $m = $today->diff($lahir)->m;
+    $d = $today->diff($lahir)->d;
+    $umur = ($y * 12) + $m . " Bulan";
+    return $umur;
+}
+
 function Tahun($umur)
 {
     $lahir = new DateTime($umur);
@@ -57,6 +68,9 @@ function convertid($param)
     }
     elseif(strlen($param) == 7){
         return $hasil = '000000000'. $param;
+    }
+    elseif(strlen($param) == 8){
+        return $hasil = '00000000'. $param;
     }
 }
 

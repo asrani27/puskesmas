@@ -40,9 +40,9 @@ class PasienSeeder extends Seeder
                 $s->asuransi_id  = $asuransi_id;
                 $s->nama         = $item->nama;
                 $s->nik          = $item->nik;
-                $s->jkel         = $item->jenis_kelamin;
+                $s->jenis_kelamin         = $item->jenis_kelamin;
                 $s->tempat_lahir = $item->tempat_lahir;
-                $s->tgl_lahir    = $item->tanggal_lahir;
+                $s->tanggal_lahir    = $item->tanggal_lahir;
                 $s->kelurahan_id = $item->kelurahan_id;
                 $s->alamat       = $item->alamat;
                 $s->save();

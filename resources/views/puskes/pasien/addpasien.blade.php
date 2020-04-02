@@ -68,7 +68,7 @@
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Jenis Kelamin *</small></label>
                         <div class="col-sm-9"> 
-                            <select class="form-control form-control-sm" name="jkel" required>
+                            <select class="form-control form-control-sm" name="jenis_kelamin" required>
                             <option value="L">Laki-Laki</option>
                             <option value="P">Perempuan</option>
                         </select>
@@ -77,7 +77,7 @@
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Tanggal Lahir <span class="text-danger"><strong>*</strong></span></small></label>
                         <div class="col-sm-9">
-                            <input type="text" id="datepicker" class="form-control form-control-sm"  name="tgl_lahir" required>
+                            <input type="text" id="datepicker" class="form-control form-control-sm"  name="tanggal_lahir" required>
                         </div>
                     </div>
                     <div class="input-group row">
@@ -108,7 +108,7 @@
                             <select class="form-control form-control-sm"  name="goldarah_id">
                                 <option value="">-Pilih-</option>
                                 @foreach ($goldarah as $item)
-                                    <option value="{{$item->id}}">{{$item->nama}}</option>
+                                    <option value="{{$item->value}}">{{$item->value}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -199,7 +199,7 @@
                             <select class="form-control form-control-sm select2" id="e3" name="agama_id">
                                 <option value="">-Pilih-</option>
                                 @foreach ($agama as $item)
-                                    <option value="{{$item->id}}">{{$item->nama}}</option>
+                                    <option value="{{$item->value}}">{{$item->value}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -210,7 +210,7 @@
                             <select class="form-control form-control-sm select2" id="e3" name="pendidikan_id">
                                 <option value="">-Pilih-</option>
                                 @foreach ($pendidikan as $item)
-                                    <option value="{{$item->id}}">{{$item->nama}}</option>
+                                    <option value="{{$item->value}}">{{$item->value}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -221,7 +221,7 @@
                             <select class="form-control form-control-sm select2" id="e3" name="status_kawin_id">
                                 <option value="">-Pilih-</option>
                                 @foreach ($statuskawin as $item)
-                                    <option value="{{$item->id}}">{{$item->nama}}</option>
+                                    <option value="{{$item->value}}">{{$item->value}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -232,7 +232,7 @@
                             <select class="form-control form-control-sm select2" id="e3" name="status_keluarga_id">
                                 <option value="0">-Pilih-</option>
                                 @foreach ($statuskeluarga as $item)
-                                    <option value="{{$item->id}}">{{$item->nama}}</option>
+                                    <option value="{{$item->value}}">{{$item->value}}</option>
                                 @endforeach
                             </select>
                         </div>

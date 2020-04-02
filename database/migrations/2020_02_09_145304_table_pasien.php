@@ -18,9 +18,9 @@ class TablePasien extends Migration
             $table->string('no_kk')->nullable();
             $table->string('nik')->nullable();
             $table->string('nama');
-            $table->char('jkel', 1);
+            $table->char('jenis_kelamin', 1);
             $table->string('tempat_lahir')->nullable();
-            $table->date('tgl_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->char('gol_darah', 1)->nullable();
             $table->string('pendidikan')->nullable();
             $table->string('status_perkawinan')->nullable();

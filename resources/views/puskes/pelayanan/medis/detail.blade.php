@@ -30,7 +30,7 @@
             @elseif($data->ruangan->id == 6)
               {{-- Menu Untuk Poli GIGI --}}
               @include('puskes.pelayanan.medis.menu_gigi')
-            @elseif($data->ruangan->id == 10)
+            @elseif($data->ruangan->id == 10 OR $data->ruangan->id == 29)
               {{-- Menu Untuk Poli ANAK --}}
               @include('puskes.pelayanan.medis.menu_anak')
             @elseif($data->ruangan->id == 8)
@@ -53,7 +53,11 @@
                                 <select class="form-control form-control-sm" id="statuspulang_id" name="statuspulang_id" onchange="changetextbox();">
                                 <option value="">-Pilih-</option>
                                 @foreach ($sp as $item)
-                                <option value="{{$item->id}}">{{$item->nama}}</option>
+                                @if($item->id == $data->statuspulang_id)
+                                  <option value="{{$item->id}}" selected>{{$item->nama}}</option>
+                                @else
+                                  <option value="{{$item->id}}">{{$item->nama}}</option>
+                                @endif
                                 @endforeach
                                 </select>
                             </div>
@@ -151,19 +155,19 @@
                                 <td>Tgl Mulai</td>
                                 <td>-</td>
                                 <td>Jenis Kelamin</td>
-                                <td>{{$data->pendaftaran->pasien->jkel}}</td>   
+                                <td>{{$data->pendaftaran->pasien->jenis_kelamin}}</td>   
                               </tr>
                               <tr>
                                 <td>Tgl Selesai</td>
                                 <td>-</td>
                                 <td>Tempat/Tgl Lahir</td>
-                                <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{$data->pendaftaran->pasien->tgl_lahir}}</td>   
+                                <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{$data->pendaftaran->pasien->tanggal_lahir}}</td>   
                               </tr>
                               <tr>
                                 <td>ID Pendaftaran</td>
                                 <td>{{$data->pendaftaran_id}}</td>
                                 <td>Umur</td>
-                                <td>{{hitungUmur($data->pendaftaran->pasien->tgl_lahir)}}</td>
+                                <td>{{hitungUmur($data->pendaftaran->pasien->tanggal_lahir)}}</td>
                               </tr>
                               <tr>
                                 <td>Tgl Pendaftaran</td>
@@ -230,11 +234,11 @@
                           </tr>
                           <tr>
                             <td>Jenis Kelamin</td>
-                            <td>{{$data->jkel == 'L' ? 'Laki-Laki' : 'Perempuan'}}</td>
+                            <td>{{$data->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan'}}</td>
                           </tr>
                           <tr>
                             <td>Tempat Dan Tanggal Lahir</td>
-                            <td>{{$data->tempat_lahir}} / {{$data->tgl_lahir == null ? null : \Carbon\Carbon::parse($data->tgl_lahir)->format('d-M-Y')}}</td>
+                            <td>{{$data->tempat_lahir}} / {{$data->tanggal_lahir == null ? null : \Carbon\Carbon::parse($data->tanggal_lahir)->format('d-M-Y')}}</td>
                           </tr>
                           <tr>
                             <td>No. Dokumen RM</td>

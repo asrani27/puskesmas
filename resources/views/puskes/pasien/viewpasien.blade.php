@@ -55,11 +55,11 @@
                           </tr>
                           <tr>
                             <td>Jenis Kelamin</td>
-                            <td>{{$data->jkel == 'L' ? 'Laki-Laki' : 'Perempuan'}}</td>
+                            <td>{{$data->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan'}}</td>
                           </tr>
                           <tr>
                             <td>Tempat Dan Tanggal Lahir</td>
-                            <td>{{$data->tempat_lahir}} / {{$data->tgl_lahir == null ? null : \Carbon\Carbon::parse($data->tgl_lahir)->format('d-M-Y')}}</td>
+                            <td>{{$data->tempat_lahir}} / {{$data->tanggal_lahir == null ? null : \Carbon\Carbon::parse($data->tanggal_lahir)->format('d-M-Y')}}</td>
                           </tr>
                           <tr>
                             <td>No. Dokumen RM</td>

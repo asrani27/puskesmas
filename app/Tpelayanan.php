@@ -42,4 +42,14 @@ class Tpelayanan extends Model
     {
         return $this->hasOne(Tresep::class, 'pelayanan_id');
     }
+
+    public function tindakan()
+    {
+        return $this->hasMany(Ttindakan::class, 'pelayanan_id');
+    }
+
+    public function mtbs()
+    {
+        return $this->hasOne(Tmtbs::class, 'pelayanan_id');
+    }
 }

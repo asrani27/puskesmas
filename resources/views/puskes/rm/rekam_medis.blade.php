@@ -72,14 +72,14 @@
                     <td><small>{{$item->nik}}</small></td>
                     <td>
                       <small>
-                      @if($item->jkel == 'L')
+                      @if($item->jenis_kelamin == 'L')
                       Laki-Laki
                       @else
                       Perempuan
                       @endif
                       </small>
                     </td>
-                    <td><small>{{$item->tempat_lahir}}, {{$item->tgl_lahir == null ? null : \Carbon\Carbon::parse($item->tgl_lahir)->format('d-M-Y')}}</small></td>
+                    <td><small>{{$item->tempat_lahir}}, {{$item->tanggal_lahir == null ? null : \Carbon\Carbon::parse($item->tanggal_lahir)->format('d-M-Y')}}</small></td>
                   
                     <td><small>{{$item->alamat}}</small></td>
                   </tr>

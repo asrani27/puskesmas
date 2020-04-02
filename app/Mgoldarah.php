@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mgoldarah extends Model
 {
-    protected $table = 'm_goldarah';
+    protected $table = 'm_lookup';
 
-    public function pasien()
+    public function goldarah()
     {
-        return $this->hasMany(Mpasien::class, 'goldarah_id');
+        return $this->where('for','gol_darah')->get();
     }
 }

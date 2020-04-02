@@ -33,7 +33,26 @@ class PendaftaranController extends Controller
     public function editPasien($id)
     {
         $data = Mpasien::find($id);
-        return view('puskes.pasien.editpasien',compact('data'));
+
+        $kota            = DB::table('m_kota')->where('nama','KOTA BANJARMASIN')->first()->id;
+        $kecamatan       = DB::table('m_kecamatan')->select('id')->whereIn('kota_id', [$kota])->pluck('id');
+        $kelurahan       = DB::table('m_kelurahan')->whereIn('kecamatan_id', [$kecamatan])->get();
+        $asuransi        = DB::table("m_asuransi")->get();
+        $pekerjaan       = DB::table('m_pekerjaan')->get();
+        $goldarah        = DB::table('m_lookup')->where('for','gol_darah')->get();
+        $agama           = DB::table('m_lookup')->where('for','agama')->get();
+        $pendidikan      = DB::table('m_lookup')->where('for','pendidikan')->get();
+        $statuskawin     = DB::table('m_lookup')->where('for','status_perkawinan')->get();
+        $statuskeluarga  = DB::table('m_lookup')->where('for','status_keluarga')->get();
+        return view('puskes.pasien.editpasien',compact('data',
+        'asuransi',
+        'kelurahan',
+        'pekerjaan',
+        'goldarah',
+        'agama',
+        'pendidikan',
+        'statuskawin',
+        'statuskeluarga'));
     }
 
     public function viewPasien($id)
@@ -63,11 +82,11 @@ class PendaftaranController extends Controller
         $kelurahan       = DB::table('m_kelurahan')->whereIn('kecamatan_id', [$kecamatan])->get();
         $asuransi        = DB::table("m_asuransi")->get();
         $pekerjaan       = DB::table('m_pekerjaan')->get();
-        $goldarah        = DB::table('m_goldarah')->get();
-        $agama           = DB::table('m_agama')->get();
-        $pendidikan      = DB::table('m_pendidikan')->get();
-        $statuskawin     = DB::table('m_status_kawin')->get();
-        $statuskeluarga  = DB::table('m_status_keluarga')->get();
+        $goldarah        = DB::table('m_lookup')->where('for','gol_darah')->get();
+        $agama           = DB::table('m_lookup')->where('for','agama')->get();
+        $pendidikan      = DB::table('m_lookup')->where('for','pendidikan')->get();
+        $statuskawin     = DB::table('m_lookup')->where('for','status_perkawinan')->get();
+        $statuskeluarga  = DB::table('m_lookup')->where('for','status_keluarga')->get();
 
         return view('puskes.pasien.addpasien',compact(
         'asuransi',
@@ -83,37 +102,44 @@ class PendaftaranController extends Controller
 
     public function storePasien(Request $req)
     {
-        $tgl_lahir = $req->tgl_lahir == null ? null : Carbon::parse($req->tgl_lahir)->format('Y-m-d');
-        $puskes = Auth::user()->puskes->first();
+        $tanggal_lahir = $req->tanggal_lahir == null ? null : Carbon::parse($req->tanggal_lahir)->format('Y-m-d');
+        $id_pasien = (int) Mpasien::orderBy('id', 'DESC')->first()->id + 1;
+        $kelurahan = Mkelurahan::find($req->kelurahan_id);
+        
         $s = new Mpasien;
+        $s->id                 = convertid($id_pasien);
         $s->no_rm_lama         = strtoupper($req->no_rm_lama);
         $s->no_dok_rm          = strtoupper($req->no_dok_rm);
         $s->asuransi_id        = $req->asuransi_id;
         $s->no_asuransi        = strtoupper($req->no_asuransi);
         $s->no_kk              = $req->no_kk;
-        $s->nik                = $req->nik;
         $s->nama               = strtoupper($req->nama);
-        $s->jkel               = $req->jkel;
-        $s->tgl_lahir          = $tgl_lahir;
+        $s->nik                = $req->nik;
+        $s->jenis_kelamin      = $req->jenis_kelamin;
         $s->tempat_lahir       = strtoupper($req->tempat_lahir);
-        $s->goldarah_id        = $req->goldarah_id;
+        $s->tanggal_lahir      = $tanggal_lahir;
+        $s->gol_darah          = $req->goldarah_id;
         $s->email              = strtoupper($req->email);
         $s->no_hp              = $req->no_hp;
-        $s->kelurahan_id       = $req->kelurahan_id;
+        $s->kelurahan_id       = $kelurahan->id;
+        $s->kecamatan_id       = $kelurahan->kecamatan->id;
+        $s->kota_id            = $kelurahan->kecamatan->kota->id;
+        $s->propinsi_id        = $kelurahan->kecamatan->kota->propinsi->id;
         $s->alamat             = strtoupper($req->alamat);
         $s->rt                 = $req->rt;
         $s->rw                 = $req->rw;
         $s->pekerjaan_id       = $req->pekerjaan_id;
-        $s->agama_id           = $req->agama_id;
-        $s->pendidikan_id      = $req->pendidikan_id;
-        $s->status_kawin_id    = $req->status_kawin_id;
-        $s->status_keluarga_id = $req->status_keluarga_id;
+        $s->agama              = $req->agama_id;
+        $s->pendidikan         = $req->pendidikan_id;
+        $s->status_perkawinan  = $req->status_kawin_id;
+        $s->status_keluarga    = $req->status_keluarga_id;
         $s->warganegara        = $req->warganegara;
         $s->nama_ayah          = strtoupper($req->nama_ayah);
         $s->nama_ibu           = strtoupper($req->nama_ibu);
+        $s->puskesmas_id       = Auth::user()->puskesmas_id;
         $s->save();
         
-        $s->puskes()->attach($puskes);
+        //$s->puskes()->attach($puskes);
 
         toast('Data Pasien Berhasil Disimpan','success');
         return redirect('/pendaftaran/pasien');
@@ -134,7 +160,7 @@ class PendaftaranController extends Controller
             'required' => 'Kolom wajib di isi!',
             'numeric'  => 'Isi Kolom Harus Angka!',
         ];
-    }
+    }  
 
     public function delete($id)
     {
@@ -172,7 +198,7 @@ class PendaftaranController extends Controller
     public function searchTglLahir(Request $req)
     {
         $tanggal = Carbon::parse($req->tanggal)->format('Y-m-d');
-        $data = Mpasien::where('tgl_lahir', $tanggal)->paginate(10);
+        $data = Mpasien::where('tanggal_lahir', $tanggal)->paginate(10);
         
         return view('puskes.pasien.pasien',compact('data'));
     }
@@ -222,7 +248,7 @@ class PendaftaranController extends Controller
         $data      = Mkelurahan::find($id);
         $kecamatan = $data->kecamatan;
         $kota      = $kecamatan->kota;
-        $provinsi  = $kota->provinsi;
+        $provinsi  = $kota->propinsi;
         return response()->json([$kecamatan, $kota, $provinsi]);
         
     }

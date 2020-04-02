@@ -174,9 +174,9 @@ class TransferController extends Controller
                 $s->asuransi_id  = $asuransi_id;
                 $s->nama         = $item->nama;
                 $s->nik          = $item->nik;
-                $s->jkel         = $item->jenis_kelamin;
+                $s->jenis_kelamin         = $item->jenis_kelamin;
                 $s->tempat_lahir = $item->tempat_lahir;
-                $s->tgl_lahir    = $item->tanggal_lahir;
+                $s->tanggal_lahir    = $item->tanggal_lahir;
                 $s->kelurahan_id = $item->kelurahan_id;
                 $s->alamat       = $item->alamat;
                 $s->save();
@@ -399,8 +399,8 @@ class TransferController extends Controller
             $s->puskesmas_id        = $puskesmas_id;
             $s->nip                 = $value->nip;
             $s->nama                = utf8_encode($value->nama);
-            $s->jkel                = $value->jenis_kelamin;
-            $s->tgl_lahir           = $value->tanggal_lahir;
+            $s->jenis_kelamin                = $value->jenis_kelamin;
+            $s->tanggal_lahir           = $value->tanggal_lahir;
             $s->tempat_lahir        = $value->tempat_lahir;
             $s->pendidikan_terakhir = $value->pendidikan_terakhir;
             $s->tahun_lulus         = $value->tahun_lulus;

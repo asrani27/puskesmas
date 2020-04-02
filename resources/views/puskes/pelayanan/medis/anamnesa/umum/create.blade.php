@@ -80,11 +80,11 @@
                                         </tr>
                                         <tr>
                                           <td>Jenis Kelamin</td>
-                                          <td>{{$data->pendaftaran->pasien->jkel}}</td>
+                                          <td>{{$data->pendaftaran->pasien->jenis_kelamin}}</td>
                                         </tr>
                                         <tr>
                                           <td>Tempat & Tanggal Lahir</td>
-                                          <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{\Carbon\Carbon::parse($data->pendaftaran->pasien->tgl_lahir)->format('d M Y')}}</td>
+                                          <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{\Carbon\Carbon::parse($data->pendaftaran->pasien->tanggal_lahir)->format('d M Y')}}</td>
                                         </tr>
                                         <tr>
                                           <td>Alamat</td>
@@ -92,7 +92,7 @@
                                         </tr>
                                         <tr>
                                           <td>Umur</td>
-                                          <td>{{hitungUmur($data->pendaftaran->pasien->tgl_lahir)}}</td>
+                                          <td>{{hitungUmur($data->pendaftaran->pasien->tanggal_lahir)}}</td>
                                         </tr>
                                         <tr>
                                           <td>Asuransi</td>

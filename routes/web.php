@@ -84,7 +84,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::get('/pendaftaran', 'PendaftaranController@pendaftaran');
     Route::any('/pendaftaran/search', 'PendaftaranController@pendaftaranSearch');
-    Route::post('/pendaftaran/pasien/search/tgl_lahir', 'PendaftaranController@searchTglLahir');
+    Route::post('/pendaftaran/pasien/search/tanggal_lahir', 'PendaftaranController@searchTglLahir');
     Route::get('/rekam_medis', 'PendaftaranController@rekamMedis');
     
     Route::get('/sinkrondb', 'TransferController@index');
@@ -110,6 +110,78 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pelayanan/medis/proses/{id}/umum/resep', 'PelayananController@storeResep')->name('resep');
     Route::get('/pelayanan/medis/proses/{id}/umum/resep', 'PelayananController@umumResep');
     Route::get('/pelayanan/medis/proses/{id}/umum/resep/{id_resep}', 'PelayananController@deleteResep');
+    Route::get('/pelayanan/medis/proses/{id}/umum/laboratorium', 'PelayananController@umumLaboratorium');
+    Route::get('/pelayanan/medis/proses/{id}/umum/tindakan', 'PelayananController@umumTindakan');
+    Route::post('/pelayanan/medis/proses/{id}/umum/tindakan', 'PelayananController@storeTindakan')->name('tindakan'); 
     
+    //POLI ANAK
+    Route::get('/pelayanan/medis/proses/{id}/anak/anamnesa', 'PelayananController@anakAnamnesa');
+    Route::post('/pelayanan/medis/proses/{id}/anak/anamnesa', 'PelayananController@storeAnamnesa')->name('anamnesa');
+    Route::post('/pelayanan/medis/proses/{id}/anak/anamnesa/{anamnesa_id}', 'PelayananController@updateAnamnesa')->name('updateAnamnesa');
+    Route::get('/pelayanan/medis/proses/{id}/anak/diagnosa', 'PelayananController@anakDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/anak/diagnosa', 'PelayananController@storeDiagnosa')->name('diagnosa');
+    Route::get('/pelayanan/medis/proses/{id}/anak/diagnosa/{id_diagnosa}', 'PelayananController@deleteDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/anak/resep', 'PelayananController@storeResep')->name('resep');
+    Route::get('/pelayanan/medis/proses/{id}/anak/resep', 'PelayananController@anakResep');
+    Route::get('/pelayanan/medis/proses/{id}/anak/resep/{id_resep}', 'PelayananController@deleteResep');
+    Route::get('/pelayanan/medis/proses/{id}/anak/laboratorium', 'PelayananController@umumLaboratorium');
+    Route::get('/pelayanan/medis/proses/{id}/anak/tindakan', 'PelayananController@anakTindakan');
+    Route::get('/pelayanan/medis/proses/{id}/anak/mtbs', 'PelayananController@anakMtbs'); 
+    Route::get('/pelayanan/medis/proses/{id}/anak/periksagizi', 'PelayananController@anakPeriksagizi'); 
+    Route::get('/pelayanan/medis/proses/{id}/anak/imunisasi', 'PelayananController@anakImunisasi'); 
+    Route::get('/pelayanan/medis/proses/{id}/anak/imunisasi/imun_anak', 'PelayananController@imunisasiAnak'); 
+    Route::get('/pelayanan/medis/proses/{id}/anak/imunisasi/imun_dewasa', 'PelayananController@imunisasiDewasa'); 
+    
+    //POLI GIGI
+    Route::get('/pelayanan/medis/proses/{id}/gigi/anamnesa', 'PelayananController@gigiAnamnesa');
+    Route::post('/pelayanan/medis/proses/{id}/gigi/anamnesa', 'PelayananController@storeAnamnesa')->name('anamnesa');
+    Route::post('/pelayanan/medis/proses/{id}/gigi/anamnesa/{anamnesa_id}', 'PelayananController@updateAnamnesa')->name('updateAnamnesa');
+    Route::get('/pelayanan/medis/proses/{id}/gigi/diagnosa', 'PelayananController@gigiDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/gigi/diagnosa', 'PelayananController@storeDiagnosa')->name('diagnosa');
+    Route::get('/pelayanan/medis/proses/{id}/gigi/diagnosa/{id_diagnosa}', 'PelayananController@deleteDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/gigi/resep', 'PelayananController@storeResep')->name('resep');
+    Route::get('/pelayanan/medis/proses/{id}/gigi/resep', 'PelayananController@gigiResep');
+    Route::get('/pelayanan/medis/proses/{id}/gigi/resep/{id_resep}', 'PelayananController@deleteResep');
+    Route::get('/pelayanan/medis/proses/{id}/gigi/laboratorium', 'PelayananController@umumLaboratorium');
+    Route::get('/pelayanan/medis/proses/{id}/gigi/tindakan', 'PelayananController@gigiTindakan');
+    
+    //POLI KIA
+    Route::get('/pelayanan/medis/proses/{id}/kia/anamnesa', 'PelayananController@kiaAnamnesa');
+    Route::post('/pelayanan/medis/proses/{id}/kia/anamnesa', 'PelayananController@storeAnamnesa')->name('anamnesa');
+    Route::post('/pelayanan/medis/proses/{id}/kia/anamnesa/{anamnesa_id}', 'PelayananController@updateAnamnesa')->name('updateAnamnesa');
+    Route::get('/pelayanan/medis/proses/{id}/kia/diagnosa', 'PelayananController@kiaDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/kia/diagnosa', 'PelayananController@storeDiagnosa')->name('diagnosa');
+    Route::get('/pelayanan/medis/proses/{id}/kia/diagnosa/{id_diagnosa}', 'PelayananController@deleteDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/kia/resep', 'PelayananController@storeResep')->name('resep');
+    Route::get('/pelayanan/medis/proses/{id}/kia/resep', 'PelayananController@kiaResep');
+    Route::get('/pelayanan/medis/proses/{id}/kia/resep/{id_resep}', 'PelayananController@deleteResep');
+    Route::get('/pelayanan/medis/proses/{id}/kia/laboratorium', 'PelayananController@umumLaboratorium');
+    Route::get('/pelayanan/medis/proses/{id}/kia/tindakan', 'PelayananController@kiaTindakan');
+    
+    //POLI LANSIA
+    Route::get('/pelayanan/medis/proses/{id}/lansia/anamnesa', 'PelayananController@lansiaAnamnesa');
+    Route::post('/pelayanan/medis/proses/{id}/lansia/anamnesa', 'PelayananController@storeAnamnesa')->name('anamnesa');
+    Route::post('/pelayanan/medis/proses/{id}/lansia/anamnesa/{anamnesa_id}', 'PelayananController@updateAnamnesa')->name('updateAnamnesa');
+    Route::get('/pelayanan/medis/proses/{id}/lansia/diagnosa', 'PelayananController@lansiaDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/lansia/diagnosa', 'PelayananController@storeDiagnosa')->name('diagnosa');
+    Route::get('/pelayanan/medis/proses/{id}/lansia/diagnosa/{id_diagnosa}', 'PelayananController@deleteDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/lansia/resep', 'PelayananController@storeResep')->name('resep');
+    Route::get('/pelayanan/medis/proses/{id}/lansia/resep', 'PelayananController@lansiaResep');
+    Route::get('/pelayanan/medis/proses/{id}/lansia/resep/{id_resep}', 'PelayananController@deleteResep');
+    Route::get('/pelayanan/medis/proses/{id}/lansia/laboratorium', 'PelayananController@umumLaboratorium');
+    Route::get('/pelayanan/medis/proses/{id}/lansia/tindakan', 'PelayananController@lansiaTindakan');
+    
+    //POLI PKPPR
+    Route::get('/pelayanan/medis/proses/{id}/pkpr/anamnesa', 'PelayananController@pkprAnamnesa');
+    Route::post('/pelayanan/medis/proses/{id}/pkpr/anamnesa', 'PelayananController@storeAnamnesa')->name('anamnesa');
+    Route::post('/pelayanan/medis/proses/{id}/pkpr/anamnesa/{anamnesa_id}', 'PelayananController@updateAnamnesa')->name('updateAnamnesa');
+    Route::get('/pelayanan/medis/proses/{id}/pkpr/diagnosa', 'PelayananController@pkprDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/pkpr/diagnosa', 'PelayananController@storeDiagnosa')->name('diagnosa');
+    Route::get('/pelayanan/medis/proses/{id}/pkpr/diagnosa/{id_diagnosa}', 'PelayananController@deleteDiagnosa');
+    Route::post('/pelayanan/medis/proses/{id}/pkpr/resep', 'PelayananController@storeResep')->name('resep');
+    Route::get('/pelayanan/medis/proses/{id}/pkpr/resep', 'PelayananController@pkprResep');
+    Route::get('/pelayanan/medis/proses/{id}/pkpr/resep/{id_resep}', 'PelayananController@deleteResep');
+    Route::get('/pelayanan/medis/proses/{id}/pkpr/laboratorium', 'PelayananController@umumLaboratorium');
+    Route::get('/pelayanan/medis/proses/{id}/pkpr/tindakan', 'PelayananController@pkprTindakan');
     
 });

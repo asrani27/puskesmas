@@ -39,7 +39,7 @@
                 </div>
                 
                 <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
-                  <form method="post" action="/pendaftaran/pasien/search/tgl_lahir">
+                  <form method="post" action="/pendaftaran/pasien/search/tanggal_lahir">
                     @csrf
                   <div class="form-group">
                     <div class="input-group input-group-sm">
@@ -90,14 +90,14 @@
                     <td><small>{{$item->no_asuransi}}</small></td>
                     <td>
                       <small>
-                      @if($item->jkel == 'L')
+                      @if($item->jenis_kelamin == 'L')
                       Laki-Laki
                       @else
                       Perempuan
                       @endif
                       </small>
                     </td>
-                    <td><small>{{$item->tempat_lahir}}, {{$item->tgl_lahir == null ? null : \Carbon\Carbon::parse($item->tgl_lahir)->format('d-M-Y')}}</small></td>
+                    <td><small>{{$item->tempat_lahir}}, {{$item->tanggal_lahir == null ? null : \Carbon\Carbon::parse($item->tanggal_lahir)->format('d-M-Y')}}</small></td>
                     <td>
                       <small>@if($item->kelurahan == null)
                         @else

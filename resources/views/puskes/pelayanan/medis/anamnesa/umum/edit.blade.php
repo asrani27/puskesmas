@@ -80,11 +80,11 @@
                                         </tr>
                                         <tr>
                                           <td>Jenis Kelamin</td>
-                                          <td>{{$data->pendaftaran->pasien->jkel}}</td>
+                                          <td>{{$data->pendaftaran->pasien->jenis_kelamin}}</td>
                                         </tr>
                                         <tr>
                                           <td>Tempat & Tanggal Lahir</td>
-                                          <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{\Carbon\Carbon::parse($data->pendaftaran->pasien->tgl_lahir)->format('d M Y')}}</td>
+                                          <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{\Carbon\Carbon::parse($data->pendaftaran->pasien->tanggal_lahir)->format('d M Y')}}</td>
                                         </tr>
                                         <tr>
                                           <td>Alamat</td>
@@ -92,7 +92,7 @@
                                         </tr>
                                         <tr>
                                           <td>Umur</td>
-                                          <td>{{hitungUmur($data->pendaftaran->pasien->tgl_lahir)}}</td>
+                                          <td>{{hitungUmur($data->pendaftaran->pasien->tanggal_lahir)}}</td>
                                         </tr>
                                         <tr>
                                           <td>Asuransi</td>
@@ -501,11 +501,11 @@
                                       <label class="col-sm-4 col-form-label text-right"><small>Konsumsi Alkohol</small></label>
                                       <div class="col-sm-8">
                                         <label class="radio-inline">
-                                          <input type="radio" name="alkohol" value="0" {{$data->anamnesa->alkohol == 0 ? 'checked': ''}}> 
+                                          <input type="radio" name="alkohol" value="0" {{$data->anamnesa->konsumsi_alkohol == 0 ? 'checked': ''}}> 
                                           <span class="badge bg-black">Tidak</span>  
                                         </label>
                                         <label class="radio-inline">
-                                          <input type="radio" name="alkohol" value="1" {{$data->anamnesa->alkohol == 1 ? 'checked': ''}}> 
+                                          <input type="radio" name="alkohol" value="1" {{$data->anamnesa->konsumsi_alkohol == 1 ? 'checked': ''}}> 
                                           <span class="badge bg-gray">Ya</span>  
                                         </label>
                                       </div>
@@ -514,11 +514,11 @@
                                       <label class="col-sm-4 col-form-label text-right"><small>Kurang Sayur / Buah</small></label>
                                       <div class="col-sm-8">
                                         <label class="radio-inline">
-                                          <input type="radio" name="sayur" value="0" {{$data->anamnesa->sayur == 0 ? 'checked': ''}} > 
+                                          <input type="radio" name="sayur" value="0" {{$data->anamnesa->kurang_sayur_buah == 0 ? 'checked': ''}} > 
                                           <span class="badge bg-black">Tidak</span>  
                                         </label>
                                         <label class="radio-inline">
-                                          <input type="radio" name="sayur" value="1" {{$data->anamnesa->sayur == 1 ? 'checked': ''}}> 
+                                          <input type="radio" name="sayur" value="1" {{$data->anamnesa->kurang_sayur_buah == 1 ? 'checked': ''}}> 
                                           <span class="badge bg-gray">Ya</span>  
                                         </label>
                                       </div>

@@ -126,7 +126,7 @@
                     <td><small>{{$item->pasien == null ? '-': $item->pasien->nik}}</small></td>
                     <td><small>{{$item->pasien->nama}}</small></td>
                     <td><small>-</small></td>
-                    <td><small>{{$item->pasien == null ? '': $item->pasien->tempat_lahir}}, {{$item->pasien == null ? null : \Carbon\Carbon::parse($item->pasien->tgl_lahir)->format('d-M-Y')}}</small></td>
+                    <td><small>{{$item->pasien == null ? '': $item->pasien->tempat_lahir}}, {{$item->pasien == null ? null : \Carbon\Carbon::parse($item->pasien->tanggal_lahir)->format('d-M-Y')}}</small></td>
                     <td><small>{{$item->umur_tahun}} Thn,{{$item->umur_bulan}} Bln, {{$item->umur_hari}} Hari</small></td>
                     <td><small>{{$item->pasien->kelurahan == null ? '-' : $item->pasien->kelurahan->nama}}</small></td>
                     <td><small>{{$item->asuransi == null ? '-' : $item->asuransi->nama}}</small></td>
@@ -140,7 +140,7 @@
                     {{-- <td><small>{{$item->no_asuransi}}</small></td>
                     <td>
                       <small>
-                      @if($item->jkel == 'L')
+                      @if($item->jenis_kelamin == 'L')
                       Laki-Laki
                       @else
                       Perempuan
