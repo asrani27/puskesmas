@@ -36,7 +36,11 @@
                         <div class="col-sm-9">
                             <select class="form-control form-control-sm" id="asuransi_id" name="asuransi_id" onchange="changetextbox();" >
                                 @foreach ($asuransi as $item)
+                                    @if($data->asuransi_id == $item->id)
+                                    <option value="{{$item->id}}" selected>{{$item->nama}}</option>
+                                    @else
                                     <option value="{{$item->id}}">{{$item->nama}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -44,58 +48,63 @@
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>No. Asuransi</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" id="no_asuransi" name="no_asuransi" disabled>
+                            <input type="text" class="form-control form-control-sm" id="no_asuransi" name="no_asuransi" readonly value="{{$data->no_asuransi}}">
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>No. KK</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="no_kk" maxlength="16" onkeypress="return hanyaAngka(event)"/>
+                            <input type="text" class="form-control form-control-sm" name="no_kk" maxlength="16" value="{{$data->no_kk}}" onkeypress="return hanyaAngka(event)"/>
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>NIK</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="nik" maxlength="16" onkeypress="return hanyaAngka(event)"/>
+                            <input type="text" class="form-control form-control-sm" name="nik" maxlength="16" value="{{$data->nik}}" onkeypress="return hanyaAngka(event)"/>
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Nama *</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="nama" required>
+                            <input type="text" class="form-control form-control-sm" name="nama" required value="{{$data->nama}}">
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Jenis Kelamin *</small></label>
                         <div class="col-sm-9"> 
                             <select class="form-control form-control-sm" name="jenis_kelamin" required>
-                            <option value="L">Laki-Laki</option>
-                            <option value="P">Perempuan</option>
+                                @if($data->jenis_kelamin == 'L')
+                                <option value="L" selected>Laki-Laki</option>
+                                <option value="P">Perempuan</option>
+                                @else
+                                <option value="L">Laki-Laki</option>
+                                <option value="P" selected>Perempuan</option>
+                                @endif
                         </select>
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Tanggal Lahir</small></label>
                         <div class="col-sm-9">
-                            <input type="text" id="datepicker" class="form-control form-control-sm"  name="tanggal_lahir">
+                            <input type="text" id="datepicker" class="form-control form-control-sm"  value="{{\Carbon\Carbon::parse($data->tanggal_lahir)->format('d/m/Y')}}" name="tanggal_lahir">
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Tempat Lahir</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="tempat_lahir">
+                            <input type="text" class="form-control form-control-sm" name="tempat_lahir" value="{{$data->tempat_lahir}}">
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>No Dok. RM</small></label>
                         <div class="col-sm-9">
-                        <input type="text" class="form-control form-control-sm" name="no_dok_rm">
+                        <input type="text" class="form-control form-control-sm" name="no_dok_rm" value="{{$data->no_dok_rm}}">
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>No. RM Lama</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="no_rm_lama">
+                            <input type="text" class="form-control form-control-sm" name="no_rm_lama" value="{{$data->no_rm_lama}}">
                         </div>
                     </div>
                     </div>
@@ -108,7 +117,11 @@
                             <select class="form-control form-control-sm"  name="goldarah_id">
                                 <option value="">-Pilih-</option>
                                 @foreach ($goldarah as $item)
+                                    @if($data->gol_darah == $item->value)
+                                    <option value="{{$item->value}}" selected>{{$item->value}}</option>
+                                    @else
                                     <option value="{{$item->value}}">{{$item->value}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -116,13 +129,13 @@
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>E-mail</small></label>
                         <div class="col-sm-9">
-                            <input type="email" class="form-control form-control-sm" name="email">
+                            <input type="email" class="form-control form-control-sm" name="email" value="{{$data->email}}">
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>No. HP</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="no_hp" maxlength="16" onkeypress="return hanyaAngka(event)"/>
+                            <input type="text" class="form-control form-control-sm" name="no_hp" maxlength="16"  value="{{$data->no_hp}}" onkeypress="return hanyaAngka(event)"/>
                         </div>
                     </div>
                     <div class="input-group row">
@@ -155,7 +168,11 @@
                             <select id="e2" class="form-control form-control-sm select2" name="kelurahan_id">
                                 <option value="">-Pilih-</option>
                                 @foreach ($kelurahan as $item)
+                                    @if($data->kelurahan_id == $item->id)
+                                    <option value="{{$item->id}}" selected>{{$item->nama}}</option>
+                                    @else
                                     <option value="{{$item->id}}">{{$item->nama}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -163,19 +180,19 @@
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Alamat</small></label>
                         <div class="col-sm-9">
-                        <input type="text" class="form-control form-control-sm" name="alamat">
+                        <input type="text" class="form-control form-control-sm" name="alamat"  value="{{$data->alamat}}" >
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>RT</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm"  name="rt" maxlength="3" onkeypress="return hanyaAngka(event)"/>
+                            <input type="text" class="form-control form-control-sm"  name="rt"  value="{{$data->rt}}" maxlength="3" onkeypress="return hanyaAngka(event)"/>
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>RW</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm"  name="rw" maxlength="3" onkeypress="return hanyaAngka(event)"/>
+                            <input type="text" class="form-control form-control-sm"  name="rw" maxlength="3"  value="{{$data->rw}}" onkeypress="return hanyaAngka(event)"/>
                         </div>
                     </div>
                     </div>
@@ -188,7 +205,11 @@
                             <select class="form-control form-control-sm select2" id="e3" name="pekerjaan_id">
                                 <option value="">-Pilih-</option>
                                 @foreach ($pekerjaan as $item)
+                                    @if($data->pekerjaan_id == $item->id)
+                                    <option value="{{$item->id}}" selected>{{$item->nama}}</option>
+                                    @else
                                     <option value="{{$item->id}}">{{$item->nama}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -199,7 +220,11 @@
                             <select class="form-control form-control-sm select2" id="e3" name="agama_id">
                                 <option value="">-Pilih-</option>
                                 @foreach ($agama as $item)
+                                    @if($data->agama == $item->value)
+                                    <option value="{{$item->value}}" selected>{{$item->value}}</option>
+                                    @else
                                     <option value="{{$item->value}}">{{$item->value}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -210,7 +235,11 @@
                             <select class="form-control form-control-sm select2" id="e3" name="pendidikan_id">
                                 <option value="">-Pilih-</option>
                                 @foreach ($pendidikan as $item)
+                                    @if($data->pendidikan == $item->value)
+                                    <option value="{{$item->value}}" selected>{{$item->value}}</option>
+                                    @else
                                     <option value="{{$item->value}}">{{$item->value}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -221,7 +250,11 @@
                             <select class="form-control form-control-sm select2" id="e3" name="status_kawin_id">
                                 <option value="">-Pilih-</option>
                                 @foreach ($statuskawin as $item)
+                                    @if($data->status_perkawinan == $item->value)
+                                    <option value="{{$item->value}}" selected>{{$item->value}}</option>
+                                    @else
                                     <option value="{{$item->value}}">{{$item->value}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -232,7 +265,11 @@
                             <select class="form-control form-control-sm select2" id="e3" name="status_keluarga_id">
                                 <option value="">-Pilih-</option>
                                 @foreach ($statuskeluarga as $item)
+                                    @if($data->status_keluarga == $item->value)
+                                    <option value="{{$item->value}}" selected>{{$item->value}}</option>
+                                    @else
                                     <option value="{{$item->value}}">{{$item->value}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -241,22 +278,26 @@
                         <label class="col-sm-3 col-form-label text-right"><small>Warga Negara</small></label>
                         <div class="col-sm-9">
                             <select class="form-control form-control-sm" name="warganegara">
-                                <option value="">-Pilih-</option>
-                                <option value="INDONESIA">INDONESIA</option>
+                                @if($data->warganegara == 'INDONESIA')
+                                <option value="INDONESIA" selected>INDONESIA</option>
                                 <option value="ASING">ASING</option>
+                                @else
+                                <option value="INDONESIA" >INDONESIA</option>
+                                <option value="ASING" selected>ASING</option>
+                                @endif
                             </select>
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Nama Ayah</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="nama_ayah">
+                            <input type="text" class="form-control form-control-sm" name="nama_ayah" value="{{$data->nama_ayah}}">
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Nama Ibu</small></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="nama_ibu">
+                            <input type="text" class="form-control form-control-sm" name="nama_ibu" value="{{$data->nama_ibu}}">
                         </div>
                     </div>
                     </div>
@@ -282,7 +323,8 @@
 $(function() {
     $('.select2').select2()
     $('#datepicker').datepicker({
-      autoclose: true
+      autoclose: true,
+      format: 'dd/mm/yyyy',
     })
     $("#e2").select2({ dropdownCssClass: "myFont" })
     $("#e3").select2({ dropdownCssClass: "myFont" })

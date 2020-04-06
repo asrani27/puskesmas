@@ -166,7 +166,7 @@
                         $no = 1;
                         @endphp
                         <tbody>
-                          {{-- @foreach ($data->pendaftaran->sortByDesc('tanggal') as $key => $item)
+                          @foreach ($data->pendaftaran->sortByDesc('tanggal') as $key => $item)
                           <tr>
                             <td>{{$no++}}</td>
                             <td>{{$item->tanggal}}</td>
@@ -174,7 +174,7 @@
                             <td>{{$item->pelayanan->ruangan->nama}}</td>
                             <td></td>
                           </tr>
-                          @endforeach --}}
+                          @endforeach
                         </tbody>
                       </table>
                       <br />

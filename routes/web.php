@@ -77,6 +77,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pendaftaran/pasien/add', 'PendaftaranController@storePasien');
     Route::get('/pendaftaran/pasien/syncrone', 'PendaftaranController@syncrone');
     Route::get('/pendaftaran/pasien/delete/{id}', 'PendaftaranController@delete');
+    Route::post('/pendaftaran/pasien/update/{id}', 'PendaftaranController@updatePasien');
     Route::get('/pendaftaran/pasien/edit/{id}', 'PendaftaranController@editPasien');
     Route::get('/pendaftaran/pasien/view/{id}', 'PendaftaranController@viewPasien');
     Route::get('/pendaftaran/pasien/create/{id}', 'PendaftaranController@create');

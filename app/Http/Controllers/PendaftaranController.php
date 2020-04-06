@@ -33,7 +33,7 @@ class PendaftaranController extends Controller
     public function editPasien($id)
     {
         $data = Mpasien::find($id);
-
+        
         $kota            = DB::table('m_kota')->where('nama','KOTA BANJARMASIN')->first()->id;
         $kecamatan       = DB::table('m_kecamatan')->select('id')->whereIn('kota_id', [$kota])->pluck('id');
         $kelurahan       = DB::table('m_kelurahan')->whereIn('kecamatan_id', [$kecamatan])->get();
@@ -138,11 +138,50 @@ class PendaftaranController extends Controller
         $s->nama_ibu           = strtoupper($req->nama_ibu);
         $s->puskesmas_id       = Auth::user()->puskesmas_id;
         $s->save();
-        
-        //$s->puskes()->attach($puskes);
 
         toast('Data Pasien Berhasil Disimpan','success');
         return redirect('/pendaftaran/pasien');
+    }
+
+    public function updatePasien(Request $req, $id)
+    {
+        $tanggal_lahir = $req->tanggal_lahir == null ? null : Carbon::parse($req->tanggal_lahir)->format('Y-m-d');
+        $kelurahan = Mkelurahan::find($req->kelurahan_id);
+        
+        $s = Mpasien::find($id);
+        $s->no_rm_lama         = strtoupper($req->no_rm_lama);
+        $s->no_dok_rm          = strtoupper($req->no_dok_rm);
+        $s->asuransi_id        = $req->asuransi_id;
+        $s->no_asuransi        = strtoupper($req->no_asuransi);
+        $s->no_kk              = $req->no_kk;
+        $s->nama               = strtoupper($req->nama);
+        $s->nik                = $req->nik;
+        $s->jenis_kelamin      = $req->jenis_kelamin;
+        $s->tempat_lahir       = strtoupper($req->tempat_lahir);
+        $s->tanggal_lahir      = $tanggal_lahir;
+        $s->gol_darah          = $req->goldarah_id;
+        $s->email              = strtoupper($req->email);
+        $s->no_hp              = $req->no_hp;
+        $s->kelurahan_id       = $kelurahan->id;
+        $s->kecamatan_id       = $kelurahan->kecamatan->id;
+        $s->kota_id            = $kelurahan->kecamatan->kota->id;
+        $s->propinsi_id        = $kelurahan->kecamatan->kota->propinsi->id;
+        $s->alamat             = strtoupper($req->alamat);
+        $s->rt                 = $req->rt;
+        $s->rw                 = $req->rw;
+        $s->pekerjaan_id       = $req->pekerjaan_id;
+        $s->agama              = $req->agama_id;
+        $s->pendidikan         = $req->pendidikan_id;
+        $s->status_perkawinan  = $req->status_kawin_id;
+        $s->status_keluarga    = $req->status_keluarga_id;
+        $s->warganegara        = $req->warganegara;
+        $s->nama_ayah          = strtoupper($req->nama_ayah);
+        $s->nama_ibu           = strtoupper($req->nama_ibu);
+        $s->puskesmas_id       = Auth::user()->puskesmas_id;
+        $s->save();
+
+        toast('Data Pasien Berhasil Diupdate','success');
+        return redirect('/pendaftaran/pasien/view/'. $id);
     }
 
     public function create($id)
@@ -164,8 +203,13 @@ class PendaftaranController extends Controller
 
     public function delete($id)
     {
-        $del = Mpasien::find($id)->delete();
-        toast('Data Pasien Berhasil Dihapus','success');
+        $check = Mpasien::find($id)->pendaftaran;
+        if($check != null){
+            toast('Data Pasien Tidak Bisa Dihapus Karena Terdapat Riwayat Inputan','info');
+        }else{
+            $del = Mpasien::find($id)->delete();
+            toast('Data Pasien Berhasil Dihapus','success');
+        }
         return back();
     }
 
