@@ -17,8 +17,11 @@ use Carbon\Carbon;
 use App\Mimunisasi;
 use App\Tpelayanan;
 use App\Tresepdetail;
+use App\Mlaboratorium;
 use App\Mstatuspulang;
+use App\Tlaboratorium;
 use App\Tperiksafisik;
+use App\Tlaboratoriumdetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -83,7 +86,7 @@ class PelayananController extends Controller
 
     public function searchTanggal(Request $req)
     {
-        $tanggal = Carbon::parse($req->tanggal)->format('Y-m-d');
+        $tanggal = Carbon::createfromformat('d/m/Y',$req->tanggal)->format('Y-m-d');
         $data = Tpelayanan::where('tanggal','LIKE', $tanggal.'%')->orderBy('created_at','desc')->paginate(10);
         $req->flash();
         $ruangan = Mruangan::orderBy('nama','desc')->get();
@@ -864,5 +867,54 @@ class PelayananController extends Controller
         $ruangan = Mruangan::orderBy('nama','desc')->get();
         $req->flash();
         return view('puskes.pelayanan.medis.medis',compact('data','ruangan'));
+    }
+
+    public function storeLab(Request $req, $id)
+    {
+        if($req->lab == null){
+            toast('Test Lab Belum Di Pilih', 'info');
+        }else{
+            $dataLab = Mlaboratorium::whereIn('id', $req->lab)->get();
+            $checkLab = Tlaboratorium::where('pelayanan_id', $id)->first();
+
+            if($checkLab == null){
+                //Jika Lab Kosong Simpan Baru
+                $lab = new Tlaboratorium;
+                $lab->tanggal = Carbon::now();
+                $lab->pelayanan_id = $id;
+                $lab->save();
+                
+                foreach($dataLab as $value)
+                {
+                    $labdetail = new Tlaboratoriumdetail;
+                    $labdetail->pemeriksaan_id = $lab->id;
+                    $labdetail->laboratorium_id = $value->id;
+                    $labdetail->tarif = $value->tarif;
+                    $labdetail->nilai_normal = $value->nilai_normal;
+                    $labdetail->satuan = $value->satuan;
+                    $labdetail->save();
+                }
+                toast('Lab Berhasil Di Simpan', 'success');
+            }else{
+                //Jika Lab Ada update Data
+                foreach($dataLab as $value)
+                {
+                    $checkLabDetail = Tlaboratoriumdetail::where('pemeriksaan_id', $checkLab->id)->where('laboratorium_id', $value->id)->first();
+                    if($checkLabDetail == null){
+                        $labdetail = new Tlaboratoriumdetail;
+                        $labdetail->pemeriksaan_id = $checkLab->id;
+                        $labdetail->laboratorium_id = $value->id;
+                        $labdetail->tarif = $value->tarif;
+                        $labdetail->nilai_normal = $value->nilai_normal;
+                        $labdetail->satuan = $value->satuan;
+                        $labdetail->save();
+                    }else{
+
+                    }
+                }
+                toast('Lab Berhasil Di Simpan', 'success');
+            }
+        }
+        return back();
     }
 }

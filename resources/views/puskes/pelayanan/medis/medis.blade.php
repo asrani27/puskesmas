@@ -167,7 +167,7 @@
 $(document).ready(function(){
     $('#datepicker').datepicker({
       autoclose: true,
-      format: 'dd-mm-yyyy'
+      format: 'dd/mm/yyyy',
     }).on('changeDate', function() {
         $('#formTanggal').submit();
     });

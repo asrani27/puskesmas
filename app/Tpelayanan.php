@@ -52,4 +52,9 @@ class Tpelayanan extends Model
     {
         return $this->hasOne(Tmtbs::class, 'pelayanan_id');
     }
+
+    public function lab()
+    {
+        return $this->hasOne(Tlaboratorium::class, 'pelayanan_id');
+    }
 }

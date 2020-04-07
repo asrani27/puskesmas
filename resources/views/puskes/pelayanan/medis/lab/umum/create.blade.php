@@ -169,6 +169,42 @@
                 <div class="col-md-8" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                     <div class="card card-info card-outline">
                       <div class="card-header">
+                        <h3 class="card-title">Data Pemeriksaan</h3>
+                      </div>
+                      <div class="card-body p-1 table-responsive">
+                        
+                        @if($data->lab == null)
+                          <div class="input-group row">
+                              <label class="col-sm-3 col-form-label text-right"><small>ID</small><strong></strong></label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control form-control-sm" name="id_lab" value="- Otomatis -" readonly>
+                              </div>
+                          </div>
+                          <div class="input-group row">
+                              <label class="col-sm-3 col-form-label text-right"><small>Tanggal</small><strong></strong></label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control form-control-sm" name="tanggal" value="{{\Carbon\Carbon::now()->format('d M Y h:i:s')}}" readonly>
+                              </div>
+                          </div>
+                        @else
+                          <div class="input-group row">
+                              <label class="col-sm-3 col-form-label text-right"><small>ID</small><strong></strong></label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control form-control-sm" name="id_lab" value="{{$data->lab->id}}" readonly>
+                              </div>
+                          </div>
+                          <div class="input-group row">
+                              <label class="col-sm-3 col-form-label text-right"><small>Tanggal</small><strong></strong></label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control form-control-sm" name="tanggal" value="{{\Carbon\Carbon::parse($data->lab->tanggal)->format('d M Y h:i:s')}}" readonly>
+                              </div>
+                          </div>
+                        @endif
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <div class="card card-info card-outline">
+                      <div class="card-header">
                         <h3 class="card-title">Riwayat Laboratorium</h3>
                       </div>
                       <div class="card-body p-1 table-responsive">
@@ -202,19 +238,26 @@
                         <h3 class="card-title">LABORATORIUM</h3>
                       </div>
                       <div class="card-body table-responsive p-2">
+                        <form method="POST" action="{{route('lab', ['id' => $data->id])}}">
+                          @csrf
                           <table>
                               <tr>
-                          @foreach ($lab as $item)
-                          <td valign="top" style="padding-right: 10px">
-                          <label>{{$item->kode}}</label><br>
-                             @foreach ($item->laboratorium as $item2)
-                             <input type="checkbox"><small>{{$item2->value}}</small><br />
-                             @endforeach
-                          <br />
-                          </td>
-                          @endforeach
+                              @foreach ($lab as $item)
+                              <td valign="top" style="padding-right: 10px">
+                              <label>{{$item->kode}}</label><br>
+                                @foreach ($item->laboratorium as $item2)
+                                <input type="checkbox" name="lab[]" value="{{$item2->id}}"><small>{{$item2->value}}</small><br />
+                                @endforeach
+                              <br />
+                              </td>
+                              @endforeach
                               </tr>
                           </table>
+                          <div class="text-right">
+                              <button type="submit" class="btn btn-sm btn-success shadow"><i class="fas fa-check"></i> Simpan</a>
+                          </div>
+                          <br />
+                        </form>
                           <table id="example" class="table table-bordered table-sm" width="100%">
                             <thead>
                             <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
@@ -224,16 +267,26 @@
                               <th>Nilai Normal</th>
                               <th>Satuan</th>
                               <th>Sampel</th>
+                              <th></th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
+                              @if($data->lab == null)
+
+                              @else
+                                @foreach ($data->lab->t_lab_detail as $item)
+                                  <tr>
+                                      <td><strong>{{$item->m_lab->jenis_pemeriksaan}}</strong> / {{$item->m_lab->value}}</td>
+                                      <td>{{$item->tarif}}</td>
+                                      <td>-</td>
+                                      <td>{{$item->nilai_normal}}</td>
+                                      <td>{{$item->satuan}}</td>
+                                      <td>-</td>
+                                      <td class="text-center">
+                                        <a href="" class="btn btn-xs btn-danger"><strong>X</strong></a>
+                                      </td>
+                                  </tr>
+                                @endforeach
+                              @endif
                             </tbody>
                           </table>
                       </div>
@@ -410,13 +463,13 @@
                     </div>
                 </div>
               </div> --}}
-            <div class="card-footer">
+            {{-- <div class="card-footer">
                 <div class="text-right">
                     <a href="/pendaftaran/pasien/edit/" class="btn btn-sm btn-info shadow"><i class="fas fa-print"></i> Cetak Hasil Periksa</a>
                     <a href="/pendaftaran/pasien/edit/" class="btn btn-sm btn-success shadow"><i class="fas fa-check"></i> Simpan</a>
                     <a href="/pendaftaran/pasien/delete/" class="btn btn-sm btn-danger shadow"  onclick="return confirm('Yakin Menghapus Semua Data Tentang Pasien Ini?');"><i class="fas fa-trash"></i> Hapus</a>
                 </div>
-            </div>
+            </div> --}}
             <!-- /.card-body -->
         </div>
     </div>
