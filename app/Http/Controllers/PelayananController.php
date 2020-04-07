@@ -28,6 +28,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PelayananController extends Controller
 {
+
+    public function __construct()
+    {
+
+    }
+      
     public function medis()
     {
         $today = Carbon::today()->format('Y-m-d');
@@ -915,6 +921,13 @@ class PelayananController extends Controller
                 toast('Lab Berhasil Di Simpan', 'success');
             }
         }
+        return back();
+    }
+
+    public function deleteLab($id)
+    {
+        $del = Tlaboratoriumdetail::find($id)->delete();
+        toast('Data Berhasil Di Hapus', 'success');
         return back();
     }
 }

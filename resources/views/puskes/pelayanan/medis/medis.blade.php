@@ -48,7 +48,7 @@
                     <form id='formTanggal' action="/pelayanan/medis/tanggal" method="POST">
                       @csrf
                         <div class="input-group input-group-sm">
-                        <input type="text" name="tanggal" id="datepicker" class="form-control"  autocomplete="off" value="{{old('tanggal')}}">
+                        <input type="text" name="tanggal" id="datepicker" class="form-control"  autocomplete="off" value="{{old('tanggal') == null ? \Carbon\Carbon::today()->format('d/m/Y') : old('tanggal')}}">
                           <div class="input-group-append">
                             <button type="submit" class="btn bg-purple"><i class="fas fa-calendar"></i></button>
                           </div>

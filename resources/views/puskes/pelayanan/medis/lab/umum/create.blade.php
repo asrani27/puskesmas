@@ -282,7 +282,7 @@
                                       <td>{{$item->satuan}}</td>
                                       <td>-</td>
                                       <td class="text-center">
-                                        <a href="" class="btn btn-xs btn-danger"><strong>X</strong></a>
+                                        <a href="/pelayanan/medis/proses/umum/lab/delete/{{$item->id}}" class="btn btn-xs btn-danger"><strong>X</strong></a>
                                       </td>
                                   </tr>
                                 @endforeach

@@ -115,6 +115,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pelayanan/medis/proses/{id}/umum/tindakan', 'PelayananController@umumTindakan');
     Route::post('/pelayanan/medis/proses/{id}/umum/tindakan', 'PelayananController@storeTindakan')->name('tindakan'); 
     Route::post('/pelayanan/medis/proses/{id}/umum/lab', 'PelayananController@storeLab')->name('lab'); 
+    Route::get('/pelayanan/medis/proses/umum/lab/delete/{id}', 'PelayananController@deleteLab'); 
     
     //POLI ANAK
     Route::get('/pelayanan/medis/proses/{id}/anak/anamnesa', 'PelayananController@anakAnamnesa');
