@@ -216,11 +216,11 @@ class PendaftaranController extends Controller
     public function pendaftaran()
     {
         $data = Tpendaftaran::orderBy('tanggal', 'desc')->paginate(10);
-        $map = $data->map(function($item){
-            $item->pelayanan = $item->pelayanan;
-            return $item;
-        });
-        dd($map);
+        // $map = $data->map(function($item){
+        //     $item->pelayanan = $item->pelayanan;
+        //     return $item;
+        // });
+        // dd($map);
         return view('puskes.daftar.pendaftaran',compact('data'));
     }
 
