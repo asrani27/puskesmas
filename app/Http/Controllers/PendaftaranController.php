@@ -217,7 +217,8 @@ class PendaftaranController extends Controller
     {
         $data = Tpendaftaran::orderBy('tanggal', 'desc')->paginate(10);
         $map = $data->map(function($item){
-            return $item->pelayanan;
+            $item->pelayanan = $item->pelayanan;
+            return $item;
         });
         dd($map);
         return view('puskes.daftar.pendaftaran',compact('data'));
