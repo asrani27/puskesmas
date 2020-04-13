@@ -187,7 +187,7 @@ class PendaftaranController extends Controller
     public function create($id)
     { 
         $data = Mpasien::find($id);
-        $ruangan = Mruangan::orderBy('nama','asc')->get();
+        $ruangan = Mruangan::where('is_aktif', 'Y')->orderBy('nama','asc')->get();
         return view('puskes.pasien.pendaftaran',compact('data','ruangan'));
     }
 

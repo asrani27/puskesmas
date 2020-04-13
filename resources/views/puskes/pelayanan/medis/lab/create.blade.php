@@ -89,10 +89,69 @@
                     
                     <div class="card card-success card-outline">
                       <div class="card-header">
-                        <h3 class="card-title">Riwayat Pasien</h3>
+                        <h3 class="card-title">Data Pasien</h3>
                       </div>
-                      <div class="card-body">
-                          
+                      <div class="card-body table-responsive p-0">
+                          <table class="table table-sm" style="font-size:15px;">
+                              <tbody>
+                                <tr>
+                                  <td>ID Pelayanan</td>
+                                  <td>{{$data->id}}</td>
+                                </tr>
+                                <tr>
+                                  <td>Tanggal</td>
+                                  <td>{{$data->tanggal}}</td>                            
+                                </tr>
+                                <tr>
+                                  <td>Poli/Ruangan</td>
+                                  <td>{{$data->ruangan->nama}}</td>     
+                                </tr>
+                                <tr>
+                                  <td>No. eRM</td>
+                                  <td>{{$data->pendaftaran->pasien->id}}</td>    
+                                </tr>
+                                <tr>
+                                  <td>No RM Lama</td>
+                                  <td>{{$data->pendaftaran->pasien->no_rm_lama}}</td>   
+                                </tr>
+                                <tr>
+                                  <td>No Dokumen RM</td>
+                                  <td>{{$data->pendaftaran->pasien->no_dok_rm}}</td>
+                                </tr>
+                                <tr>
+                                  <td>NIK</td>
+                                  <td>{{$data->pendaftaran->pasien->nik}}</td>
+                                </tr>
+                                <tr>
+                                  <td>Nama KK</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td>Nama</td>
+                                  <td>{{$data->pendaftaran->pasien->nama}}</td>
+                                </tr>
+                                <tr>
+                                  <td>Jenis Kelamin</td>
+                                  <td>{{$data->pendaftaran->pasien->jenis_kelamin}}</td>
+                                </tr>
+                                <tr>
+                                  <td>Tempat & Tanggal Lahir</td>
+                                  <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{\Carbon\Carbon::parse($data->pendaftaran->pasien->tanggal_lahir)->format('d M Y')}}</td>
+                                </tr>
+                                <tr>
+                                  <td>Alamat</td>
+                                  <td>{{$data->pendaftaran->pasien->alamat}}</td>
+                                </tr>
+                                <tr>
+                                  <td>Umur</td>
+                                  <td>{{hitungUmur($data->pendaftaran->pasien->tanggal_lahir)}}</td>
+                                </tr>
+                                <tr>
+                                  <td>Asuransi</td>
+                                  <td>{{$data->pendaftaran->pasien->asuransi->nama}}</td>
+                                </tr>
+                              </tbody>
+                          </table>
                       </div>
                       <!-- /.card-body -->
                     </div>
@@ -100,84 +159,65 @@
                 <div class="col-md-8" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                     <div class="card card-info card-outline">
                       <div class="card-header">
-                        <h3 class="card-title">Detail Pasien</h3>
+                        <h3 class="card-title">Data Pemeriksaan</h3>
                       </div>
-                      <div class="card-body table-responsive p-0">
-                        <table class="table table-sm" style="font-size:13px;">
-                            <tbody>
+                      <div class="card-body p-1 table-responsive">
+                        
+                        @if($data->lab == null)
+                          <div class="input-group row">
+                              <label class="col-sm-3 col-form-label text-right"><small>ID</small><strong></strong></label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control form-control-sm" name="id_lab" value="- Otomatis -" readonly>
+                              </div>
+                          </div>
+                          <div class="input-group row">
+                              <label class="col-sm-3 col-form-label text-right"><small>Tanggal</small><strong></strong></label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control form-control-sm" name="tanggal" value="{{\Carbon\Carbon::now()->format('d M Y h:i:s')}}" readonly>
+                              </div>
+                          </div>
+                        @else
+                          <div class="input-group row">
+                              <label class="col-sm-3 col-form-label text-right"><small>ID</small><strong></strong></label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control form-control-sm" name="id_lab" value="{{$data->lab->id}}" readonly>
+                              </div>
+                          </div>
+                          <div class="input-group row">
+                              <label class="col-sm-3 col-form-label text-right"><small>Tanggal</small><strong></strong></label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control form-control-sm" name="tanggal" value="{{\Carbon\Carbon::parse($data->lab->tanggal)->format('d M Y h:i:s')}}" readonly>
+                              </div>
+                          </div>
+                        @endif
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <div class="card card-info card-outline">
+                      <div class="card-header">
+                        <h3 class="card-title">Riwayat Laboratorium</h3>
+                      </div>
+                      <div class="card-body p-1 table-responsive">
+                        <table id="example" class="table table-bordered table-sm" width="100%">
+                          <thead>
+                          <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
+                            <th>No</th>
+                            <th>Tgl Periksa</th>
+                            <th>Penanggung Jawab</th>
+                            <th>Pemeriksaan</th>
+                            <th>Hasil</th>
+                            <th></th>
+                          </thead>
+                          <tbody>
                               <tr>
-                                <td>ID Pelayanan</td>
-                                <td>{{$data->id}}</td>
-                                <td>NIK</td>
-                                <td>{{$data->pendaftaran->pasien->nik}}</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
                               </tr>
-                              <tr>
-                                <td>No Antrean</td>
-                                <td>-</td>
-                                <td>Nama Pasien</td>
-                                <td>{{$data->pendaftaran->pasien->nama}}</td>                              
-                              </tr>
-                              <tr>
-                                <td>Instalasi</td>
-                                <td>{{$data->ruangan->instalasi->nama}}</td>    
-                                <td>Nama Ibu</td>
-                                <td>{{$data->pendaftaran->pasien->nama_ibu}}</td>   
-                              </tr>
-                              <tr>
-                                <td>Poli/Ruangan</td>
-                                <td>{{$data->ruangan->nama}}</td>   
-                                <td>No eRM</td>
-                                <td>{{$data->pendaftaran->pasien->id}}</td>   
-                              </tr>
-                              <tr>
-                                <td>Kamar/Bed</td>
-                                <td>-</td>
-                                <td>No RM Lama</td>
-                                <td>{{$data->pendaftaran->pasien->no_rm_lama}}</td>   
-                              </tr>
-                              <tr>
-                                <td>Tgl Pelayanan</td>
-                                <td>{{$data->tanggal}}</td>   
-                                <td>No Dokumen RM</td>
-                                <td>{{$data->pendaftaran->pasien->no_dok_rm}}</td>   
-                              </tr>
-                              <tr>
-                                <td>Tgl Mulai</td>
-                                <td>-</td>
-                                <td>Jenis Kelamin</td>
-                                <td>{{$data->pendaftaran->pasien->jenis_kelamin}}</td>   
-                              </tr>
-                              <tr>
-                                <td>Tgl Selesai</td>
-                                <td>-</td>
-                                <td>Tempat/Tgl Lahir</td>
-                                <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{$data->pendaftaran->pasien->tanggal_lahir}}</td>   
-                              </tr>
-                              <tr>
-                                <td>ID Pendaftaran</td>
-                                <td>{{$data->pendaftaran_id}}</td>
-                                <td>Umur</td>
-                                <td>{{hitungUmur($data->pendaftaran->pasien->tanggal_lahir)}}</td>
-                              </tr>
-                              <tr>
-                                <td>Tgl Pendaftaran</td>
-                                <td>{{$data->pendaftaran->tanggal}}</td>
-                                <td>Alamat</td>
-                                <td>{{$data->pendaftaran->pasien->alamat}}</td>
-                              </tr>
-                              <tr>
-                                <td>Asuransi</td>
-                                <td>{{$data->pendaftaran->pasien->asuransi->nama}}</td>
-                                <td>Catatan</td>
-                                <td>-</td>
-                              </tr>
-                              <tr>
-                                <td>Rujukan Dari</td>
-                                <td>{{$data->pendaftaran->rujukan_dari}}</td>
-                                <td>Nama Perujuk</td>
-                                <td>{{$data->pendaftaran->nama_perujuk}}</td>
-                              </tr>
-                            </tbody>
+                          </tbody>
                         </table>
                       </div>
                       <!-- /.card-body -->
@@ -185,10 +225,60 @@
                     
                     <div class="card card-info card-outline">
                       <div class="card-header">
-                        <h3 class="card-title">Penyakit Khusus Pasien</h3>
+                        <h3 class="card-title">LABORATORIUM</h3>
                       </div>
-                      <div class="card-body table-responsive p-0">
-                          
+                      <div class="card-body table-responsive p-2">
+                        <form method="POST" action="{{route('laboratorium', ['id' => $data->id])}}">
+                          @csrf
+                          <table>
+                              <tr>
+                              @foreach ($lab as $item)
+                              <td valign="top" style="padding-right: 10px">
+                              <label>{{$item->kode}}</label><br>
+                                @foreach ($item->laboratorium as $item2)
+                                <input type="checkbox" name="lab[]" value="{{$item2->id}}"><small>{{$item2->value}}</small><br />
+                                @endforeach
+                              <br />
+                              </td>
+                              @endforeach
+                              </tr>
+                          </table>
+                          <div class="text-right">
+                              <button type="submit" class="btn btn-sm btn-success shadow"><i class="fas fa-check"></i> Simpan</a>
+                          </div>
+                          <br />
+                        </form>
+                          <table id="example" class="table table-bordered table-sm" width="100%">
+                            <thead>
+                            <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
+                              <th>Pemeriksaan</th>
+                              <th>Tarif</th>
+                              <th>Hasil</th>
+                              <th>Nilai Normal</th>
+                              <th>Satuan</th>
+                              <th>Sampel</th>
+                              <th></th>
+                            </thead>
+                            <tbody>
+                              @if($data->lab == null)
+
+                              @else
+                                @foreach ($data->lab->t_lab_detail as $item)
+                                  <tr>
+                                      <td><strong>{{$item->m_lab->jenis_pemeriksaan}}</strong> / {{$item->m_lab->value}}</td>
+                                      <td>{{$item->tarif}}</td>
+                                      <td>-</td>
+                                      <td>{{$item->nilai_normal}}</td>
+                                      <td>{{$item->satuan}}</td>
+                                      <td>-</td>
+                                      <td class="text-center">
+                                        <a href="/pelayanan/medis/proses/lab/delete/{{$item->id}}" class="btn btn-xs btn-danger"><strong>X</strong></a>
+                                      </td>
+                                  </tr>
+                                @endforeach
+                              @endif
+                            </tbody>
+                          </table>
                       </div>
                     </div>
                 </div>
@@ -363,12 +453,13 @@
                     </div>
                 </div>
               </div> --}}
-            <div class="card-footer">
+            {{-- <div class="card-footer">
                 <div class="text-right">
-                    <a href="/pendaftaran/pasien/edit/" class="btn btn-sm btn-info shadow"><i class="fas fa-print"></i> Cetak Pengantar Rujukan</a>
-                    <a href="/pendaftaran/pasien/delete/" class="btn btn-sm btn-info shadow"  onclick="return confirm('Yakin Menghapus Semua Data Tentang Pasien Ini?');"><i class="fas fa-trash"></i> Cetak</a>
+                    <a href="/pendaftaran/pasien/edit/" class="btn btn-sm btn-info shadow"><i class="fas fa-print"></i> Cetak Hasil Periksa</a>
+                    <a href="/pendaftaran/pasien/edit/" class="btn btn-sm btn-success shadow"><i class="fas fa-check"></i> Simpan</a>
+                    <a href="/pendaftaran/pasien/delete/" class="btn btn-sm btn-danger shadow"  onclick="return confirm('Yakin Menghapus Semua Data Tentang Pasien Ini?');"><i class="fas fa-trash"></i> Hapus</a>
                 </div>
-            </div>
+            </div> --}}
             <!-- /.card-body -->
         </div>
     </div>

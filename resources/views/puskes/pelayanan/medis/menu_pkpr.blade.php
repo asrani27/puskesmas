@@ -7,8 +7,6 @@
         <a href="/pelayanan/medis/proses/{{$data->id}}/resep" class="btn bg-gradient-primary btn-sm">Resep</a>
         <a href="/pelayanan/medis/proses/{{$data->id}}/laboratorium" class="btn bg-gradient-primary btn-sm">Laboratorium</a>
         <a href="/pelayanan/medis/proses/{{$data->id}}/tindakan" class="btn bg-gradient-primary btn-sm">Tindakan</a>
-        <a href="/pelayanan/medis/proses/{{$data->id}}/mtbs" class="btn bg-gradient-primary btn-sm">MTBS</a>
-        <a href="/pelayanan/medis/proses/{{$data->id}}/imunisasi" class="btn bg-gradient-primary btn-sm">Imunisasi</a>
-        <a href="/pelayanan/medis/proses/{{$data->id}}/periksagizi" class="btn bg-gradient-primary btn-sm">Periksa Gizi</a>
+        <a href="/pelayanan/medis/proses/{{$data->id}}/pkpr" class="btn bg-gradient-danger btn-sm">PKPR</a>
     </div>
 </div>
