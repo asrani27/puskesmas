@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Closure;
+use App\Mkms;
 use App\Tresep;
 use App\Malergi;
 use App\Mlookup;
@@ -157,8 +158,41 @@ class PelayananController extends Controller
     public function Mtbs($id)
     {
         $data = Tpelayanan::find($id);
-        $checkAnamnesa = $data->mtbs;
-        dd($checkAnamnesa);
+        $checkAnamnesa = $data->anamnesa;
+        if($checkAnamnesa == null){
+            toast('Harap Isi Anamnesa Dulu', 'info');
+            return redirect('/pelayanan/medis/proses/'.$id.'/anamnesa');
+        }else{
+            $checkMtbs = $data->mtbs;
+            if($checkMtbs == null){
+                $sp   = Mstatuspulang::all();
+                $tenagamedis = Mpegawai::all()->map(function($item, $key){
+                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
+                    return $item;
+                });
+                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+                return view('puskes.pelayanan.medis.mtbs.create',compact('data','sp','dokter','perawat'));
+            }else{
+                $sp   = Mstatuspulang::all();
+                $mtbs = $checkMtbs;
+                $tenagamedis = Mpegawai::all()->map(function($item, $key){
+                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
+                    return $item;
+                });
+                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+                return view('puskes.pelayanan.medis.mtbs.edit',compact('data','sp','dokter','perawat', 'mtbs'));
+
+            }
+        }
+    }
+
+    public function Imunisasi($id)
+    {
+        $data = Tpelayanan::find($id);
         $sp   = Mstatuspulang::all();
         $tenagamedis = Mpegawai::all()->map(function($item, $key){
             $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
@@ -167,7 +201,55 @@ class PelayananController extends Controller
         });
         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        return view('puskes.pelayanan.medis.mtbs.create',compact('data','sp','dokter','perawat'));
+        return view('puskes.pelayanan.medis.imunisasi.check',compact('data','sp','dokter','perawat'));   
+    }
+
+    public function imunisasiAnak($id)
+    {
+        $data = Tpelayanan::find($id);
+        $checkKMS = Mkms::where('pasien_id', $data->pendaftaran->pasien_id)->first();
+        if($checkKMS == null){
+            $sp   = Mstatuspulang::all();
+            $tenagamedis = Mpegawai::all()->map(function($item, $key){
+                $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+                $item->nama_tenaga_medis = $item->jenispegawai->nama;
+                return $item;
+            });
+            $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+            $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+            $imun = Mimunisasi::all()->chunk(4);
+            Alert::success('Anda Memilih Imunisasi Anak','success');
+            return view('puskes.pelayanan.medis.imunisasi.imun_anak',compact('data','sp','dokter','perawat','imun'));   
+        }else{
+            $sp   = Mstatuspulang::all();
+            $tenagamedis = Mpegawai::all()->map(function($item, $key){
+                $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+                $item->nama_tenaga_medis = $item->jenispegawai->nama;
+                return $item;
+            });
+            $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+            $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+            $imun = Mimunisasi::all()->chunk(4);
+            $kms = $checkKMS;
+            Alert::success('Anda Memilih Imunisasi Anak','success');
+            return view('puskes.pelayanan.medis.imunisasi.edit_imun_anak',compact('data','sp','dokter','perawat','imun','kms'));   
+        }
+    }
+    
+    public function imunisasiDewasa($id)
+    {
+        $data = Tpelayanan::find($id);
+        $sp   = Mstatuspulang::all();
+        $tenagamedis = Mpegawai::all()->map(function($item, $key){
+            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+            $item->nama_tenaga_medis = $item->jenispegawai->nama;
+            return $item;
+        });
+        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+        $imun = Mimunisasi::all()->chunk(4);
+        Alert::success('Anda Memilih Imunisasi Dewasa','success');
+        return view('puskes.pelayanan.medis.imunisasi.imun_dewasa',compact('data','sp','dokter','perawat','imun'));   
     }
 
     public function medis()
@@ -774,37 +856,6 @@ class PelayananController extends Controller
         return view('puskes.pelayanan.medis.imunisasi.anak.check',compact('data','sp','dokter','perawat'));   
     }
     
-    public function imunisasiAnak($id)
-    {
-        $data = Tpelayanan::find($id);
-        $sp   = Mstatuspulang::all();
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        $imun = Mimunisasi::all()->chunk(4);
-        Alert::success('Anda Memilih Imunisasi Anak','success');
-        return view('puskes.pelayanan.medis.imunisasi.imun_anak',compact('data','sp','dokter','perawat','imun'));   
-    }
-    
-    public function imunisasiDewasa($id)
-    {
-        $data = Tpelayanan::find($id);
-        $sp   = Mstatuspulang::all();
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        $imun = Mimunisasi::all()->chunk(4);
-        Alert::success('Anda Memilih Imunisasi Dewasa','success');
-        return view('puskes.pelayanan.medis.imunisasi.imun_dewasa',compact('data','sp','dokter','perawat','imun'));   
-    }
 
     public function gigiDiagnosa($id)
     {

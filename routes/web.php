@@ -117,10 +117,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pelayanan/medis/proses/{id}/laboratorium', 'PelayananController@Laboratorium');
     Route::get('/pelayanan/medis/proses/{id}/tindakan', 'PelayananController@Tindakan');
     Route::get('/pelayanan/medis/proses/{id}/mtbs', 'PelayananController@Mtbs'); 
+    Route::get('/pelayanan/medis/proses/{id}/imunisasi', 'PelayananController@Imunisasi'); 
+    Route::get('/pelayanan/medis/proses/{id}/imunisasi/imun_anak', 'PelayananController@imunisasiAnak'); 
+    Route::get('/pelayanan/medis/proses/{id}/imunisasi/imun_dewasa', 'PelayananController@imunisasiDewasa'); 
     // // Route::get('/pelayanan/medis/proses/{id}/anak/periksagizi', 'PelayananController@anakPeriksagizi'); 
     // // Route::get('/pelayanan/medis/proses/{id}/anak/imunisasi', 'PelayananController@anakImunisasi'); 
-    // // Route::get('/pelayanan/medis/proses/{id}/anak/imunisasi/imun_anak', 'PelayananController@imunisasiAnak'); 
-    // // Route::get('/pelayanan/medis/proses/{id}/anak/imunisasi/imun_dewasa', 'PelayananController@imunisasiDewasa'); 
 
     // Route Anamnesa
     Route::post('/pelayanan/medis/proses/{id}/anamnesa/{anamnesa_id}', 'AnamnesaController@updateAnamnesa')->name('updateAnamnesa2');
@@ -144,6 +145,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
       
     //Route MTBS
     Route::post('/pelayanan/medis/proses/{id}/mtbs', 'MtbsController@storeMtbs')->name('mtbs'); 
+    Route::post('/pelayanan/medis/proses/{id}/mtbs/{mtbs_id}', 'MtbsController@updateMtbs')->name('updateMtbs'); 
+    
+    //Route Imunisasi
+    Route::post('/pelayanan/medis/proses/{id}/imunisasi/kms', 'ImunisasiController@storeKMS')->name('kms'); 
+    Route::post('/pelayanan/medis/proses/{id}/imunisasi/kms/update', 'ImunisasiController@updateKMS')->name('updatekms'); 
 
     // //POLI UMUM
     // Route::get('/pelayanan/medis/proses/{id}/umum/anamnesa', 'PelayananController@umumAnamnesa');

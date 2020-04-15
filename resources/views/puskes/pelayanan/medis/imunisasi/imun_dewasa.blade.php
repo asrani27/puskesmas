@@ -44,19 +44,9 @@
                 <a href="/pelayanan/medis" class="btn bg-gradient-info btn-sm">Lihat Semua</a>
               </div>
             </div>
-            @if($data->ruangan->id == 1)
-              {{-- Menu Untuk Poli Umum --}}
-              @include('puskes.pelayanan.medis.menu_umum')
-            @elseif($data->ruangan->id == 6)
-              {{-- Menu Untuk Poli GIGI --}}
-              @include('puskes.pelayanan.medis.menu_gigi')
-            @elseif($data->ruangan->id == 10 OR $data->ruangan->id == 29)
-              {{-- Menu Untuk Poli ANAK --}}
-              @include('puskes.pelayanan.medis.menu_anak')
-            @elseif($data->ruangan->id == 8)
-              {{-- Menu Untuk Poli KIA --}}
-              @include('puskes.pelayanan.medis.menu_kia')
-            @endif
+            
+            @include('puskes.pelayanan.medis.menu_utama')
+            
             <div class="row">
                 <div class="col-md-4" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                     <!-- Form Element sizes -->

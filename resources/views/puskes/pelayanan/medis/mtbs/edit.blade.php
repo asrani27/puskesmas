@@ -177,7 +177,7 @@
                     </div>
                 </div>
                 <div class="col-md-8" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
-                  <form method="POST" action="{{route('mtbs',['id' => $data->id])}}">
+                  <form method="POST" action="{{route('updateMtbs',['id' => $data->id, 'mtbs_id' => $mtbs->id])}}">
                     @csrf
                     <div class="card card-info card-outline">
                       
@@ -187,13 +187,13 @@
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>ID</small><strong></strong></label>
                                   <div class="col-sm-9">
-                                      <input type="text" class="form-control form-control-sm" value="- Otomatis -" readonly>
+                                  <input type="text" class="form-control form-control-sm" value="{{$mtbs->id}}" readonly>
                                   </div>
                               </div>
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Tanggal</small><strong></strong></label>
                                   <div class="col-sm-9">
-                                      <input type="text" class="form-control form-control-sm" name="tanggal_rencana" value="{{\Carbon\Carbon::now()->format('d M Y h:i:s')}}" readonly>
+                                      <input type="text" class="form-control form-control-sm" name="tanggal_rencana" value="{{\Carbon\Carbon::parse($mtbs->tanggal)->format('d M Y h:i:s')}}" readonly>
                                   </div>
                               </div>
                               <div class="input-group row">
@@ -202,7 +202,7 @@
                                       <select id="e2" class="form-control form-control-sm select2" style="width: 100%;" name="dokter_id" required>
                                         <option value="">-Pilih-</option>
                                         @foreach ($dokter as $item)
-                                          @if($data->anamnesa->dokter_id == $item->id)
+                                          @if($mtbs->dokter_id == $item->id)
                                           <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
                                           @else
                                           <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
@@ -217,7 +217,7 @@
                                       <select id="e3" class="form-control select2" name="perawat_id">
                                         <option value="">-Pilih-</option>
                                         @foreach ($perawat as $item)
-                                        @if($data->anamnesa->perawat_id == $item->id)
+                                        @if($mtbs->perawat_id == $item->id)
                                         <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
                                         @else
                                         <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
@@ -235,7 +235,7 @@
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Anak Sakit Apa?</small><strong><span class="text-danger">*</span></strong></label>
                                   <div class="col-sm-9">
-                                  <textarea class="form-control" rows="2" name="anak_sakit">{{$data->anamnesa->keluhan_utama}}</textarea>
+                                  <textarea class="form-control" rows="2" name="anak_sakit">{{$mtbs->anak_sakit}}</textarea>
                                   </div>
                               </div>
                               <div class="input-group row">
@@ -247,8 +247,8 @@
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Jenis Kunjungan</small><strong></strong></label>
                                   <div class="col-sm-9">
-                                        <input type="radio" id="kunjungan-1" name="jenis_kunjungan" value="1" required=""> Kunjungan Pertama <br>
-                                        <input type="radio" id="kunjungan-1" name="jenis_kunjungan" value="2" required=""> Kunjungan Ulang
+                                        <input type="radio" id="kunjungan-1" name="jenis_kunjungan" value="1" {{$mtbs->jenis_kunjungan == 1 ? 'checked' : ''}}> Kunjungan Pertama <br>
+                                        <input type="radio" id="kunjungan-1" name="jenis_kunjungan" value="2" {{$mtbs->jenis_kunjungan == 2 ? 'checked' : ''}}> Kunjungan Ulang
                                   </div>
                               </div>
                               <div class="input-group row">
@@ -281,8 +281,8 @@
                         </div>
                         <div class="card-footer p-1">
                             <div class="text-right">
-                              <button type="submit" class="btn btn-sm btn-success">Simpan</button>
-                              <button type="button" class="btn btn-sm btn-warning">Reset</button>
+                              <button type="submit" class="btn btn-sm btn-success">Update</button>
+                              <a href="/pelayanan/medis/proses/100010/mtbs/delete" class="btn btn-sm btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>
