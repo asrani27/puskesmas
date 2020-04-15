@@ -265,6 +265,25 @@ class PelayananController extends Controller
         }
     }
 
+    public function Odontogram($id)
+    {
+        $data = Tpelayanan::find($id);
+        $sp   = Mstatuspulang::all();
+        $lab  = Mjenislab::all()->map(function($item, $key){
+            $item->laboratorium = $item->lab->where('deleted_by', null);
+            return $item;
+        });
+        
+        $tenagamedis = Mpegawai::all()->map(function($item, $key){
+            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+            $item->nama_tenaga_medis = $item->jenispegawai->nama;
+            return $item;
+        });
+        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+        return view('puskes.pelayanan.medis.odontogram.create',compact('data','sp','lab','dokter','perawat'));
+    }
+
     public function medis()
     {
         $today = Carbon::today()->format('Y-m-d');
