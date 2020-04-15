@@ -149,7 +149,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     
     //Route Imunisasi
     Route::post('/pelayanan/medis/proses/{id}/imunisasi/kms', 'ImunisasiController@storeKMS')->name('kms'); 
-    Route::post('/pelayanan/medis/proses/{id}/imunisasi/kms/update', 'ImunisasiController@updateKMS')->name('updatekms'); 
+    Route::post('/pelayanan/medis/proses/{id}/imunisasi/kms/update/{kms_id}', 'ImunisasiController@updateKMS')->name('updatekms');
+    Route::post('/pelayanan/medis/proses/{id}/imunisasi/anak', 'ImunisasiController@storeImunisasiAnak')->name('imunisasiAnak'); 
+    Route::post('/pelayanan/medis/proses/{id}/imunisasi/dewasa', 'ImunisasiController@storeImunisasiDewasa')->name('imunisasiDewasa'); 
+    Route::post('/pelayanan/medis/proses/{id}/imunisasi/anak/update/{imunisasi_id}', 'ImunisasiController@UpdateImunisasiAnak')->name('updateImunisasiAnak'); 
+    Route::post('/pelayanan/medis/proses/{id}/imunisasi/dewasa/update/{imunisasi_id}', 'ImunisasiController@UpdateImunisasiDewasa')->name('updateImunisasiDewasa');
 
     // //POLI UMUM
     // Route::get('/pelayanan/medis/proses/{id}/umum/anamnesa', 'PelayananController@umumAnamnesa');

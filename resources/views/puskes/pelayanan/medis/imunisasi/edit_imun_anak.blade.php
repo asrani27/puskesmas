@@ -181,10 +181,10 @@
                         <div class="card-header">
                           <h3 class="card-title">DATA KMS ANAK</h3>
                           <div class="card-tools">
-                            <a href="/pelayanan/medis/proses/{{$data->id}}/anak/imunisasi" class="btn bg-gradient-info btn-sm">Ubah Kategori Imunisasi</a>
+                            <a href="/pelayanan/medis/proses/{{$data->id}}/imunisasi" class="btn bg-gradient-info btn-sm">Ubah Kategori Imunisasi</a>
                           </div>
                         </div>
-                       <form method="POST" action="{{route('updatekms', ['id' => $data->id])}}">
+                       <form method="POST" action="{{route('updatekms', ['id' => $data->id, 'kms_id' => $kms->id])}}">
                           @csrf
                         <div class="row">
                           <div class="col-md-6">
@@ -240,7 +240,7 @@
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Pekerjaan Ayah</small></label>
                                   <div class="col-sm-9">
-                                      <input type="text" class="form-control form-control-sm" name="pekerjaan_ayah">
+                                  <input type="text" class="form-control form-control-sm" name="pekerjaan_ayah" value="{{$kms->pekerjaan_ayah}}">
                                   </div>
                               </div>
                               <div class="input-group row">
@@ -252,27 +252,27 @@
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Pekerjaan Ibu</small></label>
                                   <div class="col-sm-9">
-                                      <input type="text" class="form-control form-control-sm" name="pekerjaan_ibu">
+                                      <input type="text" class="form-control form-control-sm" name="pekerjaan_ibu" value="{{$kms->pekerjaan_ibu}}">
                                   </div>
                               </div>
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Macamnya Persalinan</small></label>
                                   <div class="col-sm-9">
-                                      <input type="radio" name="macam_persalinan" value=1> Normal <br />
-                                      <input type="radio" name="macam_persalinan" value=2> Kelainan Letak <br />
-                                      <input type="radio" name="macam_persalinan" value=3> CPD <br />
-                                      <input type="radio" name="macam_persalinan" value=4> Cacat Bawaan<br />
-                                      <input type="radio" name="macam_persalinan" value=5> Caesar <br />
+                                      <input type="radio" name="macam_persalinan" value=1 {{$kms->macam_persalinan == 1 ? 'checked' : ''}}> Normal <br />
+                                      <input type="radio" name="macam_persalinan" value=2 {{$kms->macam_persalinan == 2 ? 'checked' : ''}}> Kelainan Letak <br />
+                                      <input type="radio" name="macam_persalinan" value=3 {{$kms->macam_persalinan == 3 ? 'checked' : ''}}> CPD <br />
+                                      <input type="radio" name="macam_persalinan" value=4 {{$kms->macam_persalinan == 4 ? 'checked' : ''}}> Cacat Bawaan<br />
+                                      <input type="radio" name="macam_persalinan" value=5 {{$kms->macam_persalinan == 5 ? 'checked' : ''}}> Caesar <br />
                                   </div>
                               </div>
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Pelayanan Persalinan</small></label>
                                   <div class="col-sm-9">
-                                      <input type="radio" name="persalinan_oleh" value=1> Dokter <br />
-                                      <input type="radio" name="persalinan_oleh" value=2> Bidan <br />
-                                      <input type="radio" name="persalinan_oleh" value=3> Tenaga Medis <br />
-                                      <input type="radio" name="persalinan_oleh" value=4> Dukun Terlatih<br />
-                                      <input type="radio" name="persalinan_oleh" value=5> Tenaga Tak Terlatih<br />
+                                      <input type="radio" name="persalinan_oleh" value=1 {{$kms->persalinan_oleh == 1 ? 'checked' : ''}}> Dokter <br />
+                                      <input type="radio" name="persalinan_oleh" value=2 {{$kms->persalinan_oleh == 2 ? 'checked' : ''}}> Bidan <br />
+                                      <input type="radio" name="persalinan_oleh" value=3 {{$kms->persalinan_oleh == 3 ? 'checked' : ''}}> Tenaga Medis <br />
+                                      <input type="radio" name="persalinan_oleh" value=4 {{$kms->persalinan_oleh == 4 ? 'checked' : ''}}> Dukun Terlatih<br />
+                                      <input type="radio" name="persalinan_oleh" value=5 {{$kms->persalinan_oleh == 5 ? 'checked' : ''}}> Tenaga Tak Terlatih<br />
                                   </div>
                               </div>
                               </div>
@@ -282,18 +282,18 @@
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Anak Ke *</small></label>
                                   <div class="col-sm-9">
-                                      <input type="text" class="form-control form-control-sm" name="anak_ke" required>
+                                  <input type="text" class="form-control form-control-sm" name="anak_ke" required value="{{$kms->anak_ke}}">
                                   </div>
                               </div>
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Tempat Persalinan</small></label>
                                   <div class="col-sm-9">
-                                      <input type="radio" name="tempat_persalinan" value=1> Rumah <br />
-                                      <input type="radio" name="tempat_persalinan" value=2> Rumah Sakit <br />
-                                      <input type="radio" name="tempat_persalinan" value=3> Puskesmas <br />
-                                      <input type="radio" name="tempat_persalinan" value=4> R. Bersalin<br />
-                                      <input type="radio" name="tempat_persalinan" value=5> R. Bidan<br />
-                                      <input type="radio" name="tempat_persalinan" value=6> Klinik<br />
+                                      <input type="radio" name="tempat_persalinan" value=1 {{$kms->tempat_persalinan == 1 ? 'checked' : ''}}> Rumah <br />
+                                      <input type="radio" name="tempat_persalinan" value=2 {{$kms->tempat_persalinan == 2 ? 'checked' : ''}}> Rumah Sakit <br />
+                                      <input type="radio" name="tempat_persalinan" value=3 {{$kms->tempat_persalinan == 3 ? 'checked' : ''}}> Puskesmas <br />
+                                      <input type="radio" name="tempat_persalinan" value=4 {{$kms->tempat_persalinan == 4 ? 'checked' : ''}}> R. Bersalin<br />
+                                      <input type="radio" name="tempat_persalinan" value=5 {{$kms->tempat_persalinan == 5 ? 'checked' : ''}}> R. Bidan<br />
+                                      <input type="radio" name="tempat_persalinan" value=6 {{$kms->tempat_persalinan == 6 ? 'checked' : ''}}> Klinik<br />
                                   </div>
                               </div>
                               <div class="input-group row">
@@ -305,39 +305,39 @@
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Lahir - 5 Jam</small></label>
                                   <div class="col-sm-9">
-                                      <input type="text" class="form-control form-control-sm" name="berat_badan">
+                                  <input type="text" class="form-control form-control-sm" name="neonatal_1" value="{{$kms->neonatal_1}}">
                                   </div>
                               </div>
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>6 - 48 Jam</small></label>
                                   <div class="col-sm-9">
-                                      <input type="text" class="form-control form-control-sm" name="berat_badan">
+                                      <input type="text" class="form-control form-control-sm" name="neonatal_2" value="{{$kms->neonatal_2}}">
                                   </div>
                               </div>
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Hari ke 3-7</small></label>
                                   <div class="col-sm-9">
-                                    <input type="text" class="form-control form-control-sm" name="berat_badan">
+                                    <input type="text" class="form-control form-control-sm" name="neonatal_3" value="{{$kms->neonatal_3}}">
                                   </div>
                               </div>
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>Hari 8 - 28</small></label>
                                   <div class="col-sm-9">
-                                      <input type="text" class="form-control form-control-sm" name="berat_badan">
+                                      <input type="text" class="form-control form-control-sm" name="neonatal_4" value="{{$kms->neonatal_4}}">
                                   </div>
                               </div>
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>ASI?</small></label>
                                   <div class="col-sm-9">
-                                    <input type="radio" name="asi" value=1> ASI<br />
-                                    <input type="radio" name="asi" value=2> Bukan ASI<br />
+                                    <input type="radio" name="asi" value=1 {{$kms->asi == 1 ? 'checked' : ''}}> ASI<br />
+                                    <input type="radio" name="asi" value=2 {{$kms->asi == 2 ? 'checked' : ''}}> Bukan ASI<br />
                                   </div>
                               </div>
                               <div class="input-group row">
                                   <label class="col-sm-3 col-form-label text-right"><small>VIT A 6 Bulan ?</small></label>
                                   <div class="col-sm-9">
-                                    <input type="radio" name="vita" value=1> Ya<br />
-                                    <input type="radio" name="vita" value=2> Tidak<br />
+                                    <input type="radio" name="vita" value=1 {{$kms->asi == 1 ? 'checked' : ''}}> Ya<br />
+                                    <input type="radio" name="vita" value=2 {{$kms->asi == 2 ? 'checked' : ''}}> Tidak<br />
                                   </div>
                               </div>
                               </div>
@@ -345,151 +345,18 @@
                         </div>
                         <div class="card-footer">
                             <div class="text-right">
-                                <button type="submit" class="btn btn-sm btn-success">Update</a>
+                                <button type="submit" class="btn btn-sm btn-primary">Update</a>
                             </div>
                         </div>
                         </form>
                     </div>
-                    <div class="card card-info card-outline">
-                        <div class="card-header">
-                          <h3 class="card-title">PEMBERIAN IMUNISASI & PEMERIKSAAN KESEHATAN ANAKK</h3>
-                        </div>
-                        <form method="POST" action="#">
-                          @csrf
-                        <div class="row">
-                          <div class="col-md-6">
-                              <div class="card-body">
-                              <div class="input-group row">
-                                  <label class="col-sm-3 col-form-label text-right"><small>Tanggal</small></label>
-                                  <div class="col-sm-9">
-                                    <input type="text" class="form-control form-control-sm" name="umur_bulan" readonly>
-                                  </div>
-                              </div>
-                              <div class="input-group row">
-                                  <label class="col-sm-3 col-form-label text-right"><small>Umur Bulan</small></label>
-                                  <div class="col-sm-9">
-                                    <input type="text" class="form-control form-control-sm" id="datepicker" name="umur_bulan" readonly>
-                                  </div>
-                              </div>
-                              </div>
-                          </div>
-                          <div class="col-md-6">
-                              <div class="card-body">
-                                <div class="input-group row">
-                                    <label class="col-sm-3 col-form-label text-right"><small>Dokter</small></label>
-                                    <div class="col-sm-9">
-                                        <select class="form-control select2 form-control-sm" id="dokter_id" name="dokter_id">
-                                            <option value="">-Pilih-</option>
-                                            @foreach ($dokter as $item)
-                                            <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="input-group row">
-                                    <label class="col-sm-3 col-form-label text-right"><small>Perawat</small></label>
-                                    <div class="col-sm-9">
-                                        <select class="form-control select2 form-control-sm" id="perawat_id" name="perawat_id">
-                                            <option value="">-Pilih-</option>
-                                            @foreach ($perawat as $item)
-                                            <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                              </div>
-                          </div>   
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12">
-                              <div class="card-body  table-responsive">
-                                <strong>DATA IMUNISASI</strong><br/>
-                              <table class="table table-bordered table-sm" width="100%">
-                                  @foreach ($imun as $item)
-                                  <tr>
-                                      @foreach ($item as $value)
-                                        <td><input type="checkbox" name="data_imun[]"> {{$value->imunisasi_nama}}</td>
-                                      @endforeach
-                                  </tr>
-                                  @endforeach
-                              </table>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6">
-                              <div class="card-body">
-                                <strong>PEMERIKSAAN KESEHATAN ANAK</strong><br/>
-                                <small>Note : Harap Isi anamnesa dan diagnosa terlebih dahulu</small>
-                                <div class="input-group row">
-                                    <label class="col-sm-3 col-form-label text-right"><small>Berat Badan</small></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-sm" name="umur_bulan" readonly>
-                                    </div>
-                                </div>
-                                <div class="input-group row">
-                                    <label class="col-sm-3 col-form-label text-right"><small>Panjang Badan</small></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-sm" name="umur_bulan" readonly>
-                                    </div>
-                                </div>
-                                <div class="input-group row">
-                                    <label class="col-sm-3 col-form-label text-right"><small>Gejala</small></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-sm" name="umur_bulan" readonly>
-                                    </div>
-                                </div>
-                                <div class="input-group row">
-                                    <label class="col-sm-3 col-form-label text-right"><small>Diagnosa</small></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-sm" name="umur_bulan" readonly>
-                                    </div>
-                                </div>
-                                <div class="input-group row">
-                                    <label class="col-sm-3 col-form-label text-right"><small>Keterangan</small></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-sm" name="umur_bulan" readonly>
-                                    </div>
-                                </div>
-                              </div>
-                          </div>
-                          <div class="col-md-6">
-                              <div class="card-body">
-                                <strong></strong><br/>
-                                <div class="input-group row">
-                                    <label class="col-sm-3 col-form-label text-right"><small>Kepandaian</small></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-sm" name="umur_bulan">
-                                    </div>
-                                </div>
-                                <div class="input-group row">
-                                    <label class="col-sm-3 col-form-label text-right"><small>Makanan Anak</small></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-sm" name="umur_bulan">
-                                    </div>
-                                </div>
-                                <div class="input-group row">
-                                    <label class="col-sm-3 col-form-label text-right"><small>Pengobatan</small></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-sm" name="umur_bulan">
-                                    </div>
-                                </div>
-                                <div class="input-group row">
-                                    <label class="col-sm-3 col-form-label text-right"><small>Nasihat</small></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-sm" name="umur_bulan">
-                                    </div>
-                                </div>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="text-right">
-                                <button type="submit" class="btn btn-sm btn-success">Simpan</a>
-                            </div>
-                        </div>
-                        </form>
-                    </div>
+                    
+                    @if($checkImun != null)
+                    @include('puskes.pelayanan.medis.imunisasi.edit_ia')
+                    @else
+                    @include('puskes.pelayanan.medis.imunisasi.create_ia')
+                    @endif
+                    
                     <div class="card card-info card-outline">
                         <div class="card-header">
                           <h3 class="card-title">RIWAYAT PEMBERIAN IMUNISASI</h3>

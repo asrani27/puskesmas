@@ -57,4 +57,9 @@ class Tpelayanan extends Model
     {
         return $this->hasOne(Tlaboratorium::class, 'pelayanan_id');
     }
+
+    public function imunisasi()
+    {
+        return $this->hasMany(Timunisasi::class, 'pelayanan_id');
+    }
 }

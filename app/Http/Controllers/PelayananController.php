@@ -218,7 +218,6 @@ class PelayananController extends Controller
             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
             $imun = Mimunisasi::all()->chunk(4);
-            Alert::success('Anda Memilih Imunisasi Anak','success');
             return view('puskes.pelayanan.medis.imunisasi.imun_anak',compact('data','sp','dokter','perawat','imun'));   
         }else{
             $sp   = Mstatuspulang::all();
@@ -231,8 +230,17 @@ class PelayananController extends Controller
             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
             $imun = Mimunisasi::all()->chunk(4);
             $kms = $checkKMS;
-            Alert::success('Anda Memilih Imunisasi Anak','success');
-            return view('puskes.pelayanan.medis.imunisasi.edit_imun_anak',compact('data','sp','dokter','perawat','imun','kms'));   
+
+            $checkImun = $data->imunisasi->where('kategori', 'anak')->first();
+            
+            return view('puskes.pelayanan.medis.imunisasi.edit_imun_anak',compact('data',
+            'sp',
+            'dokter',
+            'perawat',
+            'imun',
+            'kms',
+            'checkImun'
+            ));   
         }
     }
     
@@ -248,8 +256,13 @@ class PelayananController extends Controller
         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
         $imun = Mimunisasi::all()->chunk(4);
-        Alert::success('Anda Memilih Imunisasi Dewasa','success');
-        return view('puskes.pelayanan.medis.imunisasi.imun_dewasa',compact('data','sp','dokter','perawat','imun'));   
+        if($data->imunisasi->where('kategori', 'dewasa')->first() == null){
+            return view('puskes.pelayanan.medis.imunisasi.imun_dewasa',compact('data','sp','dokter','perawat','imun'));  
+        } else{
+
+            $dataImun = $data->imunisasi->where('kategori', 'dewasa')->first();
+            return view('puskes.pelayanan.medis.imunisasi.edit_imun_dewasa',compact('data','sp','dokter','perawat','imun','dataImun'));  
+        }
     }
 
     public function medis()

@@ -184,7 +184,7 @@
                             <a href="/pelayanan/medis/proses/{{$data->id}}/imunisasi" class="btn bg-gradient-info btn-sm">Ubah Kategori Imunisasi</a>
                           </div>
                         </div>
-                      <form method="POST" action="{{route('imunisasiDewasa', ['id' => $data->id])}}">
+                      <form method="POST" action="{{route('updateImunisasiDewasa', ['id' => $data->id, 'imunisasi_id' => $dataImun->id])}}">
                           @csrf
                             <div class="row">
                             <div class="col-md-6">
@@ -192,13 +192,13 @@
                                 <div class="input-group row">
                                     <label class="col-sm-3 col-form-label text-right"><small>Tanggal</small></label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control form-control-sm" name="tanggal" value="{{\Carbon\Carbon::now()->format('d m Y h:i:s')}}" readonly>
+                                    <input type="text" class="form-control form-control-sm" name="tanggal" value="{{\Carbon\Carbon::parse($dataImun->tanggal)->format('d-m-Y h:i:s')}}" readonly>
                                     </div>
                                 </div>
                                 <div class="input-group row">
                                     <label class="col-sm-3 col-form-label text-right"><small>Umur</small></label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-sm" name="umur_bulan" id="datepicker" value="{{umurBulan2($data->pendaftaran->pasien->tanggal_lahir)}}" readonly>
+                                        <input type="text" class="form-control form-control-sm" name="umur_bulan" id="datepicker" value="{{$dataImun->umur_bulan}}" readonly>
                                     </div>
                                 </div>
                                 </div>
@@ -211,7 +211,7 @@
                                             <select class="form-control select2 form-control-sm" id="dokter_id" name="dokter_id">
                                                 <option value="">-Pilih-</option>
                                                 @foreach ($dokter as $item)
-                                                  @if($data->anamnesa->dokter_id == $item->id)
+                                                  @if($dataImun->dokter_id == $item->id)
                                                   <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
                                                   @else
                                                   <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
@@ -226,7 +226,7 @@
                                             <select class="form-control select2 form-control-sm" id="perawat_id" name="perawat_id">
                                                 <option value="">-Pilih-</option>
                                                 @foreach ($perawat as $item)
-                                                  @if($data->anamnesa->dokter_id == $item->id)
+                                                  @if($dataImun->dokter_id == $item->id)
                                                   <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
                                                   @else
                                                   <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
@@ -246,7 +246,11 @@
                                     @foreach ($imun as $item)
                                     <tr>
                                         @foreach ($item as $value)
-                                          <td><input type="checkbox" name="data_imun[]" value="{{$value->imunisasi_kode}}"> {{$value->imunisasi_nama}}</td>
+                                          @if($dataImun->imunisasidetail->first() == null)
+                                              <td><input type="checkbox" name="data_imun[]" value="{{$value->imunisasi_kode}}"> {{$value->imunisasi_nama}}</td>
+                                          @else
+                                              <td><input type="checkbox" name="data_imun[]" value="{{$value->imunisasi_kode}}" {{$dataImun->imunisasidetail->where('imunisasi_kode', $value->imunisasi_kode)->first() == null ? '' : 'checked'}}> {{$value->imunisasi_nama}}</td>
+                                          @endif
                                         @endforeach
                                     </tr>
                                     @endforeach
@@ -256,7 +260,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-sm btn-success">Simpan</a>
+                                    <button type="submit" class="btn btn-sm btn-primary">Update</a>
                                 </div>
                             </div>
                         </form>

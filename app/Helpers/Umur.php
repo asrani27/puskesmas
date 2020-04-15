@@ -21,7 +21,16 @@ function umurBulan($umur)
     $umur = ($y * 12) + $m . " Bulan";
     return $umur;
 }
-
+function umurBulan2($umur)
+{
+    $lahir = new DateTime($umur);
+    $today = new DateTime('today');
+    $y = $today->diff($lahir)->y;
+    $m = $today->diff($lahir)->m;
+    $d = $today->diff($lahir)->d;
+    $umur = ($y * 12) + $m;
+    return $umur;
+}
 function Tahun($umur)
 {
     $lahir = new DateTime($umur);
