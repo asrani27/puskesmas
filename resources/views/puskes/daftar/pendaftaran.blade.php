@@ -19,9 +19,9 @@
               <h3 class="card-title">Data Pendaftaran</h3>
                 
             <div class="text-right">
-                <a href="/pendaftaran/pasien/add" class="btn btn-danger btn-xs float-right shadow"><i class="fas fa-docs"></i> Reset</a> &nbsp;
+                {{-- <a href="/pendaftaran/pasien/add" class="btn btn-danger btn-xs float-right shadow"><i class="fas fa-docs"></i> Reset</a> &nbsp;
               <a href="/pendaftaran/pasien/add" class="btn btn-info btn-xs float-right shadow"><i class="fas fa-print"></i> Print</a> &nbsp;
-              <a href="/pendaftaran/pasien/add" class="btn btn-primary btn-xs float-right shadow"><i class="fas fa-plus"></i> Tambah</a> &nbsp;
+              <a href="/pendaftaran/pasien/add" class="btn btn-primary btn-xs float-right shadow"><i class="fas fa-plus"></i> Tambah</a> &nbsp; --}}
             </div>
             </div>
             
