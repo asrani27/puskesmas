@@ -215,7 +215,9 @@ class PendaftaranController extends Controller
 
     public function pendaftaran()
     {
-        $data = Tpendaftaran::orderBy('tanggal', 'desc')->paginate(10);
+        $today = Carbon::today()->format('Y-m-d').'%';
+        $data = Tpendaftaran::where('tanggal', 'LIKE', $today)->orderBy('tanggal', 'desc')->paginate(10);
+        //dd($data, $today);
         // $map = $data->map(function($item){
         //     $item->pelayanan = $item->pelayanan;
         //     return $item;
@@ -257,7 +259,6 @@ class PendaftaranController extends Controller
 
     public function daftarPelayanan(Request $req,$id)
     {
-
         $pasien = Mpasien::find($id);
         $tahun = Tahun($pasien->tanggal_lahir);
         $bulan = Bulan($pasien->tanggal_lahir);

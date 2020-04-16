@@ -275,7 +275,7 @@
                                 <th>Tindakan</th>
                               </thead>
                               <tbody style="font-size:13px;">
-                                @include('puskes.pelayanan.medis.mtbs.anak.penilaian')
+                                @include('puskes.pelayanan.medis.mtbs.penilaian')
                               </tbody>
                             </table>
                         </div>

@@ -16,7 +16,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Pendaftaran</h3>
+              <h3 class="card-title">Data Pendaftaran Hari Ini ({{\Carbon\Carbon::today()->format('d M Y')}})</h3>
                 
             <div class="text-right">
                 {{-- <a href="/pendaftaran/pasien/add" class="btn btn-danger btn-xs float-right shadow"><i class="fas fa-docs"></i> Reset</a> &nbsp;
