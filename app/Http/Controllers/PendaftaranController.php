@@ -246,9 +246,12 @@ class PendaftaranController extends Controller
 
     public function searchTglLahir(Request $req)
     {
-        $tanggal = Carbon::parse($req->tanggal)->format('Y-m-d');
+        $tanggal = Carbon::createFromFormat('dmY', $req->tanggal)->format('Y-m-d');
+        
         $data = Mpasien::where('tanggal_lahir', $tanggal)->paginate(10);
         
+        $data->appends($req->only('tanggal'));
+        $req->flash();
         return view('puskes.pasien.pasien',compact('data'));
     }
 

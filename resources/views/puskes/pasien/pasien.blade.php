@@ -39,11 +39,11 @@
                 </div>
                 
                 <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
-                  <form method="post" action="/pendaftaran/pasien/search/tanggal_lahir">
+                  <form method="POST" action="/pendaftaran/pasien/search/tanggal_lahir">
                     @csrf
                   <div class="form-group">
                     <div class="input-group input-group-sm">
-                      <input type="text" name="tanggal" id="datepicker" class="form-control"  autocomplete="off" placeholder="Tanggal Lahir">
+                    <input type="text" name="tanggal" id="datepicke" class="form-control"  autocomplete="off" placeholder="Tanggal Lahir" value="{{old('tanggal')}}">
                       <div class="input-group-append">
                         <button type="submit" class="btn bg-purple"><i class="fas fa-calendar"></i></button>
                       </div>
