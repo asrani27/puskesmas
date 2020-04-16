@@ -1126,7 +1126,9 @@ class PelayananController extends Controller
 
     public function medisPoli(Request $req)
     {
-        $data = Tpelayanan::where('ruangan_id', $req->ruangan_id)->orderBy('tanggal','desc')->paginate(10);
+        $date = Carbon::createFromFormat('d/m/Y', $req->tanggal)->format('Y-m-d').'%';
+        $data = Tpelayanan::where('ruangan_id', $req->ruangan_id)->where('tanggal', 'LIKE', $date)->orderBy('tanggal','desc')->paginate(10);
+       
         $ruangan = Mruangan::where('is_aktif', 'Y')->orderBy('nama','desc')->get();
         $data->appends($req->only('ruangan_id'));
         $req->flash();

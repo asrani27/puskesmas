@@ -27,7 +27,7 @@
               <div class="row" style="padding-top:10px;">
                 
                 <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
-                  <form method="POST" action="/pelayanan/medis">
+                  <form method="POST" id='formTanggal' action="/pelayanan/medis">
                     @csrf
                     <div class="form-group">
                       <div class="input-group input-group-sm">
@@ -40,13 +40,13 @@
                       </div>
                       {{-- <input type="text" value="" name="tanggal"> --}}
                     </div>
-                  </form>
+                  {{-- </form> --}}
                 </div>
                     
                 <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
                   <div class="form-group">
-                    <form id='formTanggal' action="/pelayanan/medis/tanggal" method="POST">
-                      @csrf
+                    {{-- <form id='formTanggal' action="/pelayanan/medis/tanggal" method="POST">
+                      @csrf --}}
                         <div class="input-group input-group-sm">
                         <input type="text" name="tanggal" id="datepicker" class="form-control"  autocomplete="off" value="{{old('tanggal') == null ? \Carbon\Carbon::today()->format('d/m/Y') : old('tanggal')}}">
                           <div class="input-group-append">
