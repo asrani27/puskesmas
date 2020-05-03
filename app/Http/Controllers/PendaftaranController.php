@@ -66,13 +66,38 @@ class PendaftaranController extends Controller
         $data = Mpasien::where('nama', 'LIKE', '%'.$req->search.'%')
                 ->orWhere('no_rm_lama','LIKE', '%'.$req->search.'%')
                 ->orWhere('nik','LIKE', '%'.$req->search.'%')
-                ->orWhere('no_kk','LIKE', '%'.$req->search.'%')
+                ->orWhere('no_kk','LIKE', '%'.$req->search.'%') 
                 ->orWhere('no_asuransi','LIKE', '%'.$req->search.'%')
                 ->orWhere('tempat_lahir','LIKE', '%'.$req->search.'%')
                 ->paginate(10);
         $data->appends($req->only('search'));
         return view('puskes.pasien.pasien',compact('data'));
+    }
 
+    public function searchMedis(Request $req)
+    {   
+        $data = Mpasien::where('nama', 'LIKE', '%'.$req->search.'%')
+                ->orWhere('no_rm_lama','LIKE', '%'.$req->search.'%')
+                ->orWhere('nik','LIKE', '%'.$req->search.'%')
+                ->orWhere('no_kk','LIKE', '%'.$req->search.'%') 
+                ->orWhere('no_asuransi','LIKE', '%'.$req->search.'%')
+                ->orWhere('tempat_lahir','LIKE', '%'.$req->search.'%')
+                ->paginate(10);
+        $data->appends($req->only('search'));
+        
+        return view('puskes.rm.rekam_medis',compact('data'));
+    }
+
+    public function detailrekammedis($id)
+    {
+        // $data = Tpelayanan::find(100024);
+        // dd($data->tindakan);
+        $pasien = Mpasien::find($id);
+        $data = $pasien->pendaftaran->map(function($item){
+            $item->anamnesa = $item->pelayanan->anamnesa;
+            return $item->pelayanan;
+        })->where('anamnesa' , '!=', null);
+        return view('puskes.rm.detail',compact('pasien','data'));
     }
 
     public function addPasien()

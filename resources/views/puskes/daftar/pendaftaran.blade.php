@@ -26,7 +26,7 @@
             </div>
             
             <!-- /.card-header -->
-            <div class="card-body p-0">
+            {{-- <div class="card-body p-0"> --}}
               <div class="row" style="padding-top:10px;">
                 <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
                   <!-- text input -->
@@ -88,7 +88,8 @@
                           <a href="/pendaftaran" class="btn btn-sm btn-info"><i class="fas fa-sync-alt"></i> Reset</a>
                     </div>
                 </div> --}}
-              <table id="example" class="table table-bordered table-sm table-responsive">
+            <div class="card-body p-1 table-responsive">
+              <table id="example" class="table table-bordered table-sm">
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                   <th>#</th>

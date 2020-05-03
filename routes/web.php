@@ -96,6 +96,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::any('/pendaftaran/search', 'PendaftaranController@pendaftaranSearch');
     Route::post('/pendaftaran/pasien/search/tanggal_lahir', 'PendaftaranController@searchTglLahir');
     Route::get('/rekam_medis', 'PendaftaranController@rekamMedis');
+    Route::get('/rekammedis/detail/{id}', 'PendaftaranController@detailrekammedis');
+    Route::any('/rekam_medis/search', 'PendaftaranController@searchMedis');
     
     Route::get('/sinkrondb', 'TransferController@index');
     Route::get('/sinkrondb/sinkron/{id}', 'TransferController@sinkron');
@@ -109,6 +111,15 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pelayanan/medis/proses/{id}', 'PelayananController@selesaiPeriksa');
     Route::any('/pelayanan/medis/search', 'PelayananController@search');
     Route::any('/pelayanan/medis/tanggal', 'PelayananController@searchTanggal');
+
+    Route::get('/laporankunjunganpasien', 'LaporanController@kunjunganpasien');
+    Route::get('/laporankunjunganpasien/export', 'LaporanController@exportkunjunganpasien');
+    Route::get('/laporankunjunganpasien/export/today', 'LaporanController@exportkunjunganpasientoday');
+    Route::post('/laporankunjunganpasien/search', 'LaporanController@tampilkankunjunganpasien');
+    Route::get('/laporansp3lb1', 'LaporanController@laporansp3lb1');
+    Route::post('/laporansp3lb1', 'LaporanController@laporansp3lb1tampilkan');
+    Route::get('/laporansp3lb1/export', 'LaporanController@laporansp3lb1export');
+    
 
     //DETAIL
     Route::get('/pelayanan/medis/proses/{id}/anamnesa', 'PelayananController@Anamnesa');

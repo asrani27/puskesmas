@@ -20,9 +20,9 @@
            </div>
             
             <!-- /.card-header -->
-            <div class="card-body p-0 table-responsive">
+            <div class="card-body p-2 table-responsive">
                 <div class="d-flex">
-                  <form method="post" action="/pendaftaran/pasien/search">
+                  <form method="post" action="/rekam_medis/search">
                     @csrf
                     <div class="p-2" style="padding-bottom: 5px;">
                       <div class="input-group input-group-sm" style="width: 200px;">
@@ -62,7 +62,7 @@
                   @foreach ($data as $key => $item)
                   <tr>
                       <td>
-                        <a href="/pendaftaran/pasien/view/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+                        <a href="/rekammedis/detail/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
                       </td>
                     {{-- <td class="text-center"><small>{{ $key+ $data->firstItem() }}</small></td> --}}
                     <td><small>{{$item->id}}</small></td>

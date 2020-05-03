@@ -32,7 +32,7 @@
       <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
         <li><a href="/pendaftaran/pasien" class="dropdown-item">Pasien Dan KK </a></li>
         <li><a href="/pendaftaran" class="dropdown-item">Pendaftaran</a></li>
-        <li><a href="#" class="dropdown-item">Rekam Medis</a></li>
+        <li><a href="/rekam_medis" class="dropdown-item">Rekam Medis</a></li>
       </ul>
     </li>
     <li class="nav-item dropdown">
@@ -45,9 +45,8 @@
     <li class="nav-item dropdown">
       <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Laporan</a>
       <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-        <li><a href="#" class="dropdown-item">Kunjungan Pasien </a></li>
-        <li><a href="#" class="dropdown-item">Kunjungan Pasien BPJS</a></li>
-        <li><a href="#" class="dropdown-item">SP3 LB1 </a></li>
+        <li><a href="/laporankunjunganpasien" class="dropdown-item">Kunjungan Pasien </a></li>
+        <li><a href="/laporansp3lb1" class="dropdown-item">SP3 LB1 </a></li>
         <li><a href="#" class="dropdown-item">SP3 LB2 </a></li>
         <li><a href="#" class="dropdown-item">SP3 LB3 </a></li>
         <li><a href="#" class="dropdown-item">SP3 LB4 </a></li>
