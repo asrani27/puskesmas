@@ -7,50 +7,62 @@ use App\Tpelayanan;
 
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeSheet;
-use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\Exportable;
 
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\BeforeExport;
 use Maatwebsite\Excel\Events\BeforeWriting;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 
-class KunjunganPasien implements FromCollection, WithHeadings
+class KunjunganPasien implements FromCollection, WithHeadings, WithEvents
 {
-    
-    // public function registerEvents(): array
-    // {
-    //     return [
-    //         AfterSheet::class => function(AfterSheet $event) {
-    //             $event->sheet->setCellValue('A1','LAPORAN KUNJUNGAN PASIEN');
-    //             $event->sheet->setCellValue('A2','Puskesmas : Pekauman');
-    //             $event->sheet->setCellValue('A3','Tanggal : 25-09-2020');
-    //             $event->sheet->setCellValue('A4','Jenis Kelamin : Semua');
-    //             $event->sheet->setCellValue('A5','Asuransi : Semua');
-    //             $event->sheet->setCellValue('A6','Total Data : 80');
-    //             $event->sheet->setCellValue('A7','Kunjungan : Semua');
-    //             $event->sheet->setCellValue('A8','Jenis Kunjungan : Semua');
-    //         },
-    //     ];
-    // }
-
+    use Exportable;
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return User::all();
+        $user = User::all();
+        $data = $user->map(function($item){
+            return $item->only(['name','email','mobile','puskesmas_id']);
+        });
+        return $data;
     }
 
     public function headings(): array
     {
+        return [ 
+                    ['LAPORAN'],
+                    ['Nama','Email','Mobile','Puskesmas ID']
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        $styleArrayData = [
+            'font' => [
+                'size' => 8,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+            ],  
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                ],
+            ],
+        ];
+        
         return [
-            'ID',
-            'Nama',
-            'Email',
-            'Mobile',
-            'Puskesmas ID',
+            
+            AfterSheet::class => function(AfterSheet $event) use($styleArrayData){
+                $event->sheet->getStyle('A1')->applyFromArray($styleArrayData);
+
+            }
         ];
     }
 }

@@ -860,7 +860,7 @@ class PelayananController extends Controller
         return view('puskes.pelayanan.medis.mtbs.anak.create',compact('data','sp','dokter','perawat'));
     }
 
-    public function anakPeriksagizi($id)
+    public function Periksagizi($id)
     {   
         $data = Tpelayanan::find($id);
         $sp   = Mstatuspulang::all();
@@ -871,7 +871,7 @@ class PelayananController extends Controller
         });
         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        return view('puskes.pelayanan.medis.mtbs.periksa_gizi.create',compact('data','sp','dokter','perawat'));   
+        return view('puskes.pelayanan.medis.periksa_gizi.create',compact('data','sp','dokter','perawat'));   
     }
     
     public function anakImunisasi($id)

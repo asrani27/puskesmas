@@ -32,6 +32,7 @@
                   <th>No</th>
                   <th>Nama Instalasi</th>
                   <th>Nama Poli</th>
+                  <th>Jenis Poli</th>
                   <th>Is Aktif?</th>
                   <th>#</th>
                 </thead><small>
@@ -44,6 +45,7 @@
                     <td class="text-center" width="35px"><small>{{ $key+ $data->firstItem() }}</small></td>
                     <td><small>{{$item->instalasi->nama}}</small></td>
                     <td><small>{{$item->nama}}</small></td>
+                    <td><small>{{$item->poli_sakit == 1 ? 'Sakit' : 'Sehat'}}</small></td>
                     <td><small>{{$item->is_aktif == 'Y' ? 'Ya' : 'Tidak'}}</small></td>
                     <td width="80px">
                       <a href="/pengaturan/poli/edit/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>

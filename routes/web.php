@@ -118,6 +118,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/laporankunjunganpasien/search', 'LaporanController@tampilkankunjunganpasien');
     Route::get('/laporansp3lb1', 'LaporanController@laporansp3lb1');
     Route::post('/laporansp3lb1', 'LaporanController@laporansp3lb1tampilkan');
+    Route::get('/laporansp3lb2', 'LaporanController@laporansp3lb2');
+    Route::get('/laporansp3lb3', 'LaporanController@laporansp3lb3');
+    Route::get('/laporansp3lb4', 'LaporanController@laporansp3lb4');
+    Route::get('/test_export', 'LaporanController@test_export');
+    
     Route::get('/laporansp3lb1/export', 'LaporanController@laporansp3lb1export');
     
 
@@ -132,7 +137,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pelayanan/medis/proses/{id}/imunisasi/imun_anak', 'PelayananController@imunisasiAnak'); 
     Route::get('/pelayanan/medis/proses/{id}/imunisasi/imun_dewasa', 'PelayananController@imunisasiDewasa'); 
     Route::get('/pelayanan/medis/proses/{id}/odontogram', 'PelayananController@Odontogram'); 
-    // // Route::get('/pelayanan/medis/proses/{id}/anak/periksagizi', 'PelayananController@anakPeriksagizi'); 
+    Route::get('/pelayanan/medis/proses/{id}/periksagizi', 'PelayananController@Periksagizi'); 
     // // Route::get('/pelayanan/medis/proses/{id}/anak/imunisasi', 'PelayananController@anakImunisasi'); 
 
     // Route Anamnesa
@@ -166,6 +171,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pelayanan/medis/proses/{id}/imunisasi/dewasa', 'ImunisasiController@storeImunisasiDewasa')->name('imunisasiDewasa'); 
     Route::post('/pelayanan/medis/proses/{id}/imunisasi/anak/update/{imunisasi_id}', 'ImunisasiController@UpdateImunisasiAnak')->name('updateImunisasiAnak'); 
     Route::post('/pelayanan/medis/proses/{id}/imunisasi/dewasa/update/{imunisasi_id}', 'ImunisasiController@UpdateImunisasiDewasa')->name('updateImunisasiDewasa');
+
+    //Route Periksa Gizi
+    Route::post('/pelayanan/medis/proses/{id}/periksagizi', 'PeriksaGiziController@store')->name('periksagizi'); 
 
     // //POLI UMUM
     // Route::get('/pelayanan/medis/proses/{id}/umum/anamnesa', 'PelayananController@umumAnamnesa');

@@ -17,7 +17,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Laporan - Kunjungan Pasien</h3>
+              <h3 class="card-title">Laporan Bulanan - SP3 LB1</h3>
               {{-- <div class="card-tools">
                <a href="/rekam_medis" class="btn btn-danger btn-xs shadow"> <i class="fas fa-backward"></i> Kembali</a>
              </div> --}}

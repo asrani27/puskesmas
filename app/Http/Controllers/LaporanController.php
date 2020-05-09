@@ -17,6 +17,12 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class LaporanController extends Controller
 {
+
+    public function test_export()
+    {
+        return Excel::download(new kunjunganpasien, 'test_export.xlsx');
+    }
+
     public function exportkunjunganpasien() 
     {
         $spreadsheet = new Spreadsheet();
@@ -107,7 +113,7 @@ class LaporanController extends Controller
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
-            ],
+            ],  
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
@@ -307,5 +313,20 @@ class LaporanController extends Controller
             // });
             dd($req->all(), $req->ruangan_id,$parseStart, $parseEnd, $mapData);
         }
+    }
+
+    public function laporansp3lb2()
+    {
+        return view('puskes.laporan.laporansp3lb2');
+    }
+    
+    public function laporansp3lb3()
+    {
+        return view('puskes.laporan.laporansp3lb3');
+    }
+    
+    public function laporansp3lb4()
+    {
+        return view('puskes.laporan.laporansp3lb4');
     }
 }

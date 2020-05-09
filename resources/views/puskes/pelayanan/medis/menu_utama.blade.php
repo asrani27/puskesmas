@@ -22,4 +22,13 @@
 @elseif($data->ruangan->id == 15)
 {{-- Menu Untuk Poli KIA --}}
 @include('puskes.pelayanan.medis.menu_umum')
+@elseif($data->ruangan->id == 12)
+{{-- Menu Untuk Poli KIA --}}
+@include('puskes.pelayanan.medis.menu_gizi')
+@elseif($data->ruangan->id == 4)
+{{-- Menu Untuk Poli KIA --}}
+@include('puskes.pelayanan.medis.menu_gizi')
+@elseif($data->ruangan->id == 30)
+{{-- Menu Untuk Poli KIA --}}
+@include('puskes.pelayanan.medis.menu_imunisasi_bcg')
 @endif

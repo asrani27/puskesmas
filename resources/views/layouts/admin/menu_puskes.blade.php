@@ -47,9 +47,9 @@
       <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
         <li><a href="/laporankunjunganpasien" class="dropdown-item">Kunjungan Pasien </a></li>
         <li><a href="/laporansp3lb1" class="dropdown-item">SP3 LB1 </a></li>
-        <li><a href="#" class="dropdown-item">SP3 LB2 </a></li>
-        <li><a href="#" class="dropdown-item">SP3 LB3 </a></li>
-        <li><a href="#" class="dropdown-item">SP3 LB4 </a></li>
+        <li><a href="/laporansp3lb2" class="dropdown-item">SP3 LB2 </a></li>
+        <li><a href="/laporansp3lb3" class="dropdown-item">SP3 LB3 </a></li>
+        <li><a href="/laporansp3lb4" class="dropdown-item">SP3 LB4 </a></li>
       </ul>
     </li>
     <li class="nav-item dropdown">

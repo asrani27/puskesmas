@@ -86,8 +86,8 @@
                           <tr>
                             <td>Status</td>
                             <td>
-                                <input type="radio" name="status" value="SAKIT" checked> KUNJUNGAN SAKIT <br />
-                                <input type="radio" name="status" value="SEHAT"> KUNJUNGAN SEHAT
+                                <input type="radio" name="status" value="SAKIT" checked onclick="showSakit()"/> KUNJUNGAN SAKIT <br />
+                                <input type="radio" name="status" value="SEHAT" onclick="showSehat()"> KUNJUNGAN SEHAT
                             </td>
                           </tr>
                           <tr>
@@ -214,14 +214,24 @@
                         <tr>
                           <td>Pilih Poli <span class="text-danger"><strong>*</strong></span></td>
                           <td>
-                            <select class="form-control form-control-sm" name="ruangan_id">
-                              <option>-Pilih-</option>
-                              @foreach ($ruangan as $item)
-                                <option value="{{$item->id}}">{{$item->nama}}</option>
-                              @endforeach
-                            </select>
+                            <div id="bankDIV">
+                              <select class="form-control form-control-sm pilih-poli" name="ruangan_id">
+                                <option>-Pilih-</option>
+                                @foreach ($ruanganSakit as $item)
+                                  <option value="{{$item->id}}">{{$item->nama}}</option>
+                                @endforeach
+                              </select>
+                            </div>
+                            <div id="schoolDIV" class="none">
+                              <select class="form-control form-control-sm pilih-poli" name="ruangan_id">
+                                <option>-Pilih-</option>
+                                @foreach ($ruanganSehat as $item)
+                                  <option value="{{$item->id}}">{{$item->nama}}</option>
+                                @endforeach
+                              </select>
+                            </div>
                           </td>
-                        </tr>
+                        </tr>  
                       </tbody>
                     </table>
                   </div>
@@ -241,6 +251,29 @@
 @endsection
 
 @push('addjs')
-
-
+<style> 
+.none { display:none; }, 
+.showDIV { display:block; } 
+</style>
+<script>
+  function showSakit()
+  {
+  $("#bankDIV").removeClass("none");
+  $("#bankDIV").addClass("showDIV");
+  
+  //Make sure schoolDIV is not visible
+  $("#schoolDIV").removeClass("showDIV");
+  $("#schoolDIV").addClass("none");
+  }
+  
+  function showSehat()
+  {
+  $("#schoolDIV").removeClass("none");
+  $("#schoolDIV").addClass("showDIV");
+  
+  //Make sure bankDIV is not visible
+  $("#bankDIV").removeClass("showDIV");
+  $("#bankDIV").addClass("none");
+  }
+  </script>
 @endpush

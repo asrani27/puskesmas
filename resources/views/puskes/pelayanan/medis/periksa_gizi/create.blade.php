@@ -191,7 +191,7 @@
                         <div class="card-header">
                           <h3 class="card-title">Antropometri</h3>
                         </div>
-                      <form method="POST" action="{{route('tindakan',['id' => $data->id])}}">
+                      <form method="POST" action="{{route('periksagizi',['id' => $data->id])}}">
                         @csrf
                       <div class="row">
                         <div class="col-md-6">
