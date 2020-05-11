@@ -215,7 +215,7 @@
                           <td>Pilih Poli <span class="text-danger"><strong>*</strong></span></td>
                           <td>
                             <div id="bankDIV">
-                              <select class="form-control form-control-sm pilih-poli" name="ruangan_id">
+                              <select class="form-control form-control-sm pilih-poli" id="ruangan_id" name="ruangan_id[]" onchange="UGD()"/>
                                 <option>-Pilih-</option>
                                 @foreach ($ruanganSakit as $item)
                                   <option value="{{$item->id}}">{{$item->nama}}</option>
@@ -223,7 +223,7 @@
                               </select>
                             </div>
                             <div id="schoolDIV" class="none">
-                              <select class="form-control form-control-sm pilih-poli" name="ruangan_id">
+                              <select class="form-control form-control-sm pilih-poli" name="ruangan_id[]">
                                 <option>-Pilih-</option>
                                 @foreach ($ruanganSehat as $item)
                                   <option value="{{$item->id}}">{{$item->nama}}</option>
@@ -232,6 +232,22 @@
                             </div>
                           </td>
                         </tr>  
+                        <tr>
+                          <td>
+                            <div id="Kamar" class="none">
+                              Kamar
+                            </div>
+                          </td>
+                          <td>
+                            <div id="UGD" class="none">
+                              <select class="form-control form-control-sm" name="kamar_id">
+                                @foreach ($ugd as $item)
+                                  <option value="{{$item->id}}">{{$item->nama}}</option>
+                                @endforeach
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -274,6 +290,28 @@
   //Make sure bankDIV is not visible
   $("#bankDIV").removeClass("showDIV");
   $("#bankDIV").addClass("none");
+  }
+
+  function UGD()
+  {
+    var e = document.getElementById("ruangan_id");
+    var value = e.options[e.selectedIndex].value; 
+    if(value == 0002)
+    {
+      $("#UGD").removeClass("none");
+      $("#UGD").addClass("showDIV");
+
+      $("#Kamar").removeClass("none");
+      $("#Kamar").addClass("showDIV");
+    }
+     else
+    {
+      $("#UGD").removeClass("showDIV");
+      $("#UGD").addClass("none");
+
+      $("#Kamar").removeClass("showDIV");
+      $("#Kamar").addClass("none");
+    }
   }
   </script>
 @endpush

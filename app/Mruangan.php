@@ -19,4 +19,9 @@ class Mruangan extends Model
     {
         return $this->hasMany(Tpelayanan::class, 'ruangan_id');
     }
+
+    public function kamar()
+    {
+        return $this->hasMany(Mkamar::class, 'ruangan_id');
+    }
 }

@@ -113,7 +113,7 @@
                         @foreach ($ruangan->chunk(3) as $item)
                         <tr>
                             @foreach ($item as $item2)
-                            <td width="150px"><input type="checkbox" name="ruangan_id[]" value="{{$item2->id}}"> {{$item2->nama}}</td>
+                            <td width="250px"><input type="checkbox" name="ruangan_id[]" value="{{$item2->id}}"> {{$item2->nama}}</td>
                             @endforeach
                         </tr>
                         @endforeach
