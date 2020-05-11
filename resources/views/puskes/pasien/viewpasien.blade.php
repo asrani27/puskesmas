@@ -170,8 +170,10 @@
                           <tr>
                             <td>{{$no++}}</td>
                             <td>{{$item->tanggal}}</td>
-                            <td>{{$item->pelayanan->ruangan->instalasi->nama}}</td>
-                            <td>{{$item->pelayanan->ruangan->nama}}</td>
+
+                            <td>{{$item->pelayanan == null ? 'null' : $item->pelayanan->ruangan->instalasi->nama}}</td>
+                            <td>{{$item->pelayanan == null ? 'null' : $item->pelayanan->ruangan->nama}}</td>
+
                             <td></td>
                           </tr>
                           @endforeach

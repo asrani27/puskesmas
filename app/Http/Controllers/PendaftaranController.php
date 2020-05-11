@@ -90,8 +90,6 @@ class PendaftaranController extends Controller
 
     public function detailrekammedis($id)
     {
-        // $data = Tpelayanan::find(100024);
-        // dd($data->tindakan);
         $pasien = Mpasien::find($id);
         $data = $pasien->pendaftaran->map(function($item){
             $item->anamnesa = $item->pelayanan->anamnesa;
@@ -245,11 +243,6 @@ class PendaftaranController extends Controller
     {
         $today = Carbon::today()->format('Y-m-d').'%';
         $data = Tpendaftaran::where('tanggal', 'LIKE', $today)->orderBy('tanggal', 'desc')->paginate(10);
-        // $map = $data->map(function($item){
-        //     $item->pelayanan = $item->pelayanan;
-        //     return $item;
-        // });
-        // dd($map);
         return view('puskes.daftar.pendaftaran',compact('data'));
     }
 

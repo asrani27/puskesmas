@@ -138,23 +138,6 @@
                     <td>
                         {{-- <a href="" class="btn btn-info btn-sm">Cetak</a> --}}
                     </td>
-                    {{-- <td><small>{{$item->no_asuransi}}</small></td>
-                    <td>
-                      <small>
-                      @if($item->jenis_kelamin == 'L')
-                      Laki-Laki
-                      @else
-                      Perempuan
-                      @endif
-                      </small>
-                    </td>
-                    <td>
-                      <small>@if($item->kelurahan == null)
-                        @else
-                        {{$item->kelurahan->nama}}
-                        @endif
-                      </small>
-                    </td> --}}
                   </tr>
                   @endforeach
                 <tbody>
