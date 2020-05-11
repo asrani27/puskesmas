@@ -245,7 +245,6 @@ class PendaftaranController extends Controller
     {
         $today = Carbon::today()->format('Y-m-d').'%';
         $data = Tpendaftaran::where('tanggal', 'LIKE', $today)->orderBy('tanggal', 'desc')->paginate(10);
-        //dd($data, $today);
         // $map = $data->map(function($item){
         //     $item->pelayanan = $item->pelayanan;
         //     return $item;
@@ -287,7 +286,13 @@ class PendaftaranController extends Controller
 
     public function daftarPelayanan(Request $req,$id)
     {
-        dd($req->all());
+        if($req->status == 'SAKIT')
+        {
+            $ruangan_id = $req->ruangan_id[0];
+            
+        }else{
+            $ruangan_id = $req->ruangan_id[1];
+        }
         $pasien = Mpasien::find($id);
         $tahun = Tahun($pasien->tanggal_lahir);
         $bulan = Bulan($pasien->tanggal_lahir);
@@ -316,8 +321,8 @@ class PendaftaranController extends Controller
         $p->tanggal        = $req->tanggal;
         $p->pendaftaran_id = $t->id;
         $p->is_promotifpreventif = 0;
-        $p->instalasi_id   = Mruangan::find($req->ruangan_id)->first()->instalasi->id;
-        $p->ruangan_id     = $req->ruangan_id;
+        $p->instalasi_id   = Mruangan::find($ruangan_id)->first()->instalasi->id;
+        $p->ruangan_id     = $ruangan_id;
         $p->save();
         //dd('sukses');
 

@@ -216,7 +216,7 @@
                           <td>
                             <div id="bankDIV">
                               <select class="form-control form-control-sm pilih-poli" id="ruangan_id" name="ruangan_id[]" onchange="UGD()"/>
-                                <option>-Pilih-</option>
+                                <option value="">-Pilih-</option>
                                 @foreach ($ruanganSakit as $item)
                                   <option value="{{$item->id}}">{{$item->nama}}</option>
                                 @endforeach
@@ -224,7 +224,7 @@
                             </div>
                             <div id="schoolDIV" class="none">
                               <select class="form-control form-control-sm pilih-poli" name="ruangan_id[]">
-                                <option>-Pilih-</option>
+                                <option value="">-Pilih-</option>
                                 @foreach ($ruanganSehat as $item)
                                   <option value="{{$item->id}}">{{$item->nama}}</option>
                                 @endforeach
