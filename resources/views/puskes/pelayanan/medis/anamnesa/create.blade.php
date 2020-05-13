@@ -33,14 +33,14 @@
                     @include('puskes.pelayanan.medis.menu_utama')
                 
                   <div class="row">
-                      <div class="col-md-4" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
+                      {{-- <div class="col-md-4" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                           <!-- Form Element sizes -->
                           <div class="card card-success card-outline">
                             <div class="card-header">
                               <h3 class="card-title">Data Pasien</h3>
                             </div>
                               <div class="card-body table-responsive p-0">
-                                  <table class="table table-sm" style="font-size:15px;">
+                                  <table class="table table-sm" style="font-size:13px;">
                                       <tbody>
                                         <tr>
                                           <td>ID Pelayanan</td>
@@ -117,6 +117,8 @@
                             <!-- /.card-body -->
                           </div>
                       </div>
+                       --}}
+                    @include('puskes.pelayanan.medis.sidebar_medis')
                       <div class="col-md-8" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                       <form method="POST" action="{{route('anamnesa2', ['id'=>$data->id])}}">
                         @csrf

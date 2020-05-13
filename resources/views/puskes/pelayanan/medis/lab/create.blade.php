@@ -28,7 +28,8 @@
             @include('puskes.pelayanan.medis.menu_utama')
             
             <div class="row">
-                <div class="col-md-4" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
+            @include('puskes.pelayanan.medis.sidebar_medis')
+                {{-- <div class="col-md-4" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                     <!-- Form Element sizes -->
                     <div class="card card-success card-outline">
                       <div class="card-header">
@@ -155,7 +156,7 @@
                       </div>
                       <!-- /.card-body -->
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-md-8" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                     <div class="card card-info card-outline">
                       <div class="card-header">

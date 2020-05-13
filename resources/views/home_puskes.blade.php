@@ -139,10 +139,10 @@
       </div>
 </div>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Pasien Poli / Ruangan 13 Februari 2020</h3>
+                <h3 class="card-title">Pasien Poli / Ruangan Bulan {{\Carbon\Carbon::today()->format('M Y')}}</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                   </button>
@@ -154,22 +154,8 @@
                 </div>
               </div>
             </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card card-gray">
-            <div class="card-header">
-                <h3 class="card-title">Kunjungan Seminggu Terakhir</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="speedChart"></canvas>
-                </div>
+            <div id="namaPoli" data-info="{{$ruangan}}" data-jumlah="{{$jml}}">
             </div>
-        </div>
     </div>
 </div>
 @endsection
@@ -177,18 +163,29 @@
 @push('addjs')
 <script src="/admin/plugins/chart.js/Chart.min.js"></script>
 <script>
+var myDiv = document.querySelector('#namaPoli');
+var ruangan = JSON.parse(myDiv.dataset.info);
+var jumlah = JSON.parse(myDiv.dataset.jumlah);
+console.log([jumlah, ruangan]);
 var popCanvas = document.getElementById("barChart");
 var barChart = new Chart(popCanvas, {
   type: 'bar',
   data: {
-    labels: ["Umum", "Lansia", "Imunisasi DPT", "Imunisasi Campak", "KIA", "Anak", "TB", "KIR", "Lab", "Rawat Inap"],
+    labels: ruangan,
     datasets: [{
       label: 'Pasien',
-      data: [13, 21, 45, 56, 34, 45, 34, 54, 45, 34],
+      data: jumlah,
       backgroundColor: [
         'rgba(255, 99, 132, 0.6)',
         'rgba(54, 162, 235, 0.6)',
         'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(255, 159, 64, 0.6)',
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
         'rgba(75, 192, 192, 0.6)',
         'rgba(153, 102, 255, 0.6)',
         'rgba(255, 159, 64, 0.6)',

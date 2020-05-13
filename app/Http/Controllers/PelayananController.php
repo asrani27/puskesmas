@@ -56,7 +56,9 @@ class PelayananController extends Controller
                 });
                 $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
                 $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-                return view('puskes.pelayanan.medis.anamnesa.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
+                $sp = Mstatuspulang::all();
+                $riwayat = $data->pendaftaran->pasien->pendaftaran;
+                return view('puskes.pelayanan.medis.anamnesa.create',compact('data','keluhan','dokter', 'perawat','kesadaran','sp','riwayat'));
             }else{
                 $anamnesa = $checkAnamnesa;
                 $data = Tpelayanan::find($id);    
@@ -70,7 +72,9 @@ class PelayananController extends Controller
                 $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
                 $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
                 
-                return view('puskes.pelayanan.medis.anamnesa.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa'));
+                $sp = Mstatuspulang::all();
+                $riwayat = $data->pendaftaran->pasien->pendaftaran;
+                return view('puskes.pelayanan.medis.anamnesa.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa','sp','riwayat'));
             }
         }
     }
@@ -87,7 +91,10 @@ class PelayananController extends Controller
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
         $diagnosa = DB::table('m_diagnosa')->select('id','value')->paginate(100);
         
-        return view('puskes.pelayanan.medis.diagnosa.create',compact('data','dokter','perawat','diagnosa'));
+        $sp = Mstatuspulang::all();
+        $riwayat = $data->pendaftaran->pasien->pendaftaran;
+        
+        return view('puskes.pelayanan.medis.diagnosa.create',compact('data','dokter','perawat','diagnosa','sp','riwayat'));
     }
 
     public function Resep($id)
@@ -106,7 +113,9 @@ class PelayananController extends Controller
             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
             Alert::info('Harap Isi Anamnesa Terlebih Dahulu', 'Info');
-            return view('puskes.pelayanan.medis.anamnesa.create',compact('data','dokter','perawat','keluhan','kesadaran'));
+            $sp = Mstatuspulang::all();
+            $riwayat = $data->pendaftaran->pasien->pendaftaran;
+            return view('puskes.pelayanan.medis.anamnesa.create',compact('data','dokter','perawat','keluhan','kesadaran','sp','riwayat'));
 
         }
         else{
@@ -120,7 +129,9 @@ class PelayananController extends Controller
             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
             $obat = DB::table('m_obat')->select('id','value')->get();
             $signa = DB::table('m_signa')->select('value')->get();
-            return view('puskes.pelayanan.medis.resep.create',compact('data','dokter','perawat', 'obat','signa'));
+            $sp = Mstatuspulang::all();
+            $riwayat = $data->pendaftaran->pasien->pendaftaran;
+            return view('puskes.pelayanan.medis.resep.create',compact('data','dokter','perawat', 'obat','signa','sp','riwayat'));
         }
     }
 
@@ -132,7 +143,8 @@ class PelayananController extends Controller
             $item->laboratorium = $item->lab->where('deleted_by', null);
             return $item;
         });
-        return view('puskes.pelayanan.medis.lab.create',compact('data','sp','lab'));
+        $riwayat = $data->pendaftaran->pasien->pendaftaran;
+        return view('puskes.pelayanan.medis.lab.create',compact('data','sp','lab','riwayat'));
     }
 
     public function Tindakan($id)
@@ -152,7 +164,8 @@ class PelayananController extends Controller
         });
         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        return view('puskes.pelayanan.medis.tindakan.create',compact('data','sp','lab','dokter','perawat','tindakan'));
+        $riwayat = $data->pendaftaran->pasien->pendaftaran;
+        return view('puskes.pelayanan.medis.tindakan.create',compact('data','sp','lab','dokter','perawat','tindakan','riwayat'));
     }
 
     public function Mtbs($id)
@@ -296,7 +309,8 @@ class PelayananController extends Controller
     {
         $data = Tpelayanan::find($id);
         $sp = Mstatuspulang::all();
-        return view('puskes.pelayanan.medis.detail',compact('data','sp'));
+        $riwayat = $data->pendaftaran->pasien->pendaftaran;
+        return view('puskes.pelayanan.medis.detail',compact('data','sp','riwayat'));
     }
 
     public function mulaiPeriksa($id)
