@@ -276,7 +276,7 @@
                               </tr>
                               <tr>
                                 <td>Lama Sakit</td>
-                                <td id="lama_sakit">{{$data->anamnesa->lama_sakit_tahun}} Thn,{{$data->anamnesa->lama_sakit_bulan}} Bln,{{$data->anamnesa->lama_sakit_hari}} Hr,</td>   
+                                <td id="lama_sakit"></td>   
                                 <td>Status</td>
                                 <td></td>   
                               </tr>

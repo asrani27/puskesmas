@@ -426,9 +426,7 @@ $(document).ready(function(){
    $("#tableDiagnosa tbody tr").remove(); 
 
    data = pendaftaran.diagnosa;
-    // pendaftaran.diagnosa.forEach(function(item){
-    //   $('#tableDiagnosa').append('<tr><td>'+pendaftaran.diagnosa.id+'</td></tr>');
-    // });
+   
    for(i = 0; i< data.length; i++)
    {
      console.log(data[i].id);
