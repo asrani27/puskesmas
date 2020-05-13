@@ -57,14 +57,12 @@
                   <th>Jenis Kelamin</th>
                   <th>Tempat & Tgl Lahir</th>
                   <th>Alamat</th>
+                  <th></th>
                 </thead><small>
                 <tbody>
                   @foreach ($data as $key => $item)
                   <tr>
-                      <td>
-                        <a href="/rekammedis/detail/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
-                      </td>
-                    {{-- <td class="text-center"><small>{{ $key+ $data->firstItem() }}</small></td> --}}
+                    <td class="text-center"><small>{{ $key+ $data->firstItem() }}</small></td>
                     <td><small>{{$item->id}}</small></td>
                     <td><small>{{$item->no_rm_lama}}</small></td>
                     <td><small>{{$item->no_dok_rm}}</small></td>
@@ -82,6 +80,9 @@
                     <td><small>{{$item->tempat_lahir}}, {{$item->tanggal_lahir == null ? null : \Carbon\Carbon::parse($item->tanggal_lahir)->format('d-M-Y')}}</small></td>
                   
                     <td><small>{{$item->alamat}}</small></td>
+                    <td>
+                      <a href="/rekammedis/detail/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+                    </td>
                   </tr>
                   @endforeach
                 <tbody></small> 
