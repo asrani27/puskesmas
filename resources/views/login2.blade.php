@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login E-Pus</title>
+    <title>Login BaApik</title>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="/templogin/fonts/material-icon/css/material-design-iconic-font.min.css">
@@ -26,16 +26,15 @@
                     </div>
 
                     <div class="signin-form">
-                        <h2 class="form-title">E-Pus V.2</h2>
-						<form method="POST" class="register-form" id="login-form" action="{{route('login')}}">
-							@csrf
+                        <h2 class="form-title">BaApik V.2</h2>
+                        <form method="POST" class="register-form" id="login-form">
                             <div class="form-group">
                                 <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="username" id="your_name" placeholder="Username"/>
+                                <input type="text" name="your_name" id="your_name" placeholder="Username"/>
                             </div>
                             <div class="form-group">
                                 <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password" id="your_pass" placeholder="Password"/>
+                                <input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
                             </div>
                             <div class="form-group">
                                 <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
@@ -63,7 +62,5 @@
     <!-- JS -->
     <script src="/templogin/vendor/jquery/jquery.min.js"></script>
     <script src="/templogin/js/main.js"></script>
-	@include('sweetalert::alert')	
-</body>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
-

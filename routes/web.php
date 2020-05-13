@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login2', function () {
+    return view('login2');
+});
+
 Route::get('/logout', function() {
     Auth::logout();
     return redirect()->to('/');

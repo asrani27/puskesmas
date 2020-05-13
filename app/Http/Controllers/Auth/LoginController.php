@@ -51,7 +51,7 @@ class LoginController extends Controller
         } 
         else 
         {
-            Alert::error('Username / Password Salah', 'Pesan');
+            toast('Username / Password Salah', 'warning');
             return back();
         }
     }
