@@ -31,4 +31,28 @@
 @elseif($data->ruangan->id == 30)
 {{-- Menu Untuk Poli KIA --}}
 @include('puskes.pelayanan.medis.menu_imunisasi_bcg')
+@elseif($data->ruangan->id == 2)
+{{-- Menu Untuk Poli KIA --}}
+@include('puskes.pelayanan.medis.menu_ugd')
+@elseif($data->ruangan->id == 3)
+{{-- Menu Untuk Poli KIA --}}
+@include('puskes.pelayanan.medis.menu_ugd')
+@elseif($data->ruangan->id == 9)
+{{-- Menu Untuk Poli KIA --}}
+@include('puskes.pelayanan.medis.menu_ugd')
+@elseif($data->ruangan->id == 39)
+{{-- Menu Untuk Poli PUSTU --}}
+@include('puskes.pelayanan.medis.menu_umum')
+@elseif($data->ruangan->id == 40)
+{{-- Menu Untuk Poli PUSTU --}}
+@include('puskes.pelayanan.medis.menu_umum')
+@elseif($data->ruangan->id == 41)
+{{-- Menu Untuk Poli PUSTU --}}
+@include('puskes.pelayanan.medis.menu_umum')
+@elseif($data->ruangan->id == 42)
+{{-- Menu Untuk Poli PUSTU --}}
+@include('puskes.pelayanan.medis.menu_umum')
+@elseif($data->ruangan->id == 43)
+{{-- Menu Untuk Poli PUSTU --}}
+@include('puskes.pelayanan.medis.menu_umum')
 @endif
