@@ -167,7 +167,7 @@
                         @endphp
                         <tbody>
                           @foreach ($data->pendaftaran->sortByDesc('tanggal') as $key => $item)
-                          <tr>
+                          <tr  style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                             <td>{{$no++}}</td>
                             <td>{{$item->tanggal}}</td>
 

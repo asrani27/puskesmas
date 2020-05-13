@@ -290,6 +290,12 @@
   //Make sure bankDIV is not visible
   $("#bankDIV").removeClass("showDIV");
   $("#bankDIV").addClass("none");
+  
+      $("#UGD").removeClass("showDIV");
+      $("#UGD").addClass("none");
+
+      $("#Kamar").removeClass("showDIV");
+      $("#Kamar").addClass("none");
   }
 
   function UGD()

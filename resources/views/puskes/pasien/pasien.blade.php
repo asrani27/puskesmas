@@ -59,11 +59,11 @@
                 </div>
               </div>
               
-            <div class="card-body p-0 table-responsive">
+            <div class="card-body p-1 table-responsive">
               <table id="example" class="table table-bordered table-sm ">
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
-                  <th>#</th>
+                  <th width="5px;">#</th>
                   <th>eRM</th>
                   <th>No. RM Lama</th>
                   <th>No. Dok RM</th>
@@ -73,15 +73,12 @@
                   <th>Jenis Kelamin</th>
                   <th>Tempat & Tgl Lahir</th>
                   <th>Kelurahan</th>
+                  <th>Aksi</th>
                 </thead><small>
                 <tbody>
                   @foreach ($data as $key => $item)
                   <tr>
-                      <td>
-                        <a href="/pendaftaran/pasien/view/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
-                        <a href="/pendaftaran/pasien/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Semua Data Tentang Pasien Ini?');"><i class="fa fa-trash"></i></a>
-                      </td>
-                    {{-- <td class="text-center"><small>{{ $key+ $data->firstItem() }}</small></td> --}}
+                    <td class="text-center"><small>{{ $key+ $data->firstItem() }}</small></td>
                     <td><small>{{$item->id}}</small></td>
                     <td><small>{{$item->no_rm_lama}}</small></td>
                     <td><small>{{$item->no_dok_rm}}</small></td>
@@ -104,6 +101,10 @@
                         {{$item->kelurahan->nama}}
                         @endif
                       </small>
+                    </td>
+                    <td>
+                      <a href="/pendaftaran/pasien/view/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+                      <a href="/pendaftaran/pasien/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Semua Data Tentang Pasien Ini?');"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                   @endforeach

@@ -30,6 +30,7 @@
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                   <th>No</th>
+                  <th>ID</th>
                   <th>Nama Instalasi</th>
                   <th>Nama Poli</th>
                   <th>Jenis Poli</th>
@@ -43,6 +44,8 @@
                   @foreach ($data as $key => $item)
                   <tr>
                     <td class="text-center" width="35px"><small>{{ $key+ $data->firstItem() }}</small></td>
+                    
+                    <td><small>{{$item->id}}</small></td>
                     <td><small>{{$item->instalasi->nama}}</small></td>
                     <td><small>{{$item->nama}}</small></td>
                     <td><small>{{$item->poli_sakit == 1 ? 'Sakit' : 'Sehat'}}</small></td>
