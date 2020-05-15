@@ -32,7 +32,7 @@
                     <div class="form-group">
                       <div class="input-group input-group-sm">
                         <select class="form-control form-control-sm select2" name="ruangan_id" onchange='if(this.value != 0) { this.form.submit(); }'>
-                            <option value='0'>- Pilih Poli -</option>
+                            <option value='semua'>- Semua -</option>
                             @foreach ($ruangan as $item)
                               <option value="{{$item->id}}" {{ (old('ruangan_id') == $item->id ? "selected":"") }}>{{$item->nama}}</option>    
                             @endforeach

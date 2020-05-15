@@ -1189,12 +1189,21 @@ class PelayananController extends Controller
 
     public function medisPoli(Request $req)
     {
-        $date = Carbon::createFromFormat('d/m/Y', $req->tanggal)->format('Y-m-d').'%';
-        $data = Tpelayanan::where('ruangan_id', $req->ruangan_id)->where('tanggal', 'LIKE', $date)->orderBy('tanggal','desc')->paginate(10);
-       
-        $ruangan = Mruangan::where('is_aktif', 'Y')->orderBy('nama','desc')->get();
-        $data->appends($req->only('ruangan_id'));
-        $req->flash();
+        if($req->ruangan_id == 'semua'){
+            $date = Carbon::createFromFormat('d/m/Y', $req->tanggal)->format('Y-m-d').'%';
+            $data = Tpelayanan::Where('tanggal', 'LIKE', $date)->orderBy('tanggal','desc')->paginate(10);
+           
+            $ruangan = Mruangan::where('is_aktif', 'Y')->orderBy('nama','desc')->get();
+            $data->appends($req->only('ruangan_id'));
+            $req->flash();
+        }else{
+            $date = Carbon::createFromFormat('d/m/Y', $req->tanggal)->format('Y-m-d').'%';
+            $data = Tpelayanan::where('ruangan_id', $req->ruangan_id)->Where('tanggal', 'LIKE', $date)->orderBy('tanggal','desc')->paginate(10);
+           
+            $ruangan = Mruangan::where('is_aktif', 'Y')->orderBy('nama','desc')->get();
+            $data->appends($req->only('ruangan_id'));
+            $req->flash();
+        }
         return view('puskes.pelayanan.medis.medis',compact('data','ruangan'));
     }
 
