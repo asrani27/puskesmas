@@ -357,36 +357,8 @@ class PelayananController extends Controller
     {
         $data = Tpelayanan::find($id);
         $sp = Mstatuspulang::all();
-        $riwayat = $data->pendaftaran->pasien->pendaftaran->map(function($item){
-            $item->anamnesa = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            $dokter = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            if($dokter == null){
-                $item->dokter = null;
-            }else{
-                $item->dokter = $dokter->dokter->nama;
-            }
-            $perawat = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            if($perawat == null){
-                $item->perawat = null;
-            }else{
-                $item->perawat = $perawat->perawat->nama;
-            }
-            $item->instalasi = $item->pelayanan == null ? '' : $item->pelayanan->instalasi;
-            $item->ruangan = $item->pelayanan == null ? '' : $item->pelayanan->ruangan;
-            $item->pasien = $item->pasien;
-            $item->periksafisik = $item->pelayanan == null ? '' : $item->pelayanan->periksafisik;
-            $item->diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->map(function($item2){
-                $item2->dokter = $item2->dokter;
-                $item2->perawat = $item2->perawat;
-                $item2->diagnosis = $item2->mdiagnosa;
-                return $item2;
-            });
-            
-            $item->count_diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->count();
-            $item->asuransi = $item->pasien->asuransi;
-            return $item;
-        });
-        
+
+        $riwayat = $this->riwayat($id);
         return view('puskes.pelayanan.medis.detail',compact('data','sp','riwayat'));
     }
 
