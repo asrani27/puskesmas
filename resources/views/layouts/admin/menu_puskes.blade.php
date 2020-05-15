@@ -46,6 +46,8 @@
       <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Laporan</a>
       <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
         <li><a href="/laporankunjunganpasien" class="dropdown-item">Kunjungan Pasien </a></li>
+        <li><a href="/laporanpelayananpasien" class="dropdown-item">Pelayanan Pasien </a></li>
+        <li><a href="/laporankinerjapuskesmas" class="dropdown-item">Kinerja Puskesmas </a></li>
         <li><a href="/laporansp3lb1" class="dropdown-item">SP3 LB1 </a></li>
         <li><a href="/laporansp3lb2" class="dropdown-item">SP3 LB2 </a></li>
         <li><a href="/laporansp3lb3" class="dropdown-item">SP3 LB3 </a></li>
@@ -55,7 +57,6 @@
     <li class="nav-item dropdown">
       <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Pengaturan</a>
       <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-        <li><a href="#" class="dropdown-item">User Account </a></li>
         <li><a href="/pengaturan/data_master" class="dropdown-item">Data Master</a></li>
       </ul>
     </li>

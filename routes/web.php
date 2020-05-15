@@ -124,6 +124,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/laporankunjunganpasien/export', 'LaporanController@exportkunjunganpasien');
     Route::get('/laporankunjunganpasien/export/today', 'LaporanController@exportkunjunganpasientoday');
     Route::post('/laporankunjunganpasien/search', 'LaporanController@tampilkankunjunganpasien');
+
+    
+    Route::get('/laporanpelayananpasien', 'LaporanController@laporanpelayananpasien');
+    Route::get('/laporankinerjapuskesmas', 'LaporanController@laporankinerjapuskesmas');
+
     Route::get('/laporansp3lb1', 'LaporanController@laporansp3lb1');
     Route::post('/laporansp3lb1', 'LaporanController@laporansp3lb1tampilkan');
     Route::get('/laporansp3lb2', 'LaporanController@laporansp3lb2');

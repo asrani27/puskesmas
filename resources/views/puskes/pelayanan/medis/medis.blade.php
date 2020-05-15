@@ -84,6 +84,7 @@
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                   <th>#</th>
+                  <th>No Antrian</th>
                   <th>Tanggal Daftar</th>
                   <th>Poli/Ruangan</th>
                   <th>No. eRM</th>
@@ -95,9 +96,10 @@
                   <th>Asuransi</th>
                   <th>Status PRB</th>
                   <th>Status Prolanis</th>
+                  <th>Aksi</th>
                 </thead>
                 <tbody>
-                  @foreach ($data as $item)
+                  @foreach ($data as $key => $item)
                   <tr style="
                   @if($item->pendaftaran->status_periksa == 0)
                   background-color:#fff
@@ -107,9 +109,8 @@
                   background-color: #dff0d8
                   @endif
                   ">
-                    <td class="text-center">  
-                      <a href="/pelayanan/medis/proses/{{$item->id}}" class="btn btn-xs btn-success"><i class="fas fa-stethoscope"></i></a>
-                    </td>
+                    <td class="text-center"><small>{{ $key+ $data->firstItem() }}</small></td>
+                    <td><small>{{$item->antrean}}</small></td>
                     <td><small>{{$item->tanggal}}</small></td>
                     <td><small>{{$item->ruangan->nama}}</small></td>
                     <td><small>{{$item->pendaftaran->pasien_id}}</small></td>
@@ -121,6 +122,9 @@
                     <td><small>{{$item->pendaftaran->asuransi->nama}}</small></td>
                     <td><small>{{$item->pendaftaran->status_prb == 0 ? 'Tidak' : 'ya'}}</small></td>
                     <td><small>{{$item->pendaftaran->status_prolanis == 0 ? 'Tidak' : 'Ya'}}</small></td>
+                    <td class="text-center">  
+                      <a href="/pelayanan/medis/proses/{{$item->id}}" class="btn btn-xs btn-success"><i class="fas fa-stethoscope"></i></a>
+                    </td>
                   </tr>
                   @endforeach
                 </tbody>
