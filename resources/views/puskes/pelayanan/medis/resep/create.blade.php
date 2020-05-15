@@ -50,143 +50,70 @@
             <div class="row">
               
             @include('puskes.pelayanan.medis.sidebar_medis')
-                {{-- <div class="col-md-4" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
-                    <!-- Form Element sizes -->
-                    <div class="card card-success card-outline">
-                      <div class="card-header">
-                        <h3 class="card-title">Data Pasien</h3>
-                      </div>
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-sm" style="font-size:15px;">
-                                <tbody>
-                                  <tr>
-                                    <td>ID Pelayanan</td>
-                                    <td>{{$data->id}}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Tanggal</td>
-                                    <td>{{$data->tanggal}}</td>                            
-                                  </tr>
-                                  <tr>
-                                    <td>Poli/Ruangan</td>
-                                    <td>{{$data->ruangan->nama}}</td>     
-                                  </tr>
-                                  <tr>
-                                    <td>No. eRM</td>
-                                    <td>{{$data->pendaftaran->pasien->id}}</td>    
-                                  </tr>
-                                  <tr>
-                                    <td>No RM Lama</td>
-                                    <td>{{$data->pendaftaran->pasien->no_rm_lama}}</td>   
-                                  </tr>
-                                  <tr>
-                                    <td>No Dokumen RM</td>
-                                    <td>{{$data->pendaftaran->pasien->no_dok_rm}}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>NIK</td>
-                                    <td>{{$data->pendaftaran->pasien->nik}}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Nama KK</td>
-                                    <td>-</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Nama</td>
-                                    <td>{{$data->pendaftaran->pasien->nama}}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Jenis Kelamin</td>
-                                    <td>{{$data->pendaftaran->pasien->jenis_kelamin}}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Tempat & Tanggal Lahir</td>
-                                    <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{\Carbon\Carbon::parse($data->pendaftaran->pasien->tanggal_lahir)->format('d M Y')}}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Alamat</td>
-                                    <td>{{$data->pendaftaran->pasien->alamat}}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Umur</td>
-                                    <td>{{hitungUmur($data->pendaftaran->pasien->tanggal_lahir)}}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Asuransi</td>
-                                    <td>{{$data->pendaftaran->pasien->asuransi->nama}}</td>
-                                  </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                      <div class="card-footer">
-                          
-                      </div>
-                      <!-- /.card-body -->
-                    </div>
-                    
+                
+                <div class="col-md-8" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                     <div class="card card-success card-outline">
                       <div class="card-header">
                         <h3 class="card-title">Detail</h3>
                       </div>
-                      <form method="POST" action="{{route('resep2', ['id' => $data->id])}}">
-                        @csrf
-                      <div class="card-body">
-                        <div class="input-group row">
-                            <label class="col-sm-4 col-form-label text-right"><small>No Resep</small></label>
-                            <div class="col-sm-8">
-                              <input type="text" class="form-control form-control-sm" name="no_resep">
-                            </div>
-                        </div>
-                        <div class="input-group row">
-                            <label class="col-sm-4 col-form-label text-right"><small>Ruangan Tujuan</small></label>
-                            <div class="col-sm-8">
-                              <input type="text" class="form-control form-control-sm" name="ruangan_id" value="APOTEK">
-                            </div>
-                        </div>
-                        <div class="input-group row">
-                            <label class="col-sm-4 col-form-label text-right"><small>Tng. Medis 1</small><strong><span class="text-danger">*</span></strong></label>
-                            <div class="col-sm-8">
-                              <div class="form-group">
-                                <select class="form-control form-control-sm select2" style="width: 100%;" name="dokter_id" required>
-                                  @foreach ($dokter as $item)
-                                    @if($data->anamnesa->dokter_id == $item->id)
-                                    <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
-                                    @else
-                                    <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
-                                    @endif
-                                  @endforeach
-                                </select>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="input-group row">
-                            <label class="col-sm-4 col-form-label text-right"><small>Tng. Medis 2</small></label>
-                            <div class="col-sm-8">
-                              <div class="form-group">
-                                <select class="form-control form-control-sm select2" style="width: 100%;" name="perawat_id">
-                                  @if($data->anamnesa->perawat_id == null)
-                                  <option value=""></option>
-                                  @foreach ($perawat as $item)
-                                    <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
-                                  @endforeach
-                                  @else
-                                  @foreach ($perawat as $item)
-                                    @if($data->anamnesa->perawat_id == $item->id)
-                                    <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
-                                    @else
-                                    <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
-                                    @endif
-                                  @endforeach
-                                  @endif
-                                </select>
-                              </div>
-                            </div>
-                        </div>
+                    <form method="POST" action="{{route('resep2', ['id' => $data->id])}}">
+                      @csrf
+                    <div class="card-body">
+                      <div class="input-group row">
+                          <label class="col-sm-3 col-form-label text-right"><small>No Resep</small></label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control form-control-sm" name="no_resep">
+                          </div>
                       </div>
+                      <div class="input-group row">
+                          <label class="col-sm-3 col-form-label text-right"><small>Ruangan Tujuan</small></label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control form-control-sm" name="ruangan_id" value="APOTEK">
+                          </div>
+                      </div>
+                      <div class="input-group row">
+                          <label class="col-sm-3 col-form-label text-right"><small>Tng. Medis 1</small><strong><span class="text-danger">*</span></strong></label>
+                          <div class="col-sm-9">
+                            <div class="form-group">
+                              <select class="form-control form-control-sm select2" style="width: 100%;" name="dokter_id" required>
+                                @foreach ($dokter as $item)
+                                  @if($data->anamnesa->dokter_id == $item->id)
+                                  <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                  @else
+                                  <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                  @endif
+                                @endforeach
+                              </select>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="input-group row">
+                          <label class="col-sm-3 col-form-label text-right"><small>Tng. Medis 2</small></label>
+                          <div class="col-sm-9">
+                            <div class="form-group">
+                              <select class="form-control form-control-sm select2" style="width: 100%;" name="perawat_id">
+                                @if($data->anamnesa->perawat_id == null)
+                                <option value=""></option>
+                                @foreach ($perawat as $item)
+                                  <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                @endforeach
+                                @else
+                                @foreach ($perawat as $item)
+                                  @if($data->anamnesa->perawat_id == $item->id)
+                                  <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                  @else
+                                  <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                  @endif
+                                @endforeach
+                                @endif
+                              </select>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
                       <!-- /.card-body -->
                     </div>
-                </div> --}}
-                <div class="col-md-8" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
+
                     <div class="card card-success card-outline">
                       <div class="card-header">
                         <h3 class="card-title">Data Resep</h3>

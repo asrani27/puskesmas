@@ -36,125 +36,9 @@ class PelayananController extends Controller
         //$this->middleware('medis');
     }
     
-    public function Anamnesa($id)
-    {
-        $checkPoli = Tpelayanan::where('id', $id)->orWhere('ruangan_id', '0010')->orWhere('ruangan_id', '0029')->first();
-        if($checkPoli == null){
-            Alert::info('Tidak terdaftar di poli');
-            return back();
-        }else{
-            $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
-            if($checkAnamnesa == null)
-            {
-                $data = Tpelayanan::find($id);
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-                $sp = Mstatuspulang::all();
-                
-                $riwayat = $data->pendaftaran->pasien->pendaftaran->map(function($item){
-                    $item->anamnesa = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-                    $dokter = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-                    if($dokter == null){
-                        $item->dokter = null;
-                    }else{
-                        $item->dokter = $dokter->dokter->nama;
-                    }
-                    $perawat = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-                    if($perawat == null){
-                        $item->perawat = null;
-                    }else{
-                        $item->perawat = $perawat->perawat->nama;
-                    }
-                    $item->instalasi = $item->pelayanan == null ? '' : $item->pelayanan->instalasi;
-                    $item->ruangan = $item->pelayanan == null ? '' : $item->pelayanan->ruangan;
-                    $item->pasien = $item->pasien;
-                    $item->periksafisik = $item->pelayanan == null ? '' : $item->pelayanan->periksafisik;
-                    $item->diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->map(function($item2){
-                        $item2->dokter = $item2->dokter;
-                        $item2->perawat = $item2->perawat;
-                        $item2->diagnosis = $item2->mdiagnosa;
-                        return $item2;
-                    });
-                    
-                    $item->count_diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->count();
-                    $item->asuransi = $item->pasien->asuransi;
-                    return $item;
-                });
-                return view('puskes.pelayanan.medis.anamnesa.create',compact('data','keluhan','dokter', 'perawat','kesadaran','sp','riwayat'));
-            }else{
-                $anamnesa = $checkAnamnesa;
-                $data = Tpelayanan::find($id);    
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-                
-                $sp = Mstatuspulang::all();
-                
-                $riwayat = $data->pendaftaran->pasien->pendaftaran->map(function($item){
-                    $item->anamnesa = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-                    $dokter = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-                    if($dokter == null){
-                        $item->dokter = null;
-                    }else{
-                        $item->dokter = $dokter->dokter->nama;
-                    }
-                    $perawat = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-                    if($perawat == null){
-                        $item->perawat = null;
-                    }else{
-                        if($item->perawat == null){
-                            $item->perawat = null;
-                        }else{
-                            $item->perawat = $perawat->perawat->nama;
-                        }
-                    }
-                    $item->instalasi = $item->pelayanan == null ? '' : $item->pelayanan->instalasi;
-                    $item->ruangan = $item->pelayanan == null ? '' : $item->pelayanan->ruangan;
-                    $item->pasien = $item->pasien;
-                    $item->periksafisik = $item->pelayanan == null ? '' : $item->pelayanan->periksafisik;
-                    $item->diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->map(function($item2){
-                        $item2->dokter = $item2->dokter;
-                        $item2->perawat = $item2->perawat;
-                        $item2->diagnosis = $item2->mdiagnosa;
-                        return $item2;
-                    });
-                    
-                    $item->count_diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->count();
-                    $item->asuransi = $item->pasien->asuransi;
-                    return $item;
-                });
-                return view('puskes.pelayanan.medis.anamnesa.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa','sp','riwayat'));
-            }
-        }
-    }
-
-    public function Diagnosa($id)
+    public function riwayat($id)
     {
         $data = Tpelayanan::find($id);
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        $diagnosa = DB::table('m_diagnosa')->select('id','value')->paginate(100);
-        
-        $sp = Mstatuspulang::all();
-        
         $riwayat = $data->pendaftaran->pasien->pendaftaran->map(function($item){
             $item->anamnesa = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
             $dokter = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
@@ -188,6 +72,67 @@ class PelayananController extends Controller
             $item->asuransi = $item->pasien->asuransi;
             return $item;
         });
+        return $riwayat;
+    }
+    public function Anamnesa($id)
+    {
+        $checkPoli = Tpelayanan::where('id', $id)->orWhere('ruangan_id', '0010')->orWhere('ruangan_id', '0029')->first();
+        if($checkPoli == null){
+            Alert::info('Tidak terdaftar di poli');
+            return back();
+        }else{
+            $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
+            if($checkAnamnesa == null)
+            {
+                $data = Tpelayanan::find($id);
+                $keluhan = Mlookup::where('for','keluhan')->get();
+                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+                $tenagamedis = Mpegawai::all()->map(function($item, $key){
+                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
+                    return $item;
+                });
+                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+                $sp = Mstatuspulang::all();
+                $riwayat = $this->riwayat($id);
+                return view('puskes.pelayanan.medis.anamnesa.create',compact('data','keluhan','dokter', 'perawat','kesadaran','sp','riwayat'));
+            }else{
+                $anamnesa = $checkAnamnesa;
+                $data = Tpelayanan::find($id);    
+                $keluhan = Mlookup::where('for','keluhan')->get();
+                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+                $tenagamedis = Mpegawai::all()->map(function($item, $key){
+                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
+                    return $item;
+                });
+                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+                
+                $sp = Mstatuspulang::all();
+                
+                $riwayat = $this->riwayat($id);
+                return view('puskes.pelayanan.medis.anamnesa.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa','sp','riwayat'));
+            }
+        }
+    }
+
+    public function Diagnosa($id)
+    {
+        $data = Tpelayanan::find($id);
+        $tenagamedis = Mpegawai::all()->map(function($item, $key){
+            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+            $item->nama_tenaga_medis = $item->jenispegawai->nama;
+            return $item;
+        });
+        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+        $diagnosa = DB::table('m_diagnosa')->select('id','value')->paginate(100);
+        
+        $sp = Mstatuspulang::all();
+        
+        $riwayat = $this->riwayat($id);
         
         return view('puskes.pelayanan.medis.diagnosa.create',compact('data','dokter','perawat','diagnosa','sp','riwayat'));
     }
@@ -210,35 +155,8 @@ class PelayananController extends Controller
             Alert::info('Harap Isi Anamnesa Terlebih Dahulu', 'Info');
             $sp = Mstatuspulang::all();
             
-        $riwayat = $data->pendaftaran->pasien->pendaftaran->map(function($item){
-            $item->anamnesa = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            $dokter = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            if($dokter == null){
-                $item->dokter = null;
-            }else{
-                $item->dokter = $dokter->dokter->nama;
-            }
-            $perawat = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            if($perawat == null){
-                $item->perawat = null;
-            }else{
-                $item->perawat = $perawat->perawat->nama;
-            }
-            $item->instalasi = $item->pelayanan == null ? '' : $item->pelayanan->instalasi;
-            $item->ruangan = $item->pelayanan == null ? '' : $item->pelayanan->ruangan;
-            $item->pasien = $item->pasien;
-            $item->periksafisik = $item->pelayanan == null ? '' : $item->pelayanan->periksafisik;
-            $item->diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->map(function($item2){
-                $item2->dokter = $item2->dokter;
-                $item2->perawat = $item2->perawat;
-                $item2->diagnosis = $item2->mdiagnosa;
-                return $item2;
-            });
-            
-            $item->count_diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->count();
-            $item->asuransi = $item->pasien->asuransi;
-            return $item;
-        });
+            $riwayat = $this->riwayat($id);
+
             return view('puskes.pelayanan.medis.anamnesa.create',compact('data','dokter','perawat','keluhan','kesadaran','sp','riwayat'));
 
         }
@@ -255,35 +173,8 @@ class PelayananController extends Controller
             $signa = DB::table('m_signa')->select('value')->get();
             $sp = Mstatuspulang::all();
             
-        $riwayat = $data->pendaftaran->pasien->pendaftaran->map(function($item){
-            $item->anamnesa = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            $dokter = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            if($dokter == null){
-                $item->dokter = null;
-            }else{
-                $item->dokter = $dokter->dokter->nama;
-            }
-            $perawat = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            if($perawat == null){
-                $item->perawat = null;
-            }else{
-                $item->perawat = $perawat->perawat->nama;
-            }
-            $item->instalasi = $item->pelayanan == null ? '' : $item->pelayanan->instalasi;
-            $item->ruangan = $item->pelayanan == null ? '' : $item->pelayanan->ruangan;
-            $item->pasien = $item->pasien;
-            $item->periksafisik = $item->pelayanan == null ? '' : $item->pelayanan->periksafisik;
-            $item->diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->map(function($item2){
-                $item2->dokter = $item2->dokter;
-                $item2->perawat = $item2->perawat;
-                $item2->diagnosis = $item2->mdiagnosa;
-                return $item2;
-            });
-            
-            $item->count_diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->count();
-            $item->asuransi = $item->pasien->asuransi;
-            return $item;
-        });
+            $riwayat = $this->riwayat($id);
+
             return view('puskes.pelayanan.medis.resep.create',compact('data','dokter','perawat', 'obat','signa','sp','riwayat'));
         }
     }
@@ -297,35 +188,8 @@ class PelayananController extends Controller
             return $item;
         });
         
-        $riwayat = $data->pendaftaran->pasien->pendaftaran->map(function($item){
-            $item->anamnesa = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            $dokter = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            if($dokter == null){
-                $item->dokter = null;
-            }else{
-                $item->dokter = $dokter->dokter->nama;
-            }
-            $perawat = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            if($perawat == null){
-                $item->perawat = null;
-            }else{
-                $item->perawat = $perawat->perawat->nama;
-            }
-            $item->instalasi = $item->pelayanan == null ? '' : $item->pelayanan->instalasi;
-            $item->ruangan = $item->pelayanan == null ? '' : $item->pelayanan->ruangan;
-            $item->pasien = $item->pasien;
-            $item->periksafisik = $item->pelayanan == null ? '' : $item->pelayanan->periksafisik;
-            $item->diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->map(function($item2){
-                $item2->dokter = $item2->dokter;
-                $item2->perawat = $item2->perawat;
-                $item2->diagnosis = $item2->mdiagnosa;
-                return $item2;
-            });
-            
-            $item->count_diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->count();
-            $item->asuransi = $item->pasien->asuransi;
-            return $item;
-        });
+        $riwayat = $this->riwayat($id);
+
         return view('puskes.pelayanan.medis.lab.create',compact('data','sp','lab','riwayat'));
     }
 
@@ -347,35 +211,8 @@ class PelayananController extends Controller
         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
         
-        $riwayat = $data->pendaftaran->pasien->pendaftaran->map(function($item){
-            $item->anamnesa = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            $dokter = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            if($dokter == null){
-                $item->dokter = null;
-            }else{
-                $item->dokter = $dokter->dokter->nama;
-            }
-            $perawat = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            if($perawat == null){
-                $item->perawat = null;
-            }else{
-                $item->perawat = $perawat->perawat->nama;
-            }
-            $item->instalasi = $item->pelayanan == null ? '' : $item->pelayanan->instalasi;
-            $item->ruangan = $item->pelayanan == null ? '' : $item->pelayanan->ruangan;
-            $item->pasien = $item->pasien;
-            $item->periksafisik = $item->pelayanan == null ? '' : $item->pelayanan->periksafisik;
-            $item->diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->map(function($item2){
-                $item2->dokter = $item2->dokter;
-                $item2->perawat = $item2->perawat;
-                $item2->diagnosis = $item2->mdiagnosa;
-                return $item2;
-            });
-            
-            $item->count_diagnosa = $item->pelayanan == null ? '' : $item->pelayanan->diagnosa->count();
-            $item->asuransi = $item->pasien->asuransi;
-            return $item;
-        });
+        $riwayat = $this->riwayat($id);
+
         return view('puskes.pelayanan.medis.tindakan.create',compact('data','sp','lab','dokter','perawat','tindakan','riwayat'));
     }
 
