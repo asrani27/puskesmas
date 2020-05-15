@@ -152,11 +152,11 @@
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Kelurahan</small></label>
                         <div class="col-sm-9">
-                            <select id="e2" class="form-control form-control-sm select2 pilih-kelurahan" name="kelurahan_id">
-                                <option value="0">-Pilih-</option>
-                                @foreach ($kelurahan as $item)
+                            <select id="selKelurahan" class="form-control form-control-sm select2 selKelurahan pilih-kelurahan" name="kelurahan_id">
+                                {{-- <option value="0">-Pilih-</option> --}}
+                                {{-- @foreach ($kelurahan as $item)
                                     <option value="{{$item->id}}">{{$item->nama}}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                     </div>
@@ -278,8 +278,38 @@
 
 <!-- Select2 -->
 <script src="/admin/plugins/select2/js/select2.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script src="/admin/js/bootstrap-datepicker.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+$(document).ready(function(){
+     $("#selKelurahan").select2({
+        placeholder: '-Pilih-',
+        ajax: { 
+        url: '/pendaftaran/pasien/getKelurahan',
+        type: "post",
+        dataType: 'json',
+        delay: 250,
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        data: function (params) {
+            return {
+            searchTerm: params.term // search term
+            };
+        },
+        processResults: function (response) {
+            var data_array = [];
+                    response.forEach(function(value,key){
+            		data_array.push({id:value.id,text:value.nama})
+            });
+            return {
+                results: data_array
+            };
+        },
+        cache: true
+        }
+    });
+});
+</script>
 <script>
     $('.pilih-kelurahan').change(function () {
         var selectedKelurahan = $(this).children("option:selected").val();
@@ -305,7 +335,7 @@
 </script>
 <script>
 $(function() {
-    $('.select2').select2()
+    //$('.select2').select2()
     $('#datepicker').datepicker({
       autoclose: true
     })

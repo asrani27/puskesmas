@@ -4,10 +4,23 @@
 <link rel="stylesheet" href="/admin/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 <style>
+  .select2-selection__rendered {
+      line-height: 25px !important;
+      font-size:14px;
+  }
+  .select2-container .select2-selection--single {
+      height: 32px !important;
+      padding-bottom: 5px;
+  }
+  .select2-selection__arrow {
+      height: 25px !important;
+      padding-bottom: 5px;
+  }
+  
   .myFont{
-    font-size:12px;
-    }
-</style>
+    font-size:13px;
+  }
+  </style>
 @endpush
 
 @section('content-header')
@@ -33,90 +46,8 @@
                   @include('puskes.pelayanan.medis.menu_utama')
 
                   <div class="row">
-                      <div class="col-md-4" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
-                          <!-- Form Element sizes -->
-                          <div class="card card-success card-outline">
-                            <div class="card-header">
-                              <h3 class="card-title">Data Pasien</h3>
-                            </div>
-                              <div class="card-body table-responsive p-0">
-                                  <table class="table table-sm" style="font-size:15px;">
-                                      <tbody>
-                                        <tr>
-                                          <td>ID Pelayanan</td>
-                                          <td>{{$data->id}}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Tanggal</td>
-                                          <td>{{$data->tanggal}}</td>                            
-                                        </tr>
-                                        <tr>
-                                          <td>Poli/Ruangan</td>
-                                          <td>{{$data->ruangan->nama}}</td>     
-                                        </tr>
-                                        <tr>
-                                          <td>No. eRM</td>
-                                          <td>{{$data->pendaftaran->pasien->id}}</td>    
-                                        </tr>
-                                        <tr>
-                                          <td>No RM Lama</td>
-                                          <td>{{$data->pendaftaran->pasien->no_rm_lama}}</td>   
-                                        </tr>
-                                        <tr>
-                                          <td>No Dokumen RM</td>
-                                          <td>{{$data->pendaftaran->pasien->no_dok_rm}}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>NIK</td>
-                                          <td>{{$data->pendaftaran->pasien->nik}}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Nama KK</td>
-                                          <td>-</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Nama</td>
-                                          <td>{{$data->pendaftaran->pasien->nama}}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Jenis Kelamin</td>
-                                          <td>{{$data->pendaftaran->pasien->jenis_kelamin}}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Tempat & Tanggal Lahir</td>
-                                          <td>{{$data->pendaftaran->pasien->tempat_lahir}}, {{\Carbon\Carbon::parse($data->pendaftaran->pasien->tanggal_lahir)->format('d M Y')}}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Alamat</td>
-                                          <td>{{$data->pendaftaran->pasien->alamat}}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Umur</td>
-                                          <td>{{hitungUmur($data->pendaftaran->pasien->tanggal_lahir)}}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Asuransi</td>
-                                          <td>{{$data->pendaftaran->pasien->asuransi->nama}}</td>
-                                        </tr>
-                                      </tbody>
-                                  </table>
-                              </div>
-                            <div class="card-footer">
-                                
-                            </div>
-                            <!-- /.card-body -->
-                          </div>
-                          
-                          <div class="card card-success card-outline">
-                            <div class="card-header">
-                              <h3 class="card-title">Riwayat</h3>
-                            </div>
-                            <div class="card-body">
-                                
-                            </div>
-                            <!-- /.card-body -->
-                          </div>
-                      </div>
+                    
+                    @include('puskes.pelayanan.medis.sidebar_medis')
                       <div class="col-md-8" style="padding-left: 15px; padding-top:15px; padding-right:15px;">
                       <form method="POST" action="{{route('updateAnamnesa2', ['id'=>$data->id, 'anamnesa_id' => $anamnesa->id])}}">
                         @csrf
@@ -134,9 +65,9 @@
                                           <select id="e2" class="form-control form-control-sm select2" style="width: 100%;" name="dokter_id" required>
                                               @foreach ($dokter as $item)
                                                 @if($data->anamnesa->dokter_id == $item->id)
-                                                  <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                                  <option value="{{$item->id}}" selected>{{strtoupper($item->nama)}} / {{strtoupper($item->nama_tenaga_medis)}}</option>
                                                 @else
-                                                  <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                                  <option value="{{$item->id}}">{{strtoupper($item->nama)}} / {{strtoupper($item->nama_tenaga_medis)}}</option>
                                                 @endif
                                               @endforeach
                                           </select>
@@ -161,9 +92,9 @@
                                           <option value="">-Pilih-</option>
                                             @foreach ($perawat as $item)
                                                 @if($data->anamnesa->perawat_id == $item->id)
-                                                  <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                                  <option value="{{$item->id}}" selected>{{strtoupper($item->nama)}} / {{strtoupper($item->nama_tenaga_medis)}}</option>
                                                 @else
-                                                  <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                                  <option value="{{$item->id}}">{{strtoupper($item->nama)}} / {{strtoupper($item->nama_tenaga_medis)}}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -573,7 +504,7 @@
                           
                           <div class="card-footer">
                               <div class="text-right">
-                                  <button type="submit" class="btn btn-sm btn-success shadow"><i class="fas fa-save"></i> SIMPAN</button>
+                                  <button type="submit" class="btn btn-sm btn-success shadow"><i class="fas fa-save"></i> UPDATE</button>
                                   <a href="/pendaftaran/pasien/delete/" class="btn btn-sm btn-danger shadow"><i class="fas fa-trash"></i> KEMBALI</a>
                               </div>
                           </div>

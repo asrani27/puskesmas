@@ -6,7 +6,7 @@
 <style>
 .select2-selection__rendered {
     line-height: 17px !important;
-    font-size:14px;
+    font-size:12px;
 }
 .select2-container .select2-selection--single {
     height: 25px !important;
@@ -152,11 +152,11 @@
                           </thead>
                           <tbody>
                             @foreach ($data->diagnosa as $item)
-                              <tr style="font-size:14px;">
+                              <tr style="font-size:13px;">
                                 <td>{{$item->tanggal}}</td>
-                                <td>{{$item->dokter->nama}}</td>
-                                <td>{{$item->perawat->nama}}</td>
-                                <td>{{$item->diagnosa_id}} / {{$item->mdiagnosa->value}}</td>
+                                <td>{{strtoupper($item->dokter->nama)}}</td>
+                                <td>{{strtoupper($item->perawat->nama)}}</td>
+                                <td>{{strtoupper($item->diagnosa_id)}} / {{strtoupper($item->mdiagnosa->value)}}</td>
                                 <td>{{$item->diagnosa_jenis}}</td>
                                 <td>{{$item->diagnosa_kasus}}</td>
                                 <td>
@@ -192,24 +192,55 @@
                           <tbody>
                               <tr>
                                   <td>
+                                    @if($data->anamnesa == null)
                                     <select name="dokter_id" class="form-control form-control-sm select2">
                                       @foreach ($dokter as $item)
-                                      <option value="{{$item->id}}">{{$item->nama}}</option>
+                                      <option value="{{$item->id}}">{{strtoupper($item->nama)}}</option>
                                       @endforeach
                                     </select>
+                                    @else
+                                    <select name="dokter_id" class="form-control form-control-sm select2">
+                                      @foreach ($dokter as $item)
+                                        @if($item->id == $data->anamnesa->dokter_id)
+                                        <option value="{{$item->id}}" selected>{{strtoupper($item->nama)}}</option>
+                                        @else
+                                        <option value="{{$item->id}}">{{strtoupper($item->nama)}}</option>
+                                        @endif
+                                      @endforeach
+                                    </select>
+                                    @endif
                                   </td>
                                   <td>
+                                    @if($data->anamnesa == null)
                                     <select name="perawat_id" class="form-control form-control-sm select2">
                                       @foreach ($perawat as $item)
-                                      <option value="{{$item->id}}">{{$item->nama}}</option>
+                                      <option value="{{$item->id}}">{{strtoupper($item->nama)}}</option>
                                       @endforeach
                                     </select>
-                                  </td>
-                                  <td>
-                                    <select name="diagnosa_id" class="form-control select2" style="width: 250px">
-                                      @foreach ($diagnosa as $item)
-                                      <option value="{{$item->id}}">{{$item->id}} / {{$item->value}}</option>
+                                    @else
+                                    <select name="perawat_id" class="form-control form-control-sm select2">
+                                      @foreach ($perawat as $item)
+                                        @if($item->id == $data->anamnesa->perawat_id)
+                                        <option value="{{$item->id}}" selected>{{strtoupper($item->nama)}}</option>
+                                        @else
+                                        <option value="{{$item->id}}">{{strtoupper($item->nama)}}</option>
+                                        @endif
                                       @endforeach
+                                    </select>
+                                    @endif
+                                  </td>
+                                  {{-- <td>
+                                    <select name="perawat_id" class="form-control form-control-sm select2">
+                                      @foreach ($perawat as $item)
+                                      <option value="{{$item->id}}">{{strtoupper($item->nama)}}</option>
+                                      @endforeach
+                                    </select>
+                                  </td> --}}
+                                  <td>
+                                    <select id="selDiagnosa" name="diagnosa_id" class="form-control select2" style="width: 250px">
+                                      {{-- @foreach ($diagnosa as $item)
+                                      <option value="{{$item->id}}">{{strtoupper($item->id)}} / {{strtoupper($item->value)}}</option>
+                                      @endforeach --}}
                                     </select>
                                   </td>
                                   <td>
@@ -253,7 +284,42 @@
 @push('addjs')
 
 <script src="/admin/plugins/select2/js/select2.full.min.js"></script>
-<script>  
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+$(document).ready(function(){
+     $('.select2').select2({ dropdownCssClass: "myFont" })
+     $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+      
+     $("#selDiagnosa").select2({
+        placeholder: 'Cari..',
+        ajax: { 
+        url: '/pendaftaran/pasien/getDiagnosa',
+        type: "post",
+        dataType: 'json',
+        delay: 250,
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        data: function (params) {
+            return {
+            searchTerm: params.term // search term
+            };
+        },
+        processResults: function (response) {
+            var data_array = [];
+                    response.forEach(function(value,key){
+            		data_array.push({id:value.id,text:value.id+'/'+value.value})
+            });
+            return {
+                results: data_array
+            };
+        },
+        cache: true
+        }
+    });
+});
+</script>
+{{-- <script>  
   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2({ dropdownCssClass: "myFont" })
@@ -264,7 +330,7 @@
     })
     
   });
-</script>
+</script> --}}
 
 <script>
   $(document).on("click", ".open-modal", function () {

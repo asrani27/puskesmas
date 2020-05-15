@@ -115,7 +115,11 @@ class PelayananController extends Controller
                     if($perawat == null){
                         $item->perawat = null;
                     }else{
-                        $item->perawat = $perawat->perawat->nama;
+                        if($item->perawat == null){
+                            $item->perawat = null;
+                        }else{
+                            $item->perawat = $perawat->perawat->nama;
+                        }
                     }
                     $item->instalasi = $item->pelayanan == null ? '' : $item->pelayanan->instalasi;
                     $item->ruangan = $item->pelayanan == null ? '' : $item->pelayanan->ruangan;
@@ -163,7 +167,11 @@ class PelayananController extends Controller
             if($perawat == null){
                 $item->perawat = null;
             }else{
-                $item->perawat = $perawat->perawat->nama;
+                if($item->perawat == null){
+                    $item->perawat = null;
+                }else{
+                    $item->perawat = $perawat->perawat->nama;
+                }
             }
             $item->instalasi = $item->pelayanan == null ? '' : $item->pelayanan->instalasi;
             $item->ruangan = $item->pelayanan == null ? '' : $item->pelayanan->ruangan;

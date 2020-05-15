@@ -136,7 +136,7 @@
                                           <select id="e2" class="form-control form-control-sm select2" style="width: 100%;" name="dokter_id" required>
                                             <option value="">-Pilih-</option>
                                             @foreach ($dokter as $item)
-                                              <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                              <option value="{{$item->id}}">{{strtoupper($item->nama)}} / {{strtoupper($item->nama_tenaga_medis)}}</option>
                                             @endforeach
                                           </select>
                                         </div>
@@ -159,7 +159,7 @@
                                         <select id="e3" class="form-control select2" name="perawat_id">
                                           <option value="">-Pilih-</option>
                                           @foreach ($perawat as $item)
-                                            <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                            <option value="{{$item->id}}">{{strtoupper($item->nama)}} / {{strtoupper($item->nama_tenaga_medis)}}</option>
                                           @endforeach
                                         </select>
                                       </div>

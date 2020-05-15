@@ -2,26 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use DB;
+use Auth;
+use Alert;
+use DateTime;
+use DataTables;
 use App\Mpasien;
+use App\Mruangan;
 use App\Masuransi;
+use App\Mdiagnosa;
+use Carbon\Carbon;
 use App\Mkelurahan;
 use App\Mpuskesmas;
-use App\Mruangan;
-use App\Tpendaftaran;
 use App\Tpelayanan;
-use Alert;
-use Auth;
-use DataTables;
-use Carbon\Carbon;
-use DateTime;
-use DB;
+use App\Tpendaftaran;
+use Illuminate\Http\Request;
 
 class PendaftaranController extends Controller
 {
     public function __construct()
     {
 
+    }
+
+    public function selectKelurahan(Request $req)
+    {
+        if($req->searchTerm == null){
+            $data = null;
+        }else{
+            $data = Mkelurahan::where('nama', 'LIKE', $req->searchTerm.'%')->get()->take(10)->toArray();
+            return json_encode($data);
+        }
+    }
+
+    public function selectDiagnosa(Request $req)
+    {
+        if($req->searchTerm == null){
+            $data = null;
+        }else{
+            $data = Mdiagnosa::where('id', 'LIKE', $req->searchTerm.'%')->orWhere('value', 'LIKE', $req->searchTerm.'%')->get()->take(10)->toArray();
+            return json_encode($data);
+        }
     }
 
     public function pasien()

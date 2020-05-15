@@ -72,7 +72,11 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
-    
+    //----return response json-----
+    Route::post('/pendaftaran/pasien/getKelurahan', 'PendaftaranController@selectKelurahan');
+    Route::post('/pendaftaran/pasien/getDiagnosa', 'PendaftaranController@selectDiagnosa');
+
+    //----end----------------------
     Route::get('/pengaturan/data_master', 'PengaturanController@dataMaster');
     Route::get('/pengaturan/data_master/poli', 'PengaturanController@poli');
     Route::post('/pengaturan/data_master/poli', 'PengaturanController@storePoli')->name('simpanPoli');
