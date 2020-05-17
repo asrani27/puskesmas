@@ -78,7 +78,11 @@
                                     <select id="e2" class="form-control form-control-sm select2" style="width: 100%;" name="dokter_id" required>
                                       <option value="">-Pilih-</option>
                                       @foreach ($dokter as $item)
+                                        @if($data->odontogram->dokter_id = $item->id)
+                                        <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                        @else
                                         <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                        @endif
                                       @endforeach
                                     </select>
                                   </div>
@@ -95,7 +99,11 @@
                                   <select id="e3" class="form-control select2" name="perawat_id">
                                     <option value="">-Pilih-</option>
                                     @foreach ($perawat as $item)
-                                      <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                        @if($data->odontogram->perawat_id = $item->id)
+                                        <option value="{{$item->id}}" selected>{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                        @else
+                                        <option value="{{$item->id}}">{{$item->nama}} / {{$item->nama_tenaga_medis}}</option>
+                                        @endif
                                     @endforeach
                                   </select>
                                 </div>
@@ -137,7 +145,7 @@
                       <div class="card-footer">
                           <div class="text-right">
                               <button type="submit" class="btn btn-sm btn-success">Update</button>
-                              <a href="/delete/odontogram/{{$data->id}}" class="btn btn-sm btn-success">Update</a>
+                              <a href="/delete/odontogram/{{$data->odontogram->id}}" class="btn btn-sm btn-danger">Hapus</a>
                           </div>
                       </div>
                     </div>

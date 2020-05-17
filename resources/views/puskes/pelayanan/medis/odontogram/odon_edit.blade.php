@@ -84,7 +84,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     18
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[18][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[18][value]" id="odon_18">
+                                    <input readonly="readonly" type="hidden" value="{{$no_18}}" name="OdontogramDetail[18][value]" id="odon_18">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -111,7 +111,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     17
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[17][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[17][value]" id="odon_17">
+                                    <input readonly="readonly" type="hidden" value="{{$no_17}}" name="OdontogramDetail[17][value]" id="odon_17">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -138,7 +138,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     16
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[16][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[16][value]" id="odon_16">
+                                    <input readonly="readonly" type="hidden" value="{{$no_16}}" name="OdontogramDetail[16][value]" id="odon_16">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -165,7 +165,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     15
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[15][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[15][value]" id="odon_15">
+                                    <input readonly="readonly" type="hidden" value="{{$no_15}}" name="OdontogramDetail[15][value]" id="odon_15">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -192,7 +192,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     14
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[14][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[14][value]" id="odon_14">
+                                    <input readonly="readonly" type="hidden" value="{{$no_14}}" name="OdontogramDetail[14][value]" id="odon_14">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -214,7 +214,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     13
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[13][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[13][value]" id="odon_13">
+                                    <input readonly="readonly" type="hidden" value="{{$no_13}}" name="OdontogramDetail[13][value]" id="odon_13">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -236,7 +236,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     12
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[12][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[12][value]" id="odon_12">
+                                    <input readonly="readonly" type="hidden" value="{{$no_12}}" name="OdontogramDetail[12][value]" id="odon_12">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -258,7 +258,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     11
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[11][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[11][value]" id="odon_11">
+                                    <input readonly="readonly" type="hidden" value="{{$no_11}}" name="OdontogramDetail[11][value]" id="odon_11">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -280,7 +280,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     21
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[21][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[21][value]" id="odon_21">
+                                    <input readonly="readonly" type="hidden" value="{{$no_21}}" name="OdontogramDetail[21][value]" id="odon_21">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -302,7 +302,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     22
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[22][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[22][value]" id="odon_22">
+                                    <input readonly="readonly" type="hidden" value="{{$no_22}}" name="OdontogramDetail[22][value]" id="odon_22">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -324,7 +324,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     23
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[23][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[23][value]" id="odon_23">
+                                    <input readonly="readonly" type="hidden" value="{{$no_23}}" name="OdontogramDetail[23][value]" id="odon_23">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -351,7 +351,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     24
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[24][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[24][value]" id="odon_24">
+                                    <input readonly="readonly" type="hidden" value="{{$no_24}}" name="OdontogramDetail[24][value]" id="odon_24">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -378,7 +378,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     25
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[25][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[25][value]" id="odon_25">
+                                    <input readonly="readonly" type="hidden" value="{{$no_25}}" name="OdontogramDetail[25][value]" id="odon_25">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -405,7 +405,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     26
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[26][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[26][value]" id="odon_26">
+                                    <input readonly="readonly" type="hidden" value="{{$no_26}}" name="OdontogramDetail[26][value]" id="odon_26">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -432,7 +432,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     27
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[27][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[27][value]" id="odon_27">
+                                    <input readonly="readonly" type="hidden" value="{{$no_27}}" name="OdontogramDetail[27][value]" id="odon_27">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -459,7 +459,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     28
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[28][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[28][value]" id="odon_28">
+                                    <input readonly="readonly" type="hidden" value="{{$no_28}}" name="OdontogramDetail[28][value]" id="odon_28">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -489,7 +489,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     55
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[55][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[55][value]" id="odon_55">
+                                    <input readonly="readonly" type="hidden" value="{{$no_55}}" name="OdontogramDetail[55][value]" id="odon_55">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -516,7 +516,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     54
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[54][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[54][value]" id="odon_54">
+                                    <input readonly="readonly" type="hidden" value="{{$no_54}}" name="OdontogramDetail[54][value]" id="odon_54">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -538,7 +538,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     53
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[53][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[53][value]" id="odon_53">
+                                    <input readonly="readonly" type="hidden" value="{{$no_53}}" name="OdontogramDetail[53][value]" id="odon_53">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -560,7 +560,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     52
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[52][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[52][value]" id="odon_52">
+                                    <input readonly="readonly" type="hidden" value="{{$no_52}}" name="OdontogramDetail[52][value]" id="odon_52">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -582,7 +582,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     51
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[51][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[51][value]" id="odon_51">
+                                    <input readonly="readonly" type="hidden" value="{{$no_51}}" name="OdontogramDetail[51][value]" id="odon_51">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -604,7 +604,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     61
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[61][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[61][value]" id="odon_61">
+                                    <input readonly="readonly" type="hidden" value="{{$no_61}}" name="OdontogramDetail[61][value]" id="odon_61">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -626,7 +626,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     62
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[62][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[62][value]" id="odon_62">
+                                    <input readonly="readonly" type="hidden" value="{{$no_62}}" name="OdontogramDetail[62][value]" id="odon_62">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -648,7 +648,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     63
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[63][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[63][value]" id="odon_63">
+                                    <input readonly="readonly" type="hidden" value="{{$no_63}}" name="OdontogramDetail[63][value]" id="odon_63">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -675,7 +675,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     64
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[64][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[64][value]" id="odon_64">
+                                    <input readonly="readonly" type="hidden" value="{{$no_64}}" name="OdontogramDetail[64][value]" id="odon_64">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -702,7 +702,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     65
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[65][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[65][value]" id="odon_65">
+                                    <input readonly="readonly" type="hidden" value="{{$no_65}}" name="OdontogramDetail[65][value]" id="odon_65">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -733,7 +733,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     85
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[85][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[85][value]" id="odon_85">
+                                    <input readonly="readonly" type="hidden" value="{{$no_85}}" name="OdontogramDetail[85][value]" id="odon_85">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -760,7 +760,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     84
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[84][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[84][value]" id="odon_84">
+                                    <input readonly="readonly" type="hidden" value="{{$no_84}}" name="OdontogramDetail[84][value]" id="odon_84">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -782,7 +782,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     83
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[83][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[83][value]" id="odon_83">
+                                    <input readonly="readonly" type="hidden" value="{{$no_83}}" name="OdontogramDetail[83][value]" id="odon_83">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -804,7 +804,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     82
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[82][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[82][value]" id="odon_82">
+                                    <input readonly="readonly" type="hidden" value="{{$no_82}}" name="OdontogramDetail[82][value]" id="odon_82">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -826,7 +826,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     81
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[81][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[81][value]" id="odon_81">
+                                    <input readonly="readonly" type="hidden" value="{{$no_81}}" name="OdontogramDetail[81][value]" id="odon_81">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -848,7 +848,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     71
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[71][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[71][value]" id="odon_71">
+                                    <input readonly="readonly" type="hidden" value="{{$no_71}}" name="OdontogramDetail[71][value]" id="odon_71">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -870,7 +870,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     72
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[72][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[72][value]" id="odon_72">
+                                    <input readonly="readonly" type="hidden" value="{{$no_72}}" name="OdontogramDetail[72][value]" id="odon_72">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -892,7 +892,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     73
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[73][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[73][value]" id="odon_73">
+                                    <input readonly="readonly" type="hidden" value="{{$no_73}}" name="OdontogramDetail[73][value]" id="odon_73">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -919,7 +919,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     74
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[74][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[74][value]" id="odon_74">
+                                    <input readonly="readonly" type="hidden" value="{{$no_74}}" name="OdontogramDetail[74][value]" id="odon_74">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -946,7 +946,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     75
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[75][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[75][value]" id="odon_75">
+                                    <input readonly="readonly" type="hidden" value="{{$no_75}}" name="OdontogramDetail[75][value]" id="odon_75">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -976,7 +976,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     48
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[48][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[48][value]" id="odon_48">
+                                    <input readonly="readonly" type="hidden" value="{{$no_48}}" name="OdontogramDetail[48][value]" id="odon_48">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1003,7 +1003,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     47
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[47][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[47][value]" id="odon_47">
+                                    <input readonly="readonly" type="hidden" value="{{$no_47}}" name="OdontogramDetail[47][value]" id="odon_47">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1030,7 +1030,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     46
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[46][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[46][value]" id="odon_46">
+                                    <input readonly="readonly" type="hidden" value="{{$no_46}}" name="OdontogramDetail[46][value]" id="odon_46">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1057,7 +1057,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     45
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[45][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[45][value]" id="odon_45">
+                                    <input readonly="readonly" type="hidden" value="{{$no_45}}" name="OdontogramDetail[45][value]" id="odon_45">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1084,7 +1084,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     44
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[44][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[44][value]" id="odon_44">
+                                    <input readonly="readonly" type="hidden" value="{{$no_44}}" name="OdontogramDetail[44][value]" id="odon_44">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1106,7 +1106,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     43
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[43][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[43][value]" id="odon_43">
+                                    <input readonly="readonly" type="hidden" value="{{$no_43}}" name="OdontogramDetail[43][value]" id="odon_43">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1128,7 +1128,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     42
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[42][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[42][value]" id="odon_42">
+                                    <input readonly="readonly" type="hidden" value="{{$no_42}}" name="OdontogramDetail[42][value]" id="odon_42">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1150,7 +1150,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     41
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[41][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[41][value]" id="odon_41">
+                                    <input readonly="readonly" type="hidden" value="{{$no_41}}" name="OdontogramDetail[41][value]" id="odon_41">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1172,7 +1172,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     31
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[31][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[31][value]" id="odon_31">
+                                    <input readonly="readonly" type="hidden" value="{{$no_31}}" name="OdontogramDetail[31][value]" id="odon_31">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1194,7 +1194,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     32
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[32][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[32][value]" id="odon_32">
+                                    <input readonly="readonly" type="hidden" value="{{$no_32}}" name="OdontogramDetail[32][value]" id="odon_32">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1216,7 +1216,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     33
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[33][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[33][value]" id="odon_33">
+                                    <input readonly="readonly" type="hidden" value="{{$no_33}}" name="OdontogramDetail[33][value]" id="odon_33">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1243,7 +1243,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     34
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[34][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[34][value]" id="odon_34">
+                                    <input readonly="readonly" type="hidden" value="{{$no_34}}" name="OdontogramDetail[34][value]" id="odon_34">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1270,7 +1270,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     35
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[35][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[35][value]" id="odon_35">
+                                    <input readonly="readonly" type="hidden" value="{{$no_35}}" name="OdontogramDetail[35][value]" id="odon_35">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1297,7 +1297,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     36
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[36][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[36][value]" id="odon_36">
+                                    <input readonly="readonly" type="hidden" value="{{$no_36}}" name="OdontogramDetail[36][value]" id="odon_36">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1324,7 +1324,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     37
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[37][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[37][value]" id="odon_37">
+                                    <input readonly="readonly" type="hidden" value="{{$no_37}}" name="OdontogramDetail[37][value]" id="odon_37">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -1351,7 +1351,7 @@
                                 <td colspan="3" style="text-align:center;padding-top: 5px;font-size:13px;">
                                     38
                                     <input readonly="readonly" type="hidden" value="" name="OdontogramDetail[38][id]">
-                                    <input readonly="readonly" type="hidden" value="wwwww" name="OdontogramDetail[38][value]" id="odon_38">
+                                    <input readonly="readonly" type="hidden" value="{{$no_38}}" name="OdontogramDetail[38][value]" id="odon_38">
                                 </td>
                             </tr>
                         </tbody></table>

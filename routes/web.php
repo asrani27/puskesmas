@@ -191,6 +191,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     //Route Odontogtram
     Route::post('/pelayanan/medis/proses/{id}/odontogram', 'OdontogramController@store')->name('odontogram');
     Route::post('/pelayanan/medis/proses/{id}/odontogram/update', 'OdontogramController@update')->name('updateOdontogram');
+    Route::get('/delete/odontogram/{id}', 'OdontogramController@delete');
 
 
     //Route Gambar GIGI
