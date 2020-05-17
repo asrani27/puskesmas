@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Closure;
 use App\Mkms;
+use App\User;
 use App\Tresep;
 use App\Malergi;
 use App\Mlookup;
@@ -18,14 +19,18 @@ use App\Ttindakan;
 use Carbon\Carbon;
 use App\Mimunisasi;
 use App\Tpelayanan;
+use App\Modontogram;
 use App\Tresepdetail;
 use App\Mlaboratorium;
 use App\Mstatuspulang;
 use App\Tlaboratorium;
 use App\Tperiksafisik;
+use Illuminate\Support\Str;
 use App\Tlaboratoriumdetail;
 use Illuminate\Http\Request;
+use Intervention\Image\Image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PelayananController extends Controller
@@ -234,7 +239,8 @@ class PelayananController extends Controller
                 });
                 $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
                 $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-                return view('puskes.pelayanan.medis.mtbs.create',compact('data','sp','dokter','perawat'));
+                $riwayat = $this->riwayat($id);
+                return view('puskes.pelayanan.medis.mtbs.create',compact('data','sp','dokter','perawat','riwayat'));
             }else{
                 $sp   = Mstatuspulang::all();
                 $mtbs = $checkMtbs;
@@ -245,7 +251,8 @@ class PelayananController extends Controller
                 });
                 $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
                 $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-                return view('puskes.pelayanan.medis.mtbs.edit',compact('data','sp','dokter','perawat', 'mtbs'));
+                $riwayat = $this->riwayat($id);
+                return view('puskes.pelayanan.medis.mtbs.edit',compact('data','sp','dokter','perawat', 'mtbs','riwayat'));
 
             }
         }
@@ -262,7 +269,8 @@ class PelayananController extends Controller
         });
         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        return view('puskes.pelayanan.medis.imunisasi.check',compact('data','sp','dokter','perawat'));   
+        $riwayat = $this->riwayat($id);
+        return view('puskes.pelayanan.medis.imunisasi.check',compact('data','sp','dokter','perawat','riwayat'));   
     }
 
     public function imunisasiAnak($id)
@@ -279,7 +287,8 @@ class PelayananController extends Controller
             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
             $imun = Mimunisasi::all()->chunk(4);
-            return view('puskes.pelayanan.medis.imunisasi.imun_anak',compact('data','sp','dokter','perawat','imun'));   
+            $riwayat = $this->riwayat($id);
+            return view('puskes.pelayanan.medis.imunisasi.imun_anak',compact('data','sp','dokter','perawat','imun','riwayat'));   
         }else{
             $sp   = Mstatuspulang::all();
             $tenagamedis = Mpegawai::all()->map(function($item, $key){
@@ -294,13 +303,15 @@ class PelayananController extends Controller
 
             $checkImun = $data->imunisasi->where('kategori', 'anak')->first();
             
+            $riwayat = $this->riwayat($id);
             return view('puskes.pelayanan.medis.imunisasi.edit_imun_anak',compact('data',
             'sp',
             'dokter',
             'perawat',
             'imun',
             'kms',
-            'checkImun'
+            'checkImun',
+            'riwayat'
             ));   
         }
     }
@@ -317,12 +328,13 @@ class PelayananController extends Controller
         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
         $imun = Mimunisasi::all()->chunk(4);
+        $riwayat = $this->riwayat($id);
         if($data->imunisasi->where('kategori', 'dewasa')->first() == null){
-            return view('puskes.pelayanan.medis.imunisasi.imun_dewasa',compact('data','sp','dokter','perawat','imun'));  
+            return view('puskes.pelayanan.medis.imunisasi.imun_dewasa',compact('data','sp','dokter','perawat','imun','riwayat'));  
         } else{
 
             $dataImun = $data->imunisasi->where('kategori', 'dewasa')->first();
-            return view('puskes.pelayanan.medis.imunisasi.edit_imun_dewasa',compact('data','sp','dokter','perawat','imun','dataImun'));  
+            return view('puskes.pelayanan.medis.imunisasi.edit_imun_dewasa',compact('data','sp','dokter','riwayat','perawat','imun','dataImun'));  
         }
     }
 
@@ -342,7 +354,14 @@ class PelayananController extends Controller
         });
         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        return view('puskes.pelayanan.medis.odontogram.create',compact('data','sp','lab','dokter','perawat'));
+        $riwayat = $this->riwayat($id);
+        $checkOdontogram = $data->odontogram;
+        if($checkOdontogram == null){
+            return view('puskes.pelayanan.medis.odontogram.create',compact('data','sp','lab','dokter','perawat','riwayat'));
+    
+        }else{
+            return view('puskes.pelayanan.medis.odontogram.edit',compact('data','sp','lab','dokter','perawat','riwayat'));
+        }
     }
 
     public function medis()

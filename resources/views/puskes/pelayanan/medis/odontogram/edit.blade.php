@@ -49,7 +49,7 @@
                         </div>
                         <div class="card-body table-responsive p-2">
                           
-                          @include('puskes.pelayanan.medis.odontogram.riwayat_odon')
+                          @include('puskes.pelayanan.medis.odontogram.riwayat_odon_edit')
                             {{-- <table id="example" class="table table-bordered table-sm" width="100%">
                               <thead>
                                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
@@ -65,7 +65,7 @@
                             </table> --}}
                         </div>
                     </div>
-                    <form method="POST" action="{{route('odontogram', ['id' => $data->id])}}">
+                    <form method="POST" action="{{route('updateOdontogram', ['id' => $data->id])}}">
                     <div class="card card-info card-outline">
                         @csrf
                       <div class="row">
@@ -130,13 +130,14 @@
                       <div class="row">
                         <div class="col-md-12 p-1">
                             <div class="card-body p-2">
-                              @include('puskes.pelayanan.medis.odontogram.odon')
+                              @include('puskes.pelayanan.medis.odontogram.odon_edit')
                             </div>
                         </div>
                       </div>
                       <div class="card-footer">
                           <div class="text-right">
-                              <button type="submit" class="btn btn-sm btn-success">Simpan</button>
+                              <button type="submit" class="btn btn-sm btn-success">Update</button>
+                              <a href="/delete/odontogram/{{$data->id}}" class="btn btn-sm btn-success">Update</a>
                           </div>
                       </div>
                     </div>

@@ -62,4 +62,9 @@ class Tpelayanan extends Model
     {
         return $this->hasMany(Timunisasi::class, 'pelayanan_id');
     }
+    
+    public function odontogram()
+    {
+        return $this->hasOne(Todontogram::class, 'pelayanan_id');
+    }
 }

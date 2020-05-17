@@ -186,8 +186,17 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pelayanan/medis/proses/{id}/imunisasi/dewasa/update/{imunisasi_id}', 'ImunisasiController@UpdateImunisasiDewasa')->name('updateImunisasiDewasa');
 
     //Route Periksa Gizi
-    Route::post('/pelayanan/medis/proses/{id}/periksagizi', 'PeriksaGiziController@store')->name('periksagizi'); 
+    Route::post('/pelayanan/medis/proses/{id}/periksagizi', 'PeriksaGiziController@store')->name('periksagizi');
 
+    //Route Odontogtram
+    Route::post('/pelayanan/medis/proses/{id}/odontogram', 'OdontogramController@store')->name('odontogram');
+    Route::post('/pelayanan/medis/proses/{id}/odontogram/update', 'OdontogramController@update')->name('updateOdontogram');
+
+
+    //Route Gambar GIGI
+    Route::get('/odontogram/image/code={code}/tipe={tipe}', 'OdontogramController@image');
+    Route::get('/generatekode', 'OdontogramController@generatekode');
+    Route::get('/tarikgambar', 'OdontogramController@tarikgambar');
     // //POLI UMUM
     // Route::get('/pelayanan/medis/proses/{id}/umum/anamnesa', 'PelayananController@umumAnamnesa');
     // Route::post('/pelayanan/medis/proses/{id}/umum/anamnesa', 'PelayananController@storeAnamnesa')->name('anamnesa');

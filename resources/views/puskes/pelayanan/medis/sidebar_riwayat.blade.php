@@ -1,7 +1,7 @@
 <script>
     $(document).on("click", ".open-modal", function () {
      var pendaftaran = $(this).data('pendaftaran');
-     console.log(pendaftaran);
+     //console.log(pendaftaran);
      document.getElementById("id_pelayanan").innerHTML = pendaftaran.pelayanan.id;
      document.getElementById("instalasi").innerHTML = pendaftaran.instalasi;
      document.getElementById("nik_pasien").innerHTML = pendaftaran.pasien.nik;
@@ -103,7 +103,7 @@
      
      for(i = 0; i< data.length; i++)
      {
-       console.log(data[i].id);
+       //console.log(data[i].id);
         $('#tableDiagnosa').append('<tr><td>'+data[i].id+'</td><td>'+data[i].tanggal+'</td><td>'+data[i].dokter.nama+'</td><td>'+data[i].perawat.nama+'</td><td>'+data[i].diagnosa_id+'</td><td>'+data[i].diagnosis.value+'</td><td>'+data[i].diagnosa_jenis+'</td><td>'+data[i].diagnosa_kasus+'</td></tr>');
      }
      $('#modal-xl').modal('show');
