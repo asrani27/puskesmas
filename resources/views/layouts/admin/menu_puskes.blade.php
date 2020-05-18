@@ -52,8 +52,8 @@
         <li><a href="/laporansp3lb2" class="dropdown-item">SP3 LB2 </a></li>
         <li><a href="/laporansp3lb3" class="dropdown-item">SP3 LB3 </a></li>
         <li><a href="/laporansp3lb4" class="dropdown-item">SP3 LB4 </a></li>
-        <li><a href="/generatekode" class="dropdown-item">generate kode </a></li>
-        <li><a href="/tarikgambar" class="dropdown-item">tarik gambar dan simpan </a></li>
+        {{-- <li><a href="/generatekode" class="dropdown-item">generate kode </a></li>
+        <li><a href="/tarikgambar" class="dropdown-item">tarik gambar dan simpan </a></li> --}}
       </ul>
     </li>
     <li class="nav-item dropdown">
