@@ -76,6 +76,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pendaftaran/pasien/getKelurahan', 'PendaftaranController@selectKelurahan');
     Route::post('/pendaftaran/pasien/getDiagnosa', 'PendaftaranController@selectDiagnosa');
 
+    Route::get('/download_panduan', 'SuperadminController@downloadpanduan');
+    Route::post('/tambah_pendaftaran', 'SuperadminController@tambahpendaftaran');
     //----end----------------------
     Route::get('/pengaturan/data_master', 'PengaturanController@dataMaster');
     Route::get('/pengaturan/data_master/poli', 'PengaturanController@poli');

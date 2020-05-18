@@ -27,8 +27,8 @@
             
             <!-- /.card-header -->
             {{-- <div class="card-body p-0"> --}}
-              <div class="row" style="padding-top:10px;">
-                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
+              <div class="row" style="padding-top:5px;">
+                {{-- <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
                   <!-- text input -->
                   <div class="form-group">
                     <select class="form-control form-control-sm">
@@ -77,6 +77,19 @@
                       <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Pencarian">
                       <div class="input-group-append">
                         <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                  </form>
+                </div> --}}
+                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
+                  <!-- text input -->
+                  <form method="post" action="/tambah_pendaftaran">
+                    @csrf
+                  <div class="form-group p-1">
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-append">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i>Tambah Pendaftaran</button>
                       </div>
                     </div>
                   </div>

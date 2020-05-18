@@ -30,7 +30,7 @@
     <li class="nav-item dropdown">
       <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Pendaftaran</a>
       <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-        <li><a href="/pendaftaran/pasien" class="dropdown-item">Pasien Dan KK </a></li>
+        <li><a href="/pendaftaran/pasien" class="dropdown-item">Pasien</a></li>
         <li><a href="/pendaftaran" class="dropdown-item">Pendaftaran</a></li>
         <li><a href="/rekam_medis" class="dropdown-item">Rekam Medis</a></li>
       </ul>

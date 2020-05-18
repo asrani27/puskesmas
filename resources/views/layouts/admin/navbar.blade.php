@@ -20,8 +20,13 @@
     <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="/profile">
-            <button class="btn btn-default btn-xs"><strong> <i class="fas fa-user"></i>  PEKAUMAN </strong></button>
+        <a class="nav-link" href="#">
+            <button class="btn btn-default btn-xs"><strong> <i class="fas fa-user"></i>  PUSKESMAS </strong></button>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/download_panduan">
+            <button class="btn btn-default btn-xs"><strong> <i class="fas fa-book"></i>  DOWNLOAD PANDUAN </strong></button>
         </a>
       </li>
       <li class="nav-item">

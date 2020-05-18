@@ -25,6 +25,17 @@ class SuperadminController extends Controller
     |--------------------------------------------------------------------------
     */
 
+    public function downloadpanduan()
+    {
+        Alert::info('Buku Panduan Sedang DiBuat');
+        return back();
+    }
+
+    public function tambahpendaftaran()
+    {
+        Alert::info('Menunggu Integrasi (API/Bridging) dengan BPJS');
+        return back();
+    }
     public function role()
     {
         $data = Role::all();
