@@ -47,10 +47,17 @@ class PelayananController extends Controller
         $riwayat = $data->pendaftaran->pasien->pendaftaran->map(function($item){
             $item->anamnesa = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
             $dokter = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
+            //dd($dokter->dokter->nama);
             if($dokter == null){
                 $item->dokter = null;
             }else{
-                $item->dokter = $dokter->dokter->nama;
+                if($dokter->dokter == null){
+
+                    $item->dokter = null;
+                }else{
+                    $item->dokter = $dokter->dokter->nama;
+                }
+                //$item->dokter = $dokter->dokter->nama;
             }
             $perawat = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
             if($perawat == null){
@@ -276,44 +283,50 @@ class PelayananController extends Controller
     public function imunisasiAnak($id)
     {
         $data = Tpelayanan::find($id);
-        $checkKMS = Mkms::where('pasien_id', $data->pendaftaran->pasien_id)->first();
-        if($checkKMS == null){
-            $sp   = Mstatuspulang::all();
-            $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                return $item;
-            });
-            $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-            $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-            $imun = Mimunisasi::all()->chunk(4);
-            $riwayat = $this->riwayat($id);
-            return view('puskes.pelayanan.medis.imunisasi.imun_anak',compact('data','sp','dokter','perawat','imun','riwayat'));   
+        if($data->anamnesa == null){
+            toast('harap isi anamnesaa terlebih dahulu');
+            return back();
         }else{
-            $sp   = Mstatuspulang::all();
-            $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                return $item;
-            });
-            $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-            $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-            $imun = Mimunisasi::all()->chunk(4);
-            $kms = $checkKMS;
-
-            $checkImun = $data->imunisasi->where('kategori', 'anak')->first();
-            
-            $riwayat = $this->riwayat($id);
-            return view('puskes.pelayanan.medis.imunisasi.edit_imun_anak',compact('data',
-            'sp',
-            'dokter',
-            'perawat',
-            'imun',
-            'kms',
-            'checkImun',
-            'riwayat'
-            ));   
+            $checkKMS = Mkms::where('pasien_id', $data->pendaftaran->pasien_id)->first();
+            if($checkKMS == null){
+                $sp   = Mstatuspulang::all();
+                $tenagamedis = Mpegawai::all()->map(function($item, $key){
+                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
+                    return $item;
+                });
+                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+                $imun = Mimunisasi::all()->chunk(4);
+                $riwayat = $this->riwayat($id);
+                return view('puskes.pelayanan.medis.imunisasi.imun_anak',compact('data','sp','dokter','perawat','imun','riwayat'));   
+            }else{
+                $sp   = Mstatuspulang::all();
+                $tenagamedis = Mpegawai::all()->map(function($item, $key){
+                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
+                    return $item;
+                });
+                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+                $imun = Mimunisasi::all()->chunk(4);
+                $kms = $checkKMS;
+    
+                $checkImun = $data->imunisasi->where('kategori', 'anak')->first();
+                
+                $riwayat = $this->riwayat($id);
+                return view('puskes.pelayanan.medis.imunisasi.edit_imun_anak',compact('data',
+                'sp',
+                'dokter',
+                'perawat',
+                'imun',
+                'kms',
+                'checkImun',
+                'riwayat'
+                ));   
+            }
         }
+       
     }
     
     public function imunisasiDewasa($id)

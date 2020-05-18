@@ -43,7 +43,7 @@
       </div>
       <div class="card-footer">
           
-        <a href="#" class="btn btn-primary btn-sm">Panggil</a>
+        {{-- <a href="#" class="btn btn-primary btn-sm">Panggil</a> --}}
         @if($data->pendaftaran->status_periksa == 0)
         <a href="/pelayanan/medis/proses/{{$data->id}}/mulai" class="btn btn-success btn-sm">Mulai Periksa</a>
         @elseif($data->pendaftaran->status_periksa == 1)

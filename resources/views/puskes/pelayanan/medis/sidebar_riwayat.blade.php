@@ -55,7 +55,7 @@
      }else{
      document.getElementById("id_anamnesa").innerHTML = pendaftaran.anamnesa.id;
      document.getElementById("tanggal_anamnesa").innerHTML = pendaftaran.anamnesa.tanggal;
-     document.getElementById("dokter_anamnesa").innerHTML = pendaftaran.anamnesa.dokter.nama;
+     document.getElementById("dokter_anamnesa").innerHTML = pendaftaran.anamnesa.dokter == null ? null : pendaftaran.anamnesa.dokter.nama;
      document.getElementById("perawat_anamnesa").innerHTML = pendaftaran.anamnesa.perawat == null ? null : pendaftaran.anamnesa.perawat.nama;
      document.getElementById("keluhan_utama").innerHTML = pendaftaran.anamnesa.keluhan_utama;
      document.getElementById("keluhan_tambahan").innerHTML = pendaftaran.anamnesa.keluhan_tambahan;

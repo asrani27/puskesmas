@@ -98,7 +98,7 @@
             <div class="input-group row">
                 <label class="col-sm-3 col-form-label text-right"><small>Diagnosa</small></label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control form-control-sm" name="diagnosa" readonly value="{{$data->diagnosa->first()->mdiagnosa->value}}">
+                    <input type="text" class="form-control form-control-sm" name="diagnosa" readonly value="{{$data->diagnosa->count() == 0 ? null :$data->diagnosa->first()->mdiagnosa->value}}">
                 </div>
             </div>
             <div class="input-group row">
