@@ -165,10 +165,10 @@ class PendaftaranController extends Controller
         $s->gol_darah          = $req->goldarah_id;
         $s->email              = strtoupper($req->email);
         $s->no_hp              = $req->no_hp;
-        $s->kelurahan_id       = $kelurahan->id;
-        $s->kecamatan_id       = $kelurahan->kecamatan->id;
-        $s->kota_id            = $kelurahan->kecamatan->kota->id;
-        $s->propinsi_id        = $kelurahan->kecamatan->kota->propinsi->id;
+        $s->kelurahan_id       = $kelurahan == null ? null : $kelurahan->id;
+        $s->kecamatan_id       = $kelurahan == null ? null : $kelurahan->kecamatan->id;
+        $s->kota_id            = $kelurahan == null ? null : $kelurahan->kecamatan->kota->id;
+        $s->propinsi_id        = $kelurahan == null ? null : $kelurahan->kecamatan->kota->propinsi->id;
         $s->alamat             = strtoupper($req->alamat);
         $s->rt                 = $req->rt;
         $s->rw                 = $req->rw;

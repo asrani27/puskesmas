@@ -6,7 +6,7 @@
   </aside>
   <footer class="main-footer">
     <div class="float-right d-none d-sm-inline">
-     E-Puskesmas v.1.1.0
+     E-Puskesmas v.1.1.63
     </div>
     <strong>Copyright &copy; 2020 <a href="https://adminlte.io">Diskominfotik Banjarmasin</a>.</strong>
   </footer>
