@@ -153,7 +153,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pelayanan/medis/proses/{id}/imunisasi/imun_dewasa', 'PelayananController@imunisasiDewasa'); 
     Route::get('/pelayanan/medis/proses/{id}/odontogram', 'PelayananController@Odontogram'); 
     Route::get('/pelayanan/medis/proses/{id}/periksagizi', 'PelayananController@Periksagizi'); 
-    // // Route::get('/pelayanan/medis/proses/{id}/anak/imunisasi', 'PelayananController@anakImunisasi'); 
+    // Route::get('/pelayanan/medis/proses/{id}/anak/imunisasi', 'PelayananController@anakImunisasi'); 
 
     // Route Anamnesa
     Route::post('/pelayanan/medis/proses/{id}/anamnesa/{anamnesa_id}', 'AnamnesaController@updateAnamnesa')->name('updateAnamnesa2');

@@ -57,6 +57,7 @@
                   </div>
                 </div>
 
+                
                 <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
                   <!-- text input -->
                   <form method="post" action="/pelayanan/medis/search">

@@ -4,7 +4,7 @@
     </div>
     <form method="POST" action="{{route('imunisasiAnak', ['id' => $data->id])}}">
       @csrf
-    <div class="row">
+    <div class="row"> 
       <div class="col-md-6">
           <div class="card-body">
           <div class="input-group row">
@@ -66,7 +66,7 @@
                   @foreach ($item as $value)
                     <td><input type="checkbox" name="data_imun[]" value="{{$value->imunisasi_kode}}"> {{$value->imunisasi_nama}}</td>
                   @endforeach
-              </tr>
+              </tr>  
               @endforeach
           </table>
           </div>
