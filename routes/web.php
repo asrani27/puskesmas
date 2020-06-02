@@ -30,6 +30,8 @@ Route::get('/logout', function() {
 Auth::routes(['register' => false, 'reset' => false, 'confirm' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/odontogram/image/code={code}/tipe={tipe}', 'OdontogramController@image');
+
 Route::group(['middleware' => ['auth', 'role:superadmin|adminpuskes']], function () {
     Route::get('/profile', 'SuperadminController@profile');
     Route::post('/profile/password', 'SuperadminController@gantiPass');
@@ -197,7 +199,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
 
     //Route Gambar GIGI
-    Route::get('/odontogram/image/code={code}/tipe={tipe}', 'OdontogramController@image');
     Route::get('/generatekode', 'OdontogramController@generatekode');
     Route::get('/tarikgambar', 'OdontogramController@tarikgambar');
     // //POLI UMUM
