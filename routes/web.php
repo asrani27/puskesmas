@@ -82,6 +82,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     //----end----------------------
     Route::get('/pengaturan/data_master', 'PengaturanController@dataMaster');
     Route::get('/pengaturan/data_master/poli', 'PengaturanController@poli');
+    Route::get('/pengaturan/data_master/pegawai', 'PengaturanController@pegawai');
     Route::post('/pengaturan/data_master/poli', 'PengaturanController@storePoli')->name('simpanPoli');
     Route::get('/pengaturan/data_master/poli/add', 'PengaturanController@addPoli');
     Route::get('/pengaturan/poli/edit/{id}', 'PengaturanController@editPoli');

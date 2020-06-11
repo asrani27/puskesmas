@@ -26,7 +26,7 @@
             
               
             <div class="card-body p-1 table-responsive">
-              <table id="example" class="table table-bordered table-sm ">
+              <table id="example1" class="table table-bordered table-sm ">
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                   <th>No</th>
@@ -43,8 +43,7 @@
                 <tbody>
                   @foreach ($data as $key => $item)
                   <tr>
-                    <td class="text-center" width="35px"><small>{{ $key+ $data->firstItem() }}</small></td>
-                    
+                    <td><small>{{$no++}}</small></td>
                     <td><small>{{$item->id}}</small></td>
                     <td><small>{{$item->instalasi->nama}}</small></td>
                     <td><small>{{$item->nama}}</small></td>
@@ -59,9 +58,9 @@
                 <tbody></small> 
               </table>
             </div>
-            <div class="card-footer">
+            {{-- <div class="card-footer">
                 {{ $data->onEachSide(1)->links() }}
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

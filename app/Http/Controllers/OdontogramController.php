@@ -138,7 +138,7 @@ class OdontogramController extends Controller
             do {
                 $length = 5;
                 $str = "";
-                $characters = ['w','q'];
+                $characters = ['w','l', 'm', 'o', 'q'];
                 $max = count($characters) - 1;
                 for ($i = 0; $i < $length; $i++) {
                     $rand = mt_rand(0, $max);

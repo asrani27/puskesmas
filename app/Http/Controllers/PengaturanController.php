@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mpegawai;
 use App\Mruangan;
 use App\Minstalasi;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class PengaturanController extends Controller
 
     public function poli()
     {
-        $data = Mruangan::paginate(10);
+        $data = Mruangan::all();
         return view('master.ruangan.index',compact('data'));
     }
 
@@ -68,5 +69,11 @@ class PengaturanController extends Controller
         $s->save();
         toast('Poli berhasil Di Simpan','success');
         return redirect('/pengaturan/data_master/poli');
+    }
+
+    public function pegawai()
+    {
+        $data = Mpegawai::all();
+        return view('master.pegawai.index',compact('data'));
     }
 }
