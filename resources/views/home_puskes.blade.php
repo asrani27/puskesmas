@@ -8,9 +8,9 @@
 <div class="content-header">
     <div class="row">
         <div class="col-lg-12">
-            <a href="#" class="btn btn-sm btn-primary">Dashboard Utama</a>
+            {{-- <a href="#" class="btn btn-sm btn-primary">Dashboard Utama</a>
             <a href="#" class="btn btn-sm btn-success">Dashboard Antrian</a>
-            <a href="#" class="btn btn-sm btn-info">Dashboard SIP</a>
+            <a href="#" class="btn btn-sm btn-info">Dashboard SIP</a> --}}
         </div>
     </div>
 </div>
@@ -166,7 +166,7 @@
 var myDiv = document.querySelector('#namaPoli');
 var ruangan = JSON.parse(myDiv.dataset.info);
 var jumlah = JSON.parse(myDiv.dataset.jumlah);
-console.log([jumlah, ruangan]);
+
 var popCanvas = document.getElementById("barChart");
 var barChart = new Chart(popCanvas, {
   type: 'bar',
@@ -197,37 +197,6 @@ var barChart = new Chart(popCanvas, {
       ]
     }]
   }
-});
-</script>
-<script>
-var speedCanvas = document.getElementById("speedChart");
-
-Chart.defaults.global.defaultFontFamily = "Lato";
-Chart.defaults.global.defaultFontSize = 18;
-
-var speedData = {
-  labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
-  datasets: [{
-    label: "Car Speed (mph)",
-    data: [0, 59, 75, 20, 20, 55, 40],
-  }]
-};
-
-var chartOptions = {
-  legend: {
-    display: true,
-    position: 'top',
-    labels: {
-      boxWidth: 80,
-      fontColor: 'black'
-    }
-  }
-};
-
-var lineChart = new Chart(speedCanvas, {
-  type: 'line',
-  data: speedData,
-  options: chartOptions
 });
 </script>
 @endpush
