@@ -28,8 +28,8 @@ Route::get('/logout', function() {
 });
 
 Auth::routes(['register' => false, 'reset' => false, 'confirm' => false]);
-Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth', 'role:superadmin|adminpuskes']], function () {
     Route::get('/profile', 'SuperadminController@profile');
@@ -110,10 +110,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pengaturan/user/edit/{id}', 'PengaturanController@editUser');
     Route::post('/pengaturan/user/edit/{id}', 'PengaturanController@updateUser')->name('editUser');
 
+    Route::get('/pendaftaran/pasien', 'PendaftaranController@pasien');
     Route::get('/getkelurahan/{id}', 'PendaftaranController@getKelurahan');
     Route::any('/pendaftaran/pasien/search', 'PendaftaranController@search');
     Route::get('/pendaftaran/pasien/truncate', 'PendaftaranController@truncatePasien');
-    Route::get('/pendaftaran/pasien', 'PendaftaranController@pasien');
     Route::get('/pendaftaran/pasien/getData', 'PendaftaranController@getDataPasien');
     Route::get('/pendaftaran/pasien/add', 'PendaftaranController@addPasien');
     Route::post('/pendaftaran/pasien/add', 'PendaftaranController@storePasien');

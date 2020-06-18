@@ -44,8 +44,7 @@ class LoginController extends Controller
     {
         $login = request()->input('username');
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        //dd($login, $field, request()->password);
-        if(Auth::attempt([$field => $login, 'password' => request()->password])) 
+        if(Auth::attempt([$field => $login, 'password' => request()->password], true)) 
         {
             return redirect('/home');
         } 

@@ -10,22 +10,14 @@ use Laratrust\Traits\LaratrustUserTrait;
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
-    
+
     use Notifiable;
 
     protected $table = 'users';
     
     public $incrementing = false;
 
-    public function puskesmas()
-    {
-        return $this->belongsTo(Mpuskesmas::class, 'puskesmas_id');
-    }
-
-    public function menuakses()
-    {
-        return Menu::where('menuakses', [Auth::user()->menu]);
-    }
+    public $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -53,4 +45,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function puskesmas()
+    {
+        return $this->belongsTo(Mpuskesmas::class, 'puskesmas_id');
+    }
+
+    public function menuakses()
+    {
+        return Menu::where('menuakses', [Auth::user()->menu]);
+    }
 }

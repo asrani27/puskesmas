@@ -29,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        dd(Auth::user()->roles);
         if(Auth::user() == null){
             return redirect('/');
         }else{

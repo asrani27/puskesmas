@@ -20,9 +20,10 @@ use Illuminate\Http\Request;
 
 class PendaftaranController extends Controller
 {
+
     public function __construct()
     {
-
+       dd(Auth::user());
     }
 
     public function selectKelurahan(Request $req)
