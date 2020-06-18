@@ -80,6 +80,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/tambah_pendaftaran', 'SuperadminController@tambahpendaftaran');
     
     Route::get('/pengaturan/data_master', 'PengaturanController@dataMaster');
+    Route::get('/pengaturan/user/gantipass', 'PengaturanController@gantipass');
+    Route::post('/pengaturan/user/gantipass', 'PengaturanController@updatepass')->name('gantipass');
 
     Route::get('/pengaturan/data_master/poli', 'PengaturanController@poli');
     Route::post('/pengaturan/data_master/poli', 'PengaturanController@storePoli')->name('simpanPoli');

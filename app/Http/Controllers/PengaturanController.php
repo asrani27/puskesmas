@@ -255,4 +255,18 @@ class PengaturanController extends Controller
         $data = User::find($id);
         return view('master.jenispegawai.edit',compact('data'));
     }
+
+    public function gantipass()
+    {
+        return view('master.user.gantipass');
+    }
+    
+    public function updatepass(Request $req)
+    {
+        $u = User::first();
+        $u->password = bcrypt($req->password);
+        $u->save();
+        toast('Berhasil Di Update', 'info');
+        return redirect('/pengaturan/data_master/user');
+    }
 }

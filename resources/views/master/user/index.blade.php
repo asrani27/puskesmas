@@ -31,7 +31,6 @@
                   <th>No</th>
                   <th>Nama</th>
                   <th>Username</th>
-                  <th>Email</th>
                   <th>Aksi</th>
                 </thead><small>
                     @php
@@ -43,9 +42,8 @@
                     <td><small>{{$no++}}</small></td>
                     <td><small>{{strtoupper($item->name)}}</small></td>
                     <td><small>{{$item->username}}</small></td>
-                    <td><small>{{$item->email}}</small></td>
-                    <td width="80px">
-                      {{-- <a href="/pengaturan/user/edit/{{$item->username}}" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> --}}
+                    <td>
+                      <a href="/pengaturan/user/gantipass" class="btn btn-xs btn-success">Ganti Password</a>
                       <a href="/pengaturan/user/delete/{{$item->username}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Semua Data Ini?');"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
