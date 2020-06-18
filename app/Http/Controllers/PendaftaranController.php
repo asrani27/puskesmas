@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use DB;
 use Auth;
 use Alert;
@@ -16,14 +17,13 @@ use App\Mkelurahan;
 use App\Mpuskesmas;
 use App\Tpelayanan;
 use App\Tpendaftaran;
-use Illuminate\Http\Request;
 
 class PendaftaranController extends Controller
 {
 
     public function __construct()
     {
-       dd(Auth::user());
+       //dd(Auth()->user());
     }
 
     public function selectKelurahan(Request $req)

@@ -9,9 +9,15 @@ use App\Mruangan;
 use App\Minstalasi;
 use App\Mjenispegawai;
 use Illuminate\Http\Request;
+use Auth;
 
 class PengaturanController extends Controller
 {
+
+    public function __construct()
+    {
+        
+    }
     public function dataMaster()
     {
         $ruang = count(Mruangan::all());

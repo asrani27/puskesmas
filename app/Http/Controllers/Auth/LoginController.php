@@ -40,18 +40,18 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login()
-    {
-        $login = request()->input('username');
-        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        if(Auth::attempt([$field => $login, 'password' => request()->password], true)) 
-        {
-            return redirect('/home');
-        } 
-        else 
-        {
-            toast('Username / Password Salah', 'warning');
-            return back();
-        }
-    }
+    // public function login()
+    // {
+    //     $login = request()->input('username');
+    //     $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    //     if(Auth::attempt([$field => $login, 'password' => request()->password], true)) 
+    //     {
+    //         return redirect('/home');
+    //     } 
+    //     else 
+    //     {
+    //         toast('Username / Password Salah', 'warning');
+    //         return back();
+    //     }
+    // }
 }

@@ -2,12 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use Auth;
-use App\Mruangan;
-use Carbon\Carbon;
-use App\Mpuskesmas;
-use App\Tpelayanan;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -29,27 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        dd(Auth::user());
-        if(Auth::user() == null){
-            return redirect('/');
-        }else{
-            if(Auth::user()->hasRole('superadmin')){
-                return view('home');   
-            }else{
-                $ruangan = Mruangan::where('is_aktif', 'Y')->get()->map(function($item){
-                    return $item->nama;
-                });
-                
-                $jml = Mruangan::where('is_aktif', 'Y')->get()->map(function($item){
-                    $month = Carbon::today()->format('m');
-                    $year = Carbon::today()->format('Y');
-                    
-                    $item->jml = count(Tpelayanan::where('ruangan_id', $item->id)->whereMonth('tanggal', $month)->whereYear('tanggal', $year)->get());
-                    return $item->jml;
-                });
-                
-                return view('home_puskes',compact('ruangan','jml'));
-            }    
-        }
+        dd(\Auth::user()->hasRole('admin') ? 'Ya' : 'Tidak');
+        return view('home');
     }
 }
