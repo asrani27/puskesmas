@@ -81,13 +81,34 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/tambah_pendaftaran', 'SuperadminController@tambahpendaftaran');
     //----end----------------------
     Route::get('/pengaturan/data_master', 'PengaturanController@dataMaster');
+
     Route::get('/pengaturan/data_master/poli', 'PengaturanController@poli');
-    Route::get('/pengaturan/data_master/pegawai', 'PengaturanController@pegawai');
     Route::post('/pengaturan/data_master/poli', 'PengaturanController@storePoli')->name('simpanPoli');
     Route::get('/pengaturan/data_master/poli/add', 'PengaturanController@addPoli');
     Route::get('/pengaturan/poli/edit/{id}', 'PengaturanController@editPoli');
     Route::post('/pengaturan/poli/edit/{id}', 'PengaturanController@updatePoli')->name('editPoli');
     Route::get('/pengaturan/poli/delete/{id}', 'PengaturanController@deletePoli');
+    
+    Route::get('/pengaturan/data_master/pegawai', 'PengaturanController@pegawai');
+    Route::get('/pengaturan/data_master/pegawai/add', 'PengaturanController@addPegawai');
+    Route::post('/pengaturan/data_master/pegawai', 'PengaturanController@storePegawai')->name('simpanPegawai');
+    Route::get('/pengaturan/pegawai/delete/{id}', 'PengaturanController@deletePegawai');
+    Route::get('/pengaturan/pegawai/edit/{id}', 'PengaturanController@editPegawai');
+    Route::post('/pengaturan/pegawai/edit/{id}', 'PengaturanController@updatePegawai')->name('editPegawai');
+
+    Route::get('/pengaturan/data_master/jenispegawai', 'PengaturanController@jenispegawai');
+    Route::get('/pengaturan/data_master/jenispegawai/add', 'PengaturanController@addJenisPegawai');
+    Route::post('/pengaturan/data_master/jenispegawai', 'PengaturanController@storeJenisPegawai')->name('simpanJenisPegawai');
+    Route::get('/pengaturan/jenispegawai/delete/{id}', 'PengaturanController@deleteJenisPegawai');
+    Route::get('/pengaturan/jenispegawai/edit/{id}', 'PengaturanController@editJenisPegawai');
+    Route::post('/pengaturan/jenispegawai/edit/{id}', 'PengaturanController@updateJenisPegawai')->name('editJenisPegawai');
+
+    Route::get('/pengaturan/data_master/user', 'PengaturanController@user');
+    Route::get('/pengaturan/data_master/user/add', 'PengaturanController@adduser');
+    Route::post('/pengaturan/data_master/user', 'PengaturanController@storeUser')->name('simpanUser');
+    Route::get('/pengaturan/user/delete/{id}', 'PengaturanController@deleteUser');
+    Route::get('/pengaturan/user/edit/{id}', 'PengaturanController@editUser');
+    Route::post('/pengaturan/user/edit/{id}', 'PengaturanController@updateUser')->name('editUser');
 
     Route::get('/getkelurahan/{id}', 'PendaftaranController@getKelurahan');
     Route::any('/pendaftaran/pasien/search', 'PendaftaranController@search');

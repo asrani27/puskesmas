@@ -13,6 +13,8 @@ class User extends Authenticatable
     use Notifiable;
     protected $table = 'users';
     
+    public $incrementing = false;
+    
     public function puskesmas()
     {
         return $this->belongsTo(Mpuskesmas::class, 'puskesmas_id');

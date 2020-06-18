@@ -38,12 +38,13 @@
     </div>
     
     <div class="col-md-4 col-sm-6 col-12">
+      <a href="/pengaturan/data_master/pegawai">
       <div class="info-box bg-gradient-info">
         <span class="info-box-icon"><i class="fas fa-users"></i></span>
 
         <div class="info-box-content">
           <span class="info-box-text">Data Pegawai Puskesmas</span>
-          <span class="info-box-number">11/110</span>
+          <span class="info-box-number">{{$pegawai}}</span>
 
           <div class="progress">
             <div class="progress-bar" style="width: 70%"></div>
@@ -51,16 +52,18 @@
         </div>
         <!-- /.info-box-content -->
       </div>
+      </a>
       <!-- /.info-box -->
     </div>
     
     <div class="col-md-4 col-sm-6 col-12">
+      <a href="/pengaturan/data_master/jenispegawai">
       <div class="info-box bg-gradient-danger">
         <span class="info-box-icon"><i class="fab fa-buffer"></i></span>
 
         <div class="info-box-content">
           <span class="info-box-text">Data Jenis Pegawai</span>
-          <span class="info-box-number">1/10</span>
+          <span class="info-box-number">{{$jenispegawai}}</span>
 
           <div class="progress">
             <div class="progress-bar" style="width: 70%"></div>
@@ -68,10 +71,33 @@
         </div>
         <!-- /.info-box-content -->
       </div>
+      </a>
       <!-- /.info-box -->
     </div>
 </div>
 
+<div class="row">
+  <div class="col-md-4 col-sm-6 col-12">
+      <a href="/pengaturan/data_master/user">
+          <div class="info-box bg-gradient-success">
+              <span class="info-box-icon"><i class="fa fa-user"></i></span>
+
+              <div class="info-box-content">
+              <span class="info-box-text">Data User Pengguna</span>
+              <span class="info-box-number">{{$user}}</span>
+
+              <div class="progress">
+                  <div class="progress-bar" style="width: 70%"></div>
+              </div>
+              </div>
+              <!-- /.info-box-content -->
+          </div>
+      </a>
+    <!-- /.info-box -->
+  </div>
+  
+ 
+</div>
 @endsection
 
 @push('addjs')
