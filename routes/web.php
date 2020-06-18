@@ -160,7 +160,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/test_export', 'LaporanController@test_export');
     
     Route::get('/laporansp3lb1/export', 'LaporanController@laporansp3lb1export');
-    
 
     Route::get('/pelayanan/medis/proses/{id}/anamnesa', 'PelayananController@Anamnesa');
     Route::get('/pelayanan/medis/proses/{id}/diagnosa', 'PelayananController@Diagnosa');

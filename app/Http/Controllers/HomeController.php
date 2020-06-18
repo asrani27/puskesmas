@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        dd(\Auth::user()->hasRole('admin') ? 'Ya' : 'Tidak');
+        //dd(\Auth::user()->hasRole('admin') ? 'Ya' : 'Tidak');
         return view('home');
     }
 }
