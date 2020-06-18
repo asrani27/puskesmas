@@ -10,11 +10,13 @@ use Laratrust\Traits\LaratrustUserTrait;
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
+    
     use Notifiable;
+
     protected $table = 'users';
     
     public $incrementing = false;
-    
+
     public function puskesmas()
     {
         return $this->belongsTo(Mpuskesmas::class, 'puskesmas_id');

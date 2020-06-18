@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="signin-form">
-                        <h2 class="form-title">E-Pus V.2</h2>
+                        <h2 class="form-title">E-Puskesmas V.2</h2>
 						<form method="POST" class="register-form" id="login-form" action="{{route('login')}}">
 							@csrf
                             <div class="form-group">
