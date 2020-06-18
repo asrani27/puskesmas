@@ -29,7 +29,6 @@ Route::get('/logout', function() {
 
 Auth::routes(['register' => false, 'reset' => false, 'confirm' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth', 'role:superadmin|adminpuskes']], function () {
     Route::get('/profile', 'SuperadminController@profile');
@@ -73,6 +72,9 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/pendaftaran/pasien', 'PendaftaranController@pasien');
     //----return response json-----
     Route::post('/pendaftaran/pasien/getKelurahan', 'PendaftaranController@selectKelurahan');
     Route::post('/pendaftaran/pasien/getDiagnosa', 'PendaftaranController@selectDiagnosa');
@@ -110,7 +112,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pengaturan/user/edit/{id}', 'PengaturanController@editUser');
     Route::post('/pengaturan/user/edit/{id}', 'PengaturanController@updateUser')->name('editUser');
 
-    Route::get('/pendaftaran/pasien', 'PendaftaranController@pasien');
     Route::get('/getkelurahan/{id}', 'PendaftaranController@getKelurahan');
     Route::any('/pendaftaran/pasien/search', 'PendaftaranController@search');
     Route::get('/pendaftaran/pasien/truncate', 'PendaftaranController@truncatePasien');
