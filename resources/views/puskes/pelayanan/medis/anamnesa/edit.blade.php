@@ -459,7 +459,7 @@
                             </div>
                           </div>
                           
-                          <div class="card card-success card-outline">
+                          {{-- <div class="card card-success card-outline">
                             <div class="card-header">
                               <h3 class="card-title">Anatomi Tubuh</h3>
                             </div>
@@ -470,7 +470,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> --}}
                           
                           <div class="card card-success card-outline">
                             <div class="card-header">
