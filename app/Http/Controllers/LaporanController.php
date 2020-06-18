@@ -27,7 +27,7 @@ class LaporanController extends Controller
     {
         $spreadsheet = new Spreadsheet();
         $rowArray = Tpelayanan::Take(10)->get()->toArray();
-        dd($rowArray);
+        
         $sheet = $spreadsheet->getActiveSheet()
         ->fromArray(
             $rowArray,   // The data to set
