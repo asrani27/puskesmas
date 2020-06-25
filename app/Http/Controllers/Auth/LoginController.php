@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+use Alert;
+use App\H_login;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Auth;
-use Alert;
 
 class LoginController extends Controller
 {
@@ -46,6 +48,13 @@ class LoginController extends Controller
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if(Auth::attempt([$field => $login, 'password' => request()->password], true)) 
         {
+            $datauser = Auth::user();
+            $h = new H_login;
+            $h->puskesmas_id = $datauser->puskesmas_id;
+            $h->user_id = $datauser->username;
+            $h->tanggal = Carbon::now()->format('Y-m-d');
+            $h->jam     = Carbon::now()->format('h:i:s');
+            $h->save();
             return redirect('/home');
         } 
         else 
