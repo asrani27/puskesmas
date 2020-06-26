@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Alert;
 use App\User;
 use App\Mpegawai;
 use App\Mruangan;
 use App\Minstalasi;
+use App\Mpuskesmas;
 use App\Mjenispegawai;
 use Illuminate\Http\Request;
-use Auth;
 
 class PengaturanController extends Controller
 {
@@ -268,5 +269,21 @@ class PengaturanController extends Controller
         $u->save();
         toast('Berhasil Di Update', 'info');
         return redirect('/pengaturan/data_master/user');
+    }
+
+    public function editProfile()
+    {
+        $data = Mpuskesmas::first();
+        return view('master.profile',compact('data'));
+    }
+
+    public function updateProfilePuskesmas(Request $req)
+    {
+        $data = Mpuskesmas::first();
+        $data->nama = $req->nama;
+        $data->alamat = $req->alamat;
+        $data->save();
+        toast('Berhasil Di Update', 'info');
+        return back();
     }
 }

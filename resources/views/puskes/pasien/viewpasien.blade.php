@@ -31,7 +31,7 @@
                         <tbody>
                           <tr>
                             <td>Puskesmas</td>
-                            <td>PEKAUMAN</td>
+                            <td>{{$puskesmas->nama}}</td>
                           </tr>
                           <tr>
                             <td>Asuransi</td>

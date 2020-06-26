@@ -80,7 +80,8 @@ class PendaftaranController extends Controller
     public function viewPasien($id)
     {
         $data = Mpasien::find($id);
-        return view('puskes.pasien.viewpasien',compact('data'));
+        $puskesmas = Mpuskesmas::first();
+        return view('puskes.pasien.viewpasien',compact('data','puskesmas'));
     }
 
     public function search(Request $req)

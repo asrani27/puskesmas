@@ -90,6 +90,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pengaturan/poli/edit/{id}', 'PengaturanController@updatePoli')->name('editPoli');
     Route::get('/pengaturan/poli/delete/{id}', 'PengaturanController@deletePoli');
     
+    Route::post('/pengaturan/data_master/updateprofile', 'PengaturanController@updateProfilePuskesmas')->name('editProfilePuskesmas');
+    Route::get('/pengaturan/data_master/editprofile', 'PengaturanController@editProfile');
+
     Route::get('/pengaturan/data_master/pegawai', 'PengaturanController@pegawai');
     Route::get('/pengaturan/data_master/pegawai/add', 'PengaturanController@addPegawai');
     Route::post('/pengaturan/data_master/pegawai', 'PengaturanController@storePegawai')->name('simpanPegawai');
