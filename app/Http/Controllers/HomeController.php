@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Tpelayanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class HomeController extends Controller
 {

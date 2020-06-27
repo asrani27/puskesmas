@@ -330,7 +330,7 @@ class PendaftaranController extends Controller
         $t->tarif            = $req->tarif;
         $t->rujukan_dari     = $req->rujukan_dari;
         $t->nama_perujuk     = $req->nama_perujuk;
-        $t->puskesmas_id     = Mpuskesmas::where('nama','PEKAUMAN')->first()->id;
+        $t->puskesmas_id     = Auth::user()->puskesmas_id;
         $t->save();
 
         $p = new Tpelayanan;
