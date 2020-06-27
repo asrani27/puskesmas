@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Auth;
 use Alert;
 use App\User;
+use App\Mobat;
 use App\Mpegawai;
 use App\Mruangan;
+use App\Mobatunit;
 use App\Minstalasi;
+use App\Mobattitle;
 use App\Mpuskesmas;
 use App\Mjenispegawai;
 use Illuminate\Http\Request;
@@ -285,5 +288,64 @@ class PengaturanController extends Controller
         $data->save();
         toast('Berhasil Di Update', 'info');
         return back();
+    }
+
+    public function obat()
+    {
+        $data = Mobat::all();
+        return view('master.obat.index',compact('data'));
+    }
+
+    public function addObat()
+    {
+        $obat_title = Mobattitle::all();
+        $obat_unit = Mobatunit::all();
+        return view('master.obat.create',compact('obat_title', 'obat_unit'));
+    }
+
+    public function storeObat(Request $req)
+    {
+        $check = Mobat::first();
+        if($check == null){
+            $id = 1;
+        }else{
+            $number = Mobat::orderBy('id','desc')->first();
+            $id = $number->id + 1;
+        }
+        $s = new Mobat;
+        $s->id = $id;
+        $s->value = $req->value;
+        $s->obat_title = $req->obat_title;
+        $s->obat_unit  = $req->obat_unit;
+        $s->save();
+        toast('Data Berhasil Di Tambahkan', 'success');
+        return back();
+    }
+
+    public function deleteObat($id)
+    {
+        $del = Mobat::where('id', $id)->first()->delete();
+        toast('Data Berhasil Di Hapus', 'success');
+        return back();
+    }
+
+    public function editObat($id)
+    {
+        $data = Mobat::find($id);
+        $obat_title = Mobattitle::all();
+        $obat_unit = Mobatunit::all();
+        return view('master.obat.edit',compact('obat_title', 'obat_unit','data'));
+    }
+
+    public function updateObat(Request $req, $id)
+    {
+        $s = Mobat::find($id);
+        $s->value = $req->value;
+        $s->obat_title = $req->obat_title;
+        $s->obat_unit  = $req->obat_unit;
+        $s->save();
+        
+        toast('Data Berhasil Di Update', 'success');
+        return redirect('/pengaturan/data_master/obat');
     }
 }

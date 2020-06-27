@@ -21,10 +21,6 @@ Route::get('/', function() {
 
 Auth::routes();
 
-Route::get('/login2', function () {
-    return view('login2');
-});
-
 Route::get('/logout', function() {
     Auth::logout();
     return redirect()->to('/');
@@ -99,6 +95,13 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pengaturan/pegawai/delete/{id}', 'PengaturanController@deletePegawai');
     Route::get('/pengaturan/pegawai/edit/{id}', 'PengaturanController@editPegawai');
     Route::post('/pengaturan/pegawai/edit/{id}', 'PengaturanController@updatePegawai')->name('editPegawai');
+
+    Route::get('/pengaturan/data_master/obat', 'PengaturanController@obat');
+    Route::get('/pengaturan/data_master/obat/add', 'PengaturanController@addObat');
+    Route::post('/pengaturan/data_master/obat', 'PengaturanController@storeObat')->name('simpanObat');
+    Route::get('/pengaturan/obat/delete/{id}', 'PengaturanController@deleteObat');
+    Route::get('/pengaturan/obat/edit/{id}', 'PengaturanController@editObat');
+    Route::post('/pengaturan/obat/edit/{id}', 'PengaturanController@updateObat')->name('editObat');
 
     Route::get('/pengaturan/data_master/jenispegawai', 'PengaturanController@jenispegawai');
     Route::get('/pengaturan/data_master/jenispegawai/add', 'PengaturanController@addJenisPegawai');
