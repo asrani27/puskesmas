@@ -348,4 +348,10 @@ class PengaturanController extends Controller
         toast('Data Berhasil Di Update', 'success');
         return redirect('/pengaturan/data_master/obat');
     }
+    
+    public function stokobat()
+    {
+        $data = Mstokobat::all();
+        return view('master.stokobat.index',compact('data'));
+    }
 }

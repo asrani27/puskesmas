@@ -116,7 +116,7 @@
   </div>
   
   <div class="col-md-4 col-sm-6 col-12">
-    <a href="/pengaturan/data_master/stokobat">
+    <a href="#">
     <div class="info-box bg-gradient-danger">
       <span class="info-box-icon"><i class="fas fa-medkit"></i></span>
 

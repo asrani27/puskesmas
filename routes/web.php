@@ -103,6 +103,13 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pengaturan/obat/edit/{id}', 'PengaturanController@editObat');
     Route::post('/pengaturan/obat/edit/{id}', 'PengaturanController@updateObat')->name('editObat');
 
+    Route::get('/pengaturan/data_master/stokobat', 'PengaturanController@stokobat');
+    Route::get('/pengaturan/data_master/stokobat/add', 'PengaturanController@addStokobat');
+    Route::post('/pengaturan/data_master/stokobat', 'PengaturanController@storeStokobat')->name('simpanStokobat');
+    Route::get('/pengaturan/stokobat/delete/{id}', 'PengaturanController@deleteStokobat');
+    Route::get('/pengaturan/stokobat/edit/{id}', 'PengaturanController@editStokobatt');
+    Route::post('/pengaturan/stokobat/edit/{id}', 'PengaturanController@updateStokobat')->name('editStokobat');
+
     Route::get('/pengaturan/data_master/jenispegawai', 'PengaturanController@jenispegawai');
     Route::get('/pengaturan/data_master/jenispegawai/add', 'PengaturanController@addJenisPegawai');
     Route::post('/pengaturan/data_master/jenispegawai', 'PengaturanController@storeJenisPegawai')->name('simpanJenisPegawai');
