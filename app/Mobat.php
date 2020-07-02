@@ -17,9 +17,12 @@ class Mobat extends Model
         return $this->hasMany(Tresepdetail::class, 'obat_id');
     }
 
-    public function obattitle()
+    public function m_obat_title()
     {
-        $data = \App\Mobattitle::where('id', $this->obat_title)->first()->value;
-        return $data;
+        return $this->belongsTo(Mobattitle::class, 'obat_title');
+    }
+    public function m_obat_unit()
+    {
+        return $this->belongsTo(Mobatunit::class, 'obat_unit');
     }
 }

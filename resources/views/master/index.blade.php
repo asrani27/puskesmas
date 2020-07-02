@@ -103,7 +103,7 @@
 
       <div class="info-box-content">
         <span class="info-box-text">Data Obat</span>
-        <span class="info-box-number">{{$pegawai}}</span>
+        <span class="info-box-number">{{$obat}}</span>
 
         <div class="progress">
           <div class="progress-bar" style="width: 70%"></div>
@@ -116,13 +116,13 @@
   </div>
   
   <div class="col-md-4 col-sm-6 col-12">
-    <a href="#">
+    <a href="/pengaturan/data_master/stokobat">
     <div class="info-box bg-gradient-danger">
       <span class="info-box-icon"><i class="fas fa-medkit"></i></span>
 
       <div class="info-box-content">
         <span class="info-box-text">Stok Obat</span>
-        <span class="info-box-number">{{$jenispegawai}}</span>
+        <span class="info-box-number">~</span>
 
         <div class="progress">
           <div class="progress-bar" style="width: 70%"></div>
@@ -135,6 +135,26 @@
   </div>
   
  
+</div>
+<div class="row">
+  <div class="col-md-4 col-sm-6 col-12">
+      <a href="/pengaturan/data_master/obatmasuk">
+          <div class="info-box bg-gradient-success">
+              <span class="info-box-icon"><i class="fa fa-medkit"></i></span>
+
+              <div class="info-box-content">
+              <span class="info-box-text">Penerimaan Obat / Obat Masuk</span>
+              <span class="info-box-number">~</span>
+
+              <div class="progress">
+                  <div class="progress-bar" style="width: 70%"></div>
+              </div>
+              </div>
+              <!-- /.info-box-content -->
+          </div>
+      </a>
+    <!-- /.info-box -->
+  </div>
 </div>
 @endsection
 

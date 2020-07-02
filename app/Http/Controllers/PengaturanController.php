@@ -3,17 +3,26 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Cart;
 use Alert;
+use Cache;
+use Session;
 use App\User;
 use App\Mobat;
 use App\Mpegawai;
 use App\Mruangan;
 use App\Mobatunit;
+use App\Mstokobat;
+use Carbon\Carbon;
 use App\Minstalasi;
 use App\Mobattitle;
 use App\Mpuskesmas;
+use App\Tkeranjang;
 use App\Mjenispegawai;
+use App\Tpenerimaanobat;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Tpenerimaanobatdetail;
 
 class PengaturanController extends Controller
 {
@@ -24,11 +33,13 @@ class PengaturanController extends Controller
     }
     public function dataMaster()
     {
-        $ruang = count(Mruangan::all());
-        $pegawai = count(Mpegawai::all());
+        $ruang        = count(Mruangan::all());
+        $pegawai      = count(Mpegawai::all());
         $jenispegawai = count(Mjenispegawai::all());
-        $user = count(User::all());
-        return view('master.index',compact('ruang','pegawai','jenispegawai','user'));
+        $user         = count(User::all());
+        $obat         = count(Mobat::all());
+        $stokobat     = count(Mstokobat::all());
+        return view('master.index',compact('ruang','pegawai','jenispegawai','user','obat','stokobat'));
     }
 
     public function poli()
@@ -353,5 +364,155 @@ class PengaturanController extends Controller
     {
         $data = Mstokobat::all();
         return view('master.stokobat.index',compact('data'));
+    }
+    
+    public function addStokobat()
+    {
+        $obat = Mobat::all();
+        return view('master.stokobat.create',compact('obat'));
+    }
+
+    public function storeStokobat(Request $req)
+    {
+        $check_ruangan = Mruangan::where('nama', $req->ruangan_id)->first();
+        if($check_ruangan == null){
+            toast('Ruangan Tidak Ditemukan', 'info');
+        }else{
+            $ruangan_id = $check_ruangan->id;
+            $check = Mstokobat::where('obat_id', $req->obat_id)->where('ruangan_id', $ruangan_id)->first();
+            if($check == null){
+                $s = new Mstokobat;
+                $s->puskesmas_id = Auth::user()->puskesmas_id;
+                $s->ruangan_id   = $ruangan_id;
+                $s->obat_id      = $req->obat_id;
+                $s->harga_jual   = $req->harga_jual;
+                $s->jumlah_stok  = $req->jumlah_stok;
+                $s->save();
+                toast('Data Obat Berhasil Di Simpan', 'success');
+
+            }else{
+                toast('Obat Pada Ruangan ini Sudah Ada', 'info');
+            }
+        }
+        return back();
+    }
+
+    public function deleteStokobat($id)
+    {
+        $del = Mstokobat::find($id)->delete();
+        toast('Data Obat Berhasil Di Hapus', 'success');
+        return back();
+    }
+
+    public function editStokobat($id)
+    {
+        $data = Mstokobat::find($id);
+        $obat = Mobat::all();
+        return view('master.stokobat.edit',compact('obat','data'));
+    }
+
+    public function updateStokobat(Request $req, $id)
+    {
+        $s = Mstokobat::find($id);
+        $s->obat_id     = $req->obat_id;
+        $s->harga_jual  = $req->harga_jual;
+        $s->jumlah_stok = $req->jumlah_stok;
+        $s->save();
+        toast('Data Obat Berhasil Di Update', 'success');
+        return redirect('/pengaturan/data_master/stokobat');
+    }
+    
+    public function obatmasuk()
+    {
+        $data = Tpenerimaanobat::all();
+        return view('master.obatmasuk.index',compact('data'));
+    }
+
+    public function addObatmasuk(Request $req)
+    {
+        $petugas = Mpegawai::all();
+        $obat = Mobat::all();
+        $data = Tkeranjang::all();
+        
+        return view('master.obatmasuk.create', compact('petugas','obat','data'));
+    }
+
+    public function deleteObatmasuk($id)
+    {
+        $del = Tpenerimaanobat::find($id)->delete();
+        toast('Data Berhasil Di Hapus', 'success');
+        return back();
+    }
+
+    public function keranjangObat(Request $req)
+    {
+        $check = Tkeranjang::where('obat_id', $req->obat_id)->first();
+        if($check == null){
+            $s = new Tkeranjang;
+            $s->obat_id = $req->obat_id;
+            $s->jumlah = $req->jumlah_obat;
+            $s->save();
+        }else{
+            $s = $check;
+            $s->jumlah = $s->jumlah+$req->jumlah_obat;
+            $s->save();
+        }
+        
+        return redirect()->back();
+    }
+
+    public function resetObatmasuk()
+    {
+        Tkeranjang::truncate();
+        return back();
+    }
+
+    public function deleteKeranjangObat($key)
+    {
+        $del = Tkeranjang::find($key)->delete();
+        return back();
+    }
+
+    public function storeObatmasuk(Request $req)
+    {
+        $tanggal    = Carbon::createFromFormat('d/m/Y', $req->tanggal)->format('Y-m-d');
+        $keranjang  = Tkeranjang::all();
+        $ruangan_id = Mruangan::where('nama', $req->ruangan_id)->first()->id;
+        $petugas_id = Mpegawai::where('id', $req->pegawai_id)->first();
+        
+        //Save To Penerimaan Obat
+        $t_penerimaan = new Tpenerimaanobat;
+        $t_penerimaan->ruangan_id = $ruangan_id;
+        $t_penerimaan->tanggal    = $tanggal;
+        $t_penerimaan->petugas_id = $req->pegawai_id;
+        $t_penerimaan->save();
+
+        foreach($keranjang as $value){
+            $t_p_detail = new Tpenerimaanobatdetail;
+            $t_p_detail->penerimaan_id = $t_penerimaan->id;
+            $t_p_detail->obat_id = $value->obat_id;
+            $t_p_detail->obat_jumlah = $value->jumlah;
+            $t_p_detail->save();
+        }
+
+        //Save To M Stok Obat
+        foreach($keranjang as $item){
+            $check = Mstokobat::where('obat_id', $req->obat_id)->first();
+            if($check == null){
+                $s = new Mstokobat;
+                $s->puskesmas_id = Auth::user()->puskesmas_id;
+                $s->ruangan_id = $ruangan_id;
+                $s->obat_id = $item->obat_id;
+                $s->harga_jual = 0;
+                $s->jumlah_stok = $item->jumlah;
+                $s->save();
+            }else{
+                $s = $check;
+                $s->jumlah_stok = $item->jumlah + $s->jumlah_stok;
+                $s->save();
+            }
+        }
+        Tkeranjang::truncate();
+        return redirect('/pengaturan/data_master/obatmasuk');
     }
 }

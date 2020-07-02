@@ -43,8 +43,8 @@
                   <tr>
                     <td><small>{{$no++}}</small></td>
                     <td><small>{{$item->value}}</small></td>
-                    <td><small>{{$item->obattitle()}}</small></td>
-                    <td><small>{{$item->obat_unit}}</small></td>
+                    <td><small>{{$item->m_obat_title->value}}</small></td>
+                    <td><small>{{$item->m_obat_unit->value}}</small></td>
                     <td width="80px">
                       <a href="/pengaturan/obat/edit/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>
                       <a href="/pengaturan/obat/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Data Ini?');"><i class="fa fa-trash"></i></a>

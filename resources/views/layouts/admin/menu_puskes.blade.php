@@ -39,6 +39,7 @@
       <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Pelayanan</a>
       <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
         <li><a href="/pelayanan/medis" class="dropdown-item">Medis </a></li>
+        <li><a href="/pelayanan/apotek" class="dropdown-item">Apotek </a></li>
         {{-- <li><a href="#" class="dropdown-item">Laboratorium </a></li> --}}
       </ul>
     </li>

@@ -107,8 +107,18 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pengaturan/data_master/stokobat/add', 'PengaturanController@addStokobat');
     Route::post('/pengaturan/data_master/stokobat', 'PengaturanController@storeStokobat')->name('simpanStokobat');
     Route::get('/pengaturan/stokobat/delete/{id}', 'PengaturanController@deleteStokobat');
-    Route::get('/pengaturan/stokobat/edit/{id}', 'PengaturanController@editStokobatt');
+    Route::get('/pengaturan/stokobat/edit/{id}', 'PengaturanController@editStokobat');
     Route::post('/pengaturan/stokobat/edit/{id}', 'PengaturanController@updateStokobat')->name('editStokobat');
+
+    Route::get('/pengaturan/data_master/obatmasuk', 'PengaturanController@obatmasuk');
+    Route::get('/pengaturan/data_master/obatmasuk/add', 'PengaturanController@addObatmasuk');
+    Route::post('/pengaturan/data_master/obatmasuk', 'PengaturanController@storeObatmasuk')->name('simpanObatmasuk');
+    Route::get('/pengaturan/obatmasuk/delete/{id}', 'PengaturanController@deleteObatmasuk');
+    Route::get('/pengaturan/obatmasuk/edit/{id}', 'PengaturanController@editObatmasuk');
+    Route::get('/pengaturan/obatmasuk/reset', 'PengaturanController@resetObatmasuk');
+    Route::get('//pengaturan/data_master/obatmasuk/delete/{key}', 'PengaturanController@deleteKeranjangObat');
+    Route::post('/pengaturan/obatmasuk/edit/{id}', 'PengaturanController@updateObatmasuk')->name('editObatmasuk');
+    Route::post('/pengaturan/data_master/obatmasuk/add', 'PengaturanController@keranjangObat')->name('tambahObatMasuk');
 
     Route::get('/pengaturan/data_master/jenispegawai', 'PengaturanController@jenispegawai');
     Route::get('/pengaturan/data_master/jenispegawai/add', 'PengaturanController@addJenisPegawai');
@@ -158,11 +168,13 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::any('/pelayanan/medis/search', 'PelayananController@search');
     Route::any('/pelayanan/medis/tanggal', 'PelayananController@searchTanggal');
 
+    Route::get('/pelayanan/apotek', 'PelayananController@apotek');
+    Route::post('/pelayanan/apotek', 'PelayananController@apotekSearch');
+
     Route::get('/laporankunjunganpasien', 'LaporanController@kunjunganpasien');
     Route::get('/laporankunjunganpasien/export', 'LaporanController@exportkunjunganpasien');
     Route::get('/laporankunjunganpasien/export/today', 'LaporanController@exportkunjunganpasientoday');
     Route::post('/laporankunjunganpasien/search', 'LaporanController@tampilkankunjunganpasien');
-
     
     Route::get('/laporanpelayananpasien', 'LaporanController@laporanpelayananpasien');
     Route::get('/laporankinerjapuskesmas', 'LaporanController@laporankinerjapuskesmas');
@@ -191,26 +203,20 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pelayanan/medis/proses/{id}/anamnesa/{anamnesa_id}', 'AnamnesaController@updateAnamnesa')->name('updateAnamnesa2');
     Route::post('/pelayanan/medis/proses/{id}/anamnesa', 'PelayananController@storeAnamnesa')->name('anamnesa2');
 
-    
     Route::post('/pelayanan/medis/proses/{id}/diagnosa', 'DiagnosaController@storeDiagnosa')->name('diagnosa2');
     Route::get('/pelayanan/medis/proses/{id}/diagnosa/delete/{id_diagnosa}', 'DiagnosaController@deleteDiagnosa');
 
-    
     Route::post('/pelayanan/medis/proses/{id}/resep', 'ResepController@storeResep')->name('resep2');
     Route::get('/pelayanan/medis/proses/{id}/resep/delete/{id_resep}', 'ResepController@deleteResep');
 
-    
     Route::post('/pelayanan/medis/proses/{id}/laboratorium', 'LaboratoriumController@storeLab')->name('laboratorium'); 
     Route::get('/pelayanan/medis/proses/lab/delete/{id}', 'LaboratoriumController@deleteLab'); 
-
     
     Route::post('/pelayanan/medis/proses/{id}/tindakan', 'TindakanController@storeTindakan')->name('tindakan2'); 
     Route::get('/pelayanan/medis/proses/{id}/tindakan/delete/{id_tindakan}', 'TindakanController@deleteTindakan');
-      
     
     Route::post('/pelayanan/medis/proses/{id}/mtbs', 'MtbsController@storeMtbs')->name('mtbs'); 
     Route::post('/pelayanan/medis/proses/{id}/mtbs/{mtbs_id}', 'MtbsController@updateMtbs')->name('updateMtbs'); 
-    
     
     Route::post('/pelayanan/medis/proses/{id}/imunisasi/kms', 'ImunisasiController@storeKMS')->name('kms'); 
     Route::post('/pelayanan/medis/proses/{id}/imunisasi/kms/update/{kms_id}', 'ImunisasiController@updateKMS')->name('updatekms');
@@ -219,17 +225,13 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pelayanan/medis/proses/{id}/imunisasi/anak/update/{imunisasi_id}', 'ImunisasiController@UpdateImunisasiAnak')->name('updateImunisasiAnak'); 
     Route::post('/pelayanan/medis/proses/{id}/imunisasi/dewasa/update/{imunisasi_id}', 'ImunisasiController@UpdateImunisasiDewasa')->name('updateImunisasiDewasa');
 
-    
     Route::post('/pelayanan/medis/proses/{id}/periksagizi', 'PeriksaGiziController@store')->name('periksagizi');
 
-    
     Route::post('/pelayanan/medis/proses/{id}/odontogram', 'OdontogramController@store')->name('odontogram');
     Route::post('/pelayanan/medis/proses/{id}/odontogram/update', 'OdontogramController@update')->name('updateOdontogram');
     Route::get('/delete/odontogram/{id}', 'OdontogramController@delete');
     Route::get('/odontogram/image/code={code}/tipe={tipe}', 'OdontogramController@image');
 
-
-    
     Route::get('/generatekode', 'OdontogramController@generatekode');
     Route::get('/tarikgambar', 'OdontogramController@tarikgambar');
    

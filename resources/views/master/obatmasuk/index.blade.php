@@ -17,9 +17,9 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Stok Obat</h3>
+              <h3 class="card-title">Data Obat Masuk / Penerimaan Obat</h3>
               <div class="card-tools">
-                <a href="/pengaturan/data_master/stokobat/add" class="btn bg-gradient-primary btn-sm"><i class="fas fa-plus"></i> Tambah Data</a>
+                <a href="/pengaturan/data_master/obatmasuk/add" class="btn bg-gradient-primary btn-sm"><i class="fas fa-plus"></i> Tambah Data</a>
                 <a href="/pengaturan/data_master/" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-left"></i> Kembali</a>
               </div>
             </div>
@@ -30,11 +30,10 @@
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                   <th>No</th>
-                  <th>Nama Obat</th>
-                  <th>Kelompok</th>
-                  <th>Jumlah Stok</th>
-                  <th>Harga Jual</th>
+                  <th>Tanggal Penerimaan</th>
                   <th>Ruangan</th>
+                  <th>Petugas</th>
+                  <th>Daftar Obat Diterima</th>
                   <th>#</th>
                 </thead><small>
                     @php
@@ -44,14 +43,24 @@
                   @foreach ($data as $key => $item)
                   <tr>
                     <td><small>{{$no++}}</small></td>
-                    <td><small>{{$item->mobat->value}}</small></td>
-                    <td><small>{{$item->mobat->m_obat_title->value}}</small></td>
-                    <td><small>{{$item->jumlah_stok}}</small></td>
-                    <td><small>Rp. {{$item->harga_jual}}</small></td>
+                    <td><small>{{\Carbon\Carbon::parse($item->tanggal)->format('d-m-Y')}}</small></td>
                     <td><small>{{$item->m_ruangan->nama}}</small></td>
+                    <td><small>{{$item->petugas->nama}}</small></td>
+                    <td><small>
+                        <table class="table table-bordered table-sm">
+                        @foreach ($item->t_penerimaan_obat_detail as $item2)
+                            <tr>
+                                <td width="70%">- {{$item2->m_obat->value}}</td>
+                                <td width="15%">{{$item2->obat_jumlah}}</td>
+                                <td width="15%">{{$item2->m_obat->m_obat_unit->value}}</td>
+                            </tr>
+                        @endforeach
+                        </table>
+                    </small></td>
+                    
                     <td width="80px">
-                      <a href="/pengaturan/stokobat/edit/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>
-                      <a href="/pengaturan/stokobat/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Data Ini?');"><i class="fa fa-trash"></i></a>
+                      {{-- <a href="/pengaturan/obatmasuk/edit/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> --}}
+                      <a href="/pengaturan/obatmasuk/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Data Ini?');"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                   @endforeach

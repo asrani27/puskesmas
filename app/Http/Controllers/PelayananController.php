@@ -444,199 +444,199 @@ class PelayananController extends Controller
         return view('puskes.pelayanan.medis.medis',compact('data','ruangan'));
     }
 
-    public function umumAnamnesa($id)
-    {
-        $checkPoli = Tpelayanan::where('id', $id)->where('ruangan_id', '0001')->first();
-        if($checkPoli == null){
-            Alert::info('Tidak terdaftar di poli Umum');
-            return back();
-        }else{
-            $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
-            if($checkAnamnesa == null)
-            {
-                $data = Tpelayanan::find($id);
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-                return view('puskes.pelayanan.medis.anamnesa.umum.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
-            }else{
-                $anamnesa = $checkAnamnesa;
-                $data = Tpelayanan::find($id);    
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    // public function umumAnamnesa($id)
+    // {
+    //     $checkPoli = Tpelayanan::where('id', $id)->where('ruangan_id', '0001')->first();
+    //     if($checkPoli == null){
+    //         Alert::info('Tidak terdaftar di poli Umum');
+    //         return back();
+    //     }else{
+    //         $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
+    //         if($checkAnamnesa == null)
+    //         {
+    //             $data = Tpelayanan::find($id);
+    //             $keluhan = Mlookup::where('for','keluhan')->get();
+    //             $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+    //             $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //                 $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //                 $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //                 return $item;
+    //             });
+    //             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //             return view('puskes.pelayanan.medis.anamnesa.umum.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
+    //         }else{
+    //             $anamnesa = $checkAnamnesa;
+    //             $data = Tpelayanan::find($id);    
+    //             $keluhan = Mlookup::where('for','keluhan')->get();
+    //             $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+    //             $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //                 $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //                 $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //                 return $item;
+    //             });
+    //             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
                 
-                return view('puskes.pelayanan.medis.anamnesa.umum.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa'));
-            }
-        }
-    }
+    //             return view('puskes.pelayanan.medis.anamnesa.umum.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa'));
+    //         }
+    //     }
+    // }
     
-    public function anakAnamnesa($id)
-    {
-        $checkPoli = Tpelayanan::where('id', $id)->orWhere('ruangan_id', '0010')->orWhere('ruangan_id', '0029')->first();
-        if($checkPoli == null){
-            Alert::info('Tidak terdaftar di poli anak');
-            return back();
-        }else{
-            $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
-            if($checkAnamnesa == null)
-            {
-                $data = Tpelayanan::find($id);
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-                return view('puskes.pelayanan.medis.anamnesa.anak.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
-            }else{
-                $anamnesa = $checkAnamnesa;
-                $data = Tpelayanan::find($id);    
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    // public function anakAnamnesa($id)
+    // {
+    //     $checkPoli = Tpelayanan::where('id', $id)->orWhere('ruangan_id', '0010')->orWhere('ruangan_id', '0029')->first();
+    //     if($checkPoli == null){
+    //         Alert::info('Tidak terdaftar di poli anak');
+    //         return back();
+    //     }else{
+    //         $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
+    //         if($checkAnamnesa == null)
+    //         {
+    //             $data = Tpelayanan::find($id);
+    //             $keluhan = Mlookup::where('for','keluhan')->get();
+    //             $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+    //             $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //                 $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //                 $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //                 return $item;
+    //             });
+    //             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //             return view('puskes.pelayanan.medis.anamnesa.anak.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
+    //         }else{
+    //             $anamnesa = $checkAnamnesa;
+    //             $data = Tpelayanan::find($id);    
+    //             $keluhan = Mlookup::where('for','keluhan')->get();
+    //             $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+    //             $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //                 $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //                 $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //                 return $item;
+    //             });
+    //             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
                 
-                return view('puskes.pelayanan.medis.anamnesa.anak.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa'));
-            }
-        }
-    }
-    public function mtbsAnamnesa($id)
-    {
-        $checkPoli = Tpelayanan::where('id', $id)->orWhere('ruangan_id', '0010')->orWhere('ruangan_id', '0029')->first();
-        if($checkPoli == null){
-            Alert::info('Tidak terdaftar di poli anak');
-            return back();
-        }else{
-            $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
-            if($checkAnamnesa == null)
-            {
-                $data = Tpelayanan::find($id);
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-                return view('puskes.pelayanan.medis.anamnesa.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
-            }else{
-                $anamnesa = $checkAnamnesa;
-                $data = Tpelayanan::find($id);    
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //             return view('puskes.pelayanan.medis.anamnesa.anak.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa'));
+    //         }
+    //     }
+    // }
+    // public function mtbsAnamnesa($id)
+    // {
+    //     $checkPoli = Tpelayanan::where('id', $id)->orWhere('ruangan_id', '0010')->orWhere('ruangan_id', '0029')->first();
+    //     if($checkPoli == null){
+    //         Alert::info('Tidak terdaftar di poli anak');
+    //         return back();
+    //     }else{
+    //         $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
+    //         if($checkAnamnesa == null)
+    //         {
+    //             $data = Tpelayanan::find($id);
+    //             $keluhan = Mlookup::where('for','keluhan')->get();
+    //             $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+    //             $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //                 $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //                 $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //                 return $item;
+    //             });
+    //             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //             return view('puskes.pelayanan.medis.anamnesa.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
+    //         }else{
+    //             $anamnesa = $checkAnamnesa;
+    //             $data = Tpelayanan::find($id);    
+    //             $keluhan = Mlookup::where('for','keluhan')->get();
+    //             $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+    //             $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //                 $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //                 $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //                 return $item;
+    //             });
+    //             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
                 
-                return view('puskes.pelayanan.medis.anamnesa.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa'));
-            }
-        }
-    }
+    //             return view('puskes.pelayanan.medis.anamnesa.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa'));
+    //         }
+    //     }
+    // }
 
-    public function gigiAnamnesa($id)
-    {
-        $checkPoli = Tpelayanan::where('id', $id)->where('ruangan_id', '0006')->first();
-        if($checkPoli == null){
-            Alert::info('Tidak terdaftar di poli Umum');
-            return back();
-        }else{
-            $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
-            if($checkAnamnesa == null)
-            {
-                $data = Tpelayanan::find($id);
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-                return view('puskes.pelayanan.medis.anamnesa.gigi.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
-            }else{
-                $anamnesa = $checkAnamnesa;
-                $data = Tpelayanan::find($id);    
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    // public function gigiAnamnesa($id)
+    // {
+    //     $checkPoli = Tpelayanan::where('id', $id)->where('ruangan_id', '0006')->first();
+    //     if($checkPoli == null){
+    //         Alert::info('Tidak terdaftar di poli Umum');
+    //         return back();
+    //     }else{
+    //         $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
+    //         if($checkAnamnesa == null)
+    //         {
+    //             $data = Tpelayanan::find($id);
+    //             $keluhan = Mlookup::where('for','keluhan')->get();
+    //             $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+    //             $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //                 $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //                 $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //                 return $item;
+    //             });
+    //             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //             return view('puskes.pelayanan.medis.anamnesa.gigi.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
+    //         }else{
+    //             $anamnesa = $checkAnamnesa;
+    //             $data = Tpelayanan::find($id);    
+    //             $keluhan = Mlookup::where('for','keluhan')->get();
+    //             $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+    //             $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //                 $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //                 $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //                 return $item;
+    //             });
+    //             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
                 
-                return view('puskes.pelayanan.medis.anamnesa.gigi.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa'));
-            }
-        }
-    }
+    //             return view('puskes.pelayanan.medis.anamnesa.gigi.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa'));
+    //         }
+    //     }
+    // }
 
-    public function kiaAnamnesa($id)
-    {  
-        $checkPoli = Tpelayanan::where('id', $id)->where('ruangan_id', '0008')->first();
-        if($checkPoli == null){
-            Alert::info('Tidak terdaftar di poli Umum');
-            return back();
-        }else{
-            $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
-            if($checkAnamnesa == null)
-            {
-                $data = Tpelayanan::find($id);
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-                return view('puskes.pelayanan.medis.anamnesa.kia.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
-            }else{
-                $anamnesa = $checkAnamnesa;
-                $data = Tpelayanan::find($id);    
-                $keluhan = Mlookup::where('for','keluhan')->get();
-                $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-                $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                    $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                    $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                    return $item;
-                });
-                $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-                $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    // public function kiaAnamnesa($id)
+    // {  
+    //     $checkPoli = Tpelayanan::where('id', $id)->where('ruangan_id', '0008')->first();
+    //     if($checkPoli == null){
+    //         Alert::info('Tidak terdaftar di poli Umum');
+    //         return back();
+    //     }else{
+    //         $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
+    //         if($checkAnamnesa == null)
+    //         {
+    //             $data = Tpelayanan::find($id);
+    //             $keluhan = Mlookup::where('for','keluhan')->get();
+    //             $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+    //             $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //                 $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //                 $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //                 return $item;
+    //             });
+    //             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //             return view('puskes.pelayanan.medis.anamnesa.kia.create',compact('data','keluhan','dokter', 'perawat','kesadaran'));
+    //         }else{
+    //             $anamnesa = $checkAnamnesa;
+    //             $data = Tpelayanan::find($id);    
+    //             $keluhan = Mlookup::where('for','keluhan')->get();
+    //             $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+    //             $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //                 $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //                 $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //                 return $item;
+    //             });
+    //             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
                 
-                return view('puskes.pelayanan.medis.anamnesa.kia.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa'));
-            }
-        }
-    }
+    //             return view('puskes.pelayanan.medis.anamnesa.kia.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa'));
+    //         }
+    //     }
+    // }
 
     public function storeAnamnesa(Request $req, $id)
     {
@@ -911,49 +911,49 @@ class PelayananController extends Controller
         //return redirect('/pelayanan/medis/proses/'.$id.'/umum/anamnesa');
     }
 
-    public function umumDiagnosa($id)
-    {
-        $data = Tpelayanan::find($id);
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        $diagnosa = DB::table('m_diagnosa')->select('id','value')->paginate(100);
+    // public function umumDiagnosa($id)
+    // {
+    //     $data = Tpelayanan::find($id);
+    //     $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //         $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //         $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //         return $item;
+    //     });
+    //     $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //     $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //     $diagnosa = DB::table('m_diagnosa')->select('id','value')->paginate(100);
         
-        return view('puskes.pelayanan.medis.diagnosa.umum.create',compact('data','dokter','perawat','diagnosa'));
-    }
+    //     return view('puskes.pelayanan.medis.diagnosa.umum.create',compact('data','dokter','perawat','diagnosa'));
+    // }
 
-    public function anakDiagnosa($id)
-    {
-        $data = Tpelayanan::find($id);
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        $diagnosa = DB::table('m_diagnosa')->select('id','value')->paginate(100);
+    // public function anakDiagnosa($id)
+    // {
+    //     $data = Tpelayanan::find($id);
+    //     $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //         $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //         $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //         return $item;
+    //     });
+    //     $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //     $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //     $diagnosa = DB::table('m_diagnosa')->select('id','value')->paginate(100);
         
-        return view('puskes.pelayanan.medis.diagnosa.anak.create',compact('data','dokter','perawat','diagnosa'));
-    }
+    //     return view('puskes.pelayanan.medis.diagnosa.anak.create',compact('data','dokter','perawat','diagnosa'));
+    // }
 
-    public function anakMtbs($id)
-    {
-        $data = Tpelayanan::find($id);
-        $sp   = Mstatuspulang::all();
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        return view('puskes.pelayanan.medis.mtbs.anak.create',compact('data','sp','dokter','perawat'));
-    }
+    // public function anakMtbs($id)
+    // {
+    //     $data = Tpelayanan::find($id);
+    //     $sp   = Mstatuspulang::all();
+    //     $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //         $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //         $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //         return $item;
+    //     });
+    //     $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //     $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //     return view('puskes.pelayanan.medis.mtbs.anak.create',compact('data','sp','dokter','perawat'));
+    // }
 
     public function Periksagizi($id)
     {   
@@ -969,35 +969,35 @@ class PelayananController extends Controller
         return view('puskes.pelayanan.medis.periksa_gizi.create',compact('data','sp','dokter','perawat'));   
     }
     
-    public function anakImunisasi($id)
-    {
-        $data = Tpelayanan::find($id);
-        $sp   = Mstatuspulang::all();
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        return view('puskes.pelayanan.medis.imunisasi.anak.check',compact('data','sp','dokter','perawat'));   
-    }
+    // public function anakImunisasi($id)
+    // {
+    //     $data = Tpelayanan::find($id);
+    //     $sp   = Mstatuspulang::all();
+    //     $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //         $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //         $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //         return $item;
+    //     });
+    //     $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //     $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //     return view('puskes.pelayanan.medis.imunisasi.anak.check',compact('data','sp','dokter','perawat'));   
+    // }
     
 
-    public function gigiDiagnosa($id)
-    {
-        $data = Tpelayanan::find($id);
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        $diagnosa = DB::table('m_diagnosa')->select('id','value')->paginate(100);
+    // public function gigiDiagnosa($id)
+    // {
+    //     $data = Tpelayanan::find($id);
+    //     $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //         $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //         $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //         return $item;
+    //     });
+    //     $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //     $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //     $diagnosa = DB::table('m_diagnosa')->select('id','value')->paginate(100);
         
-        return view('puskes.pelayanan.medis.diagnosa.gigi.create',compact('data','dokter','perawat','diagnosa'));
-    }
+    //     return view('puskes.pelayanan.medis.diagnosa.gigi.create',compact('data','dokter','perawat','diagnosa'));
+    // }
 
     public function storeDiagnosa(Request $req, $id)
     {
@@ -1021,69 +1021,69 @@ class PelayananController extends Controller
         return back();
     }
 
-    public function umumResep($id)
-    {
-        $data = Tpelayanan::find($id);
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        $obat = DB::table('m_obat')->select('id','value')->get();
-        $signa = DB::table('m_signa')->select('value')->get();
-        return view('puskes.pelayanan.medis.resep.umum.create',compact('data','dokter','perawat', 'obat','signa'));
-    }
+    // public function umumResep($id)
+    // {
+    //     $data = Tpelayanan::find($id);
+    //     $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //         $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //         $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //         return $item;
+    //     });
+    //     $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //     $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //     $obat = DB::table('m_obat')->select('id','value')->get();
+    //     $signa = DB::table('m_signa')->select('value')->get();
+    //     return view('puskes.pelayanan.medis.resep.umum.create',compact('data','dokter','perawat', 'obat','signa'));
+    // }
 
-    public function anakResep($id)
-    {
-        $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
-        $keluhan = Mlookup::where('for','keluhan')->get();
-        $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
-        if($checkAnamnesa == null)
-        {
-            $data = Tpelayanan::find($id);
-            $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                return $item;
-            });
-            $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-            $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-            Alert::info('Harap Isi Anamnesa Terlebih Dahulu', 'Info');
-            return view('puskes.pelayanan.medis.anamnesa.anak.create',compact('data','dokter','perawat','keluhan','kesadaran'));
+    // public function anakResep($id)
+    // {
+    //     $checkAnamnesa = Tanamnesa::where('pelayanan_id', $id)->first();
+    //     $keluhan = Mlookup::where('for','keluhan')->get();
+    //     $kesadaran = Mlookup::where('for','kesadaran')->get()->sortby('id');
+    //     if($checkAnamnesa == null)
+    //     {
+    //         $data = Tpelayanan::find($id);
+    //         $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //             $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //             $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //             return $item;
+    //         });
+    //         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //         Alert::info('Harap Isi Anamnesa Terlebih Dahulu', 'Info');
+    //         return view('puskes.pelayanan.medis.anamnesa.anak.create',compact('data','dokter','perawat','keluhan','kesadaran'));
 
-        }
-        else{
-            $data = Tpelayanan::find($id);
-            $tenagamedis = Mpegawai::all()->map(function($item, $key){
-                $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-                $item->nama_tenaga_medis = $item->jenispegawai->nama;
-                return $item;
-            });
-            $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-            $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-            $obat = DB::table('m_obat')->select('id','value')->get();
-            $signa = DB::table('m_signa')->select('value')->get();
-            return view('puskes.pelayanan.medis.resep.anak.create',compact('data','dokter','perawat', 'obat','signa'));
-        }
-    }
+    //     }
+    //     else{
+    //         $data = Tpelayanan::find($id);
+    //         $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //             $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //             $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //             return $item;
+    //         });
+    //         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //         $obat = DB::table('m_obat')->select('id','value')->get();
+    //         $signa = DB::table('m_signa')->select('value')->get();
+    //         return view('puskes.pelayanan.medis.resep.anak.create',compact('data','dokter','perawat', 'obat','signa'));
+    //     }
+    // }
 
-    public function gigiResep($id)
-    {
-        $data = Tpelayanan::find($id);
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        $obat = DB::table('m_obat')->select('id','value')->get();
-        $signa = DB::table('m_signa')->select('value')->get();
-        return view('puskes.pelayanan.medis.resep.gigi.create',compact('data','dokter','perawat', 'obat','signa'));
-    }
+    // public function gigiResep($id)
+    // {
+    //     $data = Tpelayanan::find($id);
+    //     $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //         $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //         $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //         return $item;
+    //     });
+    //     $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //     $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //     $obat = DB::table('m_obat')->select('id','value')->get();
+    //     $signa = DB::table('m_signa')->select('value')->get();
+    //     return view('puskes.pelayanan.medis.resep.gigi.create',compact('data','dokter','perawat', 'obat','signa'));
+    // }
 
     public function storeResep(Request $req, $id)
     {
@@ -1123,76 +1123,76 @@ class PelayananController extends Controller
         return back();
     }
 
-    public function umumLaboratorium($id)
-    {
-        $data = Tpelayanan::find($id);
-        $sp = Mstatuspulang::all();
-        $lab = Mjenislab::all()->map(function($item, $key){
-            $item->laboratorium = $item->lab->where('deleted_by', null);
-            return $item;
-        });
-        return view('puskes.pelayanan.medis.lab.umum.create',compact('data','sp','lab'));
-    }
+    // public function umumLaboratorium($id)
+    // {
+    //     $data = Tpelayanan::find($id);
+    //     $sp = Mstatuspulang::all();
+    //     $lab = Mjenislab::all()->map(function($item, $key){
+    //         $item->laboratorium = $item->lab->where('deleted_by', null);
+    //         return $item;
+    //     });
+    //     return view('puskes.pelayanan.medis.lab.umum.create',compact('data','sp','lab'));
+    // }
 
-    public function umumTindakan($id)
-    {
-        $data = Tpelayanan::find($id);
-        $sp   = Mstatuspulang::all();
-        $tindakan = Mtindakan::all();
-        $lab  = Mjenislab::all()->map(function($item, $key){
-            $item->laboratorium = $item->lab->where('deleted_by', null);
-            return $item;
-        });
+    // public function umumTindakan($id)
+    // {
+    //     $data = Tpelayanan::find($id);
+    //     $sp   = Mstatuspulang::all();
+    //     $tindakan = Mtindakan::all();
+    //     $lab  = Mjenislab::all()->map(function($item, $key){
+    //         $item->laboratorium = $item->lab->where('deleted_by', null);
+    //         return $item;
+    //     });
         
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        return view('puskes.pelayanan.medis.tindakan.umum.create',compact('data','sp','lab','dokter','perawat','tindakan'));
-    }
+    //     $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //         $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //         $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //         return $item;
+    //     });
+    //     $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //     $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //     return view('puskes.pelayanan.medis.tindakan.umum.create',compact('data','sp','lab','dokter','perawat','tindakan'));
+    // }
     
-    public function anakTindakan($id)
-    {
-        $data = Tpelayanan::find($id);
-        $sp   = Mstatuspulang::all();
-        $tindakan = Mtindakan::all();
-        $lab  = Mjenislab::all()->map(function($item, $key){
-            $item->laboratorium = $item->lab->where('deleted_by', null);
-            return $item;
-        });
+    // public function anakTindakan($id)
+    // {
+    //     $data = Tpelayanan::find($id);
+    //     $sp   = Mstatuspulang::all();
+    //     $tindakan = Mtindakan::all();
+    //     $lab  = Mjenislab::all()->map(function($item, $key){
+    //         $item->laboratorium = $item->lab->where('deleted_by', null);
+    //         return $item;
+    //     });
         
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        return view('puskes.pelayanan.medis.tindakan.anak.create',compact('data','sp','lab','dokter','perawat','tindakan'));
-    }
+    //     $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //         $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //         $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //         return $item;
+    //     });
+    //     $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //     $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //     return view('puskes.pelayanan.medis.tindakan.anak.create',compact('data','sp','lab','dokter','perawat','tindakan'));
+    // }
 
-    public function gigiTindakan($id)
-    {
-        $data = Tpelayanan::find($id);
-        $sp   = Mstatuspulang::all();
-        $tindakan = Mtindakan::all();
-        $lab  = Mjenislab::all()->map(function($item, $key){
-            $item->laboratorium = $item->lab->where('deleted_by', null);
-            return $item;
-        });
+    // public function gigiTindakan($id)
+    // {
+    //     $data = Tpelayanan::find($id);
+    //     $sp   = Mstatuspulang::all();
+    //     $tindakan = Mtindakan::all();
+    //     $lab  = Mjenislab::all()->map(function($item, $key){
+    //         $item->laboratorium = $item->lab->where('deleted_by', null);
+    //         return $item;
+    //     });
         
-        $tenagamedis = Mpegawai::all()->map(function($item, $key){
-            $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
-            $item->nama_tenaga_medis = $item->jenispegawai->nama;
-            return $item;
-        });
-        $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
-        $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-        return view('puskes.pelayanan.medis.tindakan.gigi.create',compact('data','sp','lab','dokter','perawat','tindakan'));
-    }
+    //     $tenagamedis = Mpegawai::all()->map(function($item, $key){
+    //         $item->kelompok_pegawai = $item->jenispegawai->kelompok_pegawai;
+    //         $item->nama_tenaga_medis = $item->jenispegawai->nama;
+    //         return $item;
+    //     });
+    //     $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
+    //     $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
+    //     return view('puskes.pelayanan.medis.tindakan.gigi.create',compact('data','sp','lab','dokter','perawat','tindakan'));
+    // }
 
     public function storeTindakan(Request $req, $id)
     {
@@ -1293,5 +1293,20 @@ class PelayananController extends Controller
         $del = Tlaboratoriumdetail::find($id)->delete();
         toast('Data Berhasil Di Hapus', 'success');
         return back();
+    }
+
+    public function apotek()
+    {
+        $today = Carbon::today()->format('Y-m-d');
+        $data = Tpelayanan::where('tanggal','LIKE', $today.'%')->orderBy('created_at','desc')->paginate(10);
+        return view('puskes.pelayanan.apotek.index',compact('data'));
+    }
+
+    public function apotekSearch(Request $req)
+    {
+        $date = Carbon::createFromFormat('d/m/Y', $req->tanggal)->format('Y-m-d').'%';
+        $data = Tpelayanan::Where('tanggal', 'LIKE', $date)->orderBy('tanggal','desc')->paginate(10);        
+        $req->flash();
+        return view('puskes.pelayanan.apotek.index',compact('data'));
     }
 }

@@ -17,4 +17,14 @@ class Tresep extends Model
     {
         return $this->belongsTo(Tpelayanan::class, 'pelayanan_id');
     }
+
+    public function dokter()
+    {
+        return $this->belongsTo(Mpegawai::class, 'dokter_id');
+    }
+
+    public function perawat()
+    {
+        return $this->belongsTo(Mpegawai::class, 'perawat_id');
+    }
 }
