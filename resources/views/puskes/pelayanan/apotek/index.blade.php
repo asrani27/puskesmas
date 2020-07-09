@@ -112,7 +112,7 @@
                       <td><small>{{$item->resep->dokter->nama}}</small></td>
                       <td><small>{{$item->resep->perawat == null ? '-' : $item->resep->perawat->nama}}</small></td>
                       <td class="text-center">  
-                        <a href="/pelayanan/medis/proses/{{$item->id}}" class="btn btn-xs btn-success"><i class="fas fa-medkit"></i></a>
+                        <a href="/pelayanan/apotek/proses/{{$item->id}}" class="btn btn-xs btn-success"><i class="fas fa-medkit"></i></a>
                       </td>
                     </tr>
                     @endif

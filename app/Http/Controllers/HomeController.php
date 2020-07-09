@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Mruangan;
 use Carbon\Carbon;
 use App\Tpelayanan;
+use App\Tpendaftaran;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Session;
 
 class HomeController extends Controller
 {
@@ -46,8 +48,36 @@ class HomeController extends Controller
                     return $item->jml;
                 });
 
-                return view('home_puskes',compact('ruangan','jml'));
+                $pasien       = $this->pasienToday();
+                $sevenDay     = $this->pasien7day();
+                $pasienMonth  = $this->pasienMonth();
+                return view('home_puskes',compact('ruangan','jml','pasien','sevenDay','pasienMonth'));
             }
         }
+    }
+
+    public function pasienToday()
+    {
+        $today = Carbon::now()->format('Y-m-d')." 00:00:00";
+        $data  = Tpendaftaran::where('tanggal', '>=', $today)->get();
+        $count = $data->count();
+        return $count;
+    }
+
+    public function pasien7day()
+    {
+        $today = Carbon::today()->format('Y-m-d');
+        $sevenDay = CarbonImmutable::now()->add(-7, 'day')->format('Y-m-d');
+        $data  = Tpendaftaran::whereBetween('tanggal', [$sevenDay." 00:00:00",$today." 23:59:59"])->get();
+        $count = $data->count();
+        return $count;
+    }
+    
+    public function pasienMonth()
+    {
+        $year = Carbon::today()->format('Y');
+        $month = Carbon::today()->format('m');
+        $data  = Tpendaftaran::whereYear('tanggal', '=', $year)->whereMonth('tanggal', '=', $month)->get()->count();
+        return $data;
     }
 }

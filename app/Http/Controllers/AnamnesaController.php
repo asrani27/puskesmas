@@ -6,6 +6,7 @@ use App\Malergi;
 use App\Mriwayat;
 use App\Tanamnesa;
 use App\Tpelayanan;
+use App\Tperiksafisik;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 

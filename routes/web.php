@@ -170,6 +170,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::get('/pelayanan/apotek', 'PelayananController@apotek');
     Route::post('/pelayanan/apotek', 'PelayananController@apotekSearch');
+    Route::get('/pelayanan/apotek/proses/{id}', 'PelayananController@detailResep');
 
     Route::get('/laporankunjunganpasien', 'LaporanController@kunjunganpasien');
     Route::get('/laporankunjunganpasien/export', 'LaporanController@exportkunjunganpasien');
@@ -201,7 +202,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pelayanan/medis/proses/{id}/periksagizi', 'PelayananController@Periksagizi'); 
     
     Route::post('/pelayanan/medis/proses/{id}/anamnesa/{anamnesa_id}', 'AnamnesaController@updateAnamnesa')->name('updateAnamnesa2');
-    Route::post('/pelayanan/medis/proses/{id}/anamnesa', 'PelayananController@storeAnamnesa')->name('anamnesa2');
+    Route::post('/pelayanan/medis/proses/{id}/anamnesa', 'AnamnesaController@storeAnamnesa')->name('anamnesa2');
 
     Route::post('/pelayanan/medis/proses/{id}/diagnosa', 'DiagnosaController@storeDiagnosa')->name('diagnosa2');
     Route::get('/pelayanan/medis/proses/{id}/diagnosa/delete/{id_diagnosa}', 'DiagnosaController@deleteDiagnosa');

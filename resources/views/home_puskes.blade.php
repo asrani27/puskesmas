@@ -23,14 +23,14 @@
         <span class="info-box-icon"><i class="far fa-user"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">Pasien Data Lengkap</span>
-          <span class="info-box-number">41/410 &nbsp;&nbsp;</span>
+          <span class="info-box-text">Pasien Hari Ini</span>
+          <span class="info-box-number">{{$pasien}} &nbsp;&nbsp;</span>
 
           <div class="progress">
             <div class="progress-bar" style="width: 70%"></div>
           </div>
           <span class="progress-description">
-            70% Data pasien terverifikasi lengkap
+            Data pasien terverifikasi lengkap
           </span>
         </div>
         <!-- /.info-box-content -->
@@ -40,17 +40,17 @@
     
     <div class="col-md-4 col-sm-6 col-12">
       <div class="info-box bg-gradient-info">
-        <span class="info-box-icon"><i class="fas fa-stethoscope"></i></span>
+        <span class="info-box-icon"><i class="fas fa-user"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">Pasien Sudah Dilayani</span>
-          <span class="info-box-number">11/110</span>
+          <span class="info-box-text">Pasien 7 Hari Terakhir</span>
+          <span class="info-box-number">{{$sevenDay}}</span>
 
           <div class="progress">
             <div class="progress-bar" style="width: 70%"></div>
           </div>
           <span class="progress-description">
-            70% Pasien dilayani di semua pelayanan
+            Data Pasien Dalam 7 Hari Terakhir
           </span>
         </div>
         <!-- /.info-box-content -->
@@ -60,17 +60,17 @@
     
     <div class="col-md-4 col-sm-6 col-12">
       <div class="info-box bg-gradient-danger">
-        <span class="info-box-icon"><i class="fas fa-book-medical"></i></span>
+        <span class="info-box-icon"><i class="fas fa-user"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">Resep Obat Di Berikan</span>
-          <span class="info-box-number">1/10</span>
+          <span class="info-box-text">Pasien Bulan Ini</span>
+          <span class="info-box-number">{{$pasienMonth}}</span>
 
           <div class="progress">
             <div class="progress-bar" style="width: 70%"></div>
           </div>
           <span class="progress-description">
-            70% Resep Sudah Di Proses Apotek
+            Data Pasien Dalam Bulan Ini
           </span>
         </div>
         <!-- /.info-box-content -->
@@ -84,13 +84,13 @@
   
           <div class="info-box-content">
             <span class="info-box-text">Pasien Sudah Membayar</span>
-            <span class="info-box-number">41/410</span>
+            <span class="info-box-number">~</span>
   
             <div class="progress">
               <div class="progress-bar" style="width: 70%"></div>
             </div>
             <span class="progress-description">
-              70% Pasien Umum Yang Membayar
+              Pasien Umum Yang Membayar
             </span>
           </div>
           <!-- /.info-box-content -->
@@ -104,13 +104,13 @@
   
           <div class="info-box-content">
             <span class="info-box-text">Pasien BPJS Yang Di Layani</span>
-            <span class="info-box-number">41/410</span>
+            <span class="info-box-number">~ Menunggu</span>
   
             <div class="progress">
               <div class="progress-bar" style="width: 70%"></div>
             </div>
             <span class="progress-description">
-              70% Pasien BPJS Sudah Di Layani
+              Pasien BPJS Sudah Di Layani
             </span>
           </div>
           <!-- /.info-box-content -->
@@ -124,13 +124,13 @@
   
           <div class="info-box-content">
             <span class="info-box-text">Pasien BPJS Sudah Bridging</span>
-            <span class="info-box-number">41/410</span>
+            <span class="info-box-number">~ Menunggu</span>
   
             <div class="progress">
               <div class="progress-bar" style="width: 70%"></div>
             </div>
             <span class="progress-description">
-              70% Pasien BPJS Sudah Bridging ke Pcare
+              Pasien BPJS Sudah Bridging ke Pcare
             </span>
           </div>
           <!-- /.info-box-content -->

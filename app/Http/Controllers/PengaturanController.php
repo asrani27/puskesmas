@@ -424,7 +424,7 @@ class PengaturanController extends Controller
     
     public function obatmasuk()
     {
-        $data = Tpenerimaanobat::all();
+        $data = Tpenerimaanobat::orderBy('id','desc')->get();
         return view('master.obatmasuk.index',compact('data'));
     }
 
@@ -497,7 +497,7 @@ class PengaturanController extends Controller
 
         //Save To M Stok Obat
         foreach($keranjang as $item){
-            $check = Mstokobat::where('obat_id', $req->obat_id)->first();
+            $check = Mstokobat::where('obat_id', $item->obat_id)->first();
             if($check == null){
                 $s = new Mstokobat;
                 $s->puskesmas_id = Auth::user()->puskesmas_id;

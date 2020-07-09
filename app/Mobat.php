@@ -21,8 +21,14 @@ class Mobat extends Model
     {
         return $this->belongsTo(Mobattitle::class, 'obat_title');
     }
+
     public function m_obat_unit()
     {
         return $this->belongsTo(Mobatunit::class, 'obat_unit');
+    }
+    
+    public function m_stok_obat()
+    {
+        return $this->hasMany(Mstokobat::class, 'obat_id');
     }
 }

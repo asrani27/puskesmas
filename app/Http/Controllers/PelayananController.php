@@ -638,278 +638,278 @@ class PelayananController extends Controller
     //     }
     // }
 
-    public function storeAnamnesa(Request $req, $id)
-    {
-        $dokter_id = $req->dokter_id;
-        $perawat_id = $req->perawat_id;
+    // public function storeAnamnesa(Request $req, $id)
+    // {
+    //     $dokter_id = $req->dokter_id;
+    //     $perawat_id = $req->perawat_id;
         
-        //ubah status periksa
-        $pel = Tpelayanan::find($id)->pendaftaran;
-        $pel->status_periksa = 1;
-        $pel->save();
-        $pasien_id = $pel->pasien_id;
+    //     //ubah status periksa
+    //     $pel = Tpelayanan::find($id)->pendaftaran;
+    //     $pel->status_periksa = 1;
+    //     $pel->save();
+    //     $pasien_id = $pel->pasien_id;
 
-        //Simpan Anamnesa
-        $anamnesa = new Tanamnesa;
-        $anamnesa->tanggal          = $pel->tanggal;
-        $anamnesa->pelayanan_id     = $id;
-        $anamnesa->dokter_id        = $dokter_id;
-        $anamnesa->perawat_id       = $perawat_id;
-        $anamnesa->keluhan_utama    = $req->keluhan_utama;
-        $anamnesa->keluhan_tambahan = $req->keluhan_tambahan;
-        $anamnesa->lama_sakit_tahun = $req->lama_sakit_tahun;
-        $anamnesa->lama_sakit_bulan = $req->lama_sakit_bulan;
-        $anamnesa->lama_sakit_hari  = $req->lama_sakit_hari;
-        $anamnesa->merokok          = $req->merokok;
-        $anamnesa->konsumsi_alkohol = $req->alkohol;
-        $anamnesa->kurang_sayur_buah= $req->sayur;
-        $anamnesa->terapi           = $req->terapi;
-        $anamnesa->keterangan       = $req->keterangan;
-        $anamnesa->edukasi          = $req->edukasi;
-        $anamnesa->rencana_tindakan = $req->tindakan;
-        $anamnesa->askep            = $req->askep;
-        $anamnesa->observasi        = $req->observasi;
-        $anamnesa->biopsikososial   = $req->biopsikososial;
-        $anamnesa->save();
+    //     //Simpan Anamnesa
+    //     $anamnesa = new Tanamnesa;
+    //     $anamnesa->tanggal          = $pel->tanggal;
+    //     $anamnesa->pelayanan_id     = $id;
+    //     $anamnesa->dokter_id        = $dokter_id;
+    //     $anamnesa->perawat_id       = $perawat_id;
+    //     $anamnesa->keluhan_utama    = $req->keluhan_utama;
+    //     $anamnesa->keluhan_tambahan = $req->keluhan_tambahan;
+    //     $anamnesa->lama_sakit_tahun = $req->lama_sakit_tahun;
+    //     $anamnesa->lama_sakit_bulan = $req->lama_sakit_bulan;
+    //     $anamnesa->lama_sakit_hari  = $req->lama_sakit_hari;
+    //     $anamnesa->merokok          = $req->merokok;
+    //     $anamnesa->konsumsi_alkohol = $req->alkohol;
+    //     $anamnesa->kurang_sayur_buah= $req->sayur;
+    //     $anamnesa->terapi           = $req->terapi;
+    //     $anamnesa->keterangan       = $req->keterangan;
+    //     $anamnesa->edukasi          = $req->edukasi;
+    //     $anamnesa->rencana_tindakan = $req->tindakan;
+    //     $anamnesa->askep            = $req->askep;
+    //     $anamnesa->observasi        = $req->observasi;
+    //     $anamnesa->biopsikososial   = $req->biopsikososial;
+    //     $anamnesa->save();
 
-        //Simpan Periksa Fisik
-        $fisik = new Tperiksafisik;
-        $fisik->tanggal          = $pel->tanggal;
-        $fisik->pelayanan_id     = $id;
-        $fisik->dokter_id        = $dokter_id;
-        $fisik->perawat_id       = $perawat_id;
-        $fisik->sistole          = $req->sistole;
-        $fisik->diastole         = $req->diastole;
-        $fisik->detak_nadi       = $req->detak_nadi;
-        $fisik->nafas            = $req->nafas;
-        $fisik->detak_jantung    = $req->detak_jantung;
-        $fisik->suhu             = $req->suhu;
-        $fisik->kesadaran        = $req->kesadaran;
-        $fisik->triage           = $req->triage;
-        $fisik->berat            = $req->berat;
-        $fisik->tinggi           = $req->tinggi;
-        $fisik->lingkar_perut    = $req->lingkar_perut;
-        $fisik->imt              = $req->imt;
-        $fisik->hasil_imt        = $req->hasil_imt;
-        $fisik->aktifitas_fisik  = $req->aktifitas_fisik;
-        $fisik->skala_nyeri      = $req->nyeri;
-        $fisik->save();
+    //     //Simpan Periksa Fisik
+    //     $fisik = new Tperiksafisik;
+    //     $fisik->tanggal          = $pel->tanggal;
+    //     $fisik->pelayanan_id     = $id;
+    //     $fisik->dokter_id        = $dokter_id;
+    //     $fisik->perawat_id       = $perawat_id;
+    //     $fisik->sistole          = $req->sistole;
+    //     $fisik->diastole         = $req->diastole;
+    //     $fisik->detak_nadi       = $req->detak_nadi;
+    //     $fisik->nafas            = $req->nafas;
+    //     $fisik->detak_jantung    = $req->detak_jantung;
+    //     $fisik->suhu             = $req->suhu;
+    //     $fisik->kesadaran        = $req->kesadaran;
+    //     $fisik->triage           = $req->triage;
+    //     $fisik->berat            = $req->berat;
+    //     $fisik->tinggi           = $req->tinggi;
+    //     $fisik->lingkar_perut    = $req->lingkar_perut;
+    //     $fisik->imt              = $req->imt;
+    //     $fisik->hasil_imt        = $req->hasil_imt;
+    //     $fisik->aktifitas_fisik  = $req->aktifitas_fisik;
+    //     $fisik->skala_nyeri      = $req->nyeri;
+    //     $fisik->save();
 
-        //Simpan Riwayat Penyakit
-        if(!is_null($req->riwayat_penyakit_sekarang)){
-            $rp = new Mriwayat;
-            $rp->pasien_id = $pasien_id;
-            $rp->anamnesa_id = $anamnesa->id;
-            $rp->jenis_riwayat = 'Riwayat Penyakit Sekarang';
-            $rp->value = $req->riwayat_penyakit_sekarang;
-            $rp->save();
-        }
+    //     //Simpan Riwayat Penyakit
+    //     if(!is_null($req->riwayat_penyakit_sekarang)){
+    //         $rp = new Mriwayat;
+    //         $rp->pasien_id = $pasien_id;
+    //         $rp->anamnesa_id = $anamnesa->id;
+    //         $rp->jenis_riwayat = 'Riwayat Penyakit Sekarang';
+    //         $rp->value = $req->riwayat_penyakit_sekarang;
+    //         $rp->save();
+    //     }
 
-        if(!is_null($req->riwayat_penyakit_dulu)){
-            $rp = new Mriwayat;
-            $rp->pasien_id = $pasien_id;
-            $rp->anamnesa_id = $anamnesa->id;
-            $rp->jenis_riwayat = 'Riwayat Penyakit Dulu';
-            $rp->value = $req->riwayat_penyakit_dulu;
-            $rp->save();
-        }
+    //     if(!is_null($req->riwayat_penyakit_dulu)){
+    //         $rp = new Mriwayat;
+    //         $rp->pasien_id = $pasien_id;
+    //         $rp->anamnesa_id = $anamnesa->id;
+    //         $rp->jenis_riwayat = 'Riwayat Penyakit Dulu';
+    //         $rp->value = $req->riwayat_penyakit_dulu;
+    //         $rp->save();
+    //     }
         
-        if(!is_null($req->riwayat_penyakit_keluarga)){
-            $rp = new Mriwayat;
-            $rp->pasien_id = $pasien_id;
-            $rp->anamnesa_id = $anamnesa->id;
-            $rp->jenis_riwayat = 'Riwayat Penyakit Keluarga';
-            $rp->value = $req->riwayat_penyakit_keluarga;
-            $rp->save();
-        }
+    //     if(!is_null($req->riwayat_penyakit_keluarga)){
+    //         $rp = new Mriwayat;
+    //         $rp->pasien_id = $pasien_id;
+    //         $rp->anamnesa_id = $anamnesa->id;
+    //         $rp->jenis_riwayat = 'Riwayat Penyakit Keluarga';
+    //         $rp->value = $req->riwayat_penyakit_keluarga;
+    //         $rp->save();
+    //     }
 
-        //Simpan Alergi Pasien
-        if(!is_null($req->obat)){
-            $ap = new Malergi;
-            $ap->pasien_id = $pasien_id;
-            $ap->anamnesa_id = $anamnesa->id;
-            $ap->jenis_alergi = 'Obat';
-            $ap->value = $req->obat;
-            $ap->save();
-        }
+    //     //Simpan Alergi Pasien
+    //     if(!is_null($req->obat)){
+    //         $ap = new Malergi;
+    //         $ap->pasien_id = $pasien_id;
+    //         $ap->anamnesa_id = $anamnesa->id;
+    //         $ap->jenis_alergi = 'Obat';
+    //         $ap->value = $req->obat;
+    //         $ap->save();
+    //     }
         
-        if(!is_null($req->makanan)){
-            $ap = new Malergi;
-            $ap->pasien_id = $pasien_id;
-            $ap->anamnesa_id = $anamnesa->id;
-            $ap->jenis_alergi = 'Makanan';
-            $ap->value = $req->makanan;
-            $ap->save();
-        }
+    //     if(!is_null($req->makanan)){
+    //         $ap = new Malergi;
+    //         $ap->pasien_id = $pasien_id;
+    //         $ap->anamnesa_id = $anamnesa->id;
+    //         $ap->jenis_alergi = 'Makanan';
+    //         $ap->value = $req->makanan;
+    //         $ap->save();
+    //     }
         
-        if(!is_null($req->umum)){
-            $ap = new Malergi;
-            $ap->pasien_id = $pasien_id;
-            $ap->anamnesa_id = $anamnesa->id;
-            $ap->jenis_alergi = 'Umum';
-            $ap->value = $req->umum;
-            $ap->save();
-        }
-        Alert::success('Anamnesa Berhasil Di Simpan');
-        return back();
-    }
+    //     if(!is_null($req->umum)){
+    //         $ap = new Malergi;
+    //         $ap->pasien_id = $pasien_id;
+    //         $ap->anamnesa_id = $anamnesa->id;
+    //         $ap->jenis_alergi = 'Umum';
+    //         $ap->value = $req->umum;
+    //         $ap->save();
+    //     }
+    //     Alert::success('Anamnesa Berhasil Di Simpan');
+    //     return back();
+    // }
 
-    public function updateAnamnesa(Request $req, $id, $anamnesa_id)
-    {
-        $dokter_id = $req->dokter_id;
-        $perawat_id = $req->perawat_id;
+    // public function updateAnamnesa(Request $req, $id, $anamnesa_id)
+    // {
+    //     $dokter_id = $req->dokter_id;
+    //     $perawat_id = $req->perawat_id;
         
-        //Simpan Anamnesa
-        $anamnesa = Tanamnesa::find($anamnesa_id);
-        $anamnesa->pelayanan_id     = $id;
-        $anamnesa->dokter_id        = $dokter_id;
-        $anamnesa->perawat_id       = $perawat_id;
-        $anamnesa->keluhan_utama    = $req->keluhan_utama;
-        $anamnesa->keluhan_tambahan = $req->keluhan_tambahan;
-        $anamnesa->lama_sakit_tahun = $req->lama_sakit_tahun;
-        $anamnesa->lama_sakit_bulan = $req->lama_sakit_bulan;
-        $anamnesa->lama_sakit_hari  = $req->lama_sakit_hari;
-        $anamnesa->merokok          = $req->merokok;
-        $anamnesa->konsumsi_alkohol = $req->alkohol;
-        $anamnesa->kurang_sayur_buah= $req->sayur;
-        $anamnesa->terapi           = $req->terapi;
-        $anamnesa->keterangan       = $req->keterangan;
-        $anamnesa->edukasi          = $req->edukasi;
-        $anamnesa->rencana_tindakan = $req->tindakan;
-        $anamnesa->askep            = $req->askep;
-        $anamnesa->observasi        = $req->observasi;
-        $anamnesa->biopsikososial   = $req->biopsikososial;
-        $anamnesa->save();
+    //     //Simpan Anamnesa
+    //     $anamnesa = Tanamnesa::find($anamnesa_id);
+    //     $anamnesa->pelayanan_id     = $id;
+    //     $anamnesa->dokter_id        = $dokter_id;
+    //     $anamnesa->perawat_id       = $perawat_id;
+    //     $anamnesa->keluhan_utama    = $req->keluhan_utama;
+    //     $anamnesa->keluhan_tambahan = $req->keluhan_tambahan;
+    //     $anamnesa->lama_sakit_tahun = $req->lama_sakit_tahun;
+    //     $anamnesa->lama_sakit_bulan = $req->lama_sakit_bulan;
+    //     $anamnesa->lama_sakit_hari  = $req->lama_sakit_hari;
+    //     $anamnesa->merokok          = $req->merokok;
+    //     $anamnesa->konsumsi_alkohol = $req->alkohol;
+    //     $anamnesa->kurang_sayur_buah= $req->sayur;
+    //     $anamnesa->terapi           = $req->terapi;
+    //     $anamnesa->keterangan       = $req->keterangan;
+    //     $anamnesa->edukasi          = $req->edukasi;
+    //     $anamnesa->rencana_tindakan = $req->tindakan;
+    //     $anamnesa->askep            = $req->askep;
+    //     $anamnesa->observasi        = $req->observasi;
+    //     $anamnesa->biopsikososial   = $req->biopsikososial;
+    //     $anamnesa->save();
 
-        //Simpan Periksa Fisik
-        $fisik = Tpelayanan::find($id)->periksafisik;
-        $fisik->pelayanan_id     = $id;
-        $fisik->dokter_id        = $dokter_id;
-        $fisik->perawat_id       = $perawat_id;
-        $fisik->sistole          = $req->sistole;
-        $fisik->diastole         = $req->diastole;
-        $fisik->detak_nadi       = $req->detak_nadi;
-        $fisik->nafas            = $req->nafas;
-        $fisik->detak_jantung    = $req->detak_jantung;
-        $fisik->suhu             = $req->suhu;
-        $fisik->kesadaran        = $req->kesadaran;
-        $fisik->triage           = $req->triage;
-        $fisik->berat            = $req->berat;
-        $fisik->tinggi           = $req->tinggi;
-        $fisik->lingkar_perut    = $req->lingkar_perut;
-        $fisik->imt              = $req->imt;
-        $fisik->hasil_imt        = $req->hasil_imt;
-        $fisik->aktifitas_fisik  = $req->aktifitas_fisik;
-        $fisik->skala_nyeri      = $req->nyeri;
-        $fisik->save();
+    //     //Simpan Periksa Fisik
+    //     $fisik = Tpelayanan::find($id)->periksafisik;
+    //     $fisik->pelayanan_id     = $id;
+    //     $fisik->dokter_id        = $dokter_id;
+    //     $fisik->perawat_id       = $perawat_id;
+    //     $fisik->sistole          = $req->sistole;
+    //     $fisik->diastole         = $req->diastole;
+    //     $fisik->detak_nadi       = $req->detak_nadi;
+    //     $fisik->nafas            = $req->nafas;
+    //     $fisik->detak_jantung    = $req->detak_jantung;
+    //     $fisik->suhu             = $req->suhu;
+    //     $fisik->kesadaran        = $req->kesadaran;
+    //     $fisik->triage           = $req->triage;
+    //     $fisik->berat            = $req->berat;
+    //     $fisik->tinggi           = $req->tinggi;
+    //     $fisik->lingkar_perut    = $req->lingkar_perut;
+    //     $fisik->imt              = $req->imt;
+    //     $fisik->hasil_imt        = $req->hasil_imt;
+    //     $fisik->aktifitas_fisik  = $req->aktifitas_fisik;
+    //     $fisik->skala_nyeri      = $req->nyeri;
+    //     $fisik->save();
         
-        //Simpan Riwayat Penyakit
-        $checkRPS = $anamnesa->rps->where('jenis_riwayat','Riwayat Penyakit Sekarang')->first();
-        if($checkRPS == null){
-            if(!is_null($req->riwayat_penyakit_sekarang)){
-                $rp = new Mriwayat;
-                $rp->anamnesa_id = $anamnesa->id;
-                $rp->jenis_riwayat = 'Riwayat Penyakit Sekarang';
-                $rp->value = $req->riwayat_penyakit_sekarang;
-                $rp->save();
-            }
-        }else{
-            $rps = $checkRPS;
-            $rps->anamnesa_id = $anamnesa->id;
-            $rps->jenis_riwayat = 'Riwayat Penyakit Sekarang';
-            $rps->value = $req->riwayat_penyakit_sekarang;
-            $rps->save();
-        }
+    //     //Simpan Riwayat Penyakit
+    //     $checkRPS = $anamnesa->rps->where('jenis_riwayat','Riwayat Penyakit Sekarang')->first();
+    //     if($checkRPS == null){
+    //         if(!is_null($req->riwayat_penyakit_sekarang)){
+    //             $rp = new Mriwayat;
+    //             $rp->anamnesa_id = $anamnesa->id;
+    //             $rp->jenis_riwayat = 'Riwayat Penyakit Sekarang';
+    //             $rp->value = $req->riwayat_penyakit_sekarang;
+    //             $rp->save();
+    //         }
+    //     }else{
+    //         $rps = $checkRPS;
+    //         $rps->anamnesa_id = $anamnesa->id;
+    //         $rps->jenis_riwayat = 'Riwayat Penyakit Sekarang';
+    //         $rps->value = $req->riwayat_penyakit_sekarang;
+    //         $rps->save();
+    //     }
 
-        $checkRPD = $anamnesa->rpd->where('jenis_riwayat','Riwayat Penyakit Dulu')->first();
-        if($checkRPD == null){
-            if(!is_null($req->riwayat_penyakit_dulu)){
-                $rp = new Mriwayat;
-                $rp->anamnesa_id = $anamnesa->id;
-                $rp->jenis_riwayat = 'Riwayat Penyakit Dulu';
-                $rp->value = $req->riwayat_penyakit_dulu;
-                $rp->save();
-            }
-        }else{
-            $rpd = $checkRPD;
-            $rpd->anamnesa_id = $anamnesa->id;
-            $rpd->jenis_riwayat = 'Riwayat Penyakit Dulu';
-            $rpd->value = $req->riwayat_penyakit_dulu;
-            $rpd->save();
-        }
+    //     $checkRPD = $anamnesa->rpd->where('jenis_riwayat','Riwayat Penyakit Dulu')->first();
+    //     if($checkRPD == null){
+    //         if(!is_null($req->riwayat_penyakit_dulu)){
+    //             $rp = new Mriwayat;
+    //             $rp->anamnesa_id = $anamnesa->id;
+    //             $rp->jenis_riwayat = 'Riwayat Penyakit Dulu';
+    //             $rp->value = $req->riwayat_penyakit_dulu;
+    //             $rp->save();
+    //         }
+    //     }else{
+    //         $rpd = $checkRPD;
+    //         $rpd->anamnesa_id = $anamnesa->id;
+    //         $rpd->jenis_riwayat = 'Riwayat Penyakit Dulu';
+    //         $rpd->value = $req->riwayat_penyakit_dulu;
+    //         $rpd->save();
+    //     }
         
-        $checkRPK = $anamnesa->rpk->where('jenis_riwayat','Riwayat Penyakit Keluarga')->first();
-        if($checkRPK == null){
-            if(!is_null($req->riwayat_penyakit_keluarga)){
-                $rp = new Mriwayat;
-                $rp->anamnesa_id = $anamnesa->id;
-                $rp->jenis_riwayat = 'Riwayat Penyakit Keluarga';
-                $rp->value = $req->riwayat_penyakit_keluarga;
-                $rp->save();
-            }
-        }else{
-            $rpk = $checkRPK;
-            $rpk->anamnesa_id = $anamnesa->id;
-            $rpk->jenis_riwayat = 'Riwayat Penyakit Keluarga';
-            $rpk->value = $req->riwayat_penyakit_keluarga;
-            $rpk->save();
-        }
+    //     $checkRPK = $anamnesa->rpk->where('jenis_riwayat','Riwayat Penyakit Keluarga')->first();
+    //     if($checkRPK == null){
+    //         if(!is_null($req->riwayat_penyakit_keluarga)){
+    //             $rp = new Mriwayat;
+    //             $rp->anamnesa_id = $anamnesa->id;
+    //             $rp->jenis_riwayat = 'Riwayat Penyakit Keluarga';
+    //             $rp->value = $req->riwayat_penyakit_keluarga;
+    //             $rp->save();
+    //         }
+    //     }else{
+    //         $rpk = $checkRPK;
+    //         $rpk->anamnesa_id = $anamnesa->id;
+    //         $rpk->jenis_riwayat = 'Riwayat Penyakit Keluarga';
+    //         $rpk->value = $req->riwayat_penyakit_keluarga;
+    //         $rpk->save();
+    //     }
         
-        //Update Alergi Pasien
-        $checkObat = $anamnesa->obat->where('jenis_alergi','Obat')->first();
-        if($checkObat == null){
-            if(!is_null($req->obat)){
-                $rp = new Malergi;
-                $rp->anamnesa_id = $anamnesa->id;
-                $rp->jenis_alergi = 'Obat';
-                $rp->value = $req->obat;
-                $rp->save();
-            }
-        }else{
-            $obat = $checkObat;
-            $obat->anamnesa_id = $anamnesa->id;
-            $obat->jenis_alergi = 'Obat';
-            $obat->value = $req->obat;
-            $obat->save();
-        }
+    //     //Update Alergi Pasien
+    //     $checkObat = $anamnesa->obat->where('jenis_alergi','Obat')->first();
+    //     if($checkObat == null){
+    //         if(!is_null($req->obat)){
+    //             $rp = new Malergi;
+    //             $rp->anamnesa_id = $anamnesa->id;
+    //             $rp->jenis_alergi = 'Obat';
+    //             $rp->value = $req->obat;
+    //             $rp->save();
+    //         }
+    //     }else{
+    //         $obat = $checkObat;
+    //         $obat->anamnesa_id = $anamnesa->id;
+    //         $obat->jenis_alergi = 'Obat';
+    //         $obat->value = $req->obat;
+    //         $obat->save();
+    //     }
 
-        $checkMakanan = $anamnesa->makanan->where('jenis_alergi','Makanan')->first();
-        if($checkMakanan == null){
-            if(!is_null($req->riwayat_penyakit_dulu)){
-                $rp = new Malergi;
-                $rp->anamnesa_id = $anamnesa->id;
-                $rp->jenis_alergi = 'Makanan';
-                $rp->value = $req->makanan;
-                $rp->save();
-            }
-        }else{
-            $makanan = $checkMakanan;
-            $makanan->anamnesa_id = $anamnesa->id;
-            $makanan->jenis_alergi = 'Makanan';
-            $makanan->value = $req->makanan;
-            $makanan->save();
-        }
+    //     $checkMakanan = $anamnesa->makanan->where('jenis_alergi','Makanan')->first();
+    //     if($checkMakanan == null){
+    //         if(!is_null($req->riwayat_penyakit_dulu)){
+    //             $rp = new Malergi;
+    //             $rp->anamnesa_id = $anamnesa->id;
+    //             $rp->jenis_alergi = 'Makanan';
+    //             $rp->value = $req->makanan;
+    //             $rp->save();
+    //         }
+    //     }else{
+    //         $makanan = $checkMakanan;
+    //         $makanan->anamnesa_id = $anamnesa->id;
+    //         $makanan->jenis_alergi = 'Makanan';
+    //         $makanan->value = $req->makanan;
+    //         $makanan->save();
+    //     }
         
-        $checkUmum = $anamnesa->umum->where('jenis_alergi','Umum')->first();
-        if($checkUmum == null){
-            if(!is_null($req->umum)){
-                $rp = new Malergi;
-                $rp->anamnesa_id = $anamnesa->id;
-                $rp->jenis_alergi = 'Umum';
-                $rp->value = $req->umum;
-                $rp->save();
-            }
-        }else{
-            $umum = $checkUmum;
-            $umum->anamnesa_id = $anamnesa->id;
-            $umum->jenis_alergi = 'Umum';
-            $umum->value = $req->umum;
-            $umum->save();
-        }
-        Alert::success('Anamnesa Berhasil Di Update');
-        return back();
-        //return redirect('/pelayanan/medis/proses/'.$id.'/umum/anamnesa');
-    }
+    //     $checkUmum = $anamnesa->umum->where('jenis_alergi','Umum')->first();
+    //     if($checkUmum == null){
+    //         if(!is_null($req->umum)){
+    //             $rp = new Malergi;
+    //             $rp->anamnesa_id = $anamnesa->id;
+    //             $rp->jenis_alergi = 'Umum';
+    //             $rp->value = $req->umum;
+    //             $rp->save();
+    //         }
+    //     }else{
+    //         $umum = $checkUmum;
+    //         $umum->anamnesa_id = $anamnesa->id;
+    //         $umum->jenis_alergi = 'Umum';
+    //         $umum->value = $req->umum;
+    //         $umum->save();
+    //     }
+    //     Alert::success('Anamnesa Berhasil Di Update');
+    //     return back();
+    //     //return redirect('/pelayanan/medis/proses/'.$id.'/umum/anamnesa');
+    // }
 
     // public function umumDiagnosa($id)
     // {
@@ -999,27 +999,27 @@ class PelayananController extends Controller
     //     return view('puskes.pelayanan.medis.diagnosa.gigi.create',compact('data','dokter','perawat','diagnosa'));
     // }
 
-    public function storeDiagnosa(Request $req, $id)
-    {
-        $tanggal = Carbon::now();
-        $diagnosa = new Tdiagnosa;
-        $diagnosa->tanggal      = $tanggal;
-        $diagnosa->pelayanan_id = $id;
-        $diagnosa->dokter_id    = $req->dokter_id;
-        $diagnosa->perawat_id   = $req->perawat_id;
-        $diagnosa->diagnosa_id  = $req->diagnosa_id;
-        $diagnosa->diagnosa_kasus  = $req->diagnosa_kasus;
-        $diagnosa->diagnosa_jenis  = $req->diagnosa_jenis;
-        $diagnosa->save();
-        toast('Diagnosa Berhasil Di Simpan', 'success');
-        return back();
-    }
+    // public function storeDiagnosa(Request $req, $id)
+    // {
+    //     $tanggal = Carbon::now();
+    //     $diagnosa = new Tdiagnosa;
+    //     $diagnosa->tanggal      = $tanggal;
+    //     $diagnosa->pelayanan_id = $id;
+    //     $diagnosa->dokter_id    = $req->dokter_id;
+    //     $diagnosa->perawat_id   = $req->perawat_id;
+    //     $diagnosa->diagnosa_id  = $req->diagnosa_id;
+    //     $diagnosa->diagnosa_kasus  = $req->diagnosa_kasus;
+    //     $diagnosa->diagnosa_jenis  = $req->diagnosa_jenis;
+    //     $diagnosa->save();
+    //     toast('Diagnosa Berhasil Di Simpan', 'success');
+    //     return back();
+    // }
 
-    public function deleteDiagnosa($id, $id_diagnosa)
-    {
-        $del = Tdiagnosa::find($id_diagnosa)->delete();
-        return back();
-    }
+    // public function deleteDiagnosa($id, $id_diagnosa)
+    // {
+    //     $del = Tdiagnosa::find($id_diagnosa)->delete();
+    //     return back();
+    // }
 
     // public function umumResep($id)
     // {
@@ -1085,43 +1085,43 @@ class PelayananController extends Controller
     //     return view('puskes.pelayanan.medis.resep.gigi.create',compact('data','dokter','perawat', 'obat','signa'));
     // }
 
-    public function storeResep(Request $req, $id)
-    {
-        $checkResep = Tpelayanan::find($id)->resep;
-        if($checkResep == null){
-            $t               = new Tresep;
-            $t->no_resep     = $req->no_resep;
-            $t->tanggal      = Carbon::now();
-            $t->dokter_id    = $req->dokter_id;
-            $t->perawat_id   = $req->perawat_id;
-            $t->pelayanan_id = $id;
-            $t->save();
+    // public function storeResep(Request $req, $id)
+    // {
+    //     $checkResep = Tpelayanan::find($id)->resep;
+    //     if($checkResep == null){
+    //         $t               = new Tresep;
+    //         $t->no_resep     = $req->no_resep;
+    //         $t->tanggal      = Carbon::now();
+    //         $t->dokter_id    = $req->dokter_id;
+    //         $t->perawat_id   = $req->perawat_id;
+    //         $t->pelayanan_id = $id;
+    //         $t->save();
 
-            $r = new Tresepdetail;
-            $r->resep_id               = $t->id;
-            $r->obat_id                = $req->obat_id;
-            $r->obat_jumlah            = $req->obat_jumlah;
-            $r->obat_signa             = $req->obat_signa;
-            $r->aturan_pakai           = $req->aturan_pakai;
-            $r->obat_racikan           = $req->racikan;
-            $r->obat_jumlah_permintaan = $req->obat_jumlah_permintaan;
-            $r->obat_keterangan        = $req->keterangan;
-            $r->save();
-        }else{
-            $r = new Tresepdetail;
-            $r->resep_id               = $checkResep->id;
-            $r->obat_id                = $req->obat_id;
-            $r->obat_jumlah            = $req->obat_jumlah;
-            $r->obat_signa             = $req->obat_signa;
-            $r->aturan_pakai           = $req->aturan_pakai;
-            $r->obat_racikan           = $req->racikan;
-            $r->obat_jumlah_permintaan = $req->obat_jumlah_permintaan;
-            $r->obat_keterangan        = $req->keterangan;
-            $r->save();
-        }
-        toast('Resep Berhasil Di Simpan', 'success');
-        return back();
-    }
+    //         $r = new Tresepdetail;
+    //         $r->resep_id               = $t->id;
+    //         $r->obat_id                = $req->obat_id;
+    //         $r->obat_jumlah            = $req->obat_jumlah;
+    //         $r->obat_signa             = $req->obat_signa;
+    //         $r->aturan_pakai           = $req->aturan_pakai;
+    //         $r->obat_racikan           = $req->racikan;
+    //         $r->obat_jumlah_permintaan = $req->obat_jumlah_permintaan;
+    //         $r->obat_keterangan        = $req->keterangan;
+    //         $r->save();
+    //     }else{
+    //         $r = new Tresepdetail;
+    //         $r->resep_id               = $checkResep->id;
+    //         $r->obat_id                = $req->obat_id;
+    //         $r->obat_jumlah            = $req->obat_jumlah;
+    //         $r->obat_signa             = $req->obat_signa;
+    //         $r->aturan_pakai           = $req->aturan_pakai;
+    //         $r->obat_racikan           = $req->racikan;
+    //         $r->obat_jumlah_permintaan = $req->obat_jumlah_permintaan;
+    //         $r->obat_keterangan        = $req->keterangan;
+    //         $r->save();
+    //     }
+    //     toast('Resep Berhasil Di Simpan', 'success');
+    //     return back();
+    // }
 
     // public function umumLaboratorium($id)
     // {
@@ -1194,30 +1194,30 @@ class PelayananController extends Controller
     //     return view('puskes.pelayanan.medis.tindakan.gigi.create',compact('data','sp','lab','dokter','perawat','tindakan'));
     // }
 
-    public function storeTindakan(Request $req, $id)
-    {
-        $t = new Ttindakan;
-        $t->tanggal      = Carbon::now();
-        $t->pelayanan_id = $id;
-        $t->dokter_id    = $req->dokter_id;
-        $t->perawat_id   = $req->perawat_id;
-        $t->tindakan_id  = $req->tindakan_id;
-        $t->tanggal_rencana = Carbon::parse($req->tanggal_rencana);
-        $t->lama_tindakan   = $req->lama_tindakan;
-        $t->hasil           = $req->hasil;
-        $t->jumlah          = $req->jumlah;
-        $t->keterangan      = $req->keterangan;
-        $t->tarif           = Mtindakan::find($req->tindakan_id)->first()->tarif;
-        $t->save();
-        toast('Tindakan Berhasil Di Simpan', 'success');
-        return back();
-    }
+    // public function storeTindakan(Request $req, $id)
+    // {
+    //     $t = new Ttindakan;
+    //     $t->tanggal      = Carbon::now();
+    //     $t->pelayanan_id = $id;
+    //     $t->dokter_id    = $req->dokter_id;
+    //     $t->perawat_id   = $req->perawat_id;
+    //     $t->tindakan_id  = $req->tindakan_id;
+    //     $t->tanggal_rencana = Carbon::parse($req->tanggal_rencana);
+    //     $t->lama_tindakan   = $req->lama_tindakan;
+    //     $t->hasil           = $req->hasil;
+    //     $t->jumlah          = $req->jumlah;
+    //     $t->keterangan      = $req->keterangan;
+    //     $t->tarif           = Mtindakan::find($req->tindakan_id)->first()->tarif;
+    //     $t->save();
+    //     toast('Tindakan Berhasil Di Simpan', 'success');
+    //     return back();
+    // }
 
-    public function deleteResep($id, $id_resep)
-    {
-        $del = Tresepdetail::find($id_resep)->delete();
-        return back();
-    }
+    // public function deleteResep($id, $id_resep)
+    // {
+    //     $del = Tresepdetail::find($id_resep)->delete();
+    //     return back();
+    // }
 
     public function medisPoli(Request $req)
     {
@@ -1239,61 +1239,61 @@ class PelayananController extends Controller
         return view('puskes.pelayanan.medis.medis',compact('data','ruangan'));
     }
 
-    public function storeLab(Request $req, $id)
-    {
-        if($req->lab == null){
-            toast('Test Lab Belum Di Pilih', 'info');
-        }else{
-            $dataLab = Mlaboratorium::whereIn('id', $req->lab)->get();
-            $checkLab = Tlaboratorium::where('pelayanan_id', $id)->first();
+    // public function storeLab(Request $req, $id)
+    // {
+    //     if($req->lab == null){
+    //         toast('Test Lab Belum Di Pilih', 'info');
+    //     }else{
+    //         $dataLab = Mlaboratorium::whereIn('id', $req->lab)->get();
+    //         $checkLab = Tlaboratorium::where('pelayanan_id', $id)->first();
 
-            if($checkLab == null){
-                //Jika Lab Kosong Simpan Baru
-                $lab = new Tlaboratorium;
-                $lab->tanggal = Carbon::now();
-                $lab->pelayanan_id = $id;
-                $lab->save();
+    //         if($checkLab == null){
+    //             //Jika Lab Kosong Simpan Baru
+    //             $lab = new Tlaboratorium;
+    //             $lab->tanggal = Carbon::now();
+    //             $lab->pelayanan_id = $id;
+    //             $lab->save();
                 
-                foreach($dataLab as $value)
-                {
-                    $labdetail = new Tlaboratoriumdetail;
-                    $labdetail->pemeriksaan_id = $lab->id;
-                    $labdetail->laboratorium_id = $value->id;
-                    $labdetail->tarif = $value->tarif;
-                    $labdetail->nilai_normal = $value->nilai_normal;
-                    $labdetail->satuan = $value->satuan;
-                    $labdetail->save();
-                }
-                toast('Lab Berhasil Di Simpan', 'success');
-            }else{
-                //Jika Lab Ada update Data
-                foreach($dataLab as $value)
-                {
-                    $checkLabDetail = Tlaboratoriumdetail::where('pemeriksaan_id', $checkLab->id)->where('laboratorium_id', $value->id)->first();
-                    if($checkLabDetail == null){
-                        $labdetail = new Tlaboratoriumdetail;
-                        $labdetail->pemeriksaan_id = $checkLab->id;
-                        $labdetail->laboratorium_id = $value->id;
-                        $labdetail->tarif = $value->tarif;
-                        $labdetail->nilai_normal = $value->nilai_normal;
-                        $labdetail->satuan = $value->satuan;
-                        $labdetail->save();
-                    }else{
+    //             foreach($dataLab as $value)
+    //             {
+    //                 $labdetail = new Tlaboratoriumdetail;
+    //                 $labdetail->pemeriksaan_id = $lab->id;
+    //                 $labdetail->laboratorium_id = $value->id;
+    //                 $labdetail->tarif = $value->tarif;
+    //                 $labdetail->nilai_normal = $value->nilai_normal;
+    //                 $labdetail->satuan = $value->satuan;
+    //                 $labdetail->save();
+    //             }
+    //             toast('Lab Berhasil Di Simpan', 'success');
+    //         }else{
+    //             //Jika Lab Ada update Data
+    //             foreach($dataLab as $value)
+    //             {
+    //                 $checkLabDetail = Tlaboratoriumdetail::where('pemeriksaan_id', $checkLab->id)->where('laboratorium_id', $value->id)->first();
+    //                 if($checkLabDetail == null){
+    //                     $labdetail = new Tlaboratoriumdetail;
+    //                     $labdetail->pemeriksaan_id = $checkLab->id;
+    //                     $labdetail->laboratorium_id = $value->id;
+    //                     $labdetail->tarif = $value->tarif;
+    //                     $labdetail->nilai_normal = $value->nilai_normal;
+    //                     $labdetail->satuan = $value->satuan;
+    //                     $labdetail->save();
+    //                 }else{
 
-                    }
-                }
-                toast('Lab Berhasil Di Simpan', 'success');
-            }
-        }
-        return back();
-    }
+    //                 }
+    //             }
+    //             toast('Lab Berhasil Di Simpan', 'success');
+    //         }
+    //     }
+    //     return back();
+    // }
 
-    public function deleteLab($id)
-    {
-        $del = Tlaboratoriumdetail::find($id)->delete();
-        toast('Data Berhasil Di Hapus', 'success');
-        return back();
-    }
+    // public function deleteLab($id)
+    // {
+    //     $del = Tlaboratoriumdetail::find($id)->delete();
+    //     toast('Data Berhasil Di Hapus', 'success');
+    //     return back();
+    // }
 
     public function apotek()
     {
@@ -1308,5 +1308,12 @@ class PelayananController extends Controller
         $data = Tpelayanan::Where('tanggal', 'LIKE', $date)->orderBy('tanggal','desc')->paginate(10);        
         $req->flash();
         return view('puskes.pelayanan.apotek.index',compact('data'));
+    }
+
+    public function detailResep($id)
+    {
+        $data = Tpelayanan::find($id);
+        return view('puskes.pelayanan.apotek.resep',compact('data'));
+        
     }
 }
