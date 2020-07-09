@@ -177,8 +177,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
-        Darryldecode\Cart\CartServiceProvider::class
+        Yajra\DataTables\DataTablesServiceProvider::class
         
 
     ],
@@ -234,8 +233,7 @@ return [
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class, 
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Image' => Intervention\Image\Facades\Image::class,    
-        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];
