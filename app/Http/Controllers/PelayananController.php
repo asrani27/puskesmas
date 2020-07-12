@@ -28,7 +28,7 @@ use App\Tperiksafisik;
 use Illuminate\Support\Str;
 use App\Tlaboratoriumdetail;
 use Illuminate\Http\Request;
-use Intervention\Image\Image;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -353,6 +353,7 @@ class PelayananController extends Controller
 
     public function Odontogram($id)
     {
+        
         $data = Tpelayanan::find($id);
         $sp   = Mstatuspulang::all();
         $lab  = Mjenislab::all()->map(function($item, $key){

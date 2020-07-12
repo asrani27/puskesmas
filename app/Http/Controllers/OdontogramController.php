@@ -128,7 +128,7 @@ class OdontogramController extends Controller
     }
     public function image($code, $tipe)
     {
-        $gambar = Storage::url('gigi/'.$code.'_'.$tipe.'.png');
+        $gambar = url('/gigi/'.$code.'_'.$tipe.'.png');
         return Image::make(url($gambar))->response('png');
     }
 

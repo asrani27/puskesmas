@@ -27,7 +27,7 @@
                                                                                                                  
                          
                                                 <td valign="top">
-                        <table style="background-image:url('/gigi/2728_wwwww_lima.png'); background-repeat: no-repeat;background-size:65px 65px;background-position:center top;" width="40">
+                        <table style="background-image:url('{{url('/odontogram/image/code=wwwww/tipe=lima')}}'); background-repeat: no-repeat;background-size:65px 65px;background-position:center top;" width="40">
                             <tbody><tr>
                                 <td style="height:20px;width:9px;padding-left: 19px;"></td>
                                 <td style="padding-left: 10px;" data-tipe="lima" class="t"></td>
