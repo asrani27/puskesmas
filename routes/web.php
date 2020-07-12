@@ -18,8 +18,15 @@ Route::get('/', function() {
     } 
     return view('welcome');
 });
+Route::get('/login', function() {
+    if(Auth::check()) {
+        return redirect()->route('home');
+    } 
+    return redirect('/');
+});
+Route::post('/login', 'Auth\LoginController@login')->name('login');
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/logout', function() {
     Auth::logout();
