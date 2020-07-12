@@ -113,7 +113,7 @@
                 </div>
                 <div class="card-tools">&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type='submit' class="btn btn-sm btn-info shadow">Tampilkan</button>
-                <a href="/laporankunjunganpasien/export"  class="btn btn-sm btn-info shadow">Export</a>
+                <button type="submit" value='tanggal' name="tanggalex" class="btn btn-sm btn-info shadow">Export</button>
                 <a href="/laporankunjunganpasien"  class="btn btn-sm btn-info shadow">Reset</a>
                 </div>
             </div>
@@ -190,7 +190,7 @@
                         <td>{{$item->pendaftaran->pasien->jenis_kelamin == 'L' ? 'Laki-Laki':'Perempuan'}}</td>
                         <td>{{$item->pendaftaran->pasien->tempat_lahir}}, {{\Carbon\Carbon::parse($item->pendaftaran->pasien->tanggal_lahir)->format('d-m-Y')}}</td>
                         <td>{{hitungUmur($item->pendaftaran->pasien->tanggal_lahir)}}</td>
-                        <td>{{$item->pendaftaran->pasien->pekerjaan->nama}}</td>
+                        <td>{{$item->pendaftaran->pasien->pekerjaan == null ? '-' : $item->pendaftaran->pasien->pekerjaan->nama}}</td>
                         <td>{{$item->pendaftaran->pasien->alamat}}</td>
                         <td>{{$item->pendaftaran->pasien->kelurahan == null ? '':$item->pendaftaran->pasien->kelurahan->nama}}</td>
                         <td>{{$item->pendaftaran->pasien->nama_ayah}}</td>
