@@ -47,11 +47,11 @@
       <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Laporan</a>
       <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
         <li><a href="/laporankunjunganpasien" class="dropdown-item">Kunjungan Pasien </a></li>
-        <li><a href="/laporanpelayananpasien" class="dropdown-item">Pelayanan Pasien </a></li>
-        <li><a href="/laporanpemeriksaanmedis" class="dropdown-item">Pemeriksaan Medis </a></li>
-        <li><a href="/laporanpelayananresep" class="dropdown-item">Pelayanan Resep </a></li>
-        <li><a href="/laporanpengeluaranobat" class="dropdown-item">Pengeluaran Obat </a></li>
-        <li><a href="/laporanpelayananlaboratorium" class="dropdown-item">Pelayanan Laboratorium </a></li>
+        {{-- <li><a href="#" class="dropdown-item">Pelayanan Pasien </a></li>
+        <li><a href="#" class="dropdown-item">Pemeriksaan Medis </a></li>
+        <li><a href="#" class="dropdown-item">Pelayanan Resep </a></li>
+        <li><a href="#" class="dropdown-item">Pengeluaran Obat </a></li>
+        <li><a href="#" class="dropdown-item">Pelayanan Laboratorium </a></li> --}}
         {{-- <li><a href="/laporanpelayananpasien" class="dropdown-item">Pelayanan Pasien </a></li>
         <li><a href="/laporankinerjapuskesmas" class="dropdown-item">Kinerja Puskesmas </a></li> --}}
         <li><a href="/laporansp3lb1" class="dropdown-item">SP3 LB1 </a></li>
