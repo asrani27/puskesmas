@@ -19,11 +19,11 @@
             <div class="card-header">
               <h3 class="card-title">Tambah Data</h3>
               <div class="card-tools">
-                <a href="/pengaturan/data_master/jenispegawai" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-left"></i> Kembali</a>
+                <a href="/pengaturan/data_master/user" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-left"></i> Kembali</a>
               </div>
             </div>
             
-            <form action="{{route('simpanJenisPegawai')}}" method="POST">
+            <form action="{{route('simpanUser')}}" method="POST">
                 @csrf  
                 <div class="card-body p-2 table-responsive">
                     <div class="input-group row">
@@ -35,22 +35,22 @@
                         </div>
                     </div>
                     <div class="input-group row">
-                        <label class="col-sm-2 col-form-label text-right">Kelompok<strong><span class="text-danger">*</span></strong></label>
+                        <label class="col-sm-2 col-form-label text-right">Username<strong><span class="text-danger">*</span></strong></label>
                         <div class="col-sm-8">
                         <div class="form-group">
-                            <select class="form-control form-control" style="width: 100%;" name="kelompok_pegawai" required>
-                            <option value="TENAGA MEDIS" selected>TENAGA MEDIS</option>
-                            <option value="TENAGA KEPERAWATAN">TENAGA KEPERAWATAN</option>
-                            <option value="TENAGA KETEKNISIAN MEDIS">TENAGA KETEKNISIAN MEDIS</option>
-                            <option value="TENAGA KEFARMASIAN">TENAGA KEFARMASIAN</option>
-                            <option value="NON MEDIS">NON MEDIS</option>
-                            <option value="TENAGA KESEHATAN MASYARAKAT">TENAGA KESEHATAN MASYARAKAT</option>
-                            <option value="TENAGA GIZI">TENAGA GIZI</option>
-                            <option value="TENAGA KETERAMPILAN FISIK">TENAGA KETERAMPILAN FISIK</option>
-                            </select>
+                            <input type="text" class="form-control" name="username" required>
                         </div>
                         </div>
                     </div>
+                    <div class="input-group row">
+                        <label class="col-sm-2 col-form-label text-right">Password<strong><span class="text-danger">*</span></strong></label>
+                        <div class="col-sm-8">
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" required>
+                        </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="card-footer">
                     <div class="text-right">

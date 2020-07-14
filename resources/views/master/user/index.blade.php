@@ -19,7 +19,7 @@
             <div class="card-header">
               <h3 class="card-title">Data User</h3>
               <div class="card-tools">
-                {{-- <a href="/pengaturan/data_master/user/add" class="btn bg-gradient-primary btn-sm"><i class="fas fa-plus"></i> Tambah Data</a> --}}
+                <a href="/pengaturan/data_master/user/add" class="btn bg-gradient-primary btn-sm"><i class="fas fa-plus"></i> Tambah Data</a>
                 <a href="/pengaturan/data_master/" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-left"></i> Kembali</a>
               </div>
             </div>

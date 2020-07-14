@@ -21,7 +21,7 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item">
         <a class="nav-link" href="#">
-            <button class="btn btn-default btn-xs"><strong> <i class="fas fa-user"></i>  PUSKESMAS </strong></button>
+            <button class="btn btn-default btn-xs"><strong> <i class="fas fa-user"></i> &nbsp; {{strtoupper(Auth::user()->name)}} </strong></button>
         </a>
       </li>
       <li class="nav-item">

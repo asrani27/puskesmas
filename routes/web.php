@@ -139,7 +139,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pengaturan/data_master/user', 'PengaturanController@storeUser')->name('simpanUser');
     Route::get('/pengaturan/user/delete/{id}', 'PengaturanController@deleteUser');
     Route::get('/pengaturan/user/edit/{id}', 'PengaturanController@editUser');
-    Route::post('/pengaturan/user/edit/{id}', 'PengaturanController@updateUser')->name('editUser');
+    Route::post('/pengaturan/user/edit/{id}', 'PengaturanController@updateUser')->name('updateUser');
 
     Route::get('/getkelurahan/{id}', 'PendaftaranController@getKelurahan');
     Route::any('/pendaftaran/pasien/search', 'PendaftaranController@search');

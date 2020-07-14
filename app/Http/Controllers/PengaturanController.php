@@ -7,6 +7,7 @@ use Cart;
 use Alert;
 use Cache;
 use Session;
+use App\Role;
 use App\User;
 use App\Mobat;
 use App\Mpegawai;
@@ -20,6 +21,7 @@ use App\Mpuskesmas;
 use App\Tkeranjang;
 use App\Mjenispegawai;
 use App\Tpenerimaanobat;
+use Faker\Factory as Faker;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Tpenerimaanobatdetail;
@@ -217,8 +219,13 @@ class PengaturanController extends Controller
     //--------------------- USER------------------------------------
     public function user()
     {
-        $data = User::all();
-        return view('master.user.index',compact('data'));
+        if(Auth::user()->username != 'admin'){
+            $data = Auth::user();
+            return view('master.user.edit',compact('data'));
+        }else{
+            $data = User::all();
+            return view('master.user.index',compact('data'));
+        }
     }
     
     public function addUser()
@@ -228,41 +235,53 @@ class PengaturanController extends Controller
     
     public function storeUser(Request $req)
     {
-        $id  = convertruangan((int) Mjenispegawai::orderBy('id','DESC')->first()->id + 1);
+        $faker = Faker::create();
+
+        $checkUsername = User::where('username', $req->username)->first();
+        if($checkUsername == null){
+            $s                  = new User;
+            $s->id              = $req->username;
+            $s->name            = $req->nama;
+            $s->email           = $faker->email;
+            $s->password        = bcrypt($req->password);
+            $s->username        = $req->username;
+            $s->puskesmas_id    = \App\Mpuskesmas::first()->id;
+            $s->save();
+
+            $role = Role::where( 'name', '=', 'admin' )->first();
+            
+            $s->attachRole($role);
+
+            toast('User Berhasil Disimpan','success');
+        }else{
+            toast('Username Sudah ada, silahkan gunakan yang lain','info');
+        }
         
-        $s                  = new Mjenispegawai;
-        $s->id              = $id;
-        $s->nama            = $req->nama;
-        $s->urutan          = (int) $id;
-        $s->kelompok_pegawai= $req->kelompok_pegawai;
-        $s->save();
-        toast('jenis Pegawai berhasil Di Simpan','success');
-        return redirect('/pengaturan/data_master/jenispegawai');
+        return redirect('/pengaturan/data_master/user');
     }
 
     public function updateUser(Request $req, $id)
-    {
-        $s                  = Mjenispegawai::find($id);
-        $s->id              = $id;
-        $s->nama            = $req->nama;
-        $s->urutan          = (int) $id;
-        $s->kelompok_pegawai= $req->kelompok_pegawai;
+    {   
+        $s                  = User::where('id', $id)->first();
+        $s->name            = $req->nama;
+        if($req->password != null){
+            $s->password    = bcrypt($req->password);
+        }
         $s->save();
-        toast('Pegawai berhasil Di Update','success');
-        return redirect('/pengaturan/data_master/jenispegawai');
+        toast('User Berhasil DiUpdate','success');
+        return redirect('/pengaturan/data_master/user');
     }
 
     public function deleteUser($id)
     {
-        $check = User::find($id)->count();
-        if($check == 1){
-            toast('Tidak Dapat Di hapus Karena hanya ada 1 user', 'info');
-            return back();
+        if($id == 'admin'){
+            toast('Superadmin Tidak Dapat Di Hapus', 'info');
         }else{
-            $d = User::find($id)->delete();
+            $d = User::where('id',$id)->first();
+            $d->delete();
             toast('Berhasil Di hapus', 'info');
-            return back();
         }
+        return back();
     }
     
     public function editUser($id)
