@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Alert;
 use App\User;
+use App\Mpegawai;
 use App\Mruangan;
+use App\Masuransi;
 use App\Tdiagnosa;
 use Carbon\Carbon;
 use App\Tpelayanan;
@@ -45,8 +47,9 @@ class LaporanController extends Controller
         $sheet->setCellValue('A8', 'Jenis Kunjungan : Semua !');
         
         header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        
-        $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
+        $writer = IOFactory::load("05featuredemo.xlsx");
+        //$writer = IOFactory::createWriter($spreadsheet, "Xlsx");
+        //$writer->save('kunjunganpasien.xlsx');
         $writer->save('php://output');
         //return Excel::download(new KunjunganPasien, 'kunjunganpasien.xlsx');
     }
@@ -201,9 +204,13 @@ class LaporanController extends Controller
         $sheet->setCellValue('U11', 'Diagnosa');
         $sheet->setCellValue('V11', 'Jenis Kasus');
         header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="kunjunganpasien.xlsx"');
         
+        //$writer = IOFactory::load("05featuredemo.xlsx");
         $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
         $writer->save('php://output');
+        
+        //$writer->save('kunjunganpasien.xlsx');
     }
 
     public function exportkunjunganpasientanggal($parameter)
@@ -358,17 +365,67 @@ class LaporanController extends Controller
         $sheet->setCellValue('U11', 'Diagnosa');
         $sheet->setCellValue('V11', 'Jenis Kasus');
         header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="kunjunganpasien.xlsx"');
         
         $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
         $writer->save('php://output');
+        
     }
 
     public function kunjunganpasien()
     {
         $today = Carbon::today()->format('Y-m-d');
         $data = Tpelayanan::whereDate('tanggal', '=', $today)->get();
-        //->whereHas('pendaftaran', function ($item){$item->where('status_periksa', 2);})
         return view('puskes.laporan.kunjunganpasien',compact('data'));
+    }
+
+    public function laporanpelayananpasien()
+    {
+        $today = Carbon::today()->format('Y-m-d');
+        $data = Tpelayanan::whereDate('tanggal', '=', $today)->get()->map(function($item){
+            $item->anamnesa = $item->anamnesa;
+            return $item;
+        })->where('anamnesa', '!=', null);
+        $poli = Mruangan::where('is_aktif', 'Y')->get();
+        $asuransi = Masuransi::all();
+        
+        return view('puskes.laporan.pelayananpasien',compact('data','poli','asuransi'));
+    }
+
+    public function laporanpemeriksaanmedis()
+    {
+        $today = Carbon::today()->format('Y-m-d');
+        $data = Mpegawai::orderBy('nama', 'ASC')->get();
+        $poli = Mruangan::where('is_aktif', 'Y')->get();
+        $asuransi = Masuransi::all();
+        
+        return view('puskes.laporan.pemeriksaanmedis',compact('data','poli','asuransi'));
+    }
+
+    public function laporanpelayananresep()
+    {
+        
+        $today = Carbon::today()->format('Y-m-d');
+        $data = Mpegawai::orderBy('nama', 'ASC')->get();
+        $poli = Mruangan::where('is_aktif', 'Y')->get();
+        $asuransi = Masuransi::all();
+        
+        return view('puskes.laporan.pelayananresep',compact('data','poli','asuransi'));
+    }
+
+    public function laporanpengeluaranobat()
+    {
+        $today = Carbon::today()->format('Y-m-d');
+        $data = Mpegawai::orderBy('nama', 'ASC')->get();
+        $poli = Mruangan::where('is_aktif', 'Y')->get();
+        $asuransi = Masuransi::all();
+        
+        return view('puskes.laporan.pengeluaranobat',compact('data','poli','asuransi'));
+    }
+
+    public function searchlaporanpelayananpasien(Request $req)
+    {
+        dd($req->all());
     }
 
     public function tampilkankunjunganpasien(Request $req)
@@ -468,7 +525,7 @@ class LaporanController extends Controller
             //     $item->diagnosa['jenis_penyakit'] = $item->mdiagnosa;
             //     return $item->diagnosa;
             // });
-            dd($req->all(), $req->ruangan_id,$parseStart, $parseEnd, $mapData);
+            //dd($req->all(), $req->ruangan_id,$parseStart, $parseEnd, $mapData);
         }
     }
 
@@ -486,4 +543,5 @@ class LaporanController extends Controller
     {
         return view('puskes.laporan.laporansp3lb4');
     }
+
 }

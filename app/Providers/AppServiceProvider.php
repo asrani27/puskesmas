@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use View;
 use App\Menu;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,11 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        try {
-            $menu = Menu::where('menu_id',null)->where('is_aktif','Y')->get();
-            View::share('menu', $menu);
-        } catch (\Exception $e) {
-            
-        }
+        DB::listen(function($query) {
+            Log::info(
+                $query->sql,
+                $query->bindings,
+                $query->time
+            );
+        });
     }
 }
