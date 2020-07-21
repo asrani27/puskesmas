@@ -38,15 +38,11 @@
                             @endforeach
                         </select>
                       </div>
-                      {{-- <input type="text" value="" name="tanggal"> --}}
                     </div>
-                  {{-- </form> --}}
                 </div>
                     
                 <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
                   <div class="form-group">
-                    {{-- <form id='formTanggal' action="/pelayanan/medis/tanggal" method="POST">
-                      @csrf --}}
                         <div class="input-group input-group-sm">
                         <input type="text" name="tanggal" id="datepicker" class="form-control"  autocomplete="off" value="{{old('tanggal') == null ? \Carbon\Carbon::today()->format('d/m/Y') : old('tanggal')}}">
                           <div class="input-group-append">
@@ -62,14 +58,14 @@
                   <!-- text input -->
                   <form method="post" action="/pelayanan/medis/search">
                     @csrf
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <div class="input-group input-group-sm">
                       <input type="text" name="search" class="form-control" value="{{old('search')}}" placeholder="Pencarian">
                         <div class="input-group-append">
                           <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
                         </div>
                       </div>
-                    </div>
+                    </div> --}}
                   </form>
                 </div>
 

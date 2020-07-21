@@ -29,4 +29,15 @@ class Mpegawai extends Model
     {
         return $this->hasMany(Tperiksafisik::class, 'perawat_id');
     }
+
+    public function periksatm1()
+    {
+        return $this->hasMany(Tperiksafisik::class, 'dokter_id');
+    }
+    
+    public function periksatm2()
+    {
+        return $this->hasMany(Tperiksafisik::class, 'perawat_id');
+    }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Alert;
 use App\User;
+use App\Mobat;
 use App\Mpegawai;
 use App\Mruangan;
 use App\Masuransi;
@@ -12,12 +13,12 @@ use Carbon\Carbon;
 use App\Tpelayanan;
 use Illuminate\Http\Request;
 use App\Exports\KunjunganPasien;
+use App\Repositories\LaporanRepo;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
-use App\Repositories\LaporanRepo;
 
 class LaporanController extends Controller
 {
@@ -72,7 +73,7 @@ class LaporanController extends Controller
         
     }
 
-    public function laporanpemeriksaanmedis()
+    public function pemeriksaanmedis()
     {
         $today = Carbon::today()->format('Y-m-d');
         $data = Mpegawai::orderBy('nama', 'ASC')->get();
@@ -81,14 +82,52 @@ class LaporanController extends Controller
         
         return view('puskes.laporan.pemeriksaanmedis',compact('data','poli','asuransi'));
     }
-
-    public function laporanpelayananresep()
+    
+    public function searchpemeriksaanmedis(Request $req)
     {
         
+        $start = Carbon::parse($req->dari)->format('Y-m-d')." 00:00:00"; 
+        $end   = Carbon::parse($req->sampai)->format('Y-m-d')." 23:59:59"; 
+
         $today = Carbon::today()->format('Y-m-d');
-        $data = Mpegawai::orderBy('nama', 'ASC')->get();
+        $pegawai = Mpegawai::orderBy('nama', 'ASC')->get();
+        $data = $pegawai->map(function($item)use($start, $end){
+            $item->periksatenagamedis1 = count($item->periksatm1->whereBetween('tanggal', [$start, $end]));
+            $item->periksatenagamedis2 = count($item->periksatm2->whereBetween('tanggal', [$start, $end]));
+            $item->totalperiksa = $item->periksatenagamedis1 + $item->periksatenagamedi2;
+            return $item;
+        });
+        
         $poli = Mruangan::where('is_aktif', 'Y')->get();
         $asuransi = Masuransi::all();
+        $req->flash();
+        return view('puskes.laporan.pemeriksaanmedis',compact('data','poli','asuransi'));
+    }
+
+    public function pelayananresep()
+    {
+        $today = Carbon::today()->format('Y-m-d');
+        $data = [];
+        
+        $poli = Mruangan::where('is_aktif', 'Y')->get();
+        $asuransi = Masuransi::all();
+        
+        return view('puskes.laporan.pelayananresep',compact('data','poli','asuransi'));
+    }
+
+    public function searchpelayananresep(Request $req)
+    {
+        $start = Carbon::parse($req->dari)->format('Y-m-d')." 00:00:00"; 
+        $end   = Carbon::parse($req->sampai)->format('Y-m-d')." 23:59:59"; 
+
+        $today = Carbon::today()->format('Y-m-d');
+        $data = Mobat::orderBy('value', 'ASC')->get()->map(function($item) use ($start, $end){
+            $item->resep = count($item->resepdetail->whereBetween('created_at', [$start, $end]));
+            return $item;
+        })->where('resep', '!=', 0);
+        $poli = Mruangan::where('is_aktif', 'Y')->get();
+        $asuransi = Masuransi::all();
+        $req->flash();
         
         return view('puskes.laporan.pelayananresep',compact('data','poli','asuransi'));
     }

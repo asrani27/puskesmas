@@ -185,9 +185,12 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/laporanpelayananpasien', 'LaporanController@pelayananpasien');
     Route::post('/laporanpelayananpasien', 'LaporanController@searchpelayananpasien');
 
+    Route::get('/laporanpemeriksaanmedis', 'LaporanController@pemeriksaanmedis');
+    Route::post('/laporanpemeriksaanmedis', 'LaporanController@searchpemeriksaanmedis');
 
-    Route::get('/laporanpemeriksaanmedis', 'LaporanController@laporanpemeriksaanmedis');
-    Route::get('/laporanpelayananresep', 'LaporanController@laporanpelayananresep');
+    Route::get('/laporanpelayananresep', 'LaporanController@pelayananresep');
+    Route::post('/laporanpelayananresep', 'LaporanController@searchpelayananresep');
+
     Route::get('/laporanpengeluaranobat', 'LaporanController@laporanpengeluaranobat');
     Route::get('/laporankinerjapuskesmas', 'LaporanController@laporankinerjapuskesmas');
 

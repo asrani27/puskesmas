@@ -380,10 +380,16 @@ class PelayananController extends Controller
 
     public function medis()
     {
-        $today = Carbon::today()->format('Y-m-d');
-        $data = Tpelayanan::where('tanggal','LIKE', $today.'%')->orderBy('created_at','desc')->paginate(10);
-        $ruangan = Mruangan::where('is_aktif', 'Y')->orderBy('nama','desc')->get();
-        return view('puskes.pelayanan.medis.medis',compact('data','ruangan'));
+        try {
+            $today = Carbon::today()->format('Y-m-d');
+            $data = Tpelayanan::where('tanggal','LIKE', $today.'%')->orderBy('created_at','desc')->paginate(10);
+            $ruangan = Mruangan::where('is_aktif', 'Y')->orderBy('nama','desc')->get();
+            return view('puskes.pelayanan.medis.medis',compact('data','ruangan'));
+        } catch (\Exception $e) {
+            
+            report($e);
+            return false;
+        }
     }
 
     public function proses($id)

@@ -45,14 +45,14 @@
                   <!-- text input -->
                   <form method="post" action="/pelayanan/apotek/search">
                     @csrf
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <div class="input-group input-group-sm">
                       <input type="text" name="search" class="form-control" value="{{old('search')}}" placeholder="Pencarian">
                         <div class="input-group-append">
                           <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
                         </div>
                       </div>
-                    </div>
+                    </div> --}}
                   </form>
                 </div>
 
