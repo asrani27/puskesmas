@@ -33,13 +33,13 @@
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Dari <span class="text-danger"><strong>*</strong></span></small></label>
                         <div class="col-sm-9">
-                        <input type="text" id="datepicker" class="form-control form-control-sm"  name="search[dari]" required value="{{\Carbon\Carbon::today()->format('d-m-Y')}}">
+                        <input type="text" id="datepicker" class="form-control form-control-sm"  name="dari" required value="{{\Carbon\Carbon::parse(old('dari'))->format('d-m-Y')}}">
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Sampai <span class="text-danger"><strong>*</strong></span></small></label>
                         <div class="col-sm-9">
-                            <input type="text" id="datepicker2" class="form-control form-control-sm"  name="search[sampai]" required value="{{\Carbon\Carbon::today()->format('d-m-Y')}}">
+                            <input type="text" id="datepicker2" class="form-control form-control-sm"  name="sampai" required value="{{\Carbon\Carbon::parse(old('sampai'))->format('d-m-Y')}}">
                         </div>
                     </div>
                     <div class="input-group row">
@@ -124,7 +124,7 @@
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Kecamatan</small></label>
                         <div class="col-sm-9"> 
-                            <input type="text" class="form-control form-control-sm"  name="search[kecamatan]">
+                            <input type="text" class="form-control form-control-sm"  name="kecamatan" value="{{old('kecamatan')}}">
                         </div>
                     </div> 
                     <div class="input-group row">
@@ -211,8 +211,8 @@
                 </div>
                 <div class="card-tools">&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type='submit' class="btn btn-sm btn-info shadow">Tampilkan</button>
-                
-                <a href="/laporankunjunganpasien"  class="btn btn-sm btn-info shadow">Reset</a>
+                <button type="submit" value='export' name="export" class="btn btn-sm btn-info shadow">Export</button>
+                <a href="/laporanpelayananpasien"  class="btn btn-sm btn-info shadow">Reset</a>
                 </div>
             </div>
             </form>
@@ -322,9 +322,9 @@
                         <td>{{$item->anamnesa->kurang_sayur_buah == 0 ? 'Tidak' : 'Ya'}}</td>
                         <td>{{$item->anamnesa->terapi}}</td>
                         <td>{{$item->anamnesa->keterangan}}</td>
-                        <td>{{$item->anamnesa->rps->where('jenis_riwayat', 'Riwayat Penyakit Sekarang')->first()->value}}</td>
-                        <td>{{$item->anamnesa->rpd->where('jenis_riwayat', 'Riwayat Penyakit Dulu')->first()->value}}</td>
-                        <td>{{$item->anamnesa->rpk->where('jenis_riwayat', 'Riwayat Penyakit Keluarga')->first()->value}}</td>
+                        <td>{{count($item->anamnesa->rps) == 0 ? '': $item->anamnesa->rps->where('jenis_riwayat', 'Riwayat Penyakit Sekarang')->first()->value}}</td>
+                        <td>{{count($item->anamnesa->rpd) == 0 ? '': $item->anamnesa->rpd->where('jenis_riwayat', 'Riwayat Penyakit Dulu')->first()->value}}</td>
+                        <td>{{count($item->anamnesa->rpk) == 0 ? '': $item->anamnesa->rpk->where('jenis_riwayat', 'Riwayat Penyakit Keluarga')->first()->value}}</td>
                         <td>
                             <ul>
                             @foreach($item->anamnesa->obat as $alergi)
@@ -363,7 +363,7 @@
                         <td>
                             @foreach ($item->tindakan as $tindakan)
                             <ul>
-                                <li>{{$tindakan}}</li>
+                                <li>{{$tindakan->mtindakan->value}}</li>
                             </ul>
                             @endforeach
                         </td>
@@ -379,7 +379,7 @@
                             -
                             @endif
                         </td>
-                        <td>Pendaftaran</td>
+                        <td>Pendaftaran</td> 
                       </tr>
                   @endforeach
                 <tbody>

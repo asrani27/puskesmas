@@ -114,7 +114,7 @@
                 </div>
                 <div class="card-tools">&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type='submit' class="btn btn-sm btn-info shadow">Tampilkan</button>
-                <a href="/laporankunjunganpasien/export/today"  class="btn btn-sm btn-info shadow">Export</a>
+                <a href="/laporankunjunganpasien/export/today"  class="btn btn-sm btn-info shadow disabled">Export</a>
                 <a href="/laporankunjunganpasien"  class="btn btn-sm btn-info shadow">Reset</a>
                 </div>
             </div>

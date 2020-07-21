@@ -180,12 +180,12 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pelayanan/apotek/proses/{id}', 'PelayananController@detailResep');
 
     Route::get('/laporankunjunganpasien', 'LaporanController@kunjunganpasien');
-    //Route::get('/laporankunjunganpasien/export', 'LaporanController@exportkunjunganpasien');
-    Route::get('/laporankunjunganpasien/export/today', 'LaporanController@exportkunjunganpasientoday');
     Route::post('/laporankunjunganpasien/search', 'LaporanController@tampilkankunjunganpasien');
     
-    Route::get('/laporanpelayananpasien', 'LaporanController@laporanpelayananpasien');
-    Route::post('/laporanpelayananpasien', 'LaporanController@searchlaporanpelayananpasien');
+    Route::get('/laporanpelayananpasien', 'LaporanController@pelayananpasien');
+    Route::post('/laporanpelayananpasien', 'LaporanController@searchpelayananpasien');
+
+
     Route::get('/laporanpemeriksaanmedis', 'LaporanController@laporanpemeriksaanmedis');
     Route::get('/laporanpelayananresep', 'LaporanController@laporanpelayananresep');
     Route::get('/laporanpengeluaranobat', 'LaporanController@laporanpengeluaranobat');
