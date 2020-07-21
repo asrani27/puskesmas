@@ -55,7 +55,6 @@ class LaporanController extends Controller
     public function searchpelayananpasien(Request $req)
     {
         if($req->export == null){
-            
             $start = Carbon::parse($req->dari)->format('Y-m-d')." 00:00:00"; 
             $end   = Carbon::parse($req->sampai)->format('Y-m-d')." 23:59:59"; 
             $data  = Tpelayanan::whereBetween('tanggal', [$start, $end])->get()->map(function($item){
@@ -68,9 +67,7 @@ class LaporanController extends Controller
             return view('puskes.laporan.pelayananpasien',compact('data','poli','asuransi'));
 
         }else{
-            
             $this->LaporanRepo->pelayananpasien($req->all());
-            
         }
         
     }
