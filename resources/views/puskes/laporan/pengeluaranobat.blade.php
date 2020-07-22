@@ -25,7 +25,7 @@
             
             <!-- /.card-header -->
             <div class="card-body p-2 table-responsive">
-            <form method="POST" action="/laporanpelayananpasien">
+            <form method="POST" action="/laporanpengeluaranobat">
             @csrf
             <div class="row">
                 <div class="col-md-4">
@@ -33,13 +33,13 @@
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Dari <span class="text-danger"><strong>*</strong></span></small></label>
                         <div class="col-sm-9">
-                        <input type="text" id="datepicker" class="form-control form-control-sm"  name="search[dari]" required value="{{\Carbon\Carbon::today()->format('d-m-Y')}}">
+                        <input type="text" id="datepicker" class="form-control form-control-sm"  name="dari" required value="{{\Carbon\Carbon::parse(old('dari'))->format('d-m-Y')}}">
                         </div>
                     </div>
                     <div class="input-group row">
                         <label class="col-sm-3 col-form-label text-right"><small>Sampai <span class="text-danger"><strong>*</strong></span></small></label>
                         <div class="col-sm-9">
-                            <input type="text" id="datepicker2" class="form-control form-control-sm"  name="search[sampai]" required value="{{\Carbon\Carbon::today()->format('d-m-Y')}}">
+                            <input type="text" id="datepicker2" class="form-control form-control-sm"  name="sampai" required value="{{\Carbon\Carbon::parse(old('sampai'))->format('d-m-Y')}}">
                         </div>
                     </div>
                     </div>
@@ -81,14 +81,14 @@
                     $no = 1;
                     @endphp
                 <tbody>
-                  {{-- @foreach ($data as $item)
+                  @foreach ($data as $item)
                       <tr style="font-size:12px; font-family:Arial, Helvetica, sans-serif;">
                         <td>{{$no++}}</td>
-                        <td>{{\Carbon\Carbon::parse($item->tanggal)->format('d-m-Y h:i:s')}}</td>
-                        <td>{{$item->pendaftaran->pasien->nama}}</td>
-                       
+                        <td>{{$item->first()->obat_id}}</td>
+                        <td>{{$item->nama_obat}}</td>
+                        <td>{{$item->jumlah}}</td>
                       </tr>
-                  @endforeach --}}
+                  @endforeach
                 <tbody>
                 </small> 
               </table>

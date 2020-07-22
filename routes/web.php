@@ -178,6 +178,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pelayanan/apotek', 'PelayananController@apotek');
     Route::post('/pelayanan/apotek', 'PelayananController@apotekSearch');
     Route::get('/pelayanan/apotek/proses/{id}', 'PelayananController@detailResep');
+    Route::get('/pelayanan/apotek/proses/{id}/simpan', 'PelayananController@ambilResep');
 
     Route::get('/laporankunjunganpasien', 'LaporanController@kunjunganpasien');
     Route::post('/laporankunjunganpasien/search', 'LaporanController@tampilkankunjunganpasien');
@@ -191,7 +192,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/laporanpelayananresep', 'LaporanController@pelayananresep');
     Route::post('/laporanpelayananresep', 'LaporanController@searchpelayananresep');
 
-    Route::get('/laporanpengeluaranobat', 'LaporanController@laporanpengeluaranobat');
+    Route::get('/laporanpengeluaranobat', 'LaporanController@pengeluaranobat');
+    Route::post('/laporanpengeluaranobat', 'LaporanController@searchpengeluaranobat');
+
     Route::get('/laporankinerjapuskesmas', 'LaporanController@laporankinerjapuskesmas');
 
     Route::get('/laporansp3lb1', 'LaporanController@laporansp3lb1');

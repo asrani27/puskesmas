@@ -198,7 +198,7 @@
                               <td>
                                 <select name="obat_id" class="form-control select2">
                                   @foreach ($obat as $item)
-                                    <option value="{{$item->id}}">{{$item->id}} - {{$item->value}}</option>
+                                    <option value="{{$item->id}}">{{$item->value}}, Stok : {{$item->stok}}</option>
                                   @endforeach
                                 </select>
                               </td>  

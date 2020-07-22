@@ -80,7 +80,7 @@
                 </div>
                 <div class="card-tools">&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type='submit' class="btn btn-sm btn-info shadow">Tampilkan</button>
-                <a href="/laporansp3lb1/export"  class="btn btn-sm btn-info shadow">Export</a>
+                {{-- <a href="/laporansp3lb1/export"  class="btn btn-sm btn-info shadow">Export</a> --}}
                 </div>
             </div>
             </form>

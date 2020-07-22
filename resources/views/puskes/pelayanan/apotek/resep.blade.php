@@ -20,7 +20,8 @@
             <div class="card-header">
               <h3 class="card-title">Resep Obat Pasien</h3>
               <div class="card-tools">
-                <a href="/pengaturan/data_master/obat" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-left"></i> Kembali</a>
+                <a href="/pelayanan/apotek/proses/{{$data->id}}/simpan" class="btn bg-gradient-success btn-sm"  onclick="return confirm('Di Simpan Artinya Resep Ambil Oleh Pasien, Yakin?');"><i class="fas fa-save"></i> Simpan</a>
+                <a href="/pelayanan/apotek" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-left"></i> Kembali</a>
               </div>
             </div>
             

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Closure;
 use App\Mkms;
 use App\User;
+use App\Mobat;
 use App\Tresep;
 use App\Malergi;
 use App\Mlookup;
@@ -28,8 +29,8 @@ use App\Tperiksafisik;
 use Illuminate\Support\Str;
 use App\Tlaboratoriumdetail;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -181,7 +182,11 @@ class PelayananController extends Controller
             });
             $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
             $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
-            $obat = DB::table('m_obat')->select('id','value')->get();
+            $obat = Mobat::all()->map(function($item){
+                $item->stok = count($item->m_stok_obat) == 0 ? 0 : $item->m_stok_obat->first()->jumlah_stok;
+                return $item;
+            })->where('stok', '!=', 0);
+            
             $signa = DB::table('m_signa')->select('value')->get();
             $sp = Mstatuspulang::all();
             
@@ -1322,5 +1327,15 @@ class PelayananController extends Controller
         $data = Tpelayanan::find($id);
         return view('puskes.pelayanan.apotek.resep',compact('data'));
         
+    }
+
+    public function ambilResep($id)
+    {
+        //Ubah status menjadi sudah ambil
+        $resep = Tresep::where('pelayanan_id', $id)->first();
+        $resep->status_ambil = '1';
+        $resep->save();
+        toast('resep sudah diambil', 'success');
+        return redirect('/pelayanan/apotek');
     }
 }

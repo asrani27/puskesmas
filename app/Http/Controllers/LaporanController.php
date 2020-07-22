@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Alert;
 use App\User;
 use App\Mobat;
+use App\Tresep;
 use App\Mpegawai;
 use App\Mruangan;
 use App\Masuransi;
@@ -15,8 +16,8 @@ use Illuminate\Http\Request;
 use App\Exports\KunjunganPasien;
 use App\Repositories\LaporanRepo;
 use Maatwebsite\Excel\Facades\Excel;
-use PhpOffice\PhpSpreadsheet\IOFactory;
 
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -120,7 +121,6 @@ class LaporanController extends Controller
         $start = Carbon::parse($req->dari)->format('Y-m-d')." 00:00:00"; 
         $end   = Carbon::parse($req->sampai)->format('Y-m-d')." 23:59:59"; 
 
-        $today = Carbon::today()->format('Y-m-d');
         $data = Mobat::orderBy('value', 'ASC')->get()->map(function($item) use ($start, $end){
             $item->resep = count($item->resepdetail->whereBetween('created_at', [$start, $end]));
             return $item;
@@ -132,14 +132,26 @@ class LaporanController extends Controller
         return view('puskes.laporan.pelayananresep',compact('data','poli','asuransi'));
     }
 
-    public function laporanpengeluaranobat()
+    public function pengeluaranobat()
     {
-        $today = Carbon::today()->format('Y-m-d');
-        $data = Mpegawai::orderBy('nama', 'ASC')->get();
-        $poli = Mruangan::where('is_aktif', 'Y')->get();
-        $asuransi = Masuransi::all();
+        $data = [];
         
-        return view('puskes.laporan.pengeluaranobat',compact('data','poli','asuransi'));
+        return view('puskes.laporan.pengeluaranobat',compact('data'));
+    }
+    
+    public function searchpengeluaranobat(Request $req)
+    {
+        $start = Carbon::parse($req->dari)->format('Y-m-d')." 00:00:00"; 
+        $end   = Carbon::parse($req->sampai)->format('Y-m-d')." 23:59:59"; 
+        $data  = Tresep::whereBetween('tanggal', [$start, $end])->where('status_ambil', '1')->get()->map(function($item){
+            return $item->resepdetail;
+        })->collapse()->groupBy('obat_id')->map(function($item, $key){
+            $item->jumlah = $item->sum('obat_jumlah');
+            $item->nama_obat = Mobat::find($key)->value;
+            return $item;
+        });
+        $req->flash();
+        return view('puskes.laporan.pengeluaranobat',compact('data'));
     }
 
     public function tampilkankunjunganpasien(Request $req)

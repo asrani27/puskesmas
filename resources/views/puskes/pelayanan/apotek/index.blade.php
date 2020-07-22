@@ -17,7 +17,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Pelayanan Apotek</h3>
+              <h3 class="card-title">Data Pelayanan Resep</h3>
                 
             <div class="text-right">
              </div>
@@ -90,12 +90,10 @@
                     @if($item->resep == null)
                     @else
                     <tr style="
-                    @if($item->resep == null ? null:$item->resep->status_ambil == 0)
+                    @if($item->resep == null ? null:$item->resep->status_ambil == '0')
                     background-color:#f2dede
-                    @elseif($item->resep == null ? null:$item->resepstatus_ambil == 1)
-                    background-color:#f2dede
-                    @elseif($item->resep == null ? null:$item->resepstatus_ambil == 2)
-                    background-color: #dff0d8
+                    @elseif($item->resep == null ? null:$item->resep->status_ambil == '1')
+                    background-color:#dff0d8
                     @endif
                     ">
                       <td class="text-center"><small>{{ $key+ $data->firstItem() }}</small></td>
