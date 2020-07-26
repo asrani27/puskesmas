@@ -337,7 +337,7 @@
                         <td>{{$item->periksafisik->tinggi}} Cm</td>
                         <td>{{$item->periksafisik->berat}} Kg</td>
                         <td>{{$item->periksafisik->lingkar_perut}}</td>
-                        <td>{{number_format($item->periksafisik->berat / ($item->periksafisik->tinggi / 100) / ($item->periksafisik->tinggi / 100), 2)}}</td>
+                        {{-- <td>{{number_format($item->periksafisik->berat / ($item->periksafisik->tinggi / 100) / ($item->periksafisik->tinggi / 100), 2)}}</td> --}}
                         <td>-</td>
                         <td>{{$item->periksafisik->sistole}}</td>
                         <td>{{$item->periksafisik->diastole}}</td>
