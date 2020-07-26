@@ -259,7 +259,7 @@
                                         </div>
                                   </div>
                                   
-                                  <div class="input-group row">
+                                  {{-- <div class="input-group row">
                                       <label class="col-sm-4 col-form-label text-right"><small>IMT</small></label>
                                       <div class="col-sm-8">
                                           <input type="text" class="form-control form-control-sm" name="imt" readonly>
@@ -271,7 +271,7 @@
                                       <div class="col-sm-8">
                                           <input type="text" class="form-control form-control-sm" name="hasil_imt" readonly>
                                       </div>
-                                  </div>
+                                  </div> --}}
                                   </div>
                               </div>
                               <div class="col-md-6">

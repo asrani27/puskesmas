@@ -202,7 +202,7 @@
                                   <div class="input-group row">
                                       <label class="col-sm-4 col-form-label text-right"><small>IMT</small></label>
                                       <div class="col-sm-8">
-                                          <input type="text" class="form-control form-control-sm" name="imt" value="{{$data->periksafisik->imt}}" readonly>
+                                          <input type="text" class="form-control form-control-sm" name="imt" value="{{number_format($data->periksafisik->berat / ($data->periksafisik->tinggi / 100) / ($data->periksafisik->tinggi / 100), 2)}}" readonly>
                                       </div>
                                   </div>
                                   

@@ -122,7 +122,7 @@ class LaporanController extends Controller
         $end   = Carbon::parse($req->sampai)->format('Y-m-d')." 23:59:59"; 
 
         $data = Mobat::orderBy('value', 'ASC')->get()->map(function($item) use ($start, $end){
-            $item->resep = count($item->resepdetail->whereBetween('created_at', [$start, $end]));
+            $item->resep = $item->resepdetail->whereBetween('created_at', [$start, $end])->sum('obat_jumlah');
             return $item;
         })->where('resep', '!=', 0);
         $poli = Mruangan::where('is_aktif', 'Y')->get();
@@ -243,13 +243,6 @@ class LaporanController extends Controller
             $ruangan = Mruangan::where('is_aktif', 'Y')->get();
             return view('puskes.laporan.laporansp3lb1',
             compact('ruangan','mapData'));
-
-            // ->map(function($item, $value){
-            //     $item->diagnosa->kode_icd = $item->diagnosa_id;
-            //     $item->diagnosa['jenis_penyakit'] = $item->mdiagnosa;
-            //     return $item->diagnosa;
-            // });
-            //dd($req->all(), $req->ruangan_id,$parseStart, $parseEnd, $mapData);
         }
     }
 
