@@ -178,7 +178,6 @@
                     $no = 1;
                     @endphp
                 <tbody>
-                    {{$data}}
                   @foreach ($data as $item)
                       <tr style="font-size:12px; font-family:Arial, Helvetica, sans-serif;">
                         <td>{{$no++}}</td>
@@ -197,8 +196,8 @@
                         <td>{{$item->pendaftaran->pasien->nama_ayah}}</td>
                         <td>{{$item->pendaftaran->kunjungan}}</td>
                         <td>{{$item->pendaftaran->status}}</td>
-                        {{-- <td>{{$item->ruangan->nama}}</td>
-                        <td>{{$item->pendaftaran->pasien->asuransi->nama}}</td> --}}
+                        <td>{{$item->ruangan->nama}}</td>
+                        <td>{{$item->pendaftaran->pasien->asuransi->nama}}</td>
                         <td>{{$item->pendaftaran->pasien->no_asuransi}}</td>
                         <td>
                             @foreach ($item->diagnosa as $diagnosa)
