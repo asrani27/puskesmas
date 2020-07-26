@@ -225,7 +225,11 @@ class LaporanRepo
             $item->tinggi        = $item->periksafisik->tinggi;
             $item->berat         = $item->periksafisik->berat;
             $item->lingkar_perut = $item->periksafisik->lingkar_perut;
-            $item->imt           = number_format($item->periksafisik->berat / ($item->periksafisik->tinggi / 100) / ($item->periksafisik->tinggi / 100), 2);
+            if($item->periksafisik->berat == 0 || $item->periksafisik->tinggi == 0){
+                $item->imt = 0;
+            }else{
+                $item->imt           = number_format($item->periksafisik->berat / ($item->periksafisik->tinggi / 100) / ($item->periksafisik->tinggi / 100), 2);
+            }
             $item->hasil_imt = '';
             $item->sistole         = $item->periksafisik->sistole;
             $item->diastole        = $item->periksafisik->diastole;
