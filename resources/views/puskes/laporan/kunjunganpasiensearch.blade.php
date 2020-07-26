@@ -178,6 +178,7 @@
                     $no = 1;
                     @endphp
                 <tbody>
+                    {{$data}}
                   @foreach ($data as $item)
                       <tr style="font-size:12px; font-family:Arial, Helvetica, sans-serif;">
                         <td>{{$no++}}</td>
@@ -192,12 +193,12 @@
                         <td>{{hitungUmur($item->pendaftaran->pasien->tanggal_lahir)}}</td>
                         <td>{{$item->pendaftaran->pasien->pekerjaan == null ? '-' : $item->pendaftaran->pasien->pekerjaan->nama}}</td>
                         <td>{{$item->pendaftaran->pasien->alamat}}</td>
-                        {{-- <td>{{$item->pendaftaran->pasien->kelurahan == null ? '':$item->pendaftaran->pasien->kelurahan->nama}}</td> --}}
+                        <td>{{$item->pendaftaran->pasien->kelurahan == null ? '':$item->pendaftaran->pasien->kelurahan->nama}}</td>
                         <td>{{$item->pendaftaran->pasien->nama_ayah}}</td>
                         <td>{{$item->pendaftaran->kunjungan}}</td>
                         <td>{{$item->pendaftaran->status}}</td>
-                        <td>{{$item->ruangan->nama}}</td>
-                        <td>{{$item->pendaftaran->pasien->asuransi->nama}}</td>
+                        {{-- <td>{{$item->ruangan->nama}}</td>
+                        <td>{{$item->pendaftaran->pasien->asuransi->nama}}</td> --}}
                         <td>{{$item->pendaftaran->pasien->no_asuransi}}</td>
                         <td>
                             @foreach ($item->diagnosa as $diagnosa)
