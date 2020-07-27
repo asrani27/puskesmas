@@ -6,6 +6,8 @@ use Auth;
 use Alert;
 use App\H_login;
 use Carbon\Carbon;
+use App\Mpuskesmas;
+use GuzzleHttp\Client;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -55,6 +57,20 @@ class LoginController extends Controller
             $h->tanggal = Carbon::now()->format('Y-m-d');
             $h->jam     = Carbon::now()->format('h:i:s');
             $h->save();
+
+            $namePuskesmas = Mpuskesmas::where('id', $datauser->puskesmas_id)->first()->nama;
+            //Kirim Notif Ke Telegram Admin 
+            $client  = new Client();
+            $url     = "https://api.telegram.org/bot".env("BOTTELEGRAM","1314875498:AAEy9-7isizWK_0Vzr4Jy4pBDJAdzo-WK_A")."/sendMessage";
+            $data    = $client->request('GET', $url, [
+                'json' =>[
+                "chat_id" => env("BOTTELEGRAM_CHATID","1127046145"), 
+                "text" => "Puskesmas : ".$namePuskesmas."\nJamLogin : ".\Carbon\Carbon::now()."\nUsername : ".$datauser->username,"disable_notification" => true
+                ]
+            ]);
+
+            $json = $data->getBody();
+            
             return redirect('/home');
         } 
         else 
