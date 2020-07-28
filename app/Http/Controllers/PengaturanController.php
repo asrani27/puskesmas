@@ -115,7 +115,11 @@ class PengaturanController extends Controller
     
     public function storePegawai(Request $req)
     {
-        $id  = convertid((int) Mpegawai::orderBy('id','DESC')->first()->id + 1);
+        if(Mpegawai::first() == null){
+            $id = convertid(1);
+        }else{
+            $id  = convertid((int) Mpegawai::orderBy('id','DESC')->first()->id + 1);
+        }
         
         $s                  = new Mpegawai;
         $s->id              = $id;
