@@ -25,7 +25,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/download_panduan">
+        <a class="nav-link" href="/panduan/panduan.docx">
             <button class="btn btn-default btn-xs"><strong> <i class="fas fa-book"></i>  DOWNLOAD PANDUAN </strong></button>
         </a>
       </li>
