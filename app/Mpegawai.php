@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Mpegawai extends Model
 {
     protected $table = 'm_pegawai';
+    use SoftDeletes;
 
     public $incrementing = false;
+    protected $dates = ['deleted_at'];
     
     public function jenispegawai()
     {
