@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler
         $data    = $client->request('GET', $url, [
             'json' =>[
               "chat_id" => env("BOTTELEGRAM_CHATID","1127046145"), 
-              "text" => "File : ".$exception->getFile()."\nLine : ".$exception->getLine()."\nCode : ".$exception->getCode()."\nMessage : ".$exception->getMessage(),"disable_notification" => true
+              "text" => "File : ".$exception->getFile()."\nLine : ".$exception->getLine()."\nCode : ".$exception->getCode()."\nMessage : ".$exception->getMessage()."\nURL : ".url()->previous(),"disable_notification" => true
             ]
         ]);
 
