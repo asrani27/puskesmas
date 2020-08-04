@@ -358,8 +358,14 @@ class PengaturanController extends Controller
 
     public function deleteObat($id)
     {
-        $del = Mobat::where('id', $id)->first()->delete();
-        toast('Data Berhasil Di Hapus', 'success');
+        $del = Mobat::where('id', $id)->first();
+        $check = $del->m_stok_obat->first();
+        if($check == null){
+            $hapus = $del->delete();
+            toast('Data Berhasil Di Hapus', 'success');
+        }else{
+            toast('Tidak Dapat Di Hapus Karena Terdapat Stok Pada Obat Ini', 'info');
+        }
         return back();
     }
 
