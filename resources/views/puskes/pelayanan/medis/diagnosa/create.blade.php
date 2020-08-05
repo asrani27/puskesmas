@@ -155,7 +155,7 @@
                               <tr style="font-size:13px;">
                                 <td>{{$item->tanggal}}</td>
                                 <td>{{strtoupper($item->dokter->nama)}}</td>
-                                <td>{{strtoupper($item->perawat == null? '':$item->perawat->nama)}}</td>
+                                <td>{{strtoupper($item->perawat == null ? '-':$item->perawat->nama)}}</td>
                                 <td>{{strtoupper($item->diagnosa_id)}} / {{strtoupper($item->mdiagnosa->value)}}</td>
                                 <td>{{$item->diagnosa_jenis}}</td>
                                 <td>{{$item->diagnosa_kasus}}</td>
