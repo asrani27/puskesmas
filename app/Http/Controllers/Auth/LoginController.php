@@ -46,9 +46,10 @@ class LoginController extends Controller
 
     public function login()
     {
+        $remember = request()->input('remember-me') == null ? false:true;
         $login = request()->input('username');
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        if(Auth::attempt([$field => $login, 'password' => request()->password], false)) 
+        if(Auth::attempt([$field => $login, 'password' => request()->password], $remember)) 
         {
             $datauser = Auth::user();
             $h = new H_login;
