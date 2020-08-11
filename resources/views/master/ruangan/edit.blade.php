@@ -67,6 +67,21 @@
                         </div>
                         </div>
                     </div>
+                    <div class="input-group row">
+                        <label class="col-sm-2 col-form-label text-right">Menu Yg Di Akses<strong><span class="text-danger">*</span></strong></label>
+                        <div class="col-sm-8">
+                        <div class="form-group">
+                            <input type="checkbox" name="menu[]" value="anamnesa" {{$menuAkses->contains('anamnesa') == true ? 'checked' : ''}}> Anamnesa <br>
+                            <input type="checkbox" name="menu[]" value="diagnosa" {{$menuAkses->contains('diagnosa') == true ? 'checked' : ''}}> Diagnosa <br>
+                            <input type="checkbox" name="menu[]" value="resep"  {{$menuAkses->contains('resep') == true ? 'checked' : ''}}> Resep <br>
+                            <input type="checkbox" name="menu[]" value="laboratorium"  {{$menuAkses->contains('laboratorium') == true ? 'checked' : ''}}> Laboratorium <br>
+                            <input type="checkbox" name="menu[]" value="tindakan"  {{$menuAkses->contains('tindakan') == true ? 'checked' : ''}}> Tindakan <br>
+                            <input type="checkbox" name="menu[]" value="mtbs" {{$menuAkses->contains('mtbs') == true ? 'checked' : ''}}> mtbs <br>
+                            <input type="checkbox" name="menu[]" value="imunisasi" {{$menuAkses->contains('imunisasi') == true ? 'checked' : ''}}> imunisasi <br>
+                            <input type="checkbox" name="menu[]" value="odontogram" {{$menuAkses->contains('odontogram') == true ? 'checked' : ''}}> odontogram <br>
+                        </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <div class="text-right">

@@ -1,58 +1,15 @@
-@if($data->ruangan->id == 1)
-{{-- Menu Untuk Poli Umum --}}
-@include('puskes.pelayanan.medis.menu_umum')
-@elseif($data->ruangan->id == 6)
-{{-- Menu Untuk Poli GIGI --}}
-@include('puskes.pelayanan.medis.menu_gigi')
-@elseif($data->ruangan->id == 10)
-{{-- Menu Untuk Poli ANAK --}}
-@include('puskes.pelayanan.medis.menu_anak')
-@elseif($data->ruangan->id == 29)
-{{-- Menu Untuk Poli MTBS --}}
-@include('puskes.pelayanan.medis.menu_mtbs')
-@elseif($data->ruangan->id == 8)
-{{-- Menu Untuk Poli KIA --}}
-@include('puskes.pelayanan.medis.menu_kia')
-@elseif($data->ruangan->id == 11)
-{{-- Menu Untuk Poli KIA --}}
-@include('puskes.pelayanan.medis.menu_tb')
-@elseif($data->ruangan->id == 14)
-{{-- Menu Untuk Poli KIA --}}
-@include('puskes.pelayanan.medis.menu_pkpr')
-@elseif($data->ruangan->id == 15)
-{{-- Menu Untuk Poli KIA --}}
-@include('puskes.pelayanan.medis.menu_umum')
-@elseif($data->ruangan->id == 12)
-{{-- Menu Untuk Poli KIA --}}
-@include('puskes.pelayanan.medis.menu_gizi')
-@elseif($data->ruangan->id == 4)
-{{-- Menu Untuk Poli KIA --}}
-@include('puskes.pelayanan.medis.menu_gizi')
-@elseif($data->ruangan->id == 30)
-{{-- Menu Untuk Poli KIA --}}
-@include('puskes.pelayanan.medis.menu_imunisasi_bcg')
-@elseif($data->ruangan->id == 2)
-{{-- Menu Untuk Poli KIA --}}
-@include('puskes.pelayanan.medis.menu_ugd')
-@elseif($data->ruangan->id == 3)
-{{-- Menu Untuk Poli KIA --}}
-@include('puskes.pelayanan.medis.menu_ugd')
-@elseif($data->ruangan->id == 9)
-{{-- Menu Untuk Poli KIA --}}
-@include('puskes.pelayanan.medis.menu_ugd')
-@elseif($data->ruangan->id == 39)
-{{-- Menu Untuk Poli PUSTU --}}
-@include('puskes.pelayanan.medis.menu_umum')
-@elseif($data->ruangan->id == 40)
-{{-- Menu Untuk Poli PUSTU --}}
-@include('puskes.pelayanan.medis.menu_umum')
-@elseif($data->ruangan->id == 41)
-{{-- Menu Untuk Poli PUSTU --}}
-@include('puskes.pelayanan.medis.menu_umum')
-@elseif($data->ruangan->id == 42)
-{{-- Menu Untuk Poli PUSTU --}}
-@include('puskes.pelayanan.medis.menu_umum')
-@elseif($data->ruangan->id == 43)
-{{-- Menu Untuk Poli PUSTU --}}
-@include('puskes.pelayanan.medis.menu_umum')
-@endif
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-8" style="padding-left:15px; padding-top:15px">
+    <a href="/pelayanan/medis/proses/{{$data->id}}/anamnesa" class="btn bg-gradient-primary btn-sm {{$menuAkses->contains('anamnesa') == true ? 'visible' : 'invisible'}} ">Anamnesa</a>
+        <a href="/pelayanan/medis/proses/{{$data->id}}/diagnosa" class="btn bg-gradient-primary btn-sm {{$menuAkses->contains('diagnosa') == true ? 'visible' : 'invisible'}} ">Diagnosa</a>
+        <a href="/pelayanan/medis/proses/{{$data->id}}/resep" class="btn bg-gradient-primary btn-sm {{$menuAkses->contains('resep') == true ? 'visible' : 'invisible'}} ">Resep</a>
+        <a href="/pelayanan/medis/proses/{{$data->id}}/odontogram" class="btn bg-gradient-primary btn-sm {{$menuAkses->contains('odontogram') == true ? 'visible' : 'invisible'}} ">Odontogram</a>
+        <a href="/pelayanan/medis/proses/{{$data->id}}/laboratorium" class="btn bg-gradient-primary btn-sm {{$menuAkses->contains('laboratorium') == true ? 'visible' : 'invisible'}} ">Laboratorium</a>
+        <a href="/pelayanan/medis/proses/{{$data->id}}/tindakan" class="btn bg-gradient-primary btn-sm {{$menuAkses->contains('tindakan') == true ? 'visible' : 'invisible'}} ">Tindakan</a>
+        <a href="/pelayanan/medis/proses/{{$data->id}}/mtbs" class="btn bg-gradient-primary btn-sm {{$menuAkses->contains('mtbs') == true ? 'visible' : 'invisible'}} ">MTBS</a>
+        <a href="/pelayanan/medis/proses/{{$data->id}}/imunisasi" class="btn bg-gradient-primary btn-sm {{$menuAkses->contains('imunisasi') == true ? 'visible' : 'invisible'}} ">Imunisasi</a>
+        <a href="/pelayanan/medis/proses/{{$data->id}}/periksagizi" class="btn bg-gradient-primary btn-sm {{$menuAkses->contains('periksagizi') == true ? 'visible' : 'invisible'}} ">Periksa Gizi</a>
+    </div>
+</div>

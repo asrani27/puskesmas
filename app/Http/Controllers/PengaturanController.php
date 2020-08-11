@@ -59,8 +59,9 @@ class PengaturanController extends Controller
     public function editPoli($id)
     {
         $data = Mruangan::find($id);
+        $menuAkses = collect(json_decode($data->menu_akses));
         $int = Minstalasi::all();
-        return view('master.ruangan.edit',compact('data','int'));
+        return view('master.ruangan.edit',compact('data','int','menuAkses'));
     }
     
     public function updatePoli(Request $req, $id)
@@ -69,6 +70,7 @@ class PengaturanController extends Controller
         $s->instalasi_id = $req->instalasi_id;
         $s->nama         = $req->nama;
         $s->is_aktif     = $req->is_aktif;
+        $s->menu_akses   = json_encode($req->menu);
         $s->save();
         toast('Poli berhasil Di Update','success');
         return redirect('/pengaturan/data_master/poli');
@@ -95,6 +97,7 @@ class PengaturanController extends Controller
         $s->urutan       = (int) $id_ruangan;
         $s->nama         = $req->nama;
         $s->is_aktif     = $req->is_aktif;
+        $s->menu_akses   = json_encode($req->menu);
         $s->save();
         toast('Poli berhasil Di Simpan','success');
         return redirect('/pengaturan/data_master/poli');

@@ -48,7 +48,6 @@ class PelayananController extends Controller
         $riwayat = $data->pendaftaran->pasien->pendaftaran->map(function($item){
             $item->anamnesa = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
             $dokter = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
-            //dd($dokter->dokter->nama);
             if($dokter == null){
                 $item->dokter = null;
             }else{
@@ -58,7 +57,6 @@ class PelayananController extends Controller
                 }else{
                     $item->dokter = $dokter->dokter->nama;
                 }
-                //$item->dokter = $dokter->dokter->nama;
             }
             $perawat = $item->pelayanan == null ? '' : $item->pelayanan->anamnesa;
             if($perawat == null){
@@ -87,6 +85,7 @@ class PelayananController extends Controller
         });
         return $riwayat;
     }
+    
     public function Anamnesa($id)
     {
         $checkPoli = Tpelayanan::where('id', $id)->orWhere('ruangan_id', '0010')->orWhere('ruangan_id', '0029')->first();
@@ -109,7 +108,8 @@ class PelayananController extends Controller
                 $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
                 $sp = Mstatuspulang::all();
                 $riwayat = $this->riwayat($id);
-                return view('puskes.pelayanan.medis.anamnesa.create',compact('data','keluhan','dokter', 'perawat','kesadaran','sp','riwayat'));
+                $menuAkses = collect(json_decode($data->ruangan->menu_akses));
+                return view('puskes.pelayanan.medis.anamnesa.create',compact('data','menuAkses','keluhan','dokter', 'perawat','kesadaran','sp','riwayat'));
             }else{
                 $anamnesa = $checkAnamnesa;
                 $data = Tpelayanan::find($id);    
@@ -126,7 +126,8 @@ class PelayananController extends Controller
                 $sp = Mstatuspulang::all();
                 
                 $riwayat = $this->riwayat($id);
-                return view('puskes.pelayanan.medis.anamnesa.edit',compact('data','keluhan','dokter', 'perawat','kesadaran','id','anamnesa','sp','riwayat'));
+                $menuAkses = collect(json_decode($data->ruangan->menu_akses));
+                return view('puskes.pelayanan.medis.anamnesa.edit',compact('data','menuAkses','keluhan','dokter', 'perawat','kesadaran','id','anamnesa','sp','riwayat'));
             }
         }
     }
@@ -147,7 +148,8 @@ class PelayananController extends Controller
         
         $riwayat = $this->riwayat($id);
         
-        return view('puskes.pelayanan.medis.diagnosa.create',compact('data','dokter','perawat','diagnosa','sp','riwayat'));
+        $menuAkses = collect(json_decode($data->ruangan->menu_akses));
+        return view('puskes.pelayanan.medis.diagnosa.create',compact('data','menuAkses','dokter','perawat','diagnosa','sp','riwayat'));
     }
 
     public function Resep($id)
@@ -170,7 +172,8 @@ class PelayananController extends Controller
             
             $riwayat = $this->riwayat($id);
 
-            return view('puskes.pelayanan.medis.anamnesa.create',compact('data','dokter','perawat','keluhan','kesadaran','sp','riwayat'));
+            $menuAkses = collect(json_decode($data->ruangan->menu_akses));
+            return view('puskes.pelayanan.medis.anamnesa.create',compact('data','menuAkses','dokter','perawat','keluhan','kesadaran','sp','riwayat'));
 
         }
         else{
@@ -191,8 +194,9 @@ class PelayananController extends Controller
             $sp = Mstatuspulang::all();
             
             $riwayat = $this->riwayat($id);
+            $menuAkses = collect(json_decode($data->ruangan->menu_akses));
 
-            return view('puskes.pelayanan.medis.resep.create',compact('data','dokter','perawat', 'obat','signa','sp','riwayat'));
+            return view('puskes.pelayanan.medis.resep.create',compact('data','menuAkses','dokter','perawat', 'obat','signa','sp','riwayat'));
         }
     }
 
@@ -206,8 +210,9 @@ class PelayananController extends Controller
         });
         
         $riwayat = $this->riwayat($id);
+        $menuAkses = collect(json_decode($data->ruangan->menu_akses));
 
-        return view('puskes.pelayanan.medis.lab.create',compact('data','sp','lab','riwayat'));
+        return view('puskes.pelayanan.medis.lab.create',compact('data','menuAkses','sp','lab','riwayat'));
     }
 
     public function Tindakan($id)
@@ -229,8 +234,9 @@ class PelayananController extends Controller
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
         
         $riwayat = $this->riwayat($id);
+        $menuAkses = collect(json_decode($data->ruangan->menu_akses));
 
-        return view('puskes.pelayanan.medis.tindakan.create',compact('data','sp','lab','dokter','perawat','tindakan','riwayat'));
+        return view('puskes.pelayanan.medis.tindakan.create',compact('data','menuAkses','sp','lab','dokter','perawat','tindakan','riwayat'));
     }
 
     public function Mtbs($id)
@@ -252,7 +258,8 @@ class PelayananController extends Controller
                 $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
                 $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
                 $riwayat = $this->riwayat($id);
-                return view('puskes.pelayanan.medis.mtbs.create',compact('data','sp','dokter','perawat','riwayat'));
+                $menuAkses = collect(json_decode($data->ruangan->menu_akses));
+                return view('puskes.pelayanan.medis.mtbs.create',compact('data','menuAkses','sp','dokter','perawat','riwayat'));
             }else{
                 $sp   = Mstatuspulang::all();
                 $mtbs = $checkMtbs;
@@ -264,7 +271,8 @@ class PelayananController extends Controller
                 $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
                 $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
                 $riwayat = $this->riwayat($id);
-                return view('puskes.pelayanan.medis.mtbs.edit',compact('data','sp','dokter','perawat', 'mtbs','riwayat'));
+                $menuAkses = collect(json_decode($data->ruangan->menu_akses));
+                return view('puskes.pelayanan.medis.mtbs.edit',compact('data','menuAkses','sp','dokter','perawat', 'mtbs','riwayat'));
 
             }
         }
@@ -282,7 +290,8 @@ class PelayananController extends Controller
         $dokter = $tenagamedis->where('kelompok_pegawai', 'TENAGA MEDIS')->values();
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
         $riwayat = $this->riwayat($id);
-        return view('puskes.pelayanan.medis.imunisasi.check',compact('data','sp','dokter','perawat','riwayat'));   
+        $menuAkses = collect(json_decode($data->ruangan->menu_akses));
+        return view('puskes.pelayanan.medis.imunisasi.check',compact('data','menuAkses','sp','dokter','perawat','riwayat'));   
     }
 
     public function imunisasiAnak($id)
@@ -304,7 +313,8 @@ class PelayananController extends Controller
                 $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
                 $imun = Mimunisasi::all()->chunk(4);
                 $riwayat = $this->riwayat($id);
-                return view('puskes.pelayanan.medis.imunisasi.imun_anak',compact('data','sp','dokter','perawat','imun','riwayat'));   
+                $menuAkses = collect(json_decode($data->ruangan->menu_akses));
+                return view('puskes.pelayanan.medis.imunisasi.imun_anak',compact('data','menuAkses','sp','dokter','perawat','imun','riwayat'));   
             }else{
                 $sp   = Mstatuspulang::all();
                 $tenagamedis = Mpegawai::all()->map(function($item, $key){
@@ -320,7 +330,8 @@ class PelayananController extends Controller
                 $checkImun = $data->imunisasi->where('kategori', 'anak')->first();
                 
                 $riwayat = $this->riwayat($id);
-                return view('puskes.pelayanan.medis.imunisasi.edit_imun_anak',compact('data',
+                $menuAkses = collect(json_decode($data->ruangan->menu_akses));
+                return view('puskes.pelayanan.medis.imunisasi.edit_imun_anak',compact('data','menuAkses',
                 'sp',
                 'dokter',
                 'perawat',
@@ -347,12 +358,13 @@ class PelayananController extends Controller
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
         $imun = Mimunisasi::all()->chunk(4);
         $riwayat = $this->riwayat($id);
+        $menuAkses = collect(json_decode($data->ruangan->menu_akses));
         if($data->imunisasi->where('kategori', 'dewasa')->first() == null){
-            return view('puskes.pelayanan.medis.imunisasi.imun_dewasa',compact('data','sp','dokter','perawat','imun','riwayat'));  
+            return view('puskes.pelayanan.medis.imunisasi.imun_dewasa',compact('data','menuAkses','sp','dokter','perawat','imun','riwayat'));  
         } else{
 
             $dataImun = $data->imunisasi->where('kategori', 'dewasa')->first();
-            return view('puskes.pelayanan.medis.imunisasi.edit_imun_dewasa',compact('data','sp','dokter','riwayat','perawat','imun','dataImun'));  
+            return view('puskes.pelayanan.medis.imunisasi.edit_imun_dewasa',compact('data','menuAkses','sp','dokter','riwayat','perawat','imun','dataImun'));  
         }
     }
 
@@ -375,11 +387,12 @@ class PelayananController extends Controller
         $perawat = $tenagamedis->where('kelompok_pegawai','!=','TENAGA MEDIS')->values();
         $riwayat = $this->riwayat($id);
         $checkOdontogram = $data->odontogram;
+        $menuAkses = collect(json_decode($data->ruangan->menu_akses));
         if($checkOdontogram == null){
-            return view('puskes.pelayanan.medis.odontogram.create',compact('data','sp','lab','dokter','perawat','riwayat'));
+            return view('puskes.pelayanan.medis.odontogram.create',compact('data','menuAkses','sp','lab','dokter','perawat','riwayat'));
     
         }else{
-            return view('puskes.pelayanan.medis.odontogram.edit',compact('data','sp','lab','dokter','perawat','riwayat'));
+            return view('puskes.pelayanan.medis.odontogram.edit',compact('data','menuAkses','sp','lab','dokter','perawat','riwayat'));
         }
     }
 
@@ -401,9 +414,9 @@ class PelayananController extends Controller
     {
         $data = Tpelayanan::find($id);
         $sp = Mstatuspulang::all();
-
+        $menuAkses = collect(json_decode($data->ruangan->menu_akses));
         $riwayat = $this->riwayat($id);
-        return view('puskes.pelayanan.medis.detail',compact('data','sp','riwayat'));
+        return view('puskes.pelayanan.medis.detail',compact('data','sp','riwayat','menuAkses'));
     }
 
     public function mulaiPeriksa($id)

@@ -58,6 +58,21 @@
                         </div>
                         </div>
                     </div>
+                    <div class="input-group row">
+                        <label class="col-sm-2 col-form-label text-right">Menu Yg Di Akses<strong><span class="text-danger">*</span></strong></label>
+                        <div class="col-sm-8">
+                        <div class="form-group">
+                            <input type="checkbox" name="menu[]" value="anamnesa" checked> Anamnesa <br>
+                            <input type="checkbox" name="menu[]" value="diagnosa" checked> Diagnosa <br>
+                            <input type="checkbox" name="menu[]" value="resep" checked> Resep <br>
+                            <input type="checkbox" name="menu[]" value="laboratorium"> Laboratorium <br>
+                            <input type="checkbox" name="menu[]" value="tindakan"> Tindakan <br>
+                            <input type="checkbox" name="menu[]" value="mtbs"> mtbs <br>
+                            <input type="checkbox" name="menu[]" value="imunisasi"> imunisasi <br>
+                            <input type="checkbox" name="menu[]" value="odontogram"> odontogram <br>
+                        </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <div class="text-right">
