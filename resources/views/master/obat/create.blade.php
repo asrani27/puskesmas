@@ -20,11 +20,11 @@
             <div class="card-header">
               <h3 class="card-title">Tambah Obat</h3>
               <div class="card-tools">
-                <a href="/pengaturan/data_master/obat" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-left"></i> Kembali</a>
+                <a href="/pengaturan/dm/obat" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-left"></i> Kembali</a>
               </div>
             </div>
             
-            <form action="{{route('simpanObat')}}" method="POST">
+            <form action="/pengaturan/dm/obat/add" method="POST">
                 @csrf  
                 <div class="card-body p-2 table-responsive">
                     <div class="input-group row">
@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <select class="form-control form-control  select2" style="width: 100%;" name="obat_title" required>
                             <option value="">-Pilih-</option>
-                            @foreach ($obat_title as $item)
+                            @foreach ($title as $item)
                             <option value="{{$item->id}}">{{$item->value}}</option>
                             @endforeach
                             </select>
@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <select class="form-control form-control select2" style="width: 100%;" name="obat_unit" required>
                             <option value="">-Pilih-</option>
-                            @foreach ($obat_unit as $item)
+                            @foreach ($unit as $item)
                             <option value="{{$item->id}}">{{$item->value}}</option>
                             @endforeach
                             </select>

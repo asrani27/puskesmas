@@ -1,98 +1,49 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-Route::get('/', function() {
-    if(Auth::check()) {
+Route::get('/', function () {
+    if (Auth::check()) {
         return redirect()->route('home');
-    } 
+    }
     return view('welcome');
 });
-Route::get('/login', function() {
-    if(Auth::check()) {
+Route::get('/login', function () {
+    if (Auth::check()) {
         return redirect()->route('home');
-    } 
+    }
     return redirect('/');
 });
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 
-//Auth::routes();
-
-Route::get('/logout', function() {
+Route::get('/logout', function () {
     Auth::logout();
     return redirect()->to('/');
 });
 
-// Route::group(['middleware' => ['auth', 'role:superadmin|adminpuskes']], function () {
-//     Route::get('/profile', 'SuperadminController@profile');
-//     Route::post('/profile/password', 'SuperadminController@gantiPass');
-//     Route::post('/profile/foto', 'SuperadminController@gantiFoto');
-// });
-
-// Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
-
-//     Route::get('/sa/role', 'SuperadminController@role');
-//     Route::get('/sa/role/add', 'SuperadminController@addRole');
-//     Route::post('/sa/role/add', 'SuperadminController@simpanRole');
-//     Route::get('/sa/role/delete/{id}', 'SuperadminController@deleteRole');
-//     Route::get('/sa/role/edit/{id}', 'SuperadminController@editRole');
-//     Route::post('/sa/role/update/{id}', 'SuperadminController@updateRole');
-    
-//     Route::get('/sa/user', 'SuperadminController@user');
-//     Route::get('/sa/user/add', 'SuperadminController@addUser');
-//     Route::post('/sa/user/add', 'SuperadminController@simpanUser');
-//     Route::get('/sa/user/delete/{id}', 'SuperadminController@deleteUser');
-//     Route::get('/sa/user/edit/{id}', 'SuperadminController@editUser');
-//     Route::post('/sa/user/update/{id}', 'SuperadminController@updateUser');
-    
-//     Route::get('/sa/puskes', 'SuperadminController@puskes');
-//     Route::get('/sa/puskes/add', 'SuperadminController@addPuskes');
-//     Route::post('/sa/puskes/add', 'SuperadminController@simpanPuskes');
-//     Route::get('/sa/puskes/delete/{id}', 'SuperadminController@deletePuskes');
-//     Route::get('/sa/puskes/edit/{id}', 'SuperadminController@editPuskes');
-//     Route::post('/sa/puskes/update/{id}', 'SuperadminController@updatePuskes');
-    
-//     Route::get('/sa/menu', 'SuperadminController@menu');
-//     Route::post('/sa/menu/add', 'SuperadminController@simpanMenu');
-//     Route::post('/sa/submenu/add', 'SuperadminController@simpanSubmenu');
-//     Route::get('/sa/menu/delete/{id}', 'SuperadminController@deleteMenu');
-    
-//     Route::get('/sa/kecamatan', 'SuperadminController@kecamatan');
-//     Route::get('/sa/kelurahan', 'SuperadminController@kelurahan');
-// });
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
-    
+
     Route::get('/pendaftaran/pasien', 'PendaftaranController@pasien');
     Route::post('/pendaftaran/pasien/getKelurahan', 'PendaftaranController@selectKelurahan');
     Route::post('/pendaftaran/pasien/getDiagnosa', 'PendaftaranController@selectDiagnosa');
 
     Route::get('/download_panduan', 'SuperadminController@downloadpanduan');
     Route::post('/tambah_pendaftaran', 'SuperadminController@tambahpendaftaran');
-    
+
     Route::get('/pengaturan/data_master', 'PengaturanController@dataMaster');
     Route::get('/pengaturan/user/gantipass', 'PengaturanController@gantipass');
     Route::post('/pengaturan/user/gantipass', 'PengaturanController@updatepass')->name('gantipass');
 
-    Route::get('/pengaturan/data_master/poli', 'PengaturanController@poli');
+    // Route Poli 
+    Route::get('/pengaturan/data_master/poli', 'RuanganController@index');
     Route::post('/pengaturan/data_master/poli', 'PengaturanController@storePoli')->name('simpanPoli');
     Route::get('/pengaturan/data_master/poli/add', 'PengaturanController@addPoli');
     Route::get('/pengaturan/poli/edit/{id}', 'PengaturanController@editPoli');
     Route::post('/pengaturan/poli/edit/{id}', 'PengaturanController@updatePoli')->name('editPoli');
     Route::get('/pengaturan/poli/delete/{id}', 'PengaturanController@deletePoli');
-    
+    Route::get('/pengaturan/dm/poli/edit/isaktif/{isaktif}', 'RuanganController@updateIsAktif');
+    //--------------------------------------
+
     Route::post('/pengaturan/data_master/updateprofile', 'PengaturanController@updateProfilePuskesmas')->name('editProfilePuskesmas');
     Route::get('/pengaturan/data_master/editprofile', 'PengaturanController@editProfile');
 
@@ -103,12 +54,16 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pengaturan/pegawai/edit/{id}', 'PengaturanController@editPegawai');
     Route::post('/pengaturan/pegawai/edit/{id}', 'PengaturanController@updatePegawai')->name('editPegawai');
 
-    Route::get('/pengaturan/data_master/obat', 'PengaturanController@obat');
-    Route::get('/pengaturan/data_master/obat/add', 'PengaturanController@addObat');
-    Route::post('/pengaturan/data_master/obat', 'PengaturanController@storeObat')->name('simpanObat');
-    Route::get('/pengaturan/obat/delete/{id}', 'PengaturanController@deleteObat');
-    Route::get('/pengaturan/obat/edit/{id}', 'PengaturanController@editObat');
-    Route::post('/pengaturan/obat/edit/{id}', 'PengaturanController@updateObat')->name('editObat');
+    //Route Obat
+    Route::get('/pengaturan/dm/obat', 'ObatController@index');
+    Route::get('/pengaturan/dm/obat/add', 'ObatController@add');
+    Route::post('/pengaturan/dm/obat/add', 'ObatController@store');
+    Route::get('/pengaturan/dm/obat/{obat}/edit', 'ObatController@edit');
+    Route::patch('/pengaturan/dm/obat/{obat}/edit', 'ObatController@update');
+    Route::get('/pengaturan/dm/obat/{obat}/delete', 'ObatController@delete');
+    Route::get('/pengaturan/dm/obat/downloadformat', 'ObatController@downloadFormatExcel');
+    Route::post('/pengaturan/dm/obat/import', 'ObatController@importExcel');
+    //------------------------------------------------------------------
 
     Route::get('/pengaturan/data_master/stokobat', 'PengaturanController@stokobat');
     Route::get('/pengaturan/data_master/stokobat/add', 'PengaturanController@addStokobat');
@@ -161,7 +116,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/rekam_medis', 'PendaftaranController@rekamMedis');
     Route::get('/rekammedis/detail/{id}', 'PendaftaranController@detailrekammedis');
     Route::any('/rekam_medis/search', 'PendaftaranController@searchMedis');
-    
+
     Route::get('/sinkrondb', 'TransferController@index');
     Route::get('/sinkrondb/sinkron/{id}', 'TransferController@sinkron');
     Route::get('/sinkrondb/lihat/{id}', 'TransferController@lihat');
@@ -182,7 +137,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::get('/laporankunjunganpasien', 'LaporanController@kunjunganpasien');
     Route::post('/laporankunjunganpasien/search', 'LaporanController@tampilkankunjunganpasien');
-    
+
     Route::get('/laporanpelayananpasien', 'LaporanController@pelayananpasien');
     Route::post('/laporanpelayananpasien', 'LaporanController@searchpelayananpasien');
 
@@ -203,7 +158,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/laporansp3lb3', 'LaporanController@laporansp3lb3');
     Route::get('/laporansp3lb4', 'LaporanController@laporansp3lb4');
     Route::get('/test_export', 'LaporanController@test_export');
-    
+
     Route::get('/laporansp3lb1/export', 'LaporanController@laporansp3lb1export');
 
     Route::get('/pelayanan/medis/proses/{id}/anamnesa', 'PelayananController@Anamnesa');
@@ -211,13 +166,13 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pelayanan/medis/proses/{id}/resep', 'PelayananController@Resep');
     Route::get('/pelayanan/medis/proses/{id}/laboratorium', 'PelayananController@Laboratorium');
     Route::get('/pelayanan/medis/proses/{id}/tindakan', 'PelayananController@Tindakan');
-    Route::get('/pelayanan/medis/proses/{id}/mtbs', 'PelayananController@Mtbs'); 
-    Route::get('/pelayanan/medis/proses/{id}/imunisasi', 'PelayananController@Imunisasi'); 
-    Route::get('/pelayanan/medis/proses/{id}/imunisasi/imun_anak', 'PelayananController@imunisasiAnak'); 
-    Route::get('/pelayanan/medis/proses/{id}/imunisasi/imun_dewasa', 'PelayananController@imunisasiDewasa'); 
-    Route::get('/pelayanan/medis/proses/{id}/odontogram', 'PelayananController@Odontogram'); 
-    Route::get('/pelayanan/medis/proses/{id}/periksagizi', 'PelayananController@Periksagizi'); 
-    
+    Route::get('/pelayanan/medis/proses/{id}/mtbs', 'PelayananController@Mtbs');
+    Route::get('/pelayanan/medis/proses/{id}/imunisasi', 'PelayananController@Imunisasi');
+    Route::get('/pelayanan/medis/proses/{id}/imunisasi/imun_anak', 'PelayananController@imunisasiAnak');
+    Route::get('/pelayanan/medis/proses/{id}/imunisasi/imun_dewasa', 'PelayananController@imunisasiDewasa');
+    Route::get('/pelayanan/medis/proses/{id}/odontogram', 'PelayananController@Odontogram');
+    Route::get('/pelayanan/medis/proses/{id}/periksagizi', 'PelayananController@Periksagizi');
+
     Route::post('/pelayanan/medis/proses/{id}/anamnesa/{anamnesa_id}', 'AnamnesaController@updateAnamnesa')->name('updateAnamnesa2');
     Route::post('/pelayanan/medis/proses/{id}/anamnesa', 'AnamnesaController@storeAnamnesa')->name('anamnesa2');
 
@@ -227,20 +182,20 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pelayanan/medis/proses/{id}/resep', 'ResepController@storeResep')->name('resep2');
     Route::get('/pelayanan/medis/proses/{id}/resep/delete/{id_resep}', 'ResepController@deleteResep');
 
-    Route::post('/pelayanan/medis/proses/{id}/laboratorium', 'LaboratoriumController@storeLab')->name('laboratorium'); 
-    Route::get('/pelayanan/medis/proses/lab/delete/{id}', 'LaboratoriumController@deleteLab'); 
-    
-    Route::post('/pelayanan/medis/proses/{id}/tindakan', 'TindakanController@storeTindakan')->name('tindakan2'); 
+    Route::post('/pelayanan/medis/proses/{id}/laboratorium', 'LaboratoriumController@storeLab')->name('laboratorium');
+    Route::get('/pelayanan/medis/proses/lab/delete/{id}', 'LaboratoriumController@deleteLab');
+
+    Route::post('/pelayanan/medis/proses/{id}/tindakan', 'TindakanController@storeTindakan')->name('tindakan2');
     Route::get('/pelayanan/medis/proses/{id}/tindakan/delete/{id_tindakan}', 'TindakanController@deleteTindakan');
-    
-    Route::post('/pelayanan/medis/proses/{id}/mtbs', 'MtbsController@storeMtbs')->name('mtbs'); 
-    Route::post('/pelayanan/medis/proses/{id}/mtbs/{mtbs_id}', 'MtbsController@updateMtbs')->name('updateMtbs'); 
-    
-    Route::post('/pelayanan/medis/proses/{id}/imunisasi/kms', 'ImunisasiController@storeKMS')->name('kms'); 
+
+    Route::post('/pelayanan/medis/proses/{id}/mtbs', 'MtbsController@storeMtbs')->name('mtbs');
+    Route::post('/pelayanan/medis/proses/{id}/mtbs/{mtbs_id}', 'MtbsController@updateMtbs')->name('updateMtbs');
+
+    Route::post('/pelayanan/medis/proses/{id}/imunisasi/kms', 'ImunisasiController@storeKMS')->name('kms');
     Route::post('/pelayanan/medis/proses/{id}/imunisasi/kms/update/{kms_id}', 'ImunisasiController@updateKMS')->name('updatekms');
-    Route::post('/pelayanan/medis/proses/{id}/imunisasi/anak', 'ImunisasiController@storeImunisasiAnak')->name('imunisasiAnak'); 
-    Route::post('/pelayanan/medis/proses/{id}/imunisasi/dewasa', 'ImunisasiController@storeImunisasiDewasa')->name('imunisasiDewasa'); 
-    Route::post('/pelayanan/medis/proses/{id}/imunisasi/anak/update/{imunisasi_id}', 'ImunisasiController@UpdateImunisasiAnak')->name('updateImunisasiAnak'); 
+    Route::post('/pelayanan/medis/proses/{id}/imunisasi/anak', 'ImunisasiController@storeImunisasiAnak')->name('imunisasiAnak');
+    Route::post('/pelayanan/medis/proses/{id}/imunisasi/dewasa', 'ImunisasiController@storeImunisasiDewasa')->name('imunisasiDewasa');
+    Route::post('/pelayanan/medis/proses/{id}/imunisasi/anak/update/{imunisasi_id}', 'ImunisasiController@UpdateImunisasiAnak')->name('updateImunisasiAnak');
     Route::post('/pelayanan/medis/proses/{id}/imunisasi/dewasa/update/{imunisasi_id}', 'ImunisasiController@UpdateImunisasiDewasa')->name('updateImunisasiDewasa');
 
     Route::post('/pelayanan/medis/proses/{id}/periksagizi', 'PeriksaGiziController@store')->name('periksagizi');
@@ -252,5 +207,4 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::get('/generatekode', 'OdontogramController@generatekode');
     Route::get('/tarikgambar', 'OdontogramController@tarikgambar');
-   
 });

@@ -45,7 +45,7 @@
                   <tr>
                     <td><small>{{$no++}}</small></td>
                     <td><small>{{$item->mobat->value}}</small></td>
-                    <td><small>{{$item->mobat->m_obat_title->value}}</small></td>
+                    <td><small>{{$item->mobat->m_obat_title == null ? null : $item->mobat->m_obat_title->value}}</small></td>
                     <td><small>{{$item->jumlah_stok}}</small></td>
                     <td><small>Rp. {{$item->harga_jual}}</small></td>
                     <td><small>{{$item->m_ruangan->nama}}</small></td>

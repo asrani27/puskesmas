@@ -48,7 +48,15 @@
                     <td><small>{{$item->instalasi->nama}}</small></td>
                     <td><small>{{$item->nama}}</small></td>
                     <td><small>{{$item->poli_sakit == 1 ? 'Sakit' : 'Sehat'}}</small></td>
-                    <td><small>{{$item->is_aktif == 'Y' ? 'Ya' : 'Tidak'}}</small></td>
+                    <td>
+                      <form action="/pengaturan/dm/poli/edit/isaktif/{{$item->id}}">
+                        @csrf
+                        <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch{{$item->id}}" onChange="this.form.submit()" name="is_aktif" {{$item->is_aktif == 'Y' ? 'checked':''}}>
+                          <label class="custom-control-label" for="customSwitch{{$item->id}}"></label>
+                        </div>
+                      </form>
+                    </td>
                     <td width="80px">
                       <a href="/pengaturan/poli/edit/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>
                       <a href="/pengaturan/poli/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Semua Data Tentang Pasien Ini?');"><i class="fa fa-trash"></i></a>

@@ -8,8 +8,12 @@ class Mobat extends Model
 {
     protected $table = 'm_obat';
 
+    protected $fillable = [
+        'id', 'value', 'obat_title', 'obat_unit',
+    ];
+
     public $incrementing = false;
-    
+
     protected $primaryKey = 'id';
 
     public function resepdetail()
@@ -26,7 +30,7 @@ class Mobat extends Model
     {
         return $this->belongsTo(Mobatunit::class, 'obat_unit');
     }
-    
+
     public function m_stok_obat()
     {
         return $this->hasMany(Mstokobat::class, 'obat_id');

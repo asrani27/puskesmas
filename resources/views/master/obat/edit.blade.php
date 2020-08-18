@@ -20,12 +20,14 @@
             <div class="card-header">
               <h3 class="card-title">Edit Obat</h3>
               <div class="card-tools">
-                <a href="/pengaturan/data_master/obat" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-left"></i> Kembali</a>
+                <a href="/pengaturan/dm/obat" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-left"></i> Kembali</a>
               </div>
             </div>
             
-            <form action="{{route('editObat', ['id' => $data->id])}}" method="POST">
+            <form action="/pengaturan/dm/obat/{{$data->id}}/edit" method="post">
                 @csrf  
+                @method('patch')
+                
                 <div class="card-body p-2 table-responsive">
                     <div class="input-group row">
                         <label class="col-sm-2 col-form-label text-right">Nama Obat<strong><span class="text-danger">*</span></strong></label>
@@ -41,7 +43,7 @@
                         <div class="form-group">
                             <select class="form-control form-control  select2" style="width: 100%;" name="obat_title" required>
                             <option value="">-Pilih-</option>
-                            @foreach ($obat_title as $item)
+                            @foreach ($title as $item)
                                 @if($data->obat_title == $item->id)
                                 <option value="{{$item->id}}" selected>{{$item->value}}</option>
                                 @else
@@ -58,7 +60,7 @@
                         <div class="form-group">
                             <select class="form-control form-control select2" style="width: 100%;" name="obat_unit" required>
                             <option value="">-Pilih-</option>
-                            @foreach ($obat_unit as $item)
+                            @foreach ($unit as $item)
                                 @if($data->obat_unit == $item->id)
                                 <option value="{{$item->id}}" selected>{{$item->value}}</option>
                                 @else

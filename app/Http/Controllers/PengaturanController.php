@@ -31,7 +31,6 @@ class PengaturanController extends Controller
 
     public function __construct()
     {
-        
     }
     public function dataMaster()
     {
@@ -41,19 +40,13 @@ class PengaturanController extends Controller
         $user         = count(User::all());
         $obat         = count(Mobat::all());
         $stokobat     = count(Mstokobat::all());
-        return view('master.index',compact('ruang','pegawai','jenispegawai','user','obat','stokobat'));
-    }
-
-    public function poli()
-    {
-        $data = Mruangan::all();
-        return view('master.ruangan.index',compact('data'));
+        return view('master.index', compact('ruang', 'pegawai', 'jenispegawai', 'user', 'obat', 'stokobat'));
     }
 
     public function addPoli()
     {
         $int = Minstalasi::all();
-        return view('master.ruangan.create',compact('int'));
+        return view('master.ruangan.create', compact('int'));
     }
 
     public function editPoli($id)
@@ -61,9 +54,9 @@ class PengaturanController extends Controller
         $data = Mruangan::find($id);
         $menuAkses = collect(json_decode($data->menu_akses));
         $int = Minstalasi::all();
-        return view('master.ruangan.edit',compact('data','int','menuAkses'));
+        return view('master.ruangan.edit', compact('data', 'int', 'menuAkses'));
     }
-    
+
     public function updatePoli(Request $req, $id)
     {
         $s               = Mruangan::find($id);
@@ -72,17 +65,17 @@ class PengaturanController extends Controller
         $s->is_aktif     = $req->is_aktif;
         $s->menu_akses   = json_encode($req->menu);
         $s->save();
-        toast('Poli berhasil Di Update','success');
+        toast('Poli berhasil Di Update', 'success');
         return redirect('/pengaturan/data_master/poli');
     }
 
     public function deletePoli($id)
     {
         $check = Mruangan::find($id)->pelayanan->first();
-        if($check == null){
+        if ($check == null) {
             $del = Mruangan::find($id)->delete();
             toast('Poli Berhasil Di Hapus', 'success');
-        }else{
+        } else {
             toast('Poli Tidak Dapat Di Hapus Karena Ada Riwayat Pendaftaran', 'info');
         }
         return back();
@@ -90,7 +83,7 @@ class PengaturanController extends Controller
 
     public function storePoli(Request $req)
     {
-        $id_ruangan      = convertruangan((int) Mruangan::orderBy('id','DESC')->first()->id + 1);
+        $id_ruangan      = convertruangan((int) Mruangan::orderBy('id', 'DESC')->first()->id + 1);
         $s               = new Mruangan;
         $s->id           = $id_ruangan;
         $s->instalasi_id = $req->instalasi_id;
@@ -99,7 +92,7 @@ class PengaturanController extends Controller
         $s->is_aktif     = $req->is_aktif;
         $s->menu_akses   = json_encode($req->menu);
         $s->save();
-        toast('Poli berhasil Di Simpan','success');
+        toast('Poli berhasil Di Simpan', 'success');
         return redirect('/pengaturan/data_master/poli');
     }
 
@@ -107,23 +100,23 @@ class PengaturanController extends Controller
     public function pegawai()
     {
         $data = Mpegawai::all();
-        return view('master.pegawai.index',compact('data'));
+        return view('master.pegawai.index', compact('data'));
     }
-    
+
     public function addPegawai()
     {
         $jenis = Mjenispegawai::all();
-        return view('master.pegawai.create',compact('jenis'));
+        return view('master.pegawai.create', compact('jenis'));
     }
-    
+
     public function storePegawai(Request $req)
     {
-        if(Mpegawai::first() == null){
+        if (Mpegawai::first() == null) {
             $id = convertid(1);
-        }else{
-            $id  = convertid((int) Mpegawai::orderBy('id','DESC')->first()->id + 1);
+        } else {
+            $id  = convertid((int) Mpegawai::orderBy('id', 'DESC')->first()->id + 1);
         }
-        
+
         $s                  = new Mpegawai;
         $s->id              = $id;
         $s->nip             = $req->nip;
@@ -131,7 +124,7 @@ class PengaturanController extends Controller
         $s->jenispegawai_id = convertruangan($req->jenispegawai_id);
         $s->jenis_kelamin   = $req->jenis_kelamin;
         $s->save();
-        toast('Pegawai berhasil Di Simpan','success');
+        toast('Pegawai berhasil Di Simpan', 'success');
         return redirect('/pengaturan/data_master/pegawai');
     }
 
@@ -143,53 +136,53 @@ class PengaturanController extends Controller
         $s->jenispegawai_id = convertruangan($req->jenispegawai_id);
         $s->jenis_kelamin   = $req->jenis_kelamin;
         $s->save();
-        toast('Pegawai berhasil Di Update','success');
+        toast('Pegawai berhasil Di Update', 'success');
         return redirect('/pengaturan/data_master/pegawai');
     }
 
     public function deletePegawai($id)
     {
         $check = Mpegawai::find($id)->periksabydokter->first();
-        if($check == null){
+        if ($check == null) {
             $del = Mpegawai::find($id)->delete();
             toast('Pegawai Berhasil Di Hapus', 'success');
-        }else{
+        } else {
             toast('Pegawai Tidak Dapat Di Hapus Karena Ada Riwayat memeriksa Pasien', 'info');
         }
         return back();
     }
-    
+
     public function editPegawai($id)
     {
         $data = Mpegawai::find($id);
         $jenis = Mjenispegawai::all();
-        return view('master.pegawai.edit',compact('data','jenis'));
+        return view('master.pegawai.edit', compact('data', 'jenis'));
     }
-    
+
     //--------------------- JENIS PEGAWAI------------------------------------
     public function jenispegawai()
     {
         $data = Mjenispegawai::all();
-        return view('master.jenispegawai.index',compact('data'));
+        return view('master.jenispegawai.index', compact('data'));
     }
-    
+
     public function addJenisPegawai()
     {
         $jenis = Mjenispegawai::all();
-        return view('master.jenispegawai.create',compact('jenis'));
+        return view('master.jenispegawai.create', compact('jenis'));
     }
-    
+
     public function storeJenisPegawai(Request $req)
     {
-        $id  = convertruangan((int) Mjenispegawai::orderBy('id','DESC')->first()->id + 1);
-        
+        $id  = convertruangan((int) Mjenispegawai::orderBy('id', 'DESC')->first()->id + 1);
+
         $s                  = new Mjenispegawai;
         $s->id              = $id;
         $s->nama            = $req->nama;
         $s->urutan          = (int) $id;
-        $s->kelompok_pegawai= $req->kelompok_pegawai;
+        $s->kelompok_pegawai = $req->kelompok_pegawai;
         $s->save();
-        toast('jenis Pegawai berhasil Di Simpan','success');
+        toast('jenis Pegawai berhasil Di Simpan', 'success');
         return redirect('/pengaturan/data_master/jenispegawai');
     }
 
@@ -199,53 +192,53 @@ class PengaturanController extends Controller
         $s->id              = $id;
         $s->nama            = $req->nama;
         $s->urutan          = (int) $id;
-        $s->kelompok_pegawai= $req->kelompok_pegawai;
+        $s->kelompok_pegawai = $req->kelompok_pegawai;
         $s->save();
-        toast('Pegawai berhasil Di Update','success');
+        toast('Pegawai berhasil Di Update', 'success');
         return redirect('/pengaturan/data_master/jenispegawai');
     }
 
     public function deleteJenisPegawai($id)
     {
         $check = Mjenispegawai::find($id)->pegawai->first();
-        if($check == null){
+        if ($check == null) {
             $del = Mjenispegawai::find($id)->delete();
             toast('Pegawai Berhasil Di Hapus', 'success');
-        }else{
+        } else {
             toast('Pegawai Tidak Dapat Di Hapus Karena Ada Riwayat memeriksa Pasien', 'info');
         }
         return back();
     }
-    
+
     public function editjenisPegawai($id)
     {
         $data = Mjenispegawai::find($id);
-        return view('master.jenispegawai.edit',compact('data'));
+        return view('master.jenispegawai.edit', compact('data'));
     }
 
     //--------------------- USER------------------------------------
     public function user()
     {
-        if(Auth::user()->username != 'admin'){
+        if (Auth::user()->username != 'admin') {
             $data = Auth::user();
-            return view('master.user.edit',compact('data'));
-        }else{
+            return view('master.user.edit', compact('data'));
+        } else {
             $data = User::all();
-            return view('master.user.index',compact('data'));
+            return view('master.user.index', compact('data'));
         }
     }
-    
+
     public function addUser()
     {
         return view('master.user.create');
     }
-    
+
     public function storeUser(Request $req)
     {
         $faker = Faker::create();
 
         $checkUsername = User::where('username', $req->username)->first();
-        if($checkUsername == null){
+        if ($checkUsername == null) {
             $s                  = new User;
             $s->id              = $req->username;
             $s->name            = $req->nama;
@@ -255,53 +248,53 @@ class PengaturanController extends Controller
             $s->puskesmas_id    = \App\Mpuskesmas::first()->id;
             $s->save();
 
-            $role = Role::where( 'name', '=', 'admin' )->first();
-            
+            $role = Role::where('name', '=', 'admin')->first();
+
             $s->attachRole($role);
 
-            toast('User Berhasil Disimpan','success');
-        }else{
-            toast('Username Sudah ada, silahkan gunakan yang lain','info');
+            toast('User Berhasil Disimpan', 'success');
+        } else {
+            toast('Username Sudah ada, silahkan gunakan yang lain', 'info');
         }
-        
+
         return redirect('/pengaturan/data_master/user');
     }
 
     public function updateUser(Request $req, $id)
-    {   
+    {
         $s                  = User::where('id', $id)->first();
         $s->name            = $req->nama;
-        if($req->password != null){
+        if ($req->password != null) {
             $s->password    = bcrypt($req->password);
         }
         $s->save();
-        toast('User Berhasil DiUpdate','success');
+        toast('User Berhasil DiUpdate', 'success');
         return redirect('/pengaturan/data_master/user');
     }
 
     public function deleteUser($id)
     {
-        if($id == 'admin'){
+        if ($id == 'admin') {
             toast('Superadmin Tidak Dapat Di Hapus', 'info');
-        }else{
-            $d = User::where('id',$id)->first();
+        } else {
+            $d = User::where('id', $id)->first();
             $d->delete();
             toast('Berhasil Di hapus', 'info');
         }
         return back();
     }
-    
+
     public function editUser($id)
     {
         $data = User::find($id);
-        return view('master.jenispegawai.edit',compact('data'));
+        return view('master.jenispegawai.edit', compact('data'));
     }
 
     public function gantipass()
     {
         return view('master.user.gantipass');
     }
-    
+
     public function updatepass(Request $req)
     {
         $u = User::first();
@@ -314,7 +307,7 @@ class PengaturanController extends Controller
     public function editProfile()
     {
         $data = Mpuskesmas::first();
-        return view('master.profile',compact('data'));
+        return view('master.profile', compact('data'));
     }
 
     public function updateProfilePuskesmas(Request $req)
@@ -327,92 +320,27 @@ class PengaturanController extends Controller
         return back();
     }
 
-    public function obat()
-    {
-        $data = Mobat::all();
-        return view('master.obat.index',compact('data'));
-    }
-
-    public function addObat()
-    {
-        $obat_title = Mobattitle::all();
-        $obat_unit = Mobatunit::all();
-        return view('master.obat.create',compact('obat_title', 'obat_unit'));
-    }
-
-    public function storeObat(Request $req)
-    {
-        $check = Mobat::first();
-        if($check == null){
-            $id = 1;
-        }else{
-            $number = Mobat::orderBy('id','desc')->first();
-            $id = $number->id + 1;
-        }
-        $s = new Mobat;
-        $s->id = $id;
-        $s->value = $req->value;
-        $s->obat_title = $req->obat_title;
-        $s->obat_unit  = $req->obat_unit;
-        $s->save();
-        toast('Data Berhasil Di Tambahkan', 'success');
-        return back();
-    }
-
-    public function deleteObat($id)
-    {
-        $del = Mobat::where('id', $id)->first();
-        $check = $del->m_stok_obat->first();
-        if($check == null){
-            $hapus = $del->delete();
-            toast('Data Berhasil Di Hapus', 'success');
-        }else{
-            toast('Tidak Dapat Di Hapus Karena Terdapat Stok Pada Obat Ini', 'info');
-        }
-        return back();
-    }
-
-    public function editObat($id)
-    {
-        $data = Mobat::find($id);
-        $obat_title = Mobattitle::all();
-        $obat_unit = Mobatunit::all();
-        return view('master.obat.edit',compact('obat_title', 'obat_unit','data'));
-    }
-
-    public function updateObat(Request $req, $id)
-    {
-        $s = Mobat::find($id);
-        $s->value = $req->value;
-        $s->obat_title = $req->obat_title;
-        $s->obat_unit  = $req->obat_unit;
-        $s->save();
-        
-        toast('Data Berhasil Di Update', 'success');
-        return redirect('/pengaturan/data_master/obat');
-    }
-    
     public function stokobat()
     {
         $data = Mstokobat::all();
-        return view('master.stokobat.index',compact('data'));
+        return view('master.stokobat.index', compact('data'));
     }
-    
+
     public function addStokobat()
     {
         $obat = Mobat::all();
-        return view('master.stokobat.create',compact('obat'));
+        return view('master.stokobat.create', compact('obat'));
     }
 
     public function storeStokobat(Request $req)
     {
         $check_ruangan = Mruangan::where('nama', $req->ruangan_id)->first();
-        if($check_ruangan == null){
+        if ($check_ruangan == null) {
             toast('Ruangan Tidak Ditemukan', 'info');
-        }else{
+        } else {
             $ruangan_id = $check_ruangan->id;
             $check = Mstokobat::where('obat_id', $req->obat_id)->where('ruangan_id', $ruangan_id)->first();
-            if($check == null){
+            if ($check == null) {
                 $s = new Mstokobat;
                 $s->puskesmas_id = Auth::user()->puskesmas_id;
                 $s->ruangan_id   = $ruangan_id;
@@ -421,8 +349,7 @@ class PengaturanController extends Controller
                 $s->jumlah_stok  = $req->jumlah_stok;
                 $s->save();
                 toast('Data Obat Berhasil Di Simpan', 'success');
-
-            }else{
+            } else {
                 toast('Obat Pada Ruangan ini Sudah Ada', 'info');
             }
         }
@@ -440,7 +367,7 @@ class PengaturanController extends Controller
     {
         $data = Mstokobat::find($id);
         $obat = Mobat::all();
-        return view('master.stokobat.edit',compact('obat','data'));
+        return view('master.stokobat.edit', compact('obat', 'data'));
     }
 
     public function updateStokobat(Request $req, $id)
@@ -453,11 +380,11 @@ class PengaturanController extends Controller
         toast('Data Obat Berhasil Di Update', 'success');
         return redirect('/pengaturan/data_master/stokobat');
     }
-    
+
     public function obatmasuk()
     {
-        $data = Tpenerimaanobat::orderBy('id','desc')->get();
-        return view('master.obatmasuk.index',compact('data'));
+        $data = Tpenerimaanobat::orderBy('id', 'desc')->get();
+        return view('master.obatmasuk.index', compact('data'));
     }
 
     public function addObatmasuk(Request $req)
@@ -465,8 +392,8 @@ class PengaturanController extends Controller
         $petugas = Mpegawai::all();
         $obat = Mobat::all();
         $data = Tkeranjang::all();
-        
-        return view('master.obatmasuk.create', compact('petugas','obat','data'));
+
+        return view('master.obatmasuk.create', compact('petugas', 'obat', 'data'));
     }
 
     public function deleteObatmasuk($id)
@@ -479,17 +406,17 @@ class PengaturanController extends Controller
     public function keranjangObat(Request $req)
     {
         $check = Tkeranjang::where('obat_id', $req->obat_id)->first();
-        if($check == null){
+        if ($check == null) {
             $s = new Tkeranjang;
             $s->obat_id = $req->obat_id;
             $s->jumlah = $req->jumlah_obat;
             $s->save();
-        }else{
+        } else {
             $s = $check;
-            $s->jumlah = $s->jumlah+$req->jumlah_obat;
+            $s->jumlah = $s->jumlah + $req->jumlah_obat;
             $s->save();
         }
-        
+
         return redirect()->back();
     }
 
@@ -511,7 +438,7 @@ class PengaturanController extends Controller
         $keranjang  = Tkeranjang::all();
         $ruangan_id = Mruangan::where('nama', $req->ruangan_id)->first()->id;
         $petugas_id = Mpegawai::where('id', $req->pegawai_id)->first();
-        
+
         //Save To Penerimaan Obat
         $t_penerimaan = new Tpenerimaanobat;
         $t_penerimaan->ruangan_id = $ruangan_id;
@@ -519,7 +446,7 @@ class PengaturanController extends Controller
         $t_penerimaan->petugas_id = $req->pegawai_id;
         $t_penerimaan->save();
 
-        foreach($keranjang as $value){
+        foreach ($keranjang as $value) {
             $t_p_detail = new Tpenerimaanobatdetail;
             $t_p_detail->penerimaan_id = $t_penerimaan->id;
             $t_p_detail->obat_id = $value->obat_id;
@@ -528,9 +455,9 @@ class PengaturanController extends Controller
         }
 
         //Save To M Stok Obat
-        foreach($keranjang as $item){
+        foreach ($keranjang as $item) {
             $check = Mstokobat::where('obat_id', $item->obat_id)->first();
-            if($check == null){
+            if ($check == null) {
                 $s = new Mstokobat;
                 $s->puskesmas_id = Auth::user()->puskesmas_id;
                 $s->ruangan_id = $ruangan_id;
@@ -538,7 +465,7 @@ class PengaturanController extends Controller
                 $s->harga_jual = 0;
                 $s->jumlah_stok = $item->jumlah;
                 $s->save();
-            }else{
+            } else {
                 $s = $check;
                 $s->jumlah_stok = $item->jumlah + $s->jumlah_stok;
                 $s->save();

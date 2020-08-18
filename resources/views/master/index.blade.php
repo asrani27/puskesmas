@@ -97,7 +97,7 @@
   </div>
 
   <div class="col-md-4 col-sm-6 col-12">
-    <a href="/pengaturan/data_master/obat">
+    <a href="/pengaturan/dm/obat">
     <div class="info-box bg-gradient-info">
       <span class="info-box-icon"><i class="fas fa-medkit"></i></span>
 

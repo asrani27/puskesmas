@@ -9,9 +9,9 @@ class Mpegawai extends Model
 {
     protected $table = 'm_pegawai';
     use SoftDeletes;
+    protected $dates = ['deleted_at'];
 
     public $incrementing = false;
-    protected $dates = ['deleted_at'];
     
     public function jenispegawai()
     {
