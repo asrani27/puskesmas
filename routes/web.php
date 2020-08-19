@@ -64,6 +64,17 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pengaturan/dm/obat/downloadformat', 'ObatController@downloadFormatExcel');
     Route::post('/pengaturan/dm/obat/import', 'ObatController@importExcel');
     //------------------------------------------------------------------
+    
+    //Route Obat
+    Route::get('/pengaturan/dm/diagnosa', 'DiagnosaController@index');
+    Route::get('/pengaturan/dm/diagnosa/add', 'DiagnosaController@add');
+    Route::post('/pengaturan/dm/diagnosa/add', 'DiagnosaController@store');
+    Route::get('/pengaturan/dm/diagnosa/{diagnosa}/edit', 'DiagnosaController@edit');
+    Route::patch('/pengaturan/dm/diagnosa/{diagnosa}/edit', 'DiagnosaController@update');
+    Route::get('/pengaturan/dm/diagnosa/{diagnosa}/delete', 'DiagnosaController@delete');
+    Route::get('/pengaturan/dm/diagnosa/downloadformat', 'DiagnosaController@downloadFormatExcel');
+    Route::post('/pengaturan/dm/diagnosa/import', 'DiagnosaController@importExcel');
+    //------------------------------------------------------------------
 
     Route::get('/pengaturan/data_master/stokobat', 'PengaturanController@stokobat');
     Route::get('/pengaturan/data_master/stokobat/add', 'PengaturanController@addStokobat');
@@ -111,8 +122,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/pendaftaran/pasien/create/{id}', 'PendaftaranController@daftarPelayanan');
 
     Route::get('/pendaftaran', 'PendaftaranController@pendaftaran');
-    Route::any('/pendaftaran/search', 'PendaftaranController@pendaftaranSearch');
-    Route::post('/pendaftaran/pasien/search/tanggal_lahir', 'PendaftaranController@searchTglLahir');
+    Route::get('/pendaftaran/add', 'PendaftaranController@addPendaftaran');
+    Route::post('/pendaftaran/add', 'PendaftaranController@showPendaftaran');
+    //Route::any('/pendaftaran/search', 'PendaftaranController@pendaftaranSearch');
+    //Route::post('/pendaftaran/pasien/search/tanggal_lahir', 'PendaftaranController@searchTglLahir');
     Route::get('/rekam_medis', 'PendaftaranController@rekamMedis');
     Route::get('/rekammedis/detail/{id}', 'PendaftaranController@detailrekammedis');
     Route::any('/rekam_medis/search', 'PendaftaranController@searchMedis');

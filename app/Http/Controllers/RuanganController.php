@@ -19,9 +19,9 @@ class RuanganController extends Controller
         $attr['is_aktif'] = $isaktif['is_aktif'] == 'Y' ? 'T' : 'Y';
         $isaktif->update($attr);
         if ($attr['is_aktif'] == 'T') {
-            toast('Poli Di Nonaktifkan', 'success');
+            toast('Poli '.$isaktif['nama'].' Di Nonaktifkan', 'success');
         } else {
-            toast('Poli Di Aktifkan', 'success');
+            toast('Poli '.$isaktif['nama'].' Di Aktifkan', 'success');
         }
         return back();
     }

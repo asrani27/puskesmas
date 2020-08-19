@@ -31,131 +31,121 @@
                     <div class="progress-bar" style="width: 70%"></div>
                 </div>
                 </div>
-                <!-- /.info-box-content -->
             </div>
         </a>
-      <!-- /.info-box -->
+
+        <a href="/pengaturan/data_master/user">
+            <div class="info-box bg-gradient-success">
+                <span class="info-box-icon"><i class="fa fa-user"></i></span>
+  
+                <div class="info-box-content">
+                <span class="info-box-text">Data User Pengguna</span>
+                <span class="info-box-number">{{$user}}</span>
+  
+                <div class="progress">
+                    <div class="progress-bar" style="width: 70%"></div>
+                </div>
+                </div>
+            </div>
+        </a>
+        
+        <a href="/pengaturan/data_master/obatmasuk">
+            <div class="info-box bg-gradient-success">
+                <span class="info-box-icon"><i class="fa fa-medkit"></i></span>
+
+                <div class="info-box-content">
+                <span class="info-box-text">Penerimaan Obat / Obat Masuk</span>
+                <span class="info-box-number">~</span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 70%"></div>
+                </div>
+                </div>
+            </div>
+        </a>
+        
     </div>
     
     <div class="col-md-4 col-sm-6 col-12">
       <a href="/pengaturan/data_master/pegawai">
-      <div class="info-box bg-gradient-info">
-        <span class="info-box-icon"><i class="fas fa-users"></i></span>
+        <div class="info-box bg-gradient-info">
+          <span class="info-box-icon"><i class="fas fa-users"></i></span>
 
-        <div class="info-box-content">
-          <span class="info-box-text">Data Pegawai Puskesmas</span>
-          <span class="info-box-number">{{$pegawai}}</span>
+          <div class="info-box-content">
+            <span class="info-box-text">Data Pegawai Puskesmas</span>
+            <span class="info-box-number">{{$pegawai}}</span>
 
-          <div class="progress">
-            <div class="progress-bar" style="width: 70%"></div>
+            <div class="progress">
+              <div class="progress-bar" style="width: 70%"></div>
+            </div>
           </div>
+          <!-- /.info-box-content -->
         </div>
-        <!-- /.info-box-content -->
-      </div>
       </a>
-      <!-- /.info-box -->
+
+      <a href="/pengaturan/dm/obat">
+        <div class="info-box bg-gradient-info">
+          <span class="info-box-icon"><i class="fas fa-medkit"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Data Obat</span>
+            <span class="info-box-number">{{$obat}}</span>
+
+            <div class="progress">
+              <div class="progress-bar" style="width: 70%"></div>
+            </div>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+      </a>
+
+      <a href="/pengaturan/dm/diagnosa">
+        <div class="info-box bg-gradient-info">
+          <span class="info-box-icon"><i class="fas fa-stethoscope"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Data Diagnosa</span>
+            <span class="info-box-number">{{$diagnosa}}</span>
+
+            <div class="progress">
+              <div class="progress-bar" style="width: 70%"></div>
+            </div>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+      </a>
     </div>
     
     <div class="col-md-4 col-sm-6 col-12">
-      <a href="/pengaturan/data_master/jenispegawai">
-      <div class="info-box bg-gradient-danger">
-        <span class="info-box-icon"><i class="fab fa-buffer"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Data Jenis Pegawai</span>
-          <span class="info-box-number">{{$jenispegawai}}</span>
-
-          <div class="progress">
-            <div class="progress-bar" style="width: 70%"></div>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"><b>Video Panduan Aplikasi</b></h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="callout callout-warning">
+            <h5>1. Persiapkan Data Utama Dulu <a href="#">Lihat</a></h5>
+          </div>
+          <div class="callout callout-info">
+            <h5>2. Menyiapkan Poli / Ruangan <a href="#">Lihat</a></h5>
+          </div>
+          <div class="callout callout-success">
+            <h5>3. Menyiapkan Data Dokter / Tenaga Medis <a href="#">Lihat</a></h5>
+          </div>
+          <div class="callout callout-warning">
+            <h5>4. Menyiapkan Data Diagnosa Juga <a href="#">Lihat</a></h5>
+          </div>
+          <div class="callout callout-danger">
+            <h5>5. Menyiapkan Data Obat <a href="#">Lihat</a></h5>
+          </div>
+          <div class="callout callout-info">
+            <h5>6. siapkan semua baru bisa isi transaksi <a href="#">Lihat</a></h5>
           </div>
         </div>
-        <!-- /.info-box-content -->
       </div>
-      </a>
-      <!-- /.info-box -->
     </div>
 </div>
 
-<div class="row">
-  <div class="col-md-4 col-sm-6 col-12">
-      <a href="/pengaturan/data_master/user">
-          <div class="info-box bg-gradient-success">
-              <span class="info-box-icon"><i class="fa fa-user"></i></span>
-
-              <div class="info-box-content">
-              <span class="info-box-text">Data User Pengguna</span>
-              <span class="info-box-number">{{$user}}</span>
-
-              <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
-              </div>
-              </div>
-              <!-- /.info-box-content -->
-          </div>
-      </a>
-    <!-- /.info-box -->
-  </div>
-
-  <div class="col-md-4 col-sm-6 col-12">
-    <a href="/pengaturan/dm/obat">
-    <div class="info-box bg-gradient-info">
-      <span class="info-box-icon"><i class="fas fa-medkit"></i></span>
-
-      <div class="info-box-content">
-        <span class="info-box-text">Data Obat</span>
-        <span class="info-box-number">{{$obat}}</span>
-
-        <div class="progress">
-          <div class="progress-bar" style="width: 70%"></div>
-        </div>
-      </div>
-      <!-- /.info-box-content -->
-    </div>
-    </a>
-    <!-- /.info-box -->
-  </div>
-  
-  <div class="col-md-4 col-sm-6 col-12">
-    <a href="/pengaturan/data_master/stokobat">
-    <div class="info-box bg-gradient-danger">
-      <span class="info-box-icon"><i class="fas fa-medkit"></i></span>
-
-      <div class="info-box-content">
-        <span class="info-box-text">Stok Obat</span>
-        <span class="info-box-number">~</span>
-
-        <div class="progress">
-          <div class="progress-bar" style="width: 70%"></div>
-        </div>
-      </div>
-      <!-- /.info-box-content -->
-    </div>
-    </a>
-    <!-- /.info-box -->
-  </div>
-  
- 
-</div>
-<div class="row">
-  <div class="col-md-4 col-sm-6 col-12">
-      <a href="/pengaturan/data_master/obatmasuk">
-          <div class="info-box bg-gradient-success">
-              <span class="info-box-icon"><i class="fa fa-medkit"></i></span>
-
-              <div class="info-box-content">
-              <span class="info-box-text">Penerimaan Obat / Obat Masuk</span>
-              <span class="info-box-number">~</span>
-
-              <div class="progress">
-                  <div class="progress-bar" style="width: 70%"></div>
-              </div>
-              </div>
-              <!-- /.info-box-content -->
-          </div>
-      </a>
-    <!-- /.info-box -->
-  </div>
-</div>
 @endsection
 
 @push('addjs')

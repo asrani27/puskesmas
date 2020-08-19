@@ -82,18 +82,10 @@
                   </div>
                   </form>
                 </div> --}}
-                <div class="col-sm-2" style="padding-right:10px; padding-left:10px;">
-                  <!-- text input -->
-                  <form method="post" action="/tambah_pendaftaran">
-                    @csrf
-                  <div class="form-group p-1">
-                    <div class="input-group input-group-sm">
-                      <div class="input-group-append">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i>Tambah Pendaftaran</button>
-                      </div>
-                    </div>
-                  </div>
-                  </form>
+                <div class="col-sm-12 text-right" style="padding-right:20px; padding-left:20px; padding-bottom:10px;">
+                  
+                  <a href="/pendaftaran/add" class="btn btn-sm btn-success">Tambah Pendaftaran</a>
+                      
                 </div>
               </div>
                 {{-- <div class="d-flex">

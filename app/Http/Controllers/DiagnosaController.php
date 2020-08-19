@@ -2,13 +2,62 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
+use App\Mdiagnosa;
 use App\Tdiagnosa;
 use Carbon\Carbon;
+use App\Mdiagnosainduk;
 use Illuminate\Http\Request;
-use Alert;
 
 class DiagnosaController extends Controller
 {
+
+    public function index()
+    {
+        return view('master.diagnosa.index', [
+            'data' => Mdiagnosa::paginate(10)
+        ]);
+    }
+
+    public function add()
+    {
+        return view('master.diagnosa.create', [
+            'diagnosaInduk' => Mdiagnosainduk::get()
+        ]);
+    }
+
+    public function store(Request $req)
+    {
+        $attr = $req->all();
+
+        Mdiagnosa::create($attr);
+
+        toast('Data Berhasil Di Tambahkan', 'success');
+        return back();
+    }
+
+    public function edit(Mdiagnosa $diagnosa)
+    {
+        return view('master.diagnosa.edit', [
+            'data' => $diagnosa,
+            'diagnosaInduk' => Mdiagnosainduk::get()
+        ]);
+    }
+
+    public function update(Request $req, Mdiagnosa $diagnosa)
+    {
+        $diagnosa->update($req->all());
+        toast('Data Berhasil Di Update', 'success');
+        return redirect('/pengaturan/dm/diagnosa');
+    }
+
+    public function delete(Mdiagnosa $diagnosa)
+    {
+        $diagnosa->delete();
+        toast('Data Berhasil Di Hapus', 'success');
+        return back();
+    }
+
     public function storeDiagnosa(Request $req, $id)
     {
         $tanggal = Carbon::now();

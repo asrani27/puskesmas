@@ -12,6 +12,7 @@ use App\User;
 use App\Mobat;
 use App\Mpegawai;
 use App\Mruangan;
+use App\Mdiagnosa;
 use App\Mobatunit;
 use App\Mstokobat;
 use Carbon\Carbon;
@@ -40,7 +41,8 @@ class PengaturanController extends Controller
         $user         = count(User::all());
         $obat         = count(Mobat::all());
         $stokobat     = count(Mstokobat::all());
-        return view('master.index', compact('ruang', 'pegawai', 'jenispegawai', 'user', 'obat', 'stokobat'));
+        $diagnosa     = Mdiagnosa::count();
+        return view('master.index', compact('ruang', 'pegawai', 'jenispegawai', 'user', 'obat', 'stokobat', 'diagnosa'));
     }
 
     public function addPoli()

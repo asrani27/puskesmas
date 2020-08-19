@@ -269,6 +269,17 @@ class PendaftaranController extends Controller
         return view('puskes.daftar.pendaftaran',compact('data'));
     }
 
+    public function addPendaftaran()
+    {
+        $data = Mpasien::select('nik', 'nama', 'id')->get();
+        return view('puskes.daftar.create',compact('data'));
+    }
+
+    public function showPendaftaran(Request $req)
+    {
+        return redirect('/pendaftaran/pasien/create/'.$req->id);
+    }
+
     public function rekamMedis()
     {   
         $data = Mpasien::orderBy('created_at', 'desc')->paginate(10);

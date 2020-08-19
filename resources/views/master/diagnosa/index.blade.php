@@ -17,25 +17,22 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Poli / Ruangan</h3>
+              <h3 class="card-title">Data Diagnosa</h3>
               <div class="card-tools">
-                <a href="/pengaturan/data_master/poli/add" class="btn bg-gradient-primary btn-sm"><i class="fas fa-plus"></i> Tambah Data</a>
+                <a href="/pengaturan/dm/diagnosa/add" class="btn bg-gradient-primary btn-sm"><i class="fas fa-plus"></i> Tambah Data</a>
                 <a href="/pengaturan/data_master/" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-left"></i> Kembali</a>
               </div>
             </div>
             
               
             <div class="card-body p-1 table-responsive">
-              <table id="example1" class="table table-bordered table-sm ">
+              <table class="table table-bordered table-sm ">
                 <thead>
                 <tr class="bg-gradient-primary" style="font-size:12px; font-family:Arial, Helvetica, sans-serif">
                   <th>No</th>
                   <th>ID</th>
-                  <th>Nama Instalasi</th>
-                  <th>Nama Poli</th>
-                  <th>Jenis Poli</th>
-                  <th>Is Aktif?</th>
-                  <th>#</th>
+                  <th>Nama Diagnosa</th>
+                  <th></th>
                 </thead><small>
                     @php
                     $no = 1;
@@ -45,33 +42,23 @@
                   <tr>
                     <td><small>{{$no++}}</small></td>
                     <td><small>{{$item->id}}</small></td>
-                    <td><small>{{$item->instalasi->nama}}</small></td>
-                    <td><small>{{$item->nama}}</small></td>
-                    <td><small>{{$item->poli_sakit == 1 ? 'Sakit' : 'Sehat'}}</small></td>
-                    <td>
-                      <form action="/pengaturan/dm/poli/edit/isaktif/{{$item->id}}">
-                        @csrf
-                        <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch{{$item->id}}" onChange="this.form.submit()" name="is_aktif" {{$item->is_aktif == 'Y' ? 'checked':''}}>
-                          <label class="custom-control-label" for="customSwitch{{$item->id}}"></label>
-                        </div>
-                      </form>
-                    </td>
+                    <td><small>{{$item->value}}</small></td>
                     <td width="80px">
-                      <a href="/pengaturan/poli/edit/{{$item->id}}" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>
-                      <a href="/pengaturan/poli/delete/{{$item->id}}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Semua Data Ini?');"><i class="fa fa-trash"></i></a>
+                      <a href="/pengaturan/dm/diagnosa/{{$item->id}}/edit" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>
+                      <a href="/pengaturan/dm/diagnosa/{{$item->id}}/delete" class="btn btn-xs btn-danger" onclick="return confirm('Yakin Menghapus Semua Data Ini?');"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                   @endforeach
                 <tbody></small> 
               </table>
             </div>
-            {{-- <div class="card-footer">
+            <div class="card-footer">
                 {{ $data->onEachSide(1)->links() }}
-            </div> --}}
+            </div>
         </div>
     </div>
 </div>
+
 @endsection
 
 @push('addjs')
