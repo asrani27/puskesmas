@@ -124,25 +124,25 @@
         <!-- /.card-header -->
         <div class="card-body">
           <div class="callout callout-warning">
-            <h5>1. Buat User Untuk Pengguna Lain <a href="#">Lihat</a></h5>
+            <h5>1. Buat User Untuk Pengguna Lain <a href="https://drive.google.com/file/d/1Qxu3VF414xPhaqtRENhmii5oJu5wiinN/view?usp=sharing"  target="_blank">Lihat</a></h5>
           </div>
           <div class="callout callout-info">
-            <h5>2. Menyiapkan Poli <a href="#">Lihat</a></h5>
+            <h5>2. Menyiapkan Poli <a href="https://drive.google.com/file/d/1xvoNSNIBfwUwDOnk7UycRhrgwB4WtQCy/view?usp=sharing" target="_blank">Lihat</a></h5>
           </div>
           <div class="callout callout-success">
-            <h5>3. Menyiapkan Data Dokter / Tenaga Medis <a href="#">Lihat</a></h5>
+            <h5>3. Menyiapkan Data Dokter / Tenaga Medis <a href="https://drive.google.com/file/d/1nXSwvTTdVR52dXgK_GN-q7hSH0KsRkxy/view?usp=sharing" target="_blank">Lihat</a></h5>
           </div>
           <div class="callout callout-warning">
-            <h5>4. Menyiapkan Data Diagnosa Juga <a href="#">Lihat</a></h5>
+            <h5>4. Menyiapkan Data Diagnosa Juga <a href="https://drive.google.com/file/d/1SVghrFAEoUonCRzjjazQMv-oLol0EVWP/view?usp=sharing" target="_blank">Lihat</a></h5>
           </div>
           <div class="callout callout-danger">
-            <h5>5. Menyiapkan Data Obat <a href="#">Lihat</a></h5>
+            <h5>5. Menyiapkan Data Obat <a href="https://drive.google.com/file/d/1SVghrFAEoUonCRzjjazQMv-oLol0EVWP/view?usp=sharing" target="_blank">Lihat</a></h5>
           </div>
           <div class="callout callout-info">
-            <h5>6. Mendaftarkan Pasien Ke Poli<a href="#">Lihat</a></h5>
+            <h5>6. Mendaftarkan Pasien Ke Poli<a href="https://drive.google.com/file/d/1Esr5QnLRwwZULVjID6gjixIun-DHWLab/view?usp=sharing" target="_blank">Lihat</a></h5>
           </div>
           <div class="callout callout-info">
-            <h5>7. Penginputan Anamnesa, Diagnosa Dan Resep <a href="#">Lihat</a></h5>
+            <h5>7. Penginputan Anamnesa, Diagnosa Dan Resep <a href="https://drive.google.com/file/d/1_BDrGnn49XJ0Ympbbf2Rqi_h8qqm1hel/view?usp=sharing" target="_blank">Lihat</a></h5>
           </div>
         </div>
       </div>
