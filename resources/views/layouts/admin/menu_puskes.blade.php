@@ -65,7 +65,7 @@
     <li class="nav-item dropdown">
       <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Pengaturan</a>
       <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-        @if(Auth::user()->id == 'admin');
+        @if(Auth::user()->id == 'admin')
           <li><a href="/pengaturan/data_master" class="dropdown-item">Data Master</a></li>
           <li><a href="/pengaturan/data_master/editprofile" class="dropdown-item">Edit Profile</a></li>
         @else
