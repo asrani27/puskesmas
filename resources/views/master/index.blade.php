@@ -124,10 +124,10 @@
         <!-- /.card-header -->
         <div class="card-body">
           <div class="callout callout-warning">
-            <h5>1. Persiapkan Data Utama Dulu <a href="#">Lihat</a></h5>
+            <h5>1. Buat User Untuk Pengguna Lain <a href="#">Lihat</a></h5>
           </div>
           <div class="callout callout-info">
-            <h5>2. Menyiapkan Poli / Ruangan <a href="#">Lihat</a></h5>
+            <h5>2. Menyiapkan Poli <a href="#">Lihat</a></h5>
           </div>
           <div class="callout callout-success">
             <h5>3. Menyiapkan Data Dokter / Tenaga Medis <a href="#">Lihat</a></h5>
@@ -139,7 +139,10 @@
             <h5>5. Menyiapkan Data Obat <a href="#">Lihat</a></h5>
           </div>
           <div class="callout callout-info">
-            <h5>6. siapkan semua baru bisa isi transaksi <a href="#">Lihat</a></h5>
+            <h5>6. Mendaftarkan Pasien Ke Poli<a href="#">Lihat</a></h5>
+          </div>
+          <div class="callout callout-info">
+            <h5>7. Penginputan Anamnesa, Diagnosa Dan Resep <a href="#">Lihat</a></h5>
           </div>
         </div>
       </div>

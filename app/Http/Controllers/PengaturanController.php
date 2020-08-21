@@ -86,6 +86,7 @@ class PengaturanController extends Controller
     public function storePoli(Request $req)
     {
         $id_ruangan      = convertruangan((int) Mruangan::orderBy('id', 'DESC')->first()->id + 1);
+        
         $s               = new Mruangan;
         $s->id           = $id_ruangan;
         $s->instalasi_id = $req->instalasi_id;
@@ -94,6 +95,7 @@ class PengaturanController extends Controller
         $s->is_aktif     = $req->is_aktif;
         $s->menu_akses   = json_encode($req->menu);
         $s->save();
+        
         toast('Poli berhasil Di Simpan', 'success');
         return redirect('/pengaturan/data_master/poli');
     }

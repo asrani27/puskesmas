@@ -11,7 +11,7 @@ class Mruangan extends Model
 
     protected $fillable = ['is_aktif'];
 
-    use SoftDeletes;
+    //use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
