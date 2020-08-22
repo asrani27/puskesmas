@@ -136,7 +136,7 @@
             <h5>4. Menyiapkan Data Diagnosa Juga <a href="https://drive.google.com/file/d/1SVghrFAEoUonCRzjjazQMv-oLol0EVWP/view?usp=sharing" target="_blank">Lihat</a></h5>
           </div>
           <div class="callout callout-danger">
-            <h5>5. Menyiapkan Data Obat <a href="https://drive.google.com/file/d/1SVghrFAEoUonCRzjjazQMv-oLol0EVWP/view?usp=sharing" target="_blank">Lihat</a></h5>
+            <h5>5. Menyiapkan Data Obat <a href="https://drive.google.com/file/d/1bWv7aLV4Bqo-h9pBYvswe34aTDUbqtRE/view?usp=sharing" target="_blank">Lihat</a></h5>
           </div>
           <div class="callout callout-info">
             <h5>6. Mendaftarkan Pasien Ke Poli<a href="https://drive.google.com/file/d/1Esr5QnLRwwZULVjID6gjixIun-DHWLab/view?usp=sharing" target="_blank">Lihat</a></h5>
