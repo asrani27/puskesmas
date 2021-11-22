@@ -63,7 +63,7 @@
     <!-- JS -->
     <script src="/templogin/vendor/jquery/jquery.min.js"></script>
     <script src="/templogin/js/main.js"></script>
-	@include('sweetalert::alert')	
+	{{-- @include('sweetalert::alert')	 --}}
 </body>
 </html>
 

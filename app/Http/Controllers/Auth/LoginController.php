@@ -51,26 +51,26 @@ class LoginController extends Controller
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if(Auth::attempt([$field => $login, 'password' => request()->password], $remember)) 
         {
-            $datauser = Auth::user();
-            $h = new H_login;
-            $h->puskesmas_id = $datauser->puskesmas_id;
-            $h->user_id = $datauser->username;
-            $h->tanggal = Carbon::now()->format('Y-m-d');
-            $h->jam     = Carbon::now()->format('h:i:s');
-            $h->save();
+            // $datauser = Auth::user();
+            // $h = new H_login;
+            // $h->puskesmas_id = $datauser->puskesmas_id;
+            // $h->user_id = $datauser->username;
+            // $h->tanggal = Carbon::now()->format('Y-m-d');
+            // $h->jam     = Carbon::now()->format('h:i:s');
+            // $h->save();
 
-            $namePuskesmas = Mpuskesmas::where('id', $datauser->puskesmas_id)->first()->nama;
-            //Kirim Notif Ke Telegram Admin 
-            $client  = new Client();
-            $url     = "https://api.telegram.org/bot".env("BOTTELEGRAM","1314875498:AAEy9-7isizWK_0Vzr4Jy4pBDJAdzo-WK_A")."/sendMessage";
-            $data    = $client->request('GET', $url, [
-                'json' =>[
-                "chat_id" => env("BOTTELEGRAM_CHATID","1127046145"), 
-                "text" => "Puskesmas : ".$namePuskesmas."\nJamLogin : ".\Carbon\Carbon::now()."\nUsername : ".$datauser->username,"disable_notification" => true
-                ]
-            ]);
+            // $namePuskesmas = Mpuskesmas::where('id', $datauser->puskesmas_id)->first()->nama;
+            // //Kirim Notif Ke Telegram Admin 
+            // $client  = new Client();
+            // $url     = "https://api.telegram.org/bot".env("BOTTELEGRAM","1314875498:AAEy9-7isizWK_0Vzr4Jy4pBDJAdzo-WK_A")."/sendMessage";
+            // $data    = $client->request('GET', $url, [
+            //     'json' =>[
+            //     "chat_id" => env("BOTTELEGRAM_CHATID","1127046145"), 
+            //     "text" => "Puskesmas : ".$namePuskesmas."\nJamLogin : ".\Carbon\Carbon::now()."\nUsername : ".$datauser->username,"disable_notification" => true
+            //     ]
+            // ]);
 
-            $json = $data->getBody();
+            // $json = $data->getBody();
             
             return redirect('/home');
         } 
