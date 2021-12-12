@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+
     if (Auth::check()) {
         return redirect()->route('home');
     }
-    
+
     return view('welcome');
 });
 Route::get('/login', function () {
@@ -68,7 +69,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/pengaturan/dm/obat/downloadformat', 'ObatController@downloadFormatExcel');
     Route::post('/pengaturan/dm/obat/import', 'ObatController@importExcel');
     //------------------------------------------------------------------
-    
+
     //Route Obat
     Route::get('/pengaturan/dm/diagnosa', 'DiagnosaController@index');
     Route::get('/pengaturan/dm/diagnosa/add', 'DiagnosaController@add');

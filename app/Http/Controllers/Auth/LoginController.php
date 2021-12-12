@@ -46,11 +46,10 @@ class LoginController extends Controller
 
     public function login()
     {
-        $remember = request()->input('remember-me') == null ? false:true;
+        $remember = request()->input('remember-me') == null ? false : true;
         $login = request()->input('username');
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        if(Auth::attempt([$field => $login, 'password' => request()->password], $remember)) 
-        {
+        if (Auth::attempt([$field => $login, 'password' => request()->password], $remember)) {
             // $datauser = Auth::user();
             // $h = new H_login;
             // $h->puskesmas_id = $datauser->puskesmas_id;
@@ -71,11 +70,9 @@ class LoginController extends Controller
             // ]);
 
             // $json = $data->getBody();
-            
+
             return redirect('/home');
-        } 
-        else 
-        {
+        } else {
             toast('Username / Password Salah', 'warning');
             return back();
         }
