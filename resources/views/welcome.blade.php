@@ -28,7 +28,8 @@
                     </div>
 
                     <div class="signin-form">
-                        <h2 class="form-title">E-Puskesmas {{\App\Mpuskesmas::first()->nama}}</h2>
+                        <h2 class="form-title">E-Puskesmas {{\App\Mpuskesmas::first() == null ?
+                            '-':\App\Mpuskesmas::first()->nama}}</h2>
                         <form method="POST" class="register-form" id="login-form" action="{{route('login')}}">
                             @csrf
                             <div class="form-group">
