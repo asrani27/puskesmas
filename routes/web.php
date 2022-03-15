@@ -35,6 +35,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/download_panduan', 'SuperadminController@downloadpanduan');
     Route::post('/tambah_pendaftaran', 'SuperadminController@tambahpendaftaran');
 
+    Route::get('/pengaturan/akun_bpjs', 'BpjsController@index');
+    Route::post('/pengaturan/akun_bpjs', 'BpjsController@store');
+    Route::get('/pengaturan/akun_bpjs/test_connection', 'BpjsController@testConnect');
+
     Route::get('/pengaturan/data_master', 'PengaturanController@dataMaster');
     Route::get('/pengaturan/user/gantipass', 'PengaturanController@gantipass');
     Route::post('/pengaturan/user/gantipass', 'PengaturanController@updatepass')->name('gantipass');
@@ -223,6 +227,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/delete/odontogram/{id}', 'OdontogramController@delete');
     Route::get('/odontogram/image/code={code}/tipe={tipe}', 'OdontogramController@image');
 
-    Route::get('/generatekode', 'OdontogramController@generatekode');
     Route::get('/tarikgambar', 'OdontogramController@tarikgambar');
 });
+
+Route::get('/generatekode', 'OdontogramController@generatekode');
