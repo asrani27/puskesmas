@@ -35,8 +35,8 @@
             data-uk-scrollspy="{cls:'uk-animation-fade', delay: 300, repeat: true}">
 
             <p><span class="fa fa-signal"></span></p>
-            <h1><span>Progress</span><br />Maintenance Baapik</h1>
-            <p>Perpindahan Server</p>
+            <h1><span>Progress</span><br />Update New Baapik</h1>
+            <p>Proses Installing Pendaftaran Online & Baapik Bridging BPJS</p>
 
         </div>
     </div>
@@ -74,7 +74,7 @@
 </body>
 <script>
     // Set the date we're counting down to
-    var countDownDate = new Date("Apr 5, 2022 15:37:25").getTime();
+    var countDownDate = new Date("Jun 27, 2022 18:37:25").getTime();
     
     // Update the count down every 1 second
     var x = setInterval(function() {

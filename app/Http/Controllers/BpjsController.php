@@ -49,14 +49,11 @@ class BpjsController extends Controller
             return back();
         } else {
 
-            $base_url = "https://new-api.bpjs-kesehatan.go.id/pcare-rest-v3.0/dokter/0/3";
+            $base_url = "https://new-api.bpjs-kesehatan.go.id/pcare-rest-v3.0/";
             $akunBPJS = AkunBpjs::first();
             $cons_id = $akunBPJS->cons_id;
             $secret_key = $akunBPJS->secret_key;
 
-            // $client = new Client(['base_uri' => 'https://new-api.bpjs-kesehatan.go.id/pcare-rest-v3.0/']);
-            // $response = $client->request('GET', '/dokter/0/3');
-            // dd($response);
             date_default_timezone_set('UTC');
             $tStamp = strval(time() - strtotime('1970-01-01 00:00:00'));
             $signature = hash_hmac('sha256', $cons_id . "&" . $tStamp, $secret_key, true);
@@ -74,8 +71,7 @@ class BpjsController extends Controller
             $header['X-Signature'] = $encodedSignature;
             $header['X-Authorization'] = $Authorization;
 
-            toast('Berhasil Connect ke BPJS', 'success');
-            return back();
+            dd($header);
         }
     }
 }
